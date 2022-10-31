@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    int w, h, dni, pora, szyszki = 0;
+    int w, h, dni, pora, szyszki, dzien, SND = 0;
     scanf("%d %d %d\n", &w, &h, &dni);
     // printf("%d %d %d", w, h, d);
     char las[w][h];
@@ -19,74 +19,82 @@ int main(void)
     int cien[w][h];
     for (int d = 0; d < dni; d++)
     {
-        for (int p = 0; p < 3; p++)
+        dzien++;
+        if (dzien < 9)
         {
-            pora = p;
-            for (int i = 0; i < h; i++)
+            SND = szyszki;
+            for (int p = 0; p < 3; p++)
             {
-                for (int j = 0; j < w; j++)
+                pora = p;
+                for (int i = 0; i < h; i++)
                 {
-                    cien[j][i] = 1;
-                }
-                
-            }
-            for (int i = 0; i < h; i++)
-            {
-                for (int j = 0; j < w; j++)
-                {
-                    if (las[j][i] != '.')
+                    for (int j = 0; j < w; j++)
                     {
-                        int wys = las[j][i] - 48;
-                        switch (pora)
+                        cien[j][i] = 1;
+                    }
+                    
+                }
+                for (int i = 0; i < h; i++)
+                {
+                    for (int j = 0; j < w; j++)
+                    {
+                        if (las[j][i] != '.')
                         {
-                        case 0:
-                            for (int k = 1; k <= ((wys > j) ? j : wys); k++)
+                            int wys = las[j][i] - 48;
+                            switch (pora)
                             {
-                                cien[j - k][i] = 0;
-                            }
+                            case 0:
+                                for (int k = 1; k <= ((wys > j) ? j : wys); k++)
+                                {
+                                    cien[j - k][i] = 0;
+                                }
+                                
+                                break;
                             
-                            break;
-                        
-                        case 1:
-                            for (int k = 1; k <= ((wys > i) ? i : wys); k++)
-                            {
-                                cien[j][i - k] = 0;
-                            }
-                            
-                            break;
+                            case 1:
+                                for (int k = 1; k <= ((wys > i) ? i : wys); k++)
+                                {
+                                    cien[j][i - k] = 0;
+                                }
+                                
+                                break;
 
-                        case 2:
-                            for (int k = 1; k <= ((wys > (w-j)) ? (w-j) : wys); k++)
-                            {
-                                cien[j + k][i] = 0;
-                            }
-                            
-                            break;
+                            case 2:
+                                for (int k = 1; k <= ((wys > (w-j)) ? (w-j) : wys); k++)
+                                {
+                                    cien[j + k][i] = 0;
+                                }
+                                
+                                break;
 
-                        default:
-                            break;
+                            default:
+                                break;
+                            }
                         }
                     }
+                    
                 }
-                
-            }
-            for (int i = 0; i < h; i++)
-            {
-                for (int j = 0; j < w; j++)
+                for (int i = 0; i < h; i++)
                 {
-                    if (las[j][i] != '.' && las[j][i] != '9')
+                    for (int j = 0; j < w; j++)
                     {
-                        las[j][i] = las[j][i] + cien[j][i];
-                    } else if (las[j][i] == '9' && cien[j][i] == 1)
-                    {
-                        szyszki += 1;
+                        if (las[j][i] != '.' && las[j][i] != '9')
+                        {
+                            las[j][i] = las[j][i] + cien[j][i];
+                        } else if (las[j][i] == '9' && cien[j][i] == 1)
+                        {
+                            szyszki += 1;
+                        }
+                        
+                        
                     }
                     
-                    
                 }
                 
             }
-            
+            SND = szyszki - SND;
+        } else {
+            szyszki += SND;
         }
     }
     printf("%d", szyszki);
