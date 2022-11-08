@@ -36,7 +36,7 @@ void wykres(int maks, int N){
         
     }
     
-    for (int y = maks+1; y >= 0; y--)
+    for (int y = maks; y >= 0; y--)
     {
         for (int x = 0; x < N; x++)
         {
