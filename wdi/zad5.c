@@ -1,22 +1,28 @@
 #include <stdio.h>
 
-int pot(int a, int n){
-    for (int i = 0; i < n; i++)
-    {
-        a *=a;
-    }
-    return a;
-}
-
 int main(){
-    int n;
+    int n, mnoznik = 1;
     scanf("%d", &n);
-    //int tab[n];
-    //int i = n;
-    // while(n){
-    //     tab[i] = n%2;
-    // }
+    while(mnoznik <= n){
+        mnoznik *= 2;
+    }
 
-    printf("%d", pot(2,6));
-    
+    mnoznik /= 2;
+    int x = n, m = 0;
+    while(x){
+        if(x % 2){
+            m += mnoznik;
+        }
+        x /= 2;
+        mnoznik /= 2;
+    }
+
+    if(m == n){
+        printf("palindrom");
+    }
+    else{
+        printf("nie");
+    }
+
+    return 0;
 }
