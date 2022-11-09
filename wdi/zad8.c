@@ -1,15 +1,12 @@
 #include <stdio.h>
 
+int tabN[10];
+int tabM[10];
 int main(){
     int n, m;
     scanf("%d%d", &n, &m);
-    int tabN[10] = {0,0,0,0,0,0,0,0,0,0};
-    int tabM[10] = {0,0,0,0,0,0,0,0,0,0};
     while (n != 0)
     {
-        if (n == 0){
-            break;
-        }
         int cyfra = n%10;
         //printf("%d", cyfra);
         tabN[cyfra] += 1;
