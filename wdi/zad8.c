@@ -5,15 +5,16 @@ int tabM[10];
 int main(){
     int n, m;
     scanf("%d%d", &n, &m);
-    while (n != 0)
+    while (n != 0 && m != 0)
     {
-        int cyfra = n%10;
-        //printf("%d", cyfra);
-        tabN[cyfra] += 1;
-        n = (n - cyfra)/10;
-        cyfra = m%10;
-        tabM[cyfra] += 1;
-        m = (m - cyfra)/10;
+        tabN[n % 10] += 1;
+        n /= 10;
+        tabM[m % 10] += 1;
+        m /= 10;
+    }
+    if (n != m){
+        printf("nie");
+        return 0;
     }
     int palindrom = 0;
     for (int i = 0; i < 10; i++){
