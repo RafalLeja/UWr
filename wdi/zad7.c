@@ -6,9 +6,6 @@ int main(){
     int tabN[10] = {0,0,0,0,0,0,0,0,0,0};
     while (n != 0)
     {
-        if (n == 0){
-            break;
-        }
         int cyfra = n%10;
         tabN[cyfra] += 1;
         n = (n - cyfra)/10;
