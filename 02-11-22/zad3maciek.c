@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(){
-    int n, x, najw = 0, licznik;
+    int n, x, maks = 0, krok;
     scanf("%d", &n);
     int permutacje[n], liczby[n];
 
@@ -12,23 +12,23 @@ int main(){
     }
 
     for(int i = 0; i < n; i++){
-        licznik = 0;
+        krok = 0;
         if(liczby[i]){
             x = permutacje[i];
-            licznik = 1;
+            krok = 1;
             liczby[i] = 0;
             while(liczby[x - 1]){
-                licznik++;
+                krok++;
                 liczby[x - 1] = 0;
                 x = permutacje[x - 1];
             }
-            if(licznik > najw){
-                najw = licznik;
+            if(krok > maks){
+                maks = krok;
             }
         }
     }
 
-    printf("%d", najw);
+    printf("%d", maks);
 
     return 0;
 }
