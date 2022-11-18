@@ -4,15 +4,6 @@ int czasA = 0;
 int czasB = 0;
 
 
-// int pot(int a, int b)
-// {
-//     czas++;
-//     if (!b) return 1;
-//     if (b%2) return a* pot(a*a,b/2);
-//     return pot(a*a, b/2);
-// }
-
-
 int main(){
     int n,m;
     scanf("%d%d", &n,&m);
