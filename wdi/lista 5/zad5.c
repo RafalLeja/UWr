@@ -16,7 +16,7 @@ int fTrec(int n, int m){
 int fTiter(int n, int m){
     for (int i = 0; i < n+m; i++)
     {
-        /* code */
+
     }
     
     return n+m;

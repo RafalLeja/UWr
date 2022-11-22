@@ -4,7 +4,16 @@ typedef long Word;
 
 
 int main(){
-    Word w;
-    int p = &w;
-    printf("%d %d %p", w, *p, &w);
+    int tab[10];
+    for (int i = 0; i < 10; i++)
+    {
+        scanf("%d", &tab[i]);
+        if (tab[i] >= 100)
+        {
+            printf("podałeś liczbe większą niż 100");
+            return 0;
+        }
+        
+    }
+     
 }
