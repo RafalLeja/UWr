@@ -3,29 +3,29 @@
 
 int main(){
 
-    int d, a = 0, b = 0, c = scanf("%d", &d);
+    long long d, a = 0, b = 0, c = scanf("%lld", &d);
     long long dk = d * d;
 
-    for(int x = 1; x < d; x++){
-        for(int y = 1; y < d; y++){
-            if(x*x + y*y >= dk){
-                break;
+    for(int x = d - 1; x > 0; x--){
+        for(int y = d - 1; y > 0; y--){
+            long long zk = 0;
+            if(dk - x*x - y*y){
+                zk = dk - x*x - y*y;
             }
-            long long z = dk - x*x - y*y;
-            if(sqrt(z) - (int) sqrt(z) == 0){
-                if(x * y * z >= a * b * c){
-                    a = x; b = y; c = sqrt(z);
+            int z = sqrt(zk);
+            if(zk && zk - z*z == 0){
+                if(z * y * x > a * b * c){
+                    a = x; b = y; c = z;
                 }
             }
         }
-    }
+    }   
 
     if(!a){
         printf("BRAK");
     }
     else{
-        printf("%d %d %d", a, b ,c);
+        printf("%lld %lld %lld", a, b ,c);
     }
-
     return 0;
 }
