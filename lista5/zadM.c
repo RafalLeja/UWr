@@ -6,8 +6,8 @@ int main(){
     long long d, a = 0, b = 0, c = scanf("%lld", &d);
     long long dk = d * d;
 
-    for(long long x = 1; x < d; x++){
-        for(long long y = 1; y < d; y++){
+    for(long long x = sqrt(dk/4); x < d; x++){
+        for(long long y = x; y < d; y++){
             long long zk = dk - x*x - y*y;
             if(zk <= 0){
                 break;
