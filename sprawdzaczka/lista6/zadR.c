@@ -102,7 +102,7 @@ int main(){
         sklej(n, k);
         int wynik = sprawdz(n);
         printf("|%d", wynik);
-                for (int j = 0; j < n; j++)
+        for (int j = 0; j < n; j++)
         {
             for (int x = 0; x < n; x++)
             {
@@ -111,6 +111,10 @@ int main(){
             printf("\n");
         }
         printf("-------\n");
+        while (getCHar)
+        {
+            /* code */
+        }
         
     }
 
