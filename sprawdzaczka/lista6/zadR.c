@@ -1,12 +1,16 @@
 #include <stdio.h>
+#include <math.h>
 
-void rotate(char **tab, int n){
+char plyty[15][20][20];
+char sklejka[20][20];
+
+void rotate(int id, int n){
     char temp[n][n];
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            temp[i][j] = tab[i][j];
+            temp[i][j] = plyty[id][i][j];
         }
         
     }
@@ -14,68 +18,116 @@ void rotate(char **tab, int n){
     {
         for (int j = 0; j < n; j++)
         {
-            tab[j][i] = temp[i][j];
+            plyty[id][j][i] = temp[i][j];
         }
         
     }
     
 }
 
-int main(){
-    // int n, k;
-    // scanf("%d %d", &n, &k);
-    // char tab[k][n][n];
-    // char temp;
-    // scanf("%c", &temp);
-    // for (int i = 0; i < k; i++)
-    // {
-    //     for (int j = 0; j < n; j++)
-    //     {
-    //         for (int x = 0; x < n; x++)
-    //         {
-    //             scanf("%c", &tab[i][j][x]);
-    //             if(tab[i][j][k] == '\n'){
-    //                 x--;
-    //             }
-    //         }
-    //         scanf("%c", &temp);
-    //     }
-    //     scanf("%c", &temp);
-    // }
+void sklej(int n, int k){
+    int sciana = 0;
+    for (int x = 0; x < n; x++)
+    {
+        for (int y = 0; y < n; y++)
+        {
+            for (int id = 0; id < k; id++)
+            {
+                if(plyty[id][x][y] == '#'){
+                    sciana++;
+                    break;
+                }
+            }
+            if (sciana > 0)
+            {
+                sklejka[x][y] = '#';
+            }else{
+                sklejka[x][y] = '.';
+            }
+            sciana = 0;
+            
+        }
+        
+    }
+    
+}
 
-    // for (int i = 0; i < 4; i++)
-    // {
-    //     /* code */
-    // }
+int sprawdz(int n){
+    int dziury = 0;
+    for (int x = 0; x < n; x++)
+    {
+        for (int y = 0; y < n; y++)
+        {
+            if (sklejka[x][y] == '.')
+            {
+                dziury++;
+            }
+            
+        }
+        
+    }
+    return dziury;
+}
+
+int main(){
+    int n, k;
+    scanf("%d %d", &n, &k);
+    char temp;
+    scanf("%c", &temp);
+    for (int i = 0; i < k; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            for (int x = 0; x < n; x++)
+            {
+                scanf("%c", &plyty[i][j][x]);
+                if(plyty[i][j][k] == '\n'){
+                    x--;
+                }
+            }
+            scanf("%c", &temp);
+        }
+        scanf("%c", &temp);
+    }
+
+    for (int i = 0; i < pow(4,k); i++)
+    {
+        for (int t = 0; t < k; t++)
+        {
+            if (i >= pow(4,t))
+            {
+                rotate(t,n);
+            }
+        }        
+        sklej(n, k);
+        int wynik = sprawdz(n);
+        printf("|%d", wynik);
+                for (int j = 0; j < n; j++)
+        {
+            for (int x = 0; x < n; x++)
+            {
+                printf("%c", sklejka[j][x]);
+            }
+            printf("\n");
+        }
+        printf("-------\n");
+        
+    }
+
+    
+
     // for (int i = 0; i < k; i++)
     // {
-    //     for (int j = 0; j < n; j++)
-    //     {
-    //         for (int k = 0; k < n; k++)
-    //         {
-    //             printf("%c", tab[i][j][k]);
-    //         }
-    //         printf("\n");
-    //     }
-    //     printf("----\n");
+        // for (int j = 0; j < n; j++)
+        // {
+        //     for (int x = 0; x < n; x++)
+        //     {
+        //         printf("%c", sklejka[j][x]);
+        //     }
+        //     printf("\n");
+        // }
+        // printf("-------\n");
     // }
     
-    char tab[2][2] = {{'a','a'}, {'b', 'b'}};
-    for (int i = 0; i < 2; i++)
-    {
-        for (int k = 0; k < 2; k++)
-        {
-            printf("%c", tab[i][k]);
-        }
-        printf("\n");
-    }
-    rotate(&tab, 2);
-        for (int i = 0; i < 2; i++)
-    {
-        for (int k = 0; k < 2; k++)
-        {
-            printf("%c", tab[i][k]);
-        }
-        printf("\n");
-    }
+
 }
