@@ -8,6 +8,7 @@ typedef struct {
 
 Deque new_Deque();
 void del(Deque deque);
+int len(Deque deque);
 int size(Deque deque);
 int isEmpty(Deque deque);
 int* peek_left(Deque deque);

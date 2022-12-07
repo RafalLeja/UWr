@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "modul.h"
+#include "header.h"
 
 #define defaultCapacity 10
 #define minimumCapacity 3
 
 Deque new_Deque() {
   Deque deque = malloc(sizeof(Deque));
-  // Deque deque = *ptr;
   deque->store = (int* ) malloc(defaultCapacity * sizeof(int));
   deque->size = 0;
   deque->start = 0;
@@ -21,20 +20,15 @@ void del(Deque deque) {
 }
 
 int size(Deque deque) {
+  return deque->capacity;
+}
+
+int len(Deque deque) {
   return deque->size;
 }
 
-int isEmpty(Deque deque) {
-  if (deque->size == 0)
-  {
-    return 1;
-  }
-  
-  return 0;
-}
-
 int* peek_left(Deque deque) {
-  if (isEmpty(deque)) {
+  if (deque->size == 0) {
     printf("pusta tablica\n");
     return NULL;
   }
@@ -42,7 +36,7 @@ int* peek_left(Deque deque) {
 }
 
 int* peek_right(Deque deque) {
-  if (isEmpty(deque)) {
+  if (deque->size == 0) {
     printf("pusta tablica\n");
     return NULL;
   }
@@ -50,6 +44,14 @@ int* peek_right(Deque deque) {
 }
 
 int push_left(Deque deque, int value) {
+  if (deque->size == 0)
+  {
+    deque->store[deque->start] = value;
+    deque->size++;
+    deque->end++;
+    return 1;
+  }
+  
   if (deque->size > deque->capacity/2) {
     if ((deque->store = realloc(deque->store, deque->size*2*sizeof(int))) == NULL)
     {
@@ -60,7 +62,7 @@ int push_left(Deque deque, int value) {
   }else{
     for (int i = deque->size; i > 0; i--)
     {
-      deque->store[deque->start + i+1] = deque->store[deque->start+i];
+      deque->store[deque->start+i] = deque->store[deque->start+i-1];
     }
     deque->store[deque->start] = value;
     deque->size++;
@@ -78,41 +80,40 @@ int push_right(Deque deque, int value) {
     deque->capacity *= 2;
     push_right(deque, value);
   }else{
-    deque->store[deque->end + 1] = value;
     deque->end++;
+    deque->store[deque->end] = value;
     deque->size++;
-    deque->end++;
   }
   return 1;
 }
 
 
 int pop_left(Deque deque) {
-  if (deque->size < deque->capacity/6)
+  if (deque->size < (deque->capacity/6))
   {
-    if ((deque->store = realloc(deque->store, (deque->size/6)*sizeof(int))) == NULL)
+    if ((deque->store = realloc(deque->store, (deque->capacity/2)*sizeof(int))) == NULL)
     {
       return 0;
     }
-    deque->capacity /= 6;
+    deque->capacity /= 2;
   }
   
-  deque->start = deque->start + 1;
+  deque->start += 1;
   deque->size--;
   return 1;
 }
 
 int pop_right(Deque deque) {
-  if (deque->size < deque->capacity/6)
+  if (deque->size < (deque->capacity/6))
   {
-    if ((deque->store = realloc(deque->store, (deque->size/6)*sizeof(int))) == NULL)
+    if ((deque->store = realloc(deque->store, (deque->capacity/2)*sizeof(int))) == NULL)
     {
       return 0;
     }
+  deque->capacity /= 2;
   }
-  deque->capacity /= 6;
   
-  deque->end = deque->end - 1;
+  deque->end -= 1;
   deque->size--;
   return 1;
 }
