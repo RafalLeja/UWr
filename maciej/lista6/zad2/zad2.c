@@ -1,8 +1,10 @@
+//Maciej Stys lista6 zad2
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
 
-typedef struct Ksiazka_{
+typedef struct Ksiazka_s{
     char autor[100];
     char tytul[100];
     int rok;
@@ -10,19 +12,37 @@ typedef struct Ksiazka_{
 }Ksiazka;
 
 int main(int argc, char* argv[]){
-    Ksiazka ksiazka;
+    if(argc != 3){
+        printf("Nieprawidlowa ilosc danych na wejsciu");
+        return 1;
+    }
+    
     FILE* plik;
+    Ksiazka ksiazki[100];
 
-    plik = fopen(argv[argc - 1], "r");
+    plik = fopen(argv[argc - 2], "r");
 
-    while(fgets(ksiazka.autor, 100, plik) != NULL){
-        fgets(ksiazka.tytul, 100, plik);
-        fscanf("%d %d", ksiazka.rok, ksiazka.strony);
+    int i = 0;
+    char pom[12];
+    char *ptr;
+    while(fgets(ksiazki[i].autor, 100, plik) != NULL){
+        ksiazki[i].autor[strcspn(ksiazki[i].autor, "\n")] = 0;
+        
+        fgets(ksiazki[i].tytul, 100, plik);
+        ksiazki[i].tytul[strcspn(ksiazki[i].tytul, "\n")] = 0;
+        fgets(pom, 12, plik);
+        ksiazki[i].rok = strtol(pom, &ptr, 10);
+        fgets(pom, 12, plik);
+        ksiazki[i].strony = strtol(pom, &ptr, 10);
 
-        printf("%s %s %d %d\n", ksiazka.autor, ksiazka.tytul, ksiazka.rok, ksiazka.strony);
+        i++;
     }
 
     fclose(plik);
+
+    for(int j = 0; j < i; j++){
+        printf("%s %s %d %d\n", ksiazki[j].autor, ksiazki[j].tytul, ksiazki[j].rok, ksiazki[j].strony);
+    }
 
     return 0;
 }
