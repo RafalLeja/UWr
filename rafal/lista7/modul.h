@@ -4,7 +4,7 @@ typedef struct {
   int start; 
   int end;    
   int capacity;  
-} Deque;
+} * Deque;
 
 Deque new_Deque();
 void del(Deque deque);
