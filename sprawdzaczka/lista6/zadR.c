@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
+// char obrocona[15][20][20];
 char plyty[15][20][20];
 char sklejka[20][20];
 
@@ -90,7 +91,7 @@ int main(){
         scanf("%c", &temp);
     }
 
-    for (int i = 0; i < pow(4,k); i++)
+    for (int i = 0; i < pow(4,k-1); i++)
     {
         for (int t = 0; t < k; t++)
         {
@@ -111,10 +112,7 @@ int main(){
             printf("\n");
         }
         printf("-------\n");
-        while (getCHar)
-        {
-            /* code */
-        }
+
         
     }
 
