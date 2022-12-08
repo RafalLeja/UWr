@@ -1,6 +1,7 @@
-typedef struct {
+//typedef struct Drzewo *Drzewo;
+typedef struct DrzewoT {
   char* name;
-  Drzewo* store; 
+  Drzewo * store[26]; 
   int size;
   int ilosc;  
   int capacity;
