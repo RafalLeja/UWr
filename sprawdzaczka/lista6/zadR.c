@@ -4,6 +4,7 @@
 // char obrocona[15][20][20];
 char plyty[15][20][20];
 char sklejka[20][20];
+int wyniki[20*20];
 
 void rotate(int id, int n){
     char temp[n][n];
@@ -72,37 +73,40 @@ int sprawdz(int n){
 
 int main(){
     int n, k;
-    scanf("%d %d", &n, &k);
+    int zda;
+    zda = scanf("%d %d", &n, &k);
     char temp;
-    scanf("%c", &temp);
+    zda = scanf("%c", &temp);
     for (int i = 0; i < k; i++)
     {
         for (int j = 0; j < n; j++)
         {
             for (int x = 0; x < n; x++)
             {
-                scanf("%c", &plyty[i][j][x]);
+                zda = scanf("%c", &plyty[i][j][x]);
                 if(plyty[i][j][k] == '\n'){
                     x--;
                 }
             }
-            scanf("%c", &temp);
+            zda = scanf("%c", &temp);
         }
-        scanf("%c", &temp);
+        zda = scanf("%c", &temp);
     }
-
+    zda += 1;
+    
     for (int i = 0; i < pow(4,k-1); i++)
     {
         for (int t = 0; t < k; t++)
         {
-            if (i >= pow(4,t))
+            int q = pow(4,t);
+            if (i % q < pow(4,t-1))
             {
                 rotate(t,n);
             }
         }        
         sklej(n, k);
         int wynik = sprawdz(n);
-        printf("|%d", wynik);
+        printf("|%d\n", wynik);
         for (int j = 0; j < n; j++)
         {
             for (int x = 0; x < n; x++)
@@ -111,13 +115,30 @@ int main(){
             }
             printf("\n");
         }
-        printf("-------\n");
+        for (int i = 0; i < n*n; i++)
+        {
+            if (i == wynik)
+            {
+                wyniki[i]++;
+            }
+            
+        }
+        
+        //printf("-------\n");
 
         
     }
 
     
-
+    for (int i = 0; i < n*n; i++)
+    {
+        if (wyniki[i] > 0)
+        {
+            printf("%d ", i);
+        }
+        
+    }
+    
     // for (int i = 0; i < k; i++)
     // {
         // for (int j = 0; j < n; j++)
