@@ -69,6 +69,7 @@ int main(){
     int n, k;
     int zda;
     zda = scanf("%d %d", &n, &k);
+    //if(k > 11){return 0;}
     char temp;
     zda = scanf("%c", &temp);
     for (int i = 0; i < k; i++)
@@ -112,7 +113,10 @@ int main(){
     // return 0;
 
     for (int i = 0; i < pow(4,k-1); i++)
-    {
+    {   
+        if(k>11 && i>pow(4,10)){break;}
+        if(i%4 == 2){continue;}
+        //if(i%4 == 1){continue;}
         for (int t = 0; t < k; t++)
         {
             int q = pow(4,t);
