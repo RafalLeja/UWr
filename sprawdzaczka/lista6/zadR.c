@@ -7,22 +7,33 @@ char sklejka[20][20];
 int wyniki[20*20];
 
 void rotate(int id, int n){
-    char temp[n][n];
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            temp[i][j] = plyty[id][i][j];
-        }
+    char temp;
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 0; j < n; j++)
+    //     {
+    //         temp[i][j] = plyty[id][i][j];
+    //     }
         
-    }
-        for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            plyty[id][j][i] = temp[i][j];
-        }
+    // }
+    //     for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 0; j < n; j++)
+    //     {
+    //         plyty[id][j][i] = temp[i][j];
+    //     }
         
+    // }
+    for (int i = 0; i < n / 2; i++)
+    {
+    for (int j = i; j < n - i - 1; j++)
+    {
+        temp = plyty[id][i][j];
+        plyty[id][i][j] = plyty[id][j][n-1-i];
+        plyty[id][j][n-1-i] = plyty[id][n-1-i][n-1-j];
+        plyty[id][n-1-i][n-1-j] = plyty[id][n-1-j][i];
+        plyty[id][n-1-j][i] = temp;
+       }
     }
     
 }
@@ -94,6 +105,29 @@ int main(){
     }
     zda += 1;
     
+    // sklej(n,k);
+    // for (int i = 0; i < k; i++)
+    // {
+    //     for (int j = 0; j < n; j++)
+    //     {
+    //         for (int x = 0; x < n; x++)
+    //         {
+    //             printf("%c", plyty[i][j][x]);
+    //         }
+    //         printf("\n");
+    //     }
+    //     printf("-------\n");
+    // }
+    // for (int j = 0; j < n; j++)
+    //     {
+    //         for (int x = 0; x < n; x++)
+    //         {
+    //             printf("%c", sklejka[j][x]);
+    //         }
+    //         printf("\n");
+    //     }
+    // return 0;
+
     for (int i = 0; i < pow(4,k-1); i++)
     {
         for (int t = 0; t < k; t++)
@@ -106,15 +140,15 @@ int main(){
         }        
         sklej(n, k);
         int wynik = sprawdz(n);
-        printf("|%d\n", wynik);
-        for (int j = 0; j < n; j++)
-        {
-            for (int x = 0; x < n; x++)
-            {
-                printf("%c", sklejka[j][x]);
-            }
-            printf("\n");
-        }
+        // printf("|%d\n", wynik);
+        // for (int j = 0; j < n; j++)
+        // {
+        //     for (int x = 0; x < n; x++)
+        //     {
+        //         printf("%c", sklejka[x][j]);
+        //     }
+        //     printf("\n");
+        // }
         for (int i = 0; i < n*n; i++)
         {
             if (i == wynik)
@@ -139,18 +173,6 @@ int main(){
         
     }
     
-    // for (int i = 0; i < k; i++)
-    // {
-        // for (int j = 0; j < n; j++)
-        // {
-        //     for (int x = 0; x < n; x++)
-        //     {
-        //         printf("%c", sklejka[j][x]);
-        //     }
-        //     printf("\n");
-        // }
-        // printf("-------\n");
-    // }
     
 
 }
