@@ -10,7 +10,7 @@ int main() {
         idx = scanf("%s", identyfikatory[i]);
     }
 
-    idx = n;
+    idx = 0;
 
     for(int i = 0; i < n; i++){
         int unikatowosc = 0;
@@ -39,12 +39,10 @@ int main() {
         }
     }
 
-    if(idx != n){
-        for(int i = 0; i < k; i++){
-            printf("%c", identyfikatory[idx][i]);
-        }
-        printf("\n%d", max);
+    for(int i = 0; i < k; i++){
+        printf("%c", identyfikatory[idx][i]);
     }
+    printf("\n%d", max);
 
     return 0;
 }
