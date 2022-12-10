@@ -1,53 +1,50 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_N 1000
-#define MAX_K 1000
-
-int n, k;
-char identifiers[MAX_N][MAX_K];
-int max_uniqueness, max_uniqueness_idx;
-
 int main() {
-  scanf("%d%d", &n, &k);
+    int n, k, max = 0, idx;
+    idx = scanf("%d%d", &n, &k);
+    char identyfikatory[n][k];
 
-  // Wczytaj identyfikatory
-  for (int i = 0; i < n; i++) {
-    scanf("%s", identifiers[i]);
-  }
+    for(int i = 0; i < n; i++){
+        idx = scanf("%s", identyfikatory[i]);
+    }
 
-  // Dla każdego identyfikatora, oblicz jego unikatowość
-  for (int i = 0; i < n; i++) {
-    // Licznik unikatowych pozycji dla danego identyfikatora
-    int uniqueness = 0;
+    idx = n;
 
-    // Przejdź przez każdą pozycję w identyfikatorze
-    for (int j = 0; j < k; j++) {
-      // Licznik liczby identyfikatorów, które zawierają tę samą literę na pozycji j
-      int count = 0;
+    for(int i = 0; i < n; i++){
+        int unikatowosc = 0;
 
-      // Przejdź przez wszystkie identyfikatory i sprawdź, czy zawierają tę samą literę
-      for (int l = 0; l < n; l++) {
-        if (identifiers[l][j] == identifiers[i][j]) {
-          count++;
+        for(int j = 0; j < k; j++){
+            int count = 0;
+
+            for(int l = 0; l < n; l++){
+                if(identyfikatory[l][j] == identyfikatory[i][j]){
+                    count++;
+                }
+
+                if(count > 1){
+                    break;
+                }
+            }
+
+            if(count == 1){
+                unikatowosc++;
+            }
         }
-      }
 
-      // Jeśli tylko jeden identyfikator zawiera tę samą literę, oznacza to, że jest on unikatowy
-      if (count == 1) {
-        uniqueness++;
-      }
+        if (unikatowosc > max){
+            max = unikatowosc;
+            idx = i;
+        }
     }
 
-    // Jeśli unikatowość tego identyfikatora jest większa niż poprzednio znaleziona, zapamiętaj ją i jej indeks
-    if (uniqueness > max_uniqueness) {
-      max_uniqueness = uniqueness;
-      max_uniqueness_idx = i;
+    if(idx != n){
+        for(int i = 0; i < k; i++){
+            printf("%c", identyfikatory[idx][i]);
+        }
+        printf("\n%d", max);
     }
-  }
 
-  // Wypisz najbardziej unikatowy identyfikator oraz jego unikatowość
-  printf("%s\n%d\n", identifiers[max_uniqueness_idx], max_uniqueness);
-
-  return 0;
+    return 0;
 }
