@@ -4,43 +4,43 @@
 int main() {
     int n, k, max = 0, idx;
     idx = scanf("%d%d", &n, &k);
-    char identyfikatory[n][k];
+    char id[n][k];
 
     for(int i = 0; i < n; i++){
-        idx = scanf("%s", identyfikatory[i]);
+        idx = scanf("%s", id[i]);
     }
 
     idx = 0;
 
     for(int i = 0; i < n; i++){
-        int unikatowosc = 0;
+        int u = 0;
 
         for(int j = 0; j < k; j++){
-            int count = 0;
+            int c = 0;
 
             for(int l = 0; l < n; l++){
-                if(identyfikatory[l][j] == identyfikatory[i][j]){
-                    count++;
+                if(id[l][j] == id[i][j]){
+                    c++;
                 }
 
-                if(count > 1){
+                if(c > 1){
                     break;
                 }
             }
 
-            if(count == 1){
-                unikatowosc++;
+            if(c == 1){
+                u++;
             }
         }
 
-        if (unikatowosc > max){
-            max = unikatowosc;
+        if (u > max){
+            max = u;
             idx = i;
         }
     }
 
     for(int i = 0; i < k; i++){
-        printf("%c", identyfikatory[idx][i]);
+        printf("%c", id[idx][i]);
     }
     printf("\n%d", max);
 
