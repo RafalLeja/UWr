@@ -83,6 +83,6 @@ int main(){
         wynik = wykonaj(opr, war1, war2);
         wypisz(wynik);
     }
-
+    printf("chuj");
     return 0;
 }
