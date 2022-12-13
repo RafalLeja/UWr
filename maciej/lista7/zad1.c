@@ -31,55 +31,58 @@ void wypisz(int wynik){
     else{
         printf("%d\n", sekundy);
     }
-
 }
+
+void usuwanieSpacji(char *ps){
+    while(*ps == ' '){
+        *ps = getchar();
+    }
+}
+
+int czasDoSekund(char *ps){
+    usuwanieSpacji(ps);
+    int sekundy = 0, temp = 0;
+    while(*ps != ' ' && *ps != '\n'){
+        if(*ps != ':'){
+            temp = temp * 10 + (int)(*ps) - 48;
+        }
+        else{
+            sekundy = sekundy * 60 + temp;
+            temp = 0;
+        }
+        *ps = getchar();
+    }
+
+    return sekundy * 60 + temp;
+}
+
+void operator(char *ps, char *opr){
+    usuwanieSpacji(ps);
+    while(*ps != ' '){
+            *opr = *ps;
+            *ps = getchar();
+        }
+}
+
 
 int main(){
     char s, opr;
-    int temp, war1 = 1, war2, oper;
+    char *ps = &s, *popr = &opr;
+    int war1, war2, wynik;
 
-    while(1){
-        temp = 0; war1 = 0;
-        while((s = getchar()) != ' ' && s != '\n' && s != EOF){
-            if(s != ':'){
-                temp = (temp * 10) + (int)(s) - 48;
-            }
-            else{
-                war1 = war1 * 60 + temp;
-                temp = 0;
-            }
-        }
-        war1 = war1 * 60 + temp;
+    while((s = getchar()) != EOF){
+        war1 = czasDoSekund(ps);
 
-        if(war1 == 0){  //koniec programu
+        if(war1 == 0){
             return 0;
         }
 
-        while(s != '+' && s !=  '-' && s != '*' && s != '/'){
-            s = getchar();
-        }
+        operator(ps, popr);
+        war2 = czasDoSekund(ps);
 
-        opr = s;
-
-        while((s = getchar()) == ' '){
-        }
-
-        temp = 0; war2 = 0;
-        while(s != '\n'){
-            if(s != ':'){
-                temp = (temp * 10) + (int)(s) - 48;
-            }
-            else{
-                war2 = war2 * 60 + temp;
-                temp = 0;
-            }
-            s = getchar();
-        }
-        war2 = war2 * 60 + temp;
-
-        oper = wykonaj(opr, war1, war2);
-
-        wypisz(oper);
+        wynik = wykonaj(opr, war1, war2);
+        wypisz(wynik);
     }
+
     return 0;
 }
