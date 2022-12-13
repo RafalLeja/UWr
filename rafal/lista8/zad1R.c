@@ -3,6 +3,8 @@
 #include <string.h>
 #include "drzewo.h"
 
+
+
 int main(int argc, char const *argv[])
 {
     Drzewo tree = newDrzewo();
@@ -12,26 +14,28 @@ int main(int argc, char const *argv[])
     for (int i = 1; i < argc; i++)
     {
 
-        printf("plik = %s\n", argv[i]);
-        FILE* plik = fopen(argv[i], (char*) 'r');
-        char str[1]; 
-        str[0] = fgetc(plik);
-        //int idx = 0;
-        char l;
-        while (!feof(plik))
+        printf("\nplik = %s\n", argv[i]);
+        FILE* plik = fopen(argv[i], "r");
+        char *str = strdup(""); 
+        int l = 0;        
+        
+        while ((l = fgetc(plik)) != EOF)
         {
-            l = fgetc(plik);
+            printf("%c", l);
             if(l == ' '){
+                //printf("dasdsad");    
                 pushDrzewo(tree, str);
-                printf("%s", str);
-                str[0] = '\0';
+                str = strdup("");
                 continue;
             }else if(l > 'Z'){
                 l = l - ('a' - 'A');
             }
-            strncat(str, &l, 1);
+            strcat(str, (char* ) &l);
+            //printf("%c", l);
         }
-        pushDrzewo(tree, str);        
+        pushDrzewo(tree, str); 
+        fclose(plik);
+        free(str);       
     }
     
     return 0;

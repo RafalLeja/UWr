@@ -7,8 +7,8 @@
 
 Drzewo newDrzewo() {
   Drzewo drzewo = malloc(sizeof(Drzewo));
-  drzewo->name = "";
   drzewo->store = (Drzewo*) malloc(defaultCapacity * sizeof(Drzewo));
+  drzewo->name = "";
   drzewo->size = 0;
   drzewo->ilosc = 0;
   drzewo->capacity = defaultCapacity;
@@ -19,22 +19,24 @@ void delSlowo(Drzewo drzewo) {
   free(drzewo->store);
 }
 
-int pushDrzewo(Drzewo drzewo, char* slowo){
-  if (strlen(slowo) == 0 || slowo == NULL)
+void pushDrzewo(Drzewo drzewo, char* slowo){
+  if (strlen(slowo) == 0)
   {
     drzewo->ilosc++;
-    return 1;
+    return;
   }
   if (drzewo->store[slowo[0] - 'A'] == NULL)
   {
     drzewo->store[slowo[0] - 'A'] = newDrzewo();
-    drzewo->store[slowo[0] - 'A']->name = slowo[0];
+    strncat(drzewo->store[slowo[0] - 'A']->name, slowo, 1);
   }
-  slowo++;
-  pushDrzewo(drzewo->store[slowo[0] - 'A'], slowo);
+  //slowo++;
+  char * bbbb = "";
+  memmove(bbbb, slowo+1, strlen(slowo)-1);
+  pushDrzewo(drzewo->store[slowo[0] - 'A'], bbbb);
   drzewo->size++;
   
-  return 0;
+  return;
 }
 
 void printDrzewo(Drzewo drzewo){
