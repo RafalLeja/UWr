@@ -1,18 +1,41 @@
 #include<stdio.h>
 
-char dodatkowa[1][1];
-
-int licz(int n){
+int licz(int n, char dodatkowa[][n]){
     int licznik = 0;
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
-            if(dodatkowa[i][j] == '#'){
+            if(dodatkowa[i][j] == '.'){
                 licznik++;
             }
             dodatkowa[i][j] = '0';
         }
     }
     return licznik;
+}
+
+void sklejPizde(int n, char tab[][n], char dodatkowa[][n]){
+    for(int k = 0; k < n; k++){
+        for(int l = 0; l < n; l++){
+            if(dodatkowa[k][l] != '#'){
+                dodatkowa[k][l] = tab[k][l];
+            }
+        }
+    }
+}
+
+void rotate(int n, char tab[][n]){
+    char temp[n][n];
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++){
+            temp[i][j] = tab[i][j];
+        }
+    }
+
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++){
+            tab[j][i] = temp[i][j];
+        }
+    }
 }
 
 int main(){
@@ -22,7 +45,7 @@ int main(){
     char dodatkowa[n][n];
     int dziury[n*n + 1];
 
-///wypelnienie tablicy ilosci dziur zerami
+///wypelnienie tablicy dziury zerami
     for(int i = 0; i < n * n + 1; i++){
         dziury[i] = 0;
     }
@@ -41,33 +64,35 @@ int main(){
     }
 ///
 
-    for(int i = 0; i < c; i++){
-        for(int k = 0; k < n; k++){
-            for(int l = 0; l < n; l++){
-                if(dodatkowa[k][l] != '.'){
-                    dodatkowa[k][l] = tab[i][k][l];
-                }
-            }
+
+
+    int i = 0;
+    
+    while(i < c){
+        for(int j = 0; j < c; j++){
+            sklejPizde(n, tab[i], dodatkowa);
         }
+        dziury[licz(n, dodatkowa)];
+
+        rotate(n, tab[i]);
+        for(int j = 0; j < c; j++){
+            sklejPizde(n, tab[i], dodatkowa);
+        }
+
+        dziury[licz(n, dodatkowa)];
+
+
+        i++;
     }
 
-    for(int k = 0; k < n; k++){
-        for(int l = 0; l < n; l++){
-            printf("%c", dodatkowa[k][l]);
-        }
-        printf("\n");
-    }
 
-
-    dziury[licz(n)]++;
-
-///sprawdzenie mozliwych ilosc dziur
+//wypisanie mozliwych ilosc dziur
     for(int i = 0; i < n * n + 1; i++){
         if(dziury[i] > 0){
             printf("%d ", i);
         }
     }
-///
+//
 
     return 0;
 }

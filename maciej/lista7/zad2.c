@@ -1,4 +1,4 @@
-//Maciej Stys lista7 zad1
+//Maciej Stys lista7 zad2
 
 #include <stdio.h>
 
@@ -39,8 +39,45 @@ void usuwanieSpacji(char *ps){
     }
 }
 
+int przedzialDoSekund(char *ps){
+    int sekundy = 0, temp = 0, war1, war2;
+    *ps = getchar();
+    while(*ps != ','){
+        if(*ps != ':'){
+        temp = temp * 10 + (int)(*ps) - 48;
+        }
+        else{
+            sekundy = sekundy * 60 + temp;
+            temp = 0;
+        }
+        *ps = getchar();
+    }
+    war1 = sekundy * 60 + temp;
+    
+    sekundy = 0; temp = 0;
+    *ps = getchar();
+    while(*ps != ']'){
+        if(*ps != ':'){
+        temp = temp * 10 + (int)(*ps) - 48;
+        }
+        else{
+            sekundy = sekundy * 60 + temp;
+            temp = 0;
+        }
+        *ps = getchar();
+    }
+    *ps = getchar();
+    war2 = sekundy * 60 + temp;
+
+    return war2 - war1;
+}
+
 int czasDoSekund(char *ps){
     usuwanieSpacji(ps);
+    if(*ps == '['){
+        return przedzialDoSekund(ps);
+    }
+
     int sekundy = 0, temp = 0;
     while(*ps != ' ' && *ps != '\n'){
         if(*ps != ':'){
@@ -68,19 +105,29 @@ void operator(char *ps, char *opr){
 int main(){
     char s, opr;
     char *ps = &s, *popr = &opr;
-    int war1, war2, wynik;
+    int war, wynik;
 
     while((s = getchar()) != EOF){
-        war1 = czasDoSekund(ps);
+        wynik = czasDoSekund(ps);
 
-        if(war1 == 0){
+        if(wynik == 0){
             return 0;
         }
+        else if(wynik < 0){
+            printf("zly przedzial");
+            return 1;
+        }
 
-        operator(ps, popr);
-        war2 = czasDoSekund(ps);
+        while(s != '\n'){
+            operator(ps, popr);
+            war = czasDoSekund(ps);
+            if(war < 0){
+                printf("zly przedzial");
+                return 1;
+            }
 
-        wynik = wykonaj(opr, war1, war2);
+            wynik = wykonaj(opr, wynik, war);
+        }
         wypisz(wynik);
     }
     return 0;
