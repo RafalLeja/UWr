@@ -1,6 +1,6 @@
 //typedef struct Drzewo *Drzewo;
-typedef struct tree{
-  struct tree **store; 
+typedef struct tree_t{
+  struct tree_t ** store; 
   char* name;
   int size;
   int ilosc;  
@@ -11,4 +11,4 @@ typedef struct tree{
 Drzewo newDrzewo();
 void delDrzewo(Drzewo drzewo);
 void pushDrzewo(Drzewo drzewo, char* slowo); 
-//char popDrzewo(Drzewo drzewo);
+void printDrzewo(Drzewo drzewo);

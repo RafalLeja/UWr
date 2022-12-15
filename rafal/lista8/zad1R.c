@@ -13,17 +13,21 @@ int main(int argc, char const *argv[])
     }
     for (int i = 1; i < argc; i++)
     {
-
+        FILE * plik;
         printf("\nplik = %s\n", argv[i]);
-        FILE* plik = fopen(argv[i], "r");
+        if(argv[i][0] == '-'){
+            plik = stdin;
+        }else {
+            plik = fopen(argv[i], "r");
+        }
         char *str = strdup(""); 
         int l = 0;        
         
         while ((l = fgetc(plik)) != EOF)
         {
-            printf("%c", l);
-            if(l == ' '){
-                //printf("dasdsad");    
+            if(!(l >= 'A' && l <= 'Z') && !(l >= 'a' && l <= 'z')){
+                //printf("dasdsad");
+                //printf("%s\n", str);
                 pushDrzewo(tree, str);
                 str = strdup("");
                 continue;
@@ -37,6 +41,7 @@ int main(int argc, char const *argv[])
         fclose(plik);
         free(str);       
     }
-    
+    printDrzewo(tree);
+    delDrzewo(tree);
     return 0;
 }
