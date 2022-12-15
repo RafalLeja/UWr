@@ -14,7 +14,7 @@ int main(int argc, char const *argv[])
     for (int i = 1; i < argc; i++)
     {
         FILE * plik;
-        printf("\nplik = %s\n", argv[i]);
+        //printf("\nplik = %s\n", argv[i]);
         if(argv[i][0] == '-'){
             plik = stdin;
         }else {
@@ -28,7 +28,10 @@ int main(int argc, char const *argv[])
             if(!(l >= 'A' && l <= 'Z') && !(l >= 'a' && l <= 'z')){
                 //printf("dasdsad");
                 //printf("%s\n", str);
-                pushDrzewo(tree, str);
+                if (str[0] != '\0')
+                {
+                    pushDrzewo(tree, str);
+                }
                 str = strdup("");
                 continue;
             }else if(l > 'Z'){
@@ -41,7 +44,7 @@ int main(int argc, char const *argv[])
         fclose(plik);
         free(str);       
     }
-    printDrzewo(tree);
+    printDrzewo(tree, "");
     delDrzewo(tree);
     return 0;
 }

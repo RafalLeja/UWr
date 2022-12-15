@@ -7,16 +7,18 @@
 
 Drzewo newDrzewo() {
   Drzewo drzewo = (Drzewo) calloc(1, sizeof(struct tree_t));
-  drzewo->store = (Drzewo*) calloc(defaultCapacity , sizeof(Drzewo));
-  drzewo->name = strdup("");
-  drzewo->size = 0;
-  drzewo->ilosc = 0;
-  drzewo->capacity = defaultCapacity;
-  if (drzewo->store == NULL)
+  if (drzewo == NULL)
   {
     printf("brak pamieci");
     return NULL;
   }
+  drzewo->store = (Drzewo*) calloc(defaultCapacity , sizeof(Drzewo));
+    if (drzewo->store == NULL)
+  {
+    printf("brak pamieci");
+    return NULL;
+  }
+  drzewo->name = strdup("");
   
   return drzewo;
 }
@@ -27,16 +29,13 @@ void delDrzewo(Drzewo drzewo) {
 }
 
 void pushDrzewo(Drzewo drzewo, char* slowo){
-  //printf("%c\n", slowo[0]);
-  if (strlen(slowo) == 1)
+  if (strlen(slowo) == 0)
   {
     drzewo->ilosc++;
     return;
   }
-  //printf("%p\n", drzewo->store[slowo[0] - 'A']);
   if (drzewo->store[slowo[0] - 'A'] == NULL)
   {
-    //printf("a");
     drzewo->store[slowo[0] - 'A'] = newDrzewo();
     strncat(drzewo->store[slowo[0] - 'A']->name, slowo, 1);
     drzewo->size++;
@@ -49,26 +48,27 @@ void pushDrzewo(Drzewo drzewo, char* slowo){
   return;
 }
 
-void printDrzewo(Drzewo drzewo){
+void printDrzewo(Drzewo drzewo, char * slowo){
   //printf("%s x %d", drzewo->name, drzewo->ilosc);
-  if(drzewo == NULL){
-    return;
+  if(slowo[0] == '\0'){
+    slowo = strdup("");
   }
+  strncat(slowo, drzewo->name, 1);
   if (drzewo->ilosc > 0)
   {
-    printf("%s x %d\n", drzewo->name, drzewo->ilosc);}
-    for (int i = 0; i < 26; i++)
+    printf("%s x %d\n", slowo, drzewo->ilosc);
+  }
+  for (int i = 0; i < 26; i++)
+  {
+    if (drzewo->store[i] == NULL)
     {
-      if (drzewo->store[i] == NULL)
-      {
-        //printf("brak");
-        continue;
-      }
-      
-      printDrzewo(drzewo->store[i]);
+      continue;
     }
     
-  
+    printDrzewo(drzewo->store[i], slowo);
+  }
+    
+  free(slowo);
   return;
 } 
 

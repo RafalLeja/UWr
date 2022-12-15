@@ -4,11 +4,10 @@ typedef struct tree_t{
   char* name;
   int size;
   int ilosc;  
-  int capacity;
 } * Drzewo;
 
 
 Drzewo newDrzewo();
 void delDrzewo(Drzewo drzewo);
 void pushDrzewo(Drzewo drzewo, char* slowo); 
-void printDrzewo(Drzewo drzewo);
+void printDrzewo(Drzewo drzewo, char* slowo);
