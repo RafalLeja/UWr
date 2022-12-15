@@ -28,10 +28,10 @@ int main(int argc, char const *argv[])
             if(!(l >= 'A' && l <= 'Z') && !(l >= 'a' && l <= 'z')){
                 //printf("dasdsad");
                 //printf("%s\n", str);
-                if (str[0] != '\0')
-                {
+                //if (strlen(str) > 0)
+                //{
                     pushDrzewo(tree, str);
-                }
+                //}
                 str = strdup("");
                 continue;
             }else if(l > 'Z'){

@@ -54,7 +54,7 @@ void printDrzewo(Drzewo drzewo, char * slowo){
     slowo = strdup("");
   }
   strncat(slowo, drzewo->name, 1);
-  if (drzewo->ilosc > 0)
+  if (drzewo->ilosc > 0 && slowo[0] != '\0')
   {
     printf("%s x %d\n", slowo, drzewo->ilosc);
   }
@@ -64,8 +64,10 @@ void printDrzewo(Drzewo drzewo, char * slowo){
     {
       continue;
     }
-    
+    char * nastepneSlowo = strdup("");
+    strcpy(nastepneSlowo, slowo);
     printDrzewo(drzewo->store[i], slowo);
+    free(nastepneSlowo);
   }
     
   free(slowo);
