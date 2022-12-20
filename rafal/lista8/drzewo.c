@@ -24,8 +24,16 @@ Drzewo newDrzewo() {
 }
 
 void delDrzewo(Drzewo drzewo) {
-  free(drzewo->store);
-  free(drzewo->name);
+  for (int i = 0; i < 26; i++)
+  {
+    if (drzewo->store[i] == NULL)
+    {
+      continue;
+    }
+      delDrzewo(drzewo->store[i]);
+  }
+  free(drzewo);    
+  return;
 }
 
 void pushDrzewo(Drzewo drzewo, char* slowo){
@@ -49,7 +57,6 @@ void pushDrzewo(Drzewo drzewo, char* slowo){
 }
 
 void printDrzewo(Drzewo drzewo, char * slowo){
-  //printf("%s x %d", drzewo->name, drzewo->ilosc);
   if(slowo[0] == '\0'){
     slowo = strdup("");
   }
