@@ -44,9 +44,7 @@ int main(int argc, char const *argv[]){
     if (draw == -1)
     {
         printf("niepoprawny argument --draw \npolecenie powinno wygladac nastepujaco --draw [snowflake|carpet|triangle|moorecurve|tree]");
-    }
-    degree++;
-    
+    }    
     fprintf(plik, "<html> <body> <svg width=\"100\" height=\"100\"> <circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"green\" stroke-width=\"4\" fill=\"yellow\" /> </svg> </body> </html>");
     fclose(plik);
 }
