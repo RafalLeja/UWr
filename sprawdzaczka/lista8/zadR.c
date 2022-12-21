@@ -63,9 +63,9 @@ void deleteClosest(int LMcount){
                 continue;
             }   
             float dist = distance(localMaxX[i], localMaxY[i], localMaxX[j], localMaxY[j]);
-            if (min >= dist)
+            if (min > dist)
             {
-                idx1 = i;;
+                idx1 = i;
                 idx2 = j;
                 min = dist;
             }
@@ -117,9 +117,7 @@ int main(){
                 localMaxY[LMcount] = i;
                 LMcount++;
             }
-            //printf("%f", snoise2(j*(1.0/k), i*(1.0/k)));
         }
-        //printf("\n");
     }
     printf("%d %.1f ", LMcount, lowestDistance(LMcount));
     for (int i = 0; i < d+1; i++)
