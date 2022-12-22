@@ -12,39 +12,71 @@ int main(int argc, char const *argv[]){
     FILE * plik = stdout;
     for (int i = 1; i < argc; i++)
     {
-        printf("%s\n", argv[i]);
-        if (argv[i][0] == '-' && '-' == argv[i][1]){
-            if (strcmp("--draw", argv[i]) == 0)
-            {
-                i++;
-                for (int j = 0; j < 5; j++)
-                {
-                    if (strcmp(typy[j], argv[i]) == 0)
-                    {
-                        draw = j;
-                        break;
-                    }
-                }
-                continue;
-            }
-            if (strcmp("--degree", argv[i]) == 0)
-            {
-                i++;
-                degree = argv[i][0] - '0';
-                continue;
-            }
-            if (strcmp("--outfile", argv[i]) == 0)
-            {
-                i++;
-                plik = fopen( argv[i], "w");
-                continue;
-            }
+        if (argc % 2 == 0)
+        {
+            printf("bledna ilosc argumentow");
+            return 1;
         }
+        
+        if (strcmp("--draw", argv[i]) == 0)
+        {
+            i++;
+            for (int j = 0; j < 5; j++)
+            {
+                if (strcmp(typy[j], argv[i]) == 0)
+                {
+                    draw = j;
+                    break;
+                }
+            }
+            continue;
+        }
+        if (strcmp("--degree", argv[i]) == 0)
+        {
+            i++;
+            degree = argv[i][0] - '0';
+            continue;
+        }
+        if (strcmp("--outfile", argv[i]) == 0)
+        {
+            i++;
+            plik = fopen( argv[i], "w");
+            continue;
+        }
+        
     }
-    if (draw == -1)
+
+    //fprintf(plik, "<html> <body> <svg width=\"100\" height=\"100\"> <circle cx=\"50\" cy=\"50\" r=\"50\" stroke=\"green\" stroke-width=\4\" fill=\"red\" />");
+
+    switch (draw)
     {
+    case -1:
         printf("niepoprawny argument --draw \npolecenie powinno wygladac nastepujaco --draw [snowflake|carpet|triangle|moorecurve|tree]");
-    }    
-    fprintf(plik, "<html> <body> <svg width=\"100\" height=\"100\"> <circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"green\" stroke-width=\"4\" fill=\"yellow\" /> </svg> </body> </html>");
+        return 1;
+        break;
+    
+    case 0:
+        generateSnowflake(degree);
+        break;
+
+    case 1:
+        generateCarpet(degree);
+        break;
+
+    case 2:
+        generateTriangle(degree);
+        break;
+
+    case 3:
+        generateMoorecurve(degree);
+        break;
+
+    case 4:
+        generateTree(degree);
+        break;
+    }
+
+    fprintf(plik, "</svg> </body> </html>");
     fclose(plik);
+
 }
