@@ -1,69 +1,101 @@
 #include <stdio.h>
 
-int testClues(char wzkazowki, int n){
-    for (int i = 0; i < n; i++)
-    {
-        switch (wzkazowki[i])
-        {
-        case 'F':
-            testF()
-            break;
-        
-        default:
-            break;
-        }
-    }
-    
-}
-
 int main(){
     int w, h, n;
     char buff;
-    scanf("%d %d\n", &w, &h);
+    buff = scanf("%d %d\n", &w, &h);
     char mapa[h][w];
     for (int i = 0; i < h; i++)
     {
         for (int j = 0; j < w; j++)
         {
-            scanf("%c", &mapa[i][j]);
+            buff = scanf("%c", &mapa[i][j]);
         }
-        scanf("%c\n", &buff);
+        buff = scanf("%c\n", &buff);
     }
-    scanf("%d\n", &n);
-    char wzkazowki[n];
+    buff = scanf("%d\n", &n);
+    char wskazowki[n];
     for (int i = 0; i < n; i++)
     {
-        scanf("%c", &wzkazowki[i]);
+        buff = scanf("%c", &wskazowki[i]);
     }
-
-    for (int i = 0; i < h; i++)
+    for (int y = 0; y < h; y++)
     {
-        for (int j = 0; j < w; j++)
+        for (int x = 0; x < w; x++)
         {
-            for (int i = 0; i < 4; i++)
+            if (mapa[y][x] != '.')
             {
-                for (int i = 0; i < n; i++)
+                continue;
+            }
+            
+            for (int obr = 0; obr < 4; obr++)
+            {
+                int posX = x, posY = y, rot = obr;
+                int test = 0;
+                for (int wzk = 0; wzk < n; wzk++)
                 {
-                    switch (wzkazowki[i])
+                    //printf("%c", wskazowki[wzk]);
+                    int up = (rot == 0 ? 1 : 0); 
+                    int right = (rot == 1 ? rot : 0);
+                    int down = (rot == 2 ? 1 : 0); 
+                    int left = (rot == 3 ? 1 : 0); 
+                    char nextPos = mapa[posY - up + down][posX + right - left];
+                    switch (wskazowki[wzk])
                     {
+                        case 'S':
+                        if (nextPos == '.' || nextPos == 'X')
+                        {
+                            posY = posY - up + down;
+                            posX = posX + right - left;
+                        }else {
+                            test = 1;
+                            break;
+                        }
+                        break;
+
                         case 'F':
-                        testF();
+                        while (nextPos == '.' || nextPos == 'X')
+                        {
+                            posY = posY - up + down;
+                            posX = posX + right - left;
+                            nextPos = mapa[posY - up + down][posX + right - left];
+                        }
                         break;
         
-                        default:
+                        case 'L':
+                        rot--;
+                        if (rot < 0)   
+                        {
+                            rot = 3;
+                        }
+                        break;
+
+                        case 'R':
+                        rot++; 
+                        if (rot > 3)
+                        {
+                            rot = 0;
+                        }
                         break;
                     }
                 }
-                
+                if (test == 0)
+                {
+                    mapa[posY][posX] = 'X';
+                }
             }
             
         }
         
     }
     
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < h; i++)
     {
-        printf("%c", wzkazowki[i]);
+        for (int j = 0; j < w; j++)
+        {
+            printf("%c", mapa[i][j]);
+        }
+        printf("\n");
     }
     
     
