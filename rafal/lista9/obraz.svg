@@ -1,1 +1,7 @@
-<html> <body> <svg width="100" height="100"> <circle cx="50" cy="50" r="50" stroke="green" stroke-width=" fill="red" /></svg> </body> </html>
+<html>
+<body>
+<svg width="500.000000" height="500.000000">
+<polygon points="250.000000,0.000000 0.000000,435.000000 500.000000,435.000000" transform="translate(250, 250) rotate(0 deg 250 250)"/>
+</svg>
+ </body>
+ </html>

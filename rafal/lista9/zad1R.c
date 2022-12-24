@@ -1,7 +1,22 @@
 #include <stdio.h>
 #include <string.h>
+//#include "svg.h"
+#define WIDTH 500.0
+#define HEIGHT 500.0
+
+void generateSnowflake(FILE* plik, int degree, int x, int y, int w, int h, int obrot){
+    if (degree > 1)
+    {
+        return;
+    }
+    fprintf(plik, "<polygon points=\"%f,%f %f,%f %f,%f\" transform=\"translate(%d, %d) rotate(%d deg %d %d)\"/>\n", w/2.0, 0.0, 0.0, h*0.87, w*1.0, h*0.87, x, y, obrot, x, y);
+    degree++;
+    //generateSnowflake(plik, degree-1, x, y, w ,h);
+    return;
+}
 
 int main(int argc, char const *argv[]){
+    int x = 500, y = 500;
     char typy[5][12] = {"snowflake","carpet","triangle","moorecurve","tree"};
     if (argc < 2)
     {
@@ -46,7 +61,7 @@ int main(int argc, char const *argv[]){
         
     }
 
-    //fprintf(plik, "<html> <body> <svg width=\"100\" height=\"100\"> <circle cx=\"50\" cy=\"50\" r=\"50\" stroke=\"green\" stroke-width=\4\" fill=\"red\" />");
+    fprintf(plik, "<html>\n<body>\n<svg width=\"%f\" height=\"%f\">\n", WIDTH, HEIGHT);
 
     switch (draw)
     {
@@ -56,27 +71,27 @@ int main(int argc, char const *argv[]){
         break;
     
     case 0:
-        generateSnowflake(degree);
+        generateSnowflake(plik, degree, x/2, y/2, WIDTH, HEIGHT, 0);
         break;
 
     case 1:
-        generateCarpet(degree);
+        //generateCarpet(degree, x, y);
         break;
 
     case 2:
-        generateTriangle(degree);
+        //generateTriangle(degree, x, y);
         break;
 
     case 3:
-        generateMoorecurve(degree);
+        //generateMoorecurve(degree, x, y);
         break;
 
     case 4:
-        generateTree(degree);
+        //generateTree(degree, x, y);
         break;
     }
 
-    fprintf(plik, "</svg> </body> </html>");
+    fprintf(plik, "</svg>\n </body>\n </html>");
     fclose(plik);
 
 }

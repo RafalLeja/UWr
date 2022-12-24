@@ -181,6 +181,10 @@ void svg_rectangle(svg* psvg, int width, int height, int x, int y, char* fill, c
     appendstringtosvg(psvg, "' />\n");
 }
 
+void svg_polygon(svg* psvg, int pointAX, int pointAY, int pointBX, int pointBY, int pointCX, int pointCY, int x, int y, char* fill, char* stroke, int strokewidth){
+    
+}
+
 // --------------------------------------------------------
 // FUNCTION svg_fill
 // --------------------------------------------------------
