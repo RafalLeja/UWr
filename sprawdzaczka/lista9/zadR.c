@@ -39,22 +39,23 @@ int main(){
                     int right = (rot == 1 ? rot : 0);
                     int down = (rot == 2 ? 1 : 0); 
                     int left = (rot == 3 ? 1 : 0); 
-                    char nextPos = mapa[posY - up + down][posX + right - left];
+                    int nextY = posY - up + down, nextX = posX + right - left;
+                    char nextPos = mapa[nextY][nextX];
                     switch (wskazowki[wzk])
                     {
                         case 'S':
-                        if (nextPos == '.' || nextPos == 'X')
+                        if ((nextPos != '.' && nextPos != 'X') || nextX > w || nextX < 0 || nextY > h || nextY < 0)
                         {
-                            posY = posY - up + down;
-                            posX = posX + right - left;
-                        }else {
                             test = 1;
                             break;
+                        }else {
+                            posY = posY - up + down;
+                            posX = posX + right - left;
                         }
                         break;
 
                         case 'F':
-                        while (nextPos == '.' || nextPos == 'X')
+                        while ((nextPos == '.' || nextPos == 'X') && nextX <= w && nextX >= 0 && nextY <= h && nextY >= 0)
                         {
                             posY = posY - up + down;
                             posX = posX + right - left;
