@@ -1,18 +1,54 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 //#include "svg.h"
 #define WIDTH 500.0
 #define HEIGHT 500.0
 
-void generateSnowflake(FILE* plik, int degree, int x, int y, int w, int h, int obrot){
-    if (degree > 1)
+void generateTriangle(FILE* plik, int degree, int x, int y, int h, int obr){
+    if (degree < 0){
+        return;
+    }
+    int a = 2*(sqrtf(3)*h)/3;
+    if (obr == 1)
+    {
+        fprintf(plik, "M %f %f L %f %f L %f %f L %f %f", x*1.0, y+(h/3.0), x+(a/2.0), y-(h*2/3.0), x-(a/2.0), y-(h*2/3.0), x*1.0, y+(h/3.0));
+        return;
+    }
+        fprintf(plik, "M %f %f L %f %f L %f %f L %f %f", x*1.0, y-(h*2.0/3.0), x+(a/2.0), y+(h/3.0), x-(a/2.0), y+(h/3.0), x*1.0, y-(h*2.0/3.0));
+    
+}
+
+void generateSnowflake(FILE* plik, int degree, int x, int y, int h, int obrot){
+    int a = 2*(sqrtf(3)*h)/3;
+    if (degree < 0)
     {
         return;
     }
-    fprintf(plik, "<polygon points=\"%f,%f %f,%f %f,%f\" transform=\"translate(%d, %d) rotate(%d deg %d %d)\"/>\n", w/2.0, 0.0, 0.0, h*0.87, w*1.0, h*0.87, x, y, obrot, x, y);
-    degree++;
-    //generateSnowflake(plik, degree-1, x, y, w ,h);
+    fprintf(plik, "<path d=\"");
+    fprintf(plik, "M %f %f L %f %f L %f %f L %f %f ", x*1.0, y-(h*2.0/3.0), x+(a/2.0), y+(h/3.0), x-(a/2.0), y+(h/3.0), x*1.0, y-(h*2.0/3.0));
+    generateTriangle(plik, degree, x/2, y-h/6, h/3, 1);
+    generateTriangle(plik, degree, x+x/2, y/1.28, h/3, 1);
+    generateTriangle(plik, degree, x, y+h-2*h/3, h/3, 1);
+    fprintf(plik, "\" fill=\"red\" transform=\"");
+    fprintf(plik, "rotate(%d %d %d)\"/>\n", obrot, x, y);
+    // generateSnowflake(plik, degree-1, x/2, y/1.5, h/3, obrot - 60);
+    // generateSnowflake(plik, degree-1, x+(a/3), y-(h/4), h/2.5, obrot + 60); 
+    // generateSnowflake(plik, degree-1, x, y+(4.5*h/10), h/2.5, obrot + 180);
     return;
+}
+
+void generatePath(FILE*plik, int degree, int x, int y, int h, int obrot){
+    int a = 2*(sqrtf(3)*h)/3;
+    if (degree < 0)
+    {
+        return;
+    }
+    fprintf(plik, "<path d=\"");
+    fprintf(plik, "M %f %f L %f %f L %f %f Z \"", x*1.0, y-(h*2.0/3.0), x+(a/2.0), y+(h/3.0), x-(a/2.0), y+(h/3.0));
+    fprintf(plik, " fill=\"blue\" transform=\"");
+    fprintf(plik, "rotate(%d deg %d %d)\"/>\n", obrot, x, y);
+
 }
 
 int main(int argc, char const *argv[]){
@@ -61,7 +97,7 @@ int main(int argc, char const *argv[]){
         
     }
 
-    fprintf(plik, "<html>\n<body>\n<svg width=\"%f\" height=\"%f\">\n", WIDTH, HEIGHT);
+    fprintf(plik, "<html>\n<body>\n<svg width=\"%f\" height=\"%f\" viewBox=\"%f %f\">\n", WIDTH, HEIGHT, WIDTH, HEIGHT);
 
     switch (draw)
     {
@@ -71,7 +107,7 @@ int main(int argc, char const *argv[]){
         break;
     
     case 0:
-        generateSnowflake(plik, degree, x/2, y/2, WIDTH, HEIGHT, 0);
+        generateSnowflake(plik, degree, x/2, y/2, 350, 0);
         break;
 
     case 1:
