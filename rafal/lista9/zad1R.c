@@ -11,7 +11,7 @@ typedef struct {
   double y;
 } Point;
 
-void generateTriangle(FILE* plik, int degree, Point p1, Point p2,  int first){
+void generateSide(FILE* plik, int degree, Point p1, Point p2,  int first){
  
   if (degree == 0) {
     if (first == 1)
@@ -35,10 +35,10 @@ void generateTriangle(FILE* plik, int degree, Point p1, Point p2,  int first){
     p4.x = p3.x + (p5.x - p3.x) * cos(angle) - (p5.y - p3.y) * sin(angle);
     p4.y = p3.y + (p5.x - p3.x) * sin(angle) + (p5.y - p3.y) * cos(angle);
 
-    generateTriangle(plik, degree - 1, p1, p3, first == 1 ? 1 : 0);
-    generateTriangle(plik, degree - 1, p3, p4, 0);
-    generateTriangle(plik, degree - 1, p4, p5, 0);
-    generateTriangle(plik, degree - 1, p5, p2, 0);
+    generateSide(plik, degree - 1, p1, p3, first == 1 ? 1 : 0);
+    generateSide(plik, degree - 1, p3, p4, 0);
+    generateSide(plik, degree - 1, p4, p5, 0);
+    generateSide(plik, degree - 1, p5, p2, 0);
   } 
 }
 
@@ -52,14 +52,39 @@ void generateSnowflake(FILE* plik, int degree, int w, int h){
     p3.y = h/6;
 
     fprintf(plik, "<path fill=\"white\" stroke=\"cyan\" stroke-width=\"5\" d=\"");
-    generateTriangle(plik, degree, p1, p2, 1);
-    generateTriangle(plik, degree, p2, p3, 0);
-    generateTriangle(plik, degree, p3, p1, 0);
+    generateSide(plik, degree, p1, p2, 1);
+    generateSide(plik, degree, p2, p3, 0);
+    generateSide(plik, degree, p3, p1, 0);
     fprintf(plik, "\"/>");
     return;
 }
 
+void generateCarpet(FILE * plik, int degree, Point p, int w){
+    if (degree == 0) {
+        // Base case: draw a filled rectangle
+        fprintf(plik, "  <path d=\"M %f %f L %f %f L %f %f L %f %f Z\" fill=\"white\" />\n", p.x, p.y, p.x + w, p.y, p.x+w, p.y +w, p.x, p.y+w);
+    } else {
+        // Recursive case: divide the area into nine smaller rectangles and generate a Sierpinski carpet for each
+        double newSize = w / 3.0;
+        int i, j;
 
+        for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            // Skip the center rectangle
+            if (i == 1 && j == 1) continue;
+
+            Point newPoint;
+            newPoint.x = p.x + j * newSize;
+            newPoint.y = p.y + i * newSize;
+            generateCarpet(plik, degree-1 , newPoint, newSize);
+        }
+        }
+  }
+}
+
+void generateTrangle(){
+    
+}
 
 int main(int argc, char const *argv[]){
     int x = 500, y = 500;
@@ -121,7 +146,10 @@ int main(int argc, char const *argv[]){
         break;
 
     case 1:
-        //generateCarpet(degree, x, y);
+        Point p;
+        p.x = 0;
+        p.y = 0;
+        generateCarpet(plik, degree, p, y);
         break;
 
     case 2:

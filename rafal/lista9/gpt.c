@@ -32,7 +32,7 @@ void sierpinski(Point p, double size, int iteration, FILE* fp) {
 
 int main() {
   // Open an SVG file for writing
-  FILE* fp = fopen("sierpinski.svg", "w");
+  FILE* fp = fopen("koch.svg", "w");
   if (fp == NULL) {
     printf("Error opening file\n");
     return 1;
