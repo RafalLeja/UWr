@@ -61,16 +61,13 @@ void generateSnowflake(FILE* plik, int degree, int w, int h){
 
 void generateCarpet(FILE * plik, int degree, Point p, int w){
     if (degree == 0) {
-        // Base case: draw a filled rectangle
         fprintf(plik, "  <path d=\"M %f %f L %f %f L %f %f L %f %f Z\" fill=\"white\" />\n", p.x, p.y, p.x + w, p.y, p.x+w, p.y +w, p.x, p.y+w);
     } else {
-        // Recursive case: divide the area into nine smaller rectangles and generate a Sierpinski carpet for each
         double newSize = w / 3.0;
         int i, j;
 
         for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
-            // Skip the center rectangle
             if (i == 1 && j == 1) continue;
 
             Point newPoint;
@@ -82,8 +79,23 @@ void generateCarpet(FILE * plik, int degree, Point p, int w){
   }
 }
 
-void generateTrangle(){
-    
+void generateTriangle(FILE* plik, int degree, Point p1, Point p2, Point p3) {
+  if (degree == 0) {
+    fprintf(plik, "  <path d=\"M %f %f L %f %f L %f %f Z\" fill=\"blue\" />\n", p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
+  } else {
+    Point p4, p5, p6;
+
+    p4.x = (p1.x + p2.x) / 2.0;
+    p4.y = (p1.y + p2.y) / 2.0;
+    p5.x = (p2.x + p3.x) / 2.0;
+    p5.y = (p2.y + p3.y) / 2.0;
+    p6.x = (p1.x + p3.x) / 2.0;
+    p6.y = (p1.y + p3.y) / 2.0;
+
+    generateTriangle(plik, degree -1, p1, p4, p6);
+    generateTriangle(plik, degree -1, p4, p2, p5);
+    generateTriangle(plik, degree -1, p6, p5, p3);
+  }
 }
 
 int main(int argc, char const *argv[]){
@@ -153,7 +165,14 @@ int main(int argc, char const *argv[]){
         break;
 
     case 2:
-        //generateTriangle(degree, x, y);
+        Point p1, p2, p3;
+        p1.x = x/6;
+        p1.y = y/6;
+        p2.x = x*5/6;
+        p2.y = y/6;
+        p3.x = x/2;
+        p3.y = y*5/6;
+        generateTriangle(plik, degree, p1, p2, p3);
         break;
 
     case 3:
