@@ -18,14 +18,19 @@ typedef struct {
 } Specs;
 
 void inputSequence(int argc, char const *argv[], Specs * param){
+    char options[6][15] = {"--width", "--height", "--nameprefix", "--zoom", "--maxframes", "--focus"};
     for (int i = 1; i < argc; i++)
     {
-        if (argv[i][0] != '-' || argv[i][1] != '-')
+        char option = '\0';
+        for (int j = 0; j < 6; j++)
         {
-            continue;
+            if (strcmp(argv[i], options[j]) == 0)
+            {
+                option = options[j][2];
+            }
+            
         }
-        
-        switch (argv[i][2])
+        switch (option)
         {
         case 'w':
             i++;
@@ -39,6 +44,7 @@ void inputSequence(int argc, char const *argv[], Specs * param){
         
         case 'n':
             i++;
+            param->nameprefix = strdup("");
             strcpy(param->nameprefix, argv[i]);
             break;
         
@@ -55,9 +61,19 @@ void inputSequence(int argc, char const *argv[], Specs * param){
         case 'f':
             i++;
             int splitIdx = (int) (strchr(argv[i], ',') - argv[i]);
-            //char * buff = argv[i];
-            printf("%d", splitIdx);
-            //param->focus->
+            if (splitIdx == 0)
+            {
+                printf("blad parametru --focus X,Y");
+                exit(1);
+            }
+            
+            char * buff = strdup("");
+            strncat(buff, argv[i], splitIdx);
+            param->focus.x = atoi(buff);
+            param->focus.y = atoi(argv[i]+splitIdx+1);
+            free(buff);
+            break;
+        default:
             break;
         }
     }
