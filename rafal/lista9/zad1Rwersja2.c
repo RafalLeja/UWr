@@ -104,19 +104,23 @@ void generateTree(FILE* plik, int degree, double angle, double size, Point p1){
 		return;
 	} else {
 
-		Point p2, p3, p4;
-		p2 = {p1.x + size, p1.y};
-		p3 = {p1.x + size, p1.y + size};
-		p4 = {p1.x - size * sin(angle) , p1.y + size * cos(angle)};
-
-		p2.x = p1.x + size * cos(angle);
-		p2.y = p1.y + size * sin(angle);
-		p3.x = p1.x + size * cos(angle);
-		p3.y = p1.y + size * cos(angle);
-		p4.x = p1.x + size * sin(angle);
+		Point p2, p3, p4, p1p, p2p, p3p;
+		p2.x = p1.x + size;
+		p2.y = p1.y;
+		p3.x = p1.x + size;
+		p3.y = p1.y + size;
+		p4.x = p1.x - size * sin(angle);
 		p4.y = p1.y + size * cos(angle);
 
-		fprintf(plik, "<path fill=\"rgb(%f,255,%f)\" d=\"M %f %f L %f %f L %f %f L %f %f Z\" /> \n", 255 - 255.0/(degree+1), 255-255.0/(degree+1), p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
+		p1p.x = (p1.x - p4.x)*cos(angle)-(p1.y-p4.y)*sin(angle)+p4.x;
+		p1p.y = (p1.x - p4.x)*sin(angle)+(p1.y-p4.y)*cos(angle)+p4.y;
+		p2p.x = (p2.x - p4.x)*cos(angle)-(p2.y-p4.y)*sin(angle)+p4.x;
+		p2p.y = (p2.x - p4.x)*sin(angle)+(p2.y-p4.y)*cos(angle)+p4.y;
+		p3p.x = (p3.x - p4.x)*cos(angle)-(p3.y-p4.y)*sin(angle)+p4.x;
+		p3p.y = (p3.x - p4.x)*sin(angle)+(p3.y-p4.y)*cos(angle)+p4.y;
+
+
+		fprintf(plik, "<path fill=\"rgb(%f,255,%f)\" d=\"M %f %f L %f %f L %f %f L %f %f Z\" /> \n", 255 - 255.0/(degree+1), 255-255.0/(degree+1), p1p.x, p1p.y, p2p.x, p2p.y, p3p.x, p3p.y, p4.x, p4.y);
 		//fprintf(plik, "<path fill=\"rgb(%f,255,%f)\" transform=\"rotate(%f %f %f)\" d=\"M %f %f L %f %f L %f %f L %f %f Z\" /> \n", 255 - 255.0/(degree+1), 255-255.0/(degree+1), angle*180/PI, p4.x, p4.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
 		//Point p4, p5, p6, p7, p8, p9;
 
