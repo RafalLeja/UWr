@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <math.h>
 //#include "svg.h"
 #define WIDTH 600.0
@@ -23,6 +24,14 @@ void generateTriangle(FILE* plik, int degree, Point p1, Point p2, Point p3);
 void pythagorasSquare(FILE* plik, int degree, Point p1, Point p2);
 
 void pythagorasTriangle(FILE* plik, int degree, Point p1, Point p2, Point p3);
+
+void generateMoorecurve(FILE* plik, int degree, int width, int height);
+
+void rFunction(FILE * plik, int degree, Point *pen, double size, int obrot);
+
+void lFunction(FILE * plik, int degree, Point *pen, double size, int obrot);
+
+void forward(FILE * plik, Point *pen, double size, int obrot);
 
 int main(int argc, char const *argv[]){
 	int x = 500, y = 500;
@@ -58,7 +67,7 @@ int main(int argc, char const *argv[]){
 		if (strcmp("--degree", argv[i]) == 0)
 		{
 			i++;
-			degree = argv[i][0] - '0';
+			degree = atoi(argv[i]);
 			continue;
 		}
 			if (strcmp("--outfile", argv[i]) == 0)
@@ -102,7 +111,7 @@ int main(int argc, char const *argv[]){
 			break;
 
 		case 3:
-			//generateMoorecurve(degree, x, y);
+			generateMoorecurve(plik, degree, x, y);
 			break;
 
 		case 4:
@@ -167,7 +176,7 @@ void generateSnowflake(FILE* plik, int degree, int w, int h){
 
 void generateCarpet(FILE * plik, int degree, Point p, int w){
 	if (degree == 0) {
-		fprintf(plik, "  <path d=\"M %f %f L %f %f L %f %f L %f %f Z\" fill=\"white\" />\n", p.x, p.y, p.x + w, p.y, p.x+w, p.y +w, p.x, p.y+w);
+		fprintf(plik, "  <path stroke=\"white\" stroke-width=\"0\" d=\"M %f %f L %f %f L %f %f L %f %f Z\" fill=\"white\" />\n", p.x, p.y, p.x + w, p.y, p.x+w, p.y +w, p.x, p.y+w);
 	} else {
 		double newSize = w / 3.0;
 		int i, j;
@@ -187,7 +196,7 @@ void generateCarpet(FILE * plik, int degree, Point p, int w){
 
 void generateTriangle(FILE* plik, int degree, Point p1, Point p2, Point p3) {
 	if (degree == 0) {
-		fprintf(plik, "  <path d=\"M %f %f L %f %f L %f %f Z\" fill=\"blue\" />\n", p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
+		fprintf(plik, "  <path stroke=\"white\" stroke-width=\"0\" d=\"M %f %f L %f %f L %f %f Z\" fill=\"blue\" />\n", p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
 	} else {
 		Point p4, p5, p6;
 
@@ -219,7 +228,7 @@ void pythagorasSquare(FILE* plik, int degree, Point p1, Point p2){
 		p5.y = p4.y - (p2.x - p1.x + p1.y - p2.y) /2;
 
 		//fprintf(plik, "<path fill=\"rgb(%f,255,%f)\" d=\"M %f %f L %f %f L %f %f L %f %f Z\" /> \n", 255 - 255.0/(degree+1), 255-255.0/(degree+1), p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
-		fprintf(plik, "<path fill=\"rgb(%f,255,%f)\" d=\"M %f %f L %f %f L %f %f L %f %f Z\" /> \n", 255 - 255.0/(degree+1), 255-255.0/(degree+1), p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
+		fprintf(plik, "<path stroke=\"white\" stroke-width=\"0\" fill=\"rgb(%f,255,%f)\" d=\"M %f %f L %f %f L %f %f L %f %f Z\" /> \n", 255 - 255.0/(degree+1), 255-255.0/(degree+1), p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
 		//Point p4, p5, p6, p7, p8, p9;
 
 
@@ -231,8 +240,111 @@ void pythagorasSquare(FILE* plik, int degree, Point p1, Point p2){
 }
 
 void pythagorasTriangle(FILE* plik, int degree, Point p1, Point p2, Point p3){
-	fprintf(plik, "<path fill=\"rgb(%f,255,%f)\" d=\"M %f %f L %f %f L %f %f Z\" /> \n", 255 - 255.0/(degree+1), 255 - 255.0/(degree+1), p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
+	fprintf(plik, "<path stroke=\"white\" stroke-width=\"0\" fill=\"rgb(%f,255,%f)\" d=\"M %f %f L %f %f L %f %f Z\" /> \n", 255 - 255.0/(degree+1), 255 - 255.0/(degree+1), p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
 	pythagorasSquare(plik, degree -1, p1, p2);
 	pythagorasSquare(plik, degree -1, p2, p3);
 
+}
+
+void lFunction(FILE * plik, int degree, Point *pen, double size, int obrot){
+	if (degree < 0)
+	{
+		return;
+	}
+	obrot -= 90;
+	rFunction(plik, degree -1, pen, size, obrot);
+	forward(plik, pen, size, obrot);
+	obrot += 90;
+	lFunction(plik, degree -1, pen, size, obrot);
+	forward(plik, pen, size, obrot);
+	lFunction(plik, degree -1, pen, size, obrot);
+	obrot += 90;
+	forward(plik, pen, size, obrot);
+	rFunction(plik, degree -1, pen, size, obrot);
+	obrot -= 90;
+}
+
+void rFunction(FILE * plik, int degree, Point *pen, double size, int obrot){
+	if (degree < 0)
+	{
+		return;
+	}
+	obrot += 90;
+	lFunction(plik, degree -1, pen, size, obrot);
+	forward(plik, pen, size, obrot);
+	obrot -= 90;
+	rFunction(plik, degree -1, pen, size, obrot);
+	forward(plik, pen, size, obrot);
+	rFunction(plik, degree -1, pen, size, obrot);
+	obrot -= 90;
+	forward(plik, pen, size, obrot);
+	lFunction(plik, degree -1, pen, size, obrot);
+	obrot += 90;
+}
+
+void forward(FILE * plik, Point *pen, double size, int obrot){
+	while (obrot > 270 || obrot < 0)
+	{	
+		if (obrot > 270)
+		{
+			obrot -= 360;
+		}else if (obrot < 0)
+		{
+			obrot += 360;
+		}
+	}
+	switch (obrot)
+	{
+	case 0:
+		//fprintf(plik, "M %f %f ", pen->x, pen->y);
+		pen->y -= size;
+		fprintf(plik, "L %f %f \n", pen->x, pen->y);
+		break;
+	
+	case 90:
+		pen->x += size;
+		fprintf(plik, "L %f %f \n", pen->x, pen->y);
+		break;
+	
+	case 180:
+		pen->y += size;
+		fprintf(plik, "L %f %f \n", pen->x, pen->y);
+		break;
+	
+	case 270: 
+		pen->x -= size;
+		fprintf(plik, "L %f %f \n", pen->x, pen->y);
+		break;
+
+	default:
+		break;
+	}
+}
+
+void generateMoorecurve(FILE* plik, int degree, int width, int height){
+	fprintf(plik, "<path fill=\"transparent\" stroke=\"blue\" stroke-width=\"1\" d=\"\n");
+	Point pen;
+	int obrot = 0;
+	int a = 0;
+	for (int i = 0; i < degree; i++)
+	{
+		a = 2*a+1;
+	}
+	printf("%d / %d \n", a, 2*a+1);
+	printf("%f  ", (a*(0.95*width))/(2*a+1) + 0.025*width);
+	pen.x = (a*(0.95*width))/(2*a+1) + 0.025*width;
+	pen.y = 0.975*height;
+	double size = (0.95*width)/((a*2)+1);
+	fprintf(plik, "M %f %f \n", pen.x, pen.y);
+
+	lFunction(plik, degree -1, &pen, size, obrot);
+	forward(plik, &pen, size, obrot);
+	lFunction(plik, degree -1, &pen, size, obrot);
+	obrot += 90;
+	forward(plik, &pen, size, obrot);
+	obrot += 90;
+	lFunction(plik, degree -1, &pen, size, obrot);
+	forward(plik, &pen, size, obrot);
+	lFunction(plik, degree -1, &pen, size, obrot);
+	fprintf(plik, "\" /> \n");
 }
