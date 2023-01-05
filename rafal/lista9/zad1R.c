@@ -70,12 +70,12 @@ int main(int argc, char const *argv[]){
 			degree = atoi(argv[i]);
 			continue;
 		}
-			if (strcmp("--outfile", argv[i]) == 0)
-			{
-				i++;
-				plik = fopen( argv[i], "w");
-				continue;
-			}
+		if (strcmp("--outfile", argv[i]) == 0)
+		{
+			i++;
+			plik = fopen( argv[i], "w");
+			continue;
+		}
 				
 	}
 

@@ -3,7 +3,7 @@
 #include <math.h>
 #include <string.h>
 
-#define aproxItr 10
+#define aproxItr 2000
 
 typedef struct {
   double x;
@@ -21,7 +21,7 @@ typedef struct {
 
 void inputSequence(int argc, char const *argv[], Specs * param);
 
-int includedInSet(Point p, int w, int h, double scale, Point focus);
+int includedInSet(Point p, int w, int h, double scale);
 
 Point imaginarySq(Point p);
 
@@ -29,7 +29,36 @@ int main(int argc, char const *argv[])
 {
     Specs param = { 0, 0, "mandel-", 0.25, 10, {sqrt(2)*600, 0} };
     inputSequence(argc, argv, &param);
-    printf("w = %d, h = %d, pre = %s, zoom = %f, frames = %d, fx = %f, fy = %f", param.width, param.height, param.nameprefix, param.zoom, param.maxframes, param.focus.x, param.focus.y);
+    printf("w = %d, h = %d, pre = %s, zoom = %f, frames = %d, fx = %f, fy = %f\n", param.width, param.height, param.nameprefix, param.zoom, param.maxframes, param.focus.x, param.focus.y);
+    for (int i = 0; i < param.maxframes; i++)
+    {
+        double scale = 1;
+        char * name = strdup(param.nameprefix);
+        char * number = strdup("");
+        sprintf(number, "%d", i);
+        name = strcat(name, number);
+        name = strcat(name, ".pgm");
+        FILE * plik = fopen(name, "wb");
+        fprintf(plik, "P2\n");
+        //fprintf(plik, "#%s ", name);
+        fprintf(plik, "%d %d\n", param.width, param.height);
+        fprintf(plik, "255\n");
+        for (int y = 0; y < param.height; y++)
+        {
+            for (int x = 0; x < param.width; x++)
+            {
+                Point pixel = {x, y};
+                if (includedInSet(pixel, param.width, param.height, scale) == 1)
+                {
+                    fprintf(plik, "255 ");
+                }else {
+                    fprintf(plik, "0 ");
+                }
+            }
+            
+        }
+        fclose(plik);
+    }
     
     return 0;
 }
@@ -39,17 +68,23 @@ Point imaginarySq(Point p){
     return o; 
 }
 
-int includedInSet(Point p, int w, int h, double scale, Point focus){
+int includedInSet(Point p, int w, int h, double scale){
     double const minX = -2.5, maxX = 1.5, minY = -1.25, maxY = 1.25;
     Point imaginaryPoint;
-    imaginaryPoint.x = p.x * (fabs(minX - maxX)/w) - minX;
-    imaginaryPoint.y = p.y * (fabs(minY - maxY)/w) - minY;
+    imaginaryPoint.x = p.x * (fabs(minX - maxX)/(w*scale)) + minX;
+    imaginaryPoint.y = p.y * (fabs(minY - maxY)/(h*scale)) + minY;
+    //printf("%f %f \n", imaginaryPoint.x, imaginaryPoint.y);
     Point z = {0, 0};
-    for(int i = 0; i<aproxItr; i++){
+    for(int i = 0; i<aproxItr && sqrt(pow(z.x,2)+ pow(z.y,2)) < 2; i++){
         Point sqr = imaginarySq(z);
-        z.x = sqr.x + p.x;
-        z.y = sqr.y + p.y; 
+        z.x = sqr.x + imaginaryPoint.x;
+        z.y = sqr.y + imaginaryPoint.y; 
     }
+    if (sqrt(pow(z.x,2)+ pow(z.y,2)) >= 2)
+    {
+        return 0;
+    }
+    return 1;
     
 }
 
