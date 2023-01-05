@@ -79,7 +79,7 @@ int main(int argc, char const *argv[]){
 				
 	}
 
-	fprintf(plik, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"%f\" height=\"%f\" viewBox=\"%f %f\">", WIDTH, HEIGHT, WIDTH, HEIGHT);
+	fprintf(plik, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"%f\" height=\"%f\" viewBox=\"%f %f\"> \n", WIDTH, HEIGHT, WIDTH, HEIGHT);
 
 	switch (draw)
 	{
@@ -170,7 +170,7 @@ void generateSnowflake(FILE* plik, int degree, int w, int h){
 	generateSide(plik, degree, p1, p2, 1);
 	generateSide(plik, degree, p2, p3, 0);
 	generateSide(plik, degree, p3, p1, 0);
-	fprintf(plik, "\"/>");
+	fprintf(plik, "Z \"/>");
 	return;
 }
 

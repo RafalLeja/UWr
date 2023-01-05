@@ -3,6 +3,8 @@
 #include <math.h>
 #include <string.h>
 
+#define aproxItr 10
+
 typedef struct {
   double x;
   double y;
@@ -16,6 +18,40 @@ typedef struct {
     int maxframes;
     Point focus;
 } Specs;
+
+void inputSequence(int argc, char const *argv[], Specs * param);
+
+int includedInSet(Point p, int w, int h, double scale, Point focus);
+
+Point imaginarySq(Point p);
+
+int main(int argc, char const *argv[])
+{
+    Specs param = { 0, 0, "mandel-", 0.25, 10, {sqrt(2)*600, 0} };
+    inputSequence(argc, argv, &param);
+    printf("w = %d, h = %d, pre = %s, zoom = %f, frames = %d, fx = %f, fy = %f", param.width, param.height, param.nameprefix, param.zoom, param.maxframes, param.focus.x, param.focus.y);
+    
+    return 0;
+}
+
+Point imaginarySq(Point p){
+    Point o = { pow(p.x, 2) + pow(p.y, 2), 2*p.x*p.y};
+    return o; 
+}
+
+int includedInSet(Point p, int w, int h, double scale, Point focus){
+    double const minX = -2.5, maxX = 1.5, minY = -1.25, maxY = 1.25;
+    Point imaginaryPoint;
+    imaginaryPoint.x = p.x * (fabs(minX - maxX)/w) - minX;
+    imaginaryPoint.y = p.y * (fabs(minY - maxY)/w) - minY;
+    Point z = {0, 0};
+    for(int i = 0; i<aproxItr; i++){
+        Point sqr = imaginarySq(z);
+        z.x = sqr.x + p.x;
+        z.y = sqr.y + p.y; 
+    }
+    
+}
 
 void inputSequence(int argc, char const *argv[], Specs * param){
     char options[6][15] = {"--width", "--height", "--nameprefix", "--zoom", "--maxframes", "--focus"};
@@ -61,7 +97,7 @@ void inputSequence(int argc, char const *argv[], Specs * param){
         case 'f':
             i++;
             int splitIdx = (int) (strchr(argv[i], ',') - argv[i]);
-            if (splitIdx == 0)
+            if (strchr(argv[i], ',') == NULL)
             {
                 printf("blad parametru --focus X,Y");
                 exit(1);
@@ -77,21 +113,16 @@ void inputSequence(int argc, char const *argv[], Specs * param){
             break;
         }
     }
-    
-}
+    if (param->height == 0 && param->width != 0)
+    {
+        param->height = param->width * 3/4;
+    }else if (param->width == 0 && param->height != 0)
+    {
+        param->width = param->height * 4/3;
+    }else if (param->width == 0 && param->height == 0)
+    {
+        param->width = 1600;
+        param->height = 1200;
+    }
 
-int main(int argc, char const *argv[])
-{
-    Specs param = { 1800, 1200, "mandel-", 0.25, 10, {sqrt(2)*600, 0} };
-    // param.width = 1800;
-    // param.height = 1200;
-    // param.nameprefix = "mandel-";
-    // param.zoom = 0.25;
-    // param.focus.x = sqrt(2)*param.width;
-    // param.focus.y = 0;
-
-    inputSequence(argc, argv, &param);
-    printf("%d %d %s %f %d %f %f", param.width, param.height, param.nameprefix, param.zoom, param.maxframes, param.focus.x, param.focus.y);
-    
-    return 0;
 }
