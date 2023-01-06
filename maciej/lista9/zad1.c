@@ -42,12 +42,12 @@ int main(int argc, char* argv[]){
     while(fgets(linia, sizeof(linia), fp)){
         wczytaneLinie++;
 
-        if (strncmp(linia, "      <trkpt", 12) == 0){
+        if (strncmp(linia, "<trkpt ", 7) == 0){
             if(liczbaPunktow % 2 == 0){
-                sscanf(linia, "      <trkpt lat=\"%lf\" lon=\"%lf\">", &wspol[0], &wspol[1]);
+                sscanf(linia, "<trkpt lat=\"%lf\" lon=\"%lf\">", &wspol[0], &wspol[1]);
             }
             else{
-                sscanf(linia, "      <trkpt lat=\"%lf\" lon=\"%lf\">", &wspol[2], &wspol[3]);
+                sscanf(linia, "<trkpt lat=\"%lf\" lon=\"%lf\">", &wspol[2], &wspol[3]);
             }
 
             if(liczbaPunktow > 0){

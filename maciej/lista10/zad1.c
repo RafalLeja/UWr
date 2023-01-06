@@ -67,7 +67,12 @@ int main(int argc, char* argv[]){
 
     while(fgets(linia, sizeof(linia), fp)){
         sscanf(linia, "%f %f %f  %[^\n]", &f1, &f2, &f3, nazwa);
-        stworz(&lista, f1, f2, f3, nazwa);
+        if(strcmp(nazwa, "KONIEC") != 0){
+            stworz(&lista, f1, f2, f3, nazwa);
+        }
+        else{
+            break;
+        }
     }
     fclose(fp);
 
