@@ -32,8 +32,8 @@ void createPoint(point** lista, double lat, double lon, char time[20]){
     join(lista, new);
 }
 
-point** getData(){
-    FILE *fp = fopen("dane/rower.gpx", "r");
+point* getData(char* filePath){
+    FILE *fp = fopen(filePath, "r");
     point* points = NULL;
     point** start = &points;
 
@@ -70,21 +70,13 @@ void wyswietl(point* list){
     }
 }
 
-
-
-
-
-
-
-
-
 int main(int argc, char* argv[]){
-    // if(argc < 2){
-    //     printf("bledne wywolanie funkcji");
-    //     return 1;
-    // }
+    if(argc < 2){
+        printf("bledne wywolanie funkcji");
+        return 1;
+    }
 
-    point* listOfPoints = getData();
+    point* listOfPoints = getData(argv[1]);
 
     wyswietl(listOfPoints);
     
