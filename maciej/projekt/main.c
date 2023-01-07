@@ -240,7 +240,7 @@ properties getProperties(point* list){
     return prop;
 }
 
-kilometer* splitTrack(point* list, properties prop){
+kilometer* splitTrack(point* list, int* bestRate){
     kilometer* kilo = NULL;
     kilometer** begin = &kilo;
 
@@ -249,7 +249,7 @@ kilometer* splitTrack(point* list, properties prop){
     double coords[4];
     char start[20];
     double distance = 0;
-    prop.bestRate = 0;
+    *bestRate = 0;
     point* counter = list;
 
     strcpy(start, counter->time);
@@ -271,8 +271,8 @@ kilometer* splitTrack(point* list, properties prop){
 
         if(distance - 1000 * kiloCounter > 0){
             creatKilometer(&kilo, kiloCounter, coords[line % 2], coords[(line % 2) + 1], start, counter->time);
-            if(prop.bestRate == 0 || time2sec(counter->time) - time2sec(start) < prop.bestRate){
-                prop.bestRate = time2sec(counter->time) - time2sec(start);
+            if(*bestRate == 0 || time2sec(counter->time) - time2sec(start) < *bestRate){
+                *bestRate = time2sec(counter->time) - time2sec(start);
             }
             
             kiloCounter++;
@@ -286,7 +286,7 @@ kilometer* splitTrack(point* list, properties prop){
 }
 
 void showProp(properties prop){
-    printf("start: %s\nend: %s\ntotalTime: %02d:%02d:%02d\nmaxSpeed: %f\naverageSpeed: %f\nmaxHeight: %f\nminHeight: %f\ndistance: %.2f[km]\nbestRate: %02d'%02d''\naverageRate: %f\n",
+    printf("start: %s\nend: %s\ntotalTime: %02d:%02d:%02d\nmaxSpeed: %.2f\naverageSpeed: %.2f\nmaxHeight: %.2f\nminHeight: %.2f\ndistance: %.2f[km]\nbestRate: %02d'%02d''\naverageRate: %02d'%02d\n",
     prop.start,
     prop.end,
     prop.totalTime.hh, prop.totalTime.min, prop.totalTime.sec,
@@ -297,7 +297,8 @@ void showProp(properties prop){
     prop.distance / 1000,
     prop.bestRate / 60,
     prop.bestRate % 60,
-    prop.averageRate
+    (int) prop.averageRate / 1,
+    (int) (prop.averageRate * 60) / 1 % 60
     );
 }
 
@@ -308,7 +309,6 @@ void showKilo(kilometer* kilo){
     } 
 }
 
-
 int main(int argc, char* argv[]){
     if(argc < 2){
         printf("bledne wywolanie funkcji");
@@ -316,16 +316,12 @@ int main(int argc, char* argv[]){
     }
 
     point* listOfPoints = getData(argv[1]);
-
     properties prop;
-
     prop = getProperties(listOfPoints);
-
-    kilometer* kilometers = splitTrack(listOfPoints, prop);
+    kilometer* kilometers = splitTrack(listOfPoints, &prop.bestRate);
 
     showProp(prop);
     showKilo(kilometers);
     
-
     return 0;
 }
