@@ -3,7 +3,7 @@
 #include <math.h>
 #include <string.h>
 
-#define aproxItr 2000
+#define aproxItr 1500
 
 typedef struct {
   double x;
@@ -21,18 +21,19 @@ typedef struct {
 
 void inputSequence(int argc, char const *argv[], Specs * param);
 
-int includedInSet(Point p, int w, int h, double scale);
+int includedInSet(Point p, int w, int h, double scale, Point focus);
 
 Point imaginarySq(Point p);
 
 int main(int argc, char const *argv[])
 {
-    Specs param = { 0, 0, "mandel-", 0.25, 10, {sqrt(2)*600, 0} };
+    Specs param = { 0, 0, "mandel-", 0.75, 10, {-35, 0} };
     inputSequence(argc, argv, &param);
     printf("w = %d, h = %d, pre = %s, zoom = %f, frames = %d, fx = %f, fy = %f\n", param.width, param.height, param.nameprefix, param.zoom, param.maxframes, param.focus.x, param.focus.y);
+    double scale = 1;
+    Point offset = {0, 0};
     for (int i = 0; i < param.maxframes; i++)
     {
-        double scale = 1;
         char * name = strdup(param.nameprefix);
         char * number = strdup("");
         sprintf(number, "%d", i);
@@ -40,42 +41,50 @@ int main(int argc, char const *argv[])
         name = strcat(name, ".pgm");
         FILE * plik = fopen(name, "wb");
         fprintf(plik, "P2\n");
-        //fprintf(plik, "#%s ", name);
         fprintf(plik, "%d %d\n", param.width, param.height);
         fprintf(plik, "255\n");
         for (int y = 0; y < param.height; y++)
         {
+            // if (y % 1000 == 0)
+            // {
+            //     printf("%d\n", y);
+            // }
+            
             for (int x = 0; x < param.width; x++)
             {
                 Point pixel = {x, y};
-                if (includedInSet(pixel, param.width, param.height, scale) == 1)
+                if (includedInSet(pixel, param.width, param.height, scale, offset) == 1)
                 {
                     fprintf(plik, "255 ");
                 }else {
                     fprintf(plik, "0 ");
                 }
             }
-            
+            fprintf(plik, "\n");
         }
         fclose(plik);
+        offset.x += param.focus.x*scale;
+        offset.y += param.focus.y;
+        scale *= param.zoom;
     }
     
     return 0;
 }
 
 Point imaginarySq(Point p){
-    Point o = { pow(p.x, 2) + pow(p.y, 2), 2*p.x*p.y};
+    Point o = { pow(p.x, 2) - pow(p.y, 2), 2*p.x*p.y};
     return o; 
 }
 
-int includedInSet(Point p, int w, int h, double scale){
+int includedInSet(Point p, int w, int h, double scale, Point focus){
     double const minX = -2.5, maxX = 1.5, minY = -1.25, maxY = 1.25;
     Point imaginaryPoint;
-    imaginaryPoint.x = p.x * (fabs(minX - maxX)/(w*scale)) + minX;
-    imaginaryPoint.y = p.y * (fabs(minY - maxY)/(h*scale)) + minY;
+    imaginaryPoint.x = ((p.x+focus.x) * (fabs(minX - maxX)/w) + minX)*scale;
+    imaginaryPoint.y = ((p.y+focus.y) * (fabs(minY - maxY)/h) + minY)*scale;
     //printf("%f %f \n", imaginaryPoint.x, imaginaryPoint.y);
     Point z = {0, 0};
     for(int i = 0; i<aproxItr && sqrt(pow(z.x,2)+ pow(z.y,2)) < 2; i++){
+        //printf("%f %f \n", z.x, z.y);
         Point sqr = imaginarySq(z);
         z.x = sqr.x + imaginaryPoint.x;
         z.y = sqr.y + imaginaryPoint.y; 
@@ -135,9 +144,7 @@ void inputSequence(int argc, char const *argv[], Specs * param){
             if (strchr(argv[i], ',') == NULL)
             {
                 printf("blad parametru --focus X,Y");
-                exit(1);
             }
-            
             char * buff = strdup("");
             strncat(buff, argv[i], splitIdx);
             param->focus.x = atoi(buff);
@@ -150,13 +157,13 @@ void inputSequence(int argc, char const *argv[], Specs * param){
     }
     if (param->height == 0 && param->width != 0)
     {
-        param->height = param->width * 3/4;
+        param->height = param->width * 5/8;
     }else if (param->width == 0 && param->height != 0)
     {
-        param->width = param->height * 4/3;
+        param->width = param->height * 8/5;
     }else if (param->width == 0 && param->height == 0)
     {
-        param->width = 1600;
+        param->width = 1920;
         param->height = 1200;
     }
 
