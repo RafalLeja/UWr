@@ -31,7 +31,7 @@ typedef struct properties{
     double minHeight;
     double averageSpeed;
     double distance;
-    int bestRate;
+    double bestRate;
     double averageRate;
 }properties;
 
@@ -186,9 +186,16 @@ properties getProperties(point* list){
     double coords[4];
     int time[2];
     double distance = 0;
+
+    int maxTime[2];
+    double maxDist[2];
+    maxDist[0] = 0;
+    maxDist[1] = 0;
+
     point* counter = list;
 
     int timeStart = time2sec(counter->time);
+    maxTime[0] = timeStart;
     time[0] = time2sec(counter->time);
     int timeEnd;
     coords[0] = counter->lat;
@@ -198,7 +205,9 @@ properties getProperties(point* list){
     strcpy(prop.start, counter->time);
     timeConverter(prop.start);
 
+
     prop.maxSpeed = 0;
+    prop.bestRate = 999;
     counter = counter->next;
 
     for(; counter != NULL; counter = counter->next){
@@ -206,16 +215,27 @@ properties getProperties(point* list){
             coords[0] = counter->lat;
             coords[1] = counter->lon;
             time[0] = time2sec(counter->time);
+            maxTime[1] = time[0];
         }
         else{
             coords[2] = counter->lat;
             coords[3] = counter->lon;
             time[1] = time2sec(counter->time);
+            maxTime[1] = time[1];
         }
         distance += dist(coords[0], coords[1], coords[2], coords[3]);
+        maxDist[1] += dist(coords[0], coords[1], coords[2], coords[3]);
 
-        if(dist(coords[0], coords[1], coords[2], coords[3])/ abs(time[1] - time[0]) * 3.6 > prop.maxSpeed){
-            prop.maxSpeed = dist(coords[0], coords[1], coords[2], coords[3]) / abs(time[1] - time[0]) * 3.6;
+        if(maxTime[1] - maxTime[0] >= 10){
+            if(prop.maxSpeed < (maxDist[1] - maxDist[0]) / (maxTime[1] - maxTime[0]) * 3.6){
+                prop.maxSpeed = (maxDist[1] - maxDist[0]) / (maxTime[1] - maxTime[0]) * 3.6;
+            }
+            if(prop.bestRate > (maxTime[1] - maxTime[0]) / (maxDist[1] - maxDist[0]) / 60 * 1000){
+                prop.bestRate = (maxTime[1] - maxTime[0]) / (maxDist[1] - maxDist[0]) / 60 * 1000;
+            }
+
+            maxTime[0] = maxTime[1];
+            maxDist[0] = maxDist[1];
         }
 
         if(counter->ele > prop.maxHeight){
@@ -235,12 +255,12 @@ properties getProperties(point* list){
     prop.totalTime = setMyTime(timeEnd - timeStart);
     prop.distance = distance;
     prop.averageSpeed = prop.distance / (timeEnd - timeStart) * 3.6;
-    prop.averageRate = (timeEnd - timeStart) / prop.distance /60 * 1000;
+    prop.averageRate = (timeEnd - timeStart) / prop.distance / 60 * 1000;
 
     return prop;
 }
 
-kilometer* splitTrack(point* list, int* bestRate){
+kilometer* splitTrack(point* list){
     kilometer* kilo = NULL;
     kilometer** begin = &kilo;
 
@@ -249,7 +269,6 @@ kilometer* splitTrack(point* list, int* bestRate){
     double coords[4];
     char start[20];
     double distance = 0;
-    *bestRate = 0;
     point* counter = list;
 
     strcpy(start, counter->time);
@@ -271,9 +290,6 @@ kilometer* splitTrack(point* list, int* bestRate){
 
         if(distance - 1000 * kiloCounter > 0){
             creatKilometer(&kilo, kiloCounter, coords[line % 2], coords[(line % 2) + 1], start, counter->time);
-            if(*bestRate == 0 || time2sec(counter->time) - time2sec(start) < *bestRate){
-                *bestRate = time2sec(counter->time) - time2sec(start);
-            }
             
             kiloCounter++;
             strcpy(start, counter->time);
@@ -295,8 +311,8 @@ void showProp(properties prop){
     prop.maxHeight,
     prop.minHeight,
     prop.distance / 1000,
-    prop.bestRate / 60,
-    prop.bestRate % 60,
+    (int) prop.bestRate / 1,
+    (int) (prop.bestRate * 60) / 1 % 60,
     (int) prop.averageRate / 1,
     (int) (prop.averageRate * 60) / 1 % 60
     );
@@ -318,10 +334,10 @@ int main(int argc, char* argv[]){
     point* listOfPoints = getData(argv[1]);
     properties prop;
     prop = getProperties(listOfPoints);
-    kilometer* kilometers = splitTrack(listOfPoints, &prop.bestRate);
+    kilometer* kilometers = splitTrack(listOfPoints);
 
     showProp(prop);
-    showKilo(kilometers);
+    // showKilo(kilometers);
     
     return 0;
 }
