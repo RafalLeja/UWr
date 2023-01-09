@@ -11,6 +11,12 @@ typedef struct {
 } Point;
 
 typedef struct {
+    int r;
+    int g;
+    int b;
+} Pixel;
+
+typedef struct {
     int width;
     int height;
     char * nameprefix; 
@@ -21,7 +27,7 @@ typedef struct {
 
 void inputSequence(int argc, char const *argv[], Specs * param);
 
-int includedInSet(Point p, int w, int h, double scale, Point focus);
+Pixel includedInSet(Point p, int w, int h, double scale, Point focus);
 
 Point imaginarySq(Point p);
 
@@ -38,9 +44,9 @@ int main(int argc, char const *argv[])
         char * number = strdup("");
         sprintf(number, "%d", i);
         name = strcat(name, number);
-        name = strcat(name, ".pgm");
-        FILE * plik = fopen(name, "wb");
-        fprintf(plik, "P2\n");
+        name = strcat(name, ".ppm");
+        FILE * plik = fopen(name, "w");
+        fprintf(plik, "P3\n");
         fprintf(plik, "%d %d\n", param.width, param.height);
         fprintf(plik, "255\n");
         for (int y = 0; y < param.height; y++)
@@ -53,12 +59,9 @@ int main(int argc, char const *argv[])
             for (int x = 0; x < param.width; x++)
             {
                 Point pixel = {x, y};
-                if (includedInSet(pixel, param.width, param.height, scale, offset) == 1)
-                {
-                    fprintf(plik, "255 ");
-                }else {
-                    fprintf(plik, "0 ");
-                }
+                Pixel color = includedInSet(pixel, param.width, param.height, scale, offset);
+                fprintf(plik, "%d %d %d ", color.r, color.g, color.b);
+
             }
             fprintf(plik, "\n");
         }
@@ -76,24 +79,31 @@ Point imaginarySq(Point p){
     return o; 
 }
 
-int includedInSet(Point p, int w, int h, double scale, Point focus){
+Pixel includedInSet(Point p, int w, int h, double scale, Point focus){
+    Pixel color = { 0, 0, 0};
     double const minX = -2.5, maxX = 1.5, minY = -1.25, maxY = 1.25;
     Point imaginaryPoint;
     imaginaryPoint.x = ((p.x+focus.x) * (fabs(minX - maxX)/w) + minX)*scale;
     imaginaryPoint.y = ((p.y+focus.y) * (fabs(minY - maxY)/h) + minY)*scale;
     //printf("%f %f \n", imaginaryPoint.x, imaginaryPoint.y);
     Point z = {0, 0};
-    for(int i = 0; i<aproxItr && sqrt(pow(z.x,2)+ pow(z.y,2)) < 2; i++){
+    int i; 
+    for(i = 0;i<aproxItr && sqrt(pow(z.x,2)+ pow(z.y,2)) < 2; i++){
         //printf("%f %f \n", z.x, z.y);
         Point sqr = imaginarySq(z);
         z.x = sqr.x + imaginaryPoint.x;
         z.y = sqr.y + imaginaryPoint.y; 
     }
+    //printf("%d\n", i);
     if (sqrt(pow(z.x,2)+ pow(z.y,2)) >= 2)
     {
-        return 0;
+        color.r = abs((255/i) - 255);
+        return color;
     }
-    return 1;
+    color.r = 255;
+    color.g = 255;
+    color.b = 255;
+    return color;
     
 }
 

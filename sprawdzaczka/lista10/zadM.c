@@ -1,10 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-long int horner(int* a, int n, int x) {
-    long int wynik = a[0];
+long long int horner(int* a, int n, int x) {
+    long long int wynik = a[0] % 100000;
     for (int i = 1; i <= n; i++) {
-        wynik = wynik * x + a[i];
+        wynik = (wynik * x + a[i]) % 100000;
     }
     return wynik;
 }
@@ -25,7 +25,7 @@ int main(){
             printf(" ");
         }     
 
-        printf("%05ld\n", labs(horner(wspolczynniki, stopienWielomianu, x)) % 100000);
+        printf("%.5lld\n", llabs(horner(wspolczynniki, stopienWielomianu, x)));
     }
 
     return 0;
