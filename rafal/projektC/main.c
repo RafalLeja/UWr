@@ -4,10 +4,12 @@
 #include <string.h>
 
 #define aproxItr 1500
+#define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+#define PBWIDTH 60
 
 typedef struct {
-  double x;
-  double y;
+  long double x;
+  long double y;
 } Point;
 
 typedef struct {
@@ -25,6 +27,14 @@ typedef struct {
     Point focus;
 } Specs;
 
+void printProgress(double percentage) {
+    int val = (int) (percentage * 100);
+    int lpad = (int) (percentage * PBWIDTH);
+    int rpad = PBWIDTH - lpad;
+    printf("\r%3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
+    fflush(stdout);
+}
+
 void inputSequence(int argc, char const *argv[], Specs * param);
 
 Pixel includedInSet(Point p, int w, int h, double scale, Point focus);
@@ -35,9 +45,10 @@ int main(int argc, char const *argv[])
 {
     Specs param = { 0, 0, "mandel-", 0.75, 10, {-35, 0} };
     inputSequence(argc, argv, &param);
-    printf("w = %d, h = %d, pre = %s, zoom = %f, frames = %d, fx = %f, fy = %f\n", param.width, param.height, param.nameprefix, param.zoom, param.maxframes, param.focus.x, param.focus.y);
+    printf("w = %d, h = %d, pre = %s, zoom = %f, frames = %d, fx = %Lf, fy = %Lf\n", param.width, param.height, param.nameprefix, param.zoom, param.maxframes, param.focus.x, param.focus.y);
     double scale = 1;
     Point offset = {0, 0};
+    int prog = 0;
     for (int i = 0; i < param.maxframes; i++)
     {
         char * name = strdup(param.nameprefix);
@@ -51,11 +62,6 @@ int main(int argc, char const *argv[])
         fprintf(plik, "255\n");
         for (int y = 0; y < param.height; y++)
         {
-            // if (y % 1000 == 0)
-            // {
-            //     printf("%d\n", y);
-            // }
-            
             for (int x = 0; x < param.width; x++)
             {
                 Point pixel = {x, y};
@@ -64,9 +70,11 @@ int main(int argc, char const *argv[])
 
             }
             fprintf(plik, "\n");
+            prog++;
+            printProgress(prog*1.0/(param.maxframes*param.height)*1.0);
         }
         fclose(plik);
-        offset.x += param.focus.x*scale;
+        offset.x += param.focus.x;
         offset.y += param.focus.y;
         scale *= param.zoom;
     }
