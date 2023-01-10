@@ -1,3 +1,5 @@
+//Maciej Stys lista10 zad1
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -14,6 +16,19 @@ typedef struct PtList{
     char nazwa[47];
     struct PtList *next;
 }PtList;
+
+double odleglosc(double lat1, double lon1, double lat2, double lon2){
+    double dLat = stopnieNaRadiany(lat2 - lat1);
+    double dLon = stopnieNaRadiany(lon2 - lon1);
+
+    lat1 = stopnieNaRadiany(lat1);
+    lat2 = stopnieNaRadiany(lat2);
+
+    double a = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2); 
+    double c = 2 * atan2(sqrt(a), sqrt(1-a)); 
+    
+    return promienZiemi * c;
+}
 
 void polacz(PtList** lista, PtList* nowyElement){
     if(*lista == NULL){
@@ -42,7 +57,32 @@ void stworz(PtList** lista, float a, float b, float c, char nazwaa[47]){
 
 void wyswietl(PtList* lista){
     for(PtList* licznik = lista; licznik != NULL; licznik = licznik->next){
-        printf("%f %f %f %s\n", licznik->x, licznik->y, licznik->z, licznik->nazwa);
+        printf("%.0f %.2f %.2f %s\n", licznik->x, licznik->y, licznik->z, licznik->nazwa);
+    }
+}
+
+void wyswietlNazwa(PtList* lista, char* nazwa){
+    for(PtList* licznik = lista; licznik != NULL; licznik = licznik->next){
+        if(strstr(licznik->nazwa, nazwa)){
+            printf("%.0f %.2f %.2f %s\n", licznik->x, licznik->y, licznik->z, licznik->nazwa);
+        }
+    }
+}
+
+void wyswietlOdleglosc(PtList* lista, char* nazwa){
+    double lat;
+    double lon;
+    for(PtList* licznik = lista; licznik != NULL; licznik = licznik->next){
+        if(strstr(licznik->nazwa, nazwa)){
+            nazwa = licznik->nazwa;
+            lat = licznik->z;
+            lon = licznik->y;
+            break;
+        }
+    }
+
+    for(PtList* licznik = lista; licznik != NULL; licznik = licznik->next){
+        printf("%s -> %s : %.2f [km]\n", nazwa, licznik->nazwa, odleglosc(lat, lon, licznik->z, licznik->y));
     }
 }
 
@@ -50,19 +90,6 @@ void pamiec(PtList** lista){
     for(PtList* licznik = *lista; licznik != NULL; licznik = licznik->next){
         free(licznik);
     }
-}
-
-double odleglosc(double lat1, double lon1, double lat2, double lon2){   //law of haversine
-    double dLat = stopnieNaRadiany(lat2 - lat1);
-    double dLon = stopnieNaRadiany(lon2 - lon1);
-
-    lat1 = stopnieNaRadiany(lat1);
-    lat2 = stopnieNaRadiany(lat2);
-
-    double a = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2); 
-    double c = 2 * atan2(sqrt(a), sqrt(1-a)); 
-    
-    return promienZiemi * c;
 }
 
 int main(int argc, char* argv[]){
@@ -95,36 +122,17 @@ int main(int argc, char* argv[]){
 
     fclose(fp);
 
-    if(argc ==2){
+    if(argc == 2){
         wyswietl(lista);
         printf("Liczba wczytanych wszystkich elementow: %d", elementy);
     }
 
     if(argc == 3){
-        for(PtList* licznik = lista; licznik != NULL; licznik = licznik->next){
-            if(strstr(licznik->nazwa, argv[2])){
-                printf("%f %f %f %s\n", licznik->x, licznik->y, licznik->z, licznik->nazwa);
-            }
-        }
+        wyswietlNazwa(lista, argv[2]);
     }
 
     if(argc == 4 && strcmp(argv[3], "dist") == 0){
-        char* nazwa;
-        double lat;
-        double lon;
-        for(PtList* licznik = lista; licznik != NULL; licznik = licznik->next){
-            if(strstr(licznik->nazwa, argv[2])){
-                nazwa = licznik->nazwa;
-                lat = licznik->z;
-                lon = licznik->y;
-                break;
-            }
-        }
-        
-        for(PtList* licznik = lista; licznik != NULL; licznik = licznik->next){
-            printf("%s -> %s : %.2f [km]\n", nazwa, licznik->nazwa, odleglosc(lat, lon, licznik->z, licznik->y));
-        }
-        
+        wyswietlOdleglosc(lista, argv[2]);
     }
     
     pamiec(&lista);
