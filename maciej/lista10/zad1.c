@@ -92,6 +92,7 @@ int main(int argc, char* argv[]){
         }
         stworz(&lista, f1, f2, f3, nazwa);
     }
+
     fclose(fp);
 
     if(argc ==2){
@@ -126,7 +127,6 @@ int main(int argc, char* argv[]){
         
     }
     
-    fclose(fp);
     pamiec(&lista);
 
     return 0;

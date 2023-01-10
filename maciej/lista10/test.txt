@@ -2352,7 +2352,7 @@
  959  78.34 40.17  Blue Knob 
  957  74.5 42.5  Overlook Mountain 
  952  82.42 35.3  Table Rock Mountain 
- 952  10.9 52.9  Brandon, Mount 
+ 952  -10.9 52.9  Brandon, Mount 
  948 118.56 34.7  Sandstone Peak   (Mt.Allen) 
  942  14.18 68.11  Vagakallen 
  935   9.13 40.53  Monte Lisgiu 
