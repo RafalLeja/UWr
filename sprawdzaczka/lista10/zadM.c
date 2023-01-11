@@ -1,12 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-long long int horner(int* a, int n, int x) {
-    long long int wynik = a[0] % 100000;
-    for (int i = 1; i <= n; i++) {
-        wynik = (wynik * x + a[i]) % 100000;
+int horner(int* a, int n, int x) {
+    long long int wynik = a[0] % 1000000000;
+    for(int i = 1; i <= n; i++) {
+        wynik = (wynik * x + a[i]) % 1000000000;
     }
-    return wynik;
+    return (int) llabs(wynik) % 100000;
 }
 
 int main(){
@@ -21,12 +21,8 @@ int main(){
             buf = scanf("%d", &wspolczynniki[b]);
         }
         
-        if(buf == -123){
-            printf(" ");
-        }     
-
-        printf("%.5lld\n", llabs(horner(wspolczynniki, stopienWielomianu, x)));
+        printf("%05d\n", horner(wspolczynniki, stopienWielomianu, x));
     }
 
-    return 0;
+    return buf;
 }
