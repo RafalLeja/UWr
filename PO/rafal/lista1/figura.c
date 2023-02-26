@@ -1,6 +1,6 @@
 /* 
 	* Rafał Leja
-        * PO: lista 1, figura
+        * PO: lista 1, zadanie 1: figura
 	* gcc figura.c -o figura && ./figura.exe
 */
 #include <stdlib.h>
