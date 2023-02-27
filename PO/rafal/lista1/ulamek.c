@@ -1,7 +1,7 @@
 /* 
 	* Rafał Leja
-        * PO: lista 1, zadanie 2: ułamek
-	* gcc ulamek.c -o ulamek && ./ulamek.exe
+    * PO: lista 1, zadanie 2: ułamek
+	* gcc ulamek.c 
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,8 +14,7 @@ typedef struct ulamek {
 
 int NWD(int a, int b){
 	int pom;
-	while(b!=0)
-	{
+	while(b!=0){
 		pom = b;
 		b = a%b;
 		a = pom;	
@@ -105,5 +104,5 @@ int main(){
 	show(b);
 	podziel_i_zamien(a,b);
 	show(b);
-	return 1; 
+	return 0; 
 }
