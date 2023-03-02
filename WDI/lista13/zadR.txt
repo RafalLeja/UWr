@@ -1,0 +1,69 @@
+typedef struct list {
+    int val;
+    struct list *next;
+} list;
+
+typedef struct link_list {
+    struct list *head, *tail;
+} link_list;
+
+// piwerwsze zadanie
+int pierwsze(int macierz[n][n]){ 
+int *a[n];
+    for (int i; i < n; i++) {
+        list = nowaLista();
+        for(int j; j<n; j++) {
+            if (macierz[i][j] == 1){
+                dodaj(list, j);
+            }
+        }
+        a[i] = list;
+    }
+    return a;
+}
+
+void dfs(a[], int v){
+    stack stos = stosPusty();
+    dodaj(stos, v);
+    while(!pusty(stos)){
+        w = zobacz(stos);
+        odw[]
+    }
+}
+
+// czwarte zadanie
+list czwarte(a[], int u, int v){
+    list out = nowaLista();
+    dodaj(out, u);
+    for(list i = a[u]; i; i=i->next){
+        if(i.val == v){
+            dodaj(out, v);
+            return out;
+        }
+    }
+    for(list i = a[u]; i; i=i->next){
+        dodajListe(czwarte(a[], i.val, v));
+    }
+    return list;
+}
+
+// ósme zadanie {niedokończone - nie chce mi sie}
+int * ósme(int a[], n){
+    for(int i; i < n; i++){
+        int j  = 0;
+        while(a[i][j] != NULL){
+            if (siega(i, a[i][j++], a[])){
+                break;
+            }
+        }
+    }
+}
+
+kol siega(int i, int j, a[]){
+    int * out
+    while(a[i][j] != NULL){
+        if (siega(i, a[i][j++], a[]) != NULL){
+            break;
+        }
+    }
+}
