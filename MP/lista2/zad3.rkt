@@ -22,10 +22,10 @@
 
 (define (matrix-expt m k)
    (define (it base acc dest)
-      (if (= dest 1)
+      (if (= dest 0)
          acc
          (it base (matrix-mult base acc) (- dest 1))))
-   (it m m k))
+   (it m 1 k))
 
 (define (fib-matrix k)
    (define (it a b dest)
@@ -39,6 +39,6 @@
       (if (= dest 0)
          acc
          (if (= 0 (modulo dest 2))
-            (it (matrix-mult base base) acc (/ k 2))
-            (it base (matrix-mult base acc) (- k 1)))))
+            (it (matrix-mult base base) acc (/ dest 2))
+            (it base (matrix-mult base acc) (- dest 1)))))
    (it m (make-matrix 1 1 1 1) k))
