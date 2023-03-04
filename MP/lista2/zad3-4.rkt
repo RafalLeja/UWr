@@ -4,10 +4,10 @@
 
 (define (matrix-mult x y) 
    (make-matrix 
-      (* (matrix-a x) (matrix-a y))
-      (* (matrix-b x) (matrix-b y))
-      (* (matrix-c x) (matrix-c y))
-      (* (matrix-d x) (matrix-d y))
+      (+ (* (matrix-a x) (matrix-a y)) (* (matrix-b x) (matrix-c y)))
+      (+ (* (matrix-a x) (matrix-b y)) (* (matrix-b x) (matrix-d y)))
+      (+ (* (matrix-c x) (matrix-a y)) (* (matrix-d x) (matrix-c y)))
+      (+ (* (matrix-d x) (matrix-d y)) (* (matrix-c x) (matrix-b y)))
       ))
 
 (define matrix-id (make-matrix 1 0 0 1))
@@ -25,14 +25,10 @@
       (if (= dest 0)
          acc
          (it base (matrix-mult base acc) (- dest 1))))
-   (it m 1 k))
+   (it m (make-matrix 1 1 1 1) k))
 
 (define (fib-matrix k)
-   (define (it a b dest)
-      (if (= dest 0)
-         a
-         (it b (matrix-add a b) (- dest 1))))
-   (it (make-matrix 1 1 1 0) (make-matrix 2 1 1 1) k))
+   (matrix-expt (make-matrix 1 1 1 0) k))
 
 (define (matrix-expt-fast m k)
    (define (it base acc dest)
@@ -42,3 +38,6 @@
             (it (matrix-mult base base) acc (/ dest 2))
             (it base (matrix-mult base acc) (- dest 1)))))
    (it m (make-matrix 1 1 1 1) k))
+
+(define (fib-matrix-fast k)
+   (matrix-expt-fast (make-matrix 1 1 1 0) k))
