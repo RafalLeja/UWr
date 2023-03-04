@@ -134,7 +134,7 @@ public class Strumienie
 
 		public char los(){
 			// funkcja zwracająca losowy znak z przedziału a - z
-			return (char)('a' + rand.next() % 26); 
+			return (char)(' ' + rand.next() % 94); 
 		}
 
 		public void reset(){
