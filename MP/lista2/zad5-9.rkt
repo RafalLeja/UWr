@@ -45,7 +45,7 @@
    (if (null? l)
       l
       (if (= e (car l))
-      (rmv e (cdr l))
+      (cdr l)
       (cons (car l) (rmv e (cdr l))))))
 
 (define (select l)
