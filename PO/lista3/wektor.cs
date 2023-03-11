@@ -92,15 +92,4 @@ namespace WektorBib
 			return (float)Math.Sqrt(wynik);
 		}
 	}
-
-	public class Program
-	{
-		public static void Main(){
-			Wektor a = new Wektor(1, 3f);
-			Wektor b = new Wektor(1, 2f);
-			Wektor c = a*b;
-			System.Console.WriteLine(
-				$"a = {a.norma()}, b = {b.norma()}, a*b = {c.norma()}");
-		}
-	}
 }
