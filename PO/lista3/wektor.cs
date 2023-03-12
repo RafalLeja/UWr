@@ -1,7 +1,8 @@
 /*
 	* Rafał Leja, 12.03.2023
-	* PO: wektor.cs, lista 3, zadanie 4
+	* PO: Wektor, lista 3, zadanie 4
     * moduł WektorBib zawierający klasę Wektor
+	* mcs -t:library -out:wektor.dll wektor.cs
 */
 
 using System;
@@ -10,20 +11,20 @@ namespace WektorBib
 {
 	public class Wektor
 	{
-		float[] wartosci;
-		int wymiar;
+		public float[] val;
+		public int dim;
 
 		// konstruktor wektora zadawany w sposób:
 		// Wektor(wymiar = n,
 		// n liczb typu float ozaczających kolejne współrzędne wektora)
-		public Wektor(int n, params float[] wart)
+		public Wektor(int n, params float[] SetVal)
 		{
-			wymiar = n;
-			wartosci = wart;
+			dim = n;
+			val = SetVal;
 			// usuwanie ewentualnego nadmiaru argumentów
 			// (można rówież w takim przypadku zgłosić wyjątek,
 			// ale uznałem że tak będzie łaskawiej dla użytkownika)
-			Array.Resize(ref wartosci, n);
+			Array.Resize(ref val, n);
 		}
 
 		// przeciążenie operatora '+'
@@ -35,17 +36,17 @@ namespace WektorBib
 			// i w przypadku różnych wymiarów,
 			// zgłaszam wyjątek zgodnie z dokumentacją:
 			// https://learn.microsoft.com/pl-pl/dotnet/csharp/fundamentals/exceptions/creating-and-throwing-exceptions
-			if(a.wymiar != b.wymiar)
+			if(a.dim != b.dim)
 			{
 				throw new ArgumentException(
 					"Wektory muszą mieć takie same wymiary!");
 			}
-			int n = a.wymiar;;
+			int n = a.dim;;
 			float[] wart = new float[n];
 			// dodawanie kolejnych współrzędnych wektora
 			for (int i = 0; i < n; i++)
 			{
-				wart[i] = a.wartosci[i] + b.wartosci[i];
+				wart[i] = a.val[i] + b.val[i];
 			}
 			return new Wektor(n, wart);
 		}
@@ -53,12 +54,12 @@ namespace WektorBib
 		// przeciążenie operatora '*', przypadek skalar * wektor
 		public static Wektor operator *(float a, Wektor b)
 		{
-			int n = b.wymiar;
+			int n = b.dim;
 			float[] wart = new float[n];
 			// mnożenie kolejnych współrzędnych wektora przez skalar
 			for (int i = 0; i < n; i++)
 			{
-				wart[i] = b.wartosci[i] * a;
+				wart[i] = b.val[i] * a;
 			}
 			return new Wektor(n, wart);
 		}
@@ -69,23 +70,23 @@ namespace WektorBib
 			// podobnie jak przy dodawaniu, 
 			// iloczyn wektorów jest zdefiniowany
 			// tylko dla wektorów o jednakowych wymiarach
-			if(a.wymiar != b.wymiar)
+			if(a.dim != b.dim)
 			{
 				throw new ArgumentException(
 					"Wektory muszą mieć takie same wymiary!");
 			}
-			int n = a.wymiar;
+			int n = a.dim;
 			float[] wart = new float[n];
 			for (int i = 0; i < n; i++)
 			{
-				wart[i] = a.wartosci[i] * b.wartosci[i];
+				wart[i] = a.val[i] * b.val[i];
 			}
 			return new Wektor(n, wart);
 		}
 
 		public float norma(){
 			float wynik = 0;
-			foreach (var item in this.wartosci)
+			foreach (var item in this.val)
 			{
 				wynik += (float)Math.Pow(item, 2.0f);
 			}

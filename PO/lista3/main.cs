@@ -4,7 +4,7 @@
     * kompilator: mono, so: Windows 10
 	* mcs -t:library -out:wektor.dll wektor.cs
     * mcs -t:library -out:lista.dll lista.cs
-    * mcs -r:wektor.dll -r:lista.dll -out:main.exe | ./main.cs
+    * mcs -r:wektor.dll -r:lista.dll -out:main.exe | .\main.cs
 */
 
 using System;
@@ -19,17 +19,53 @@ namespace Main
         static void Main(){
 
 
-            Wektor a = new Wektor(1, 2f);
-            Wektor b = new Wektor(1, 3f);
-            Wektor c = new Wektor(1, 5f);
+            Wektor a = new Wektor(2, 2f, 7f);
+            Wektor b = new Wektor(2, 3f, 11f);
+            Wektor c = new Wektor(2, 5f, 13f);
 
             Lista<Wektor> l = new Lista<Wektor>();
             
-            l.push_front(a);
-            l.push_front(b);
+            l.push_back(b);
             l.push_back(c);
+            l.push_front(a);
+            
+            while (l.size != 0)
+            {
+                Wektor output = l.pop_back();
+                Console.Write(
+                    $"|[{output.val[0]}, {output.val[1]}]| = "
+                );
+                Console.WriteLine(
+                    $"{output.norma()}"
+                );
+            };
 
-            System.Console.WriteLine(l.pop_back());
+            Console.Write(
+                $"[{a.val[0]}, {a.val[1]}] + "
+            );
+            Console.Write(
+                $"[{b.val[0]}, {b.val[1]}] = "
+            );
+            Console.WriteLine(
+                $"[{(a+b).val[0]}, {(a+b).val[1]}]"
+            );
+
+            Console.Write(
+                $"[{a.val[0]}, {a.val[1]}] * "
+            );
+            Console.Write(
+                $"[{b.val[0]}, {b.val[1]}] = "
+            );
+            Console.WriteLine(
+                $"[{(a*b).val[0]}, {(a*b).val[1]}]"
+            );
+
+            Console.Write(
+                $"5 * [{c.val[0]}, {c.val[1]}] = "
+            );
+            Console.WriteLine(
+                $"[{(5*c).val[0]} , {(5*c).val[1]}]"
+            );
         }
     }
 }
