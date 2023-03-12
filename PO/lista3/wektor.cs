@@ -1,7 +1,7 @@
-/* 
-	* Rafał Leja
-	* PO: lista 3, zadanie 4: Wektor
-	* msc wektor.cs -out:wektor.dll 
+/*
+	* Rafał Leja, 12.03.2023
+	* PO: wektor.cs, lista 3, zadanie 4
+    * moduł WektorBib zawierający klasę Wektor
 */
 
 using System;

@@ -1,3 +1,9 @@
+/*
+	* Rafał Leja, 12.03.2023
+	* PO: lista.cs, lista 3, zadanie 4
+    * moduł ListaBib zawierający klasę Lista oraz Element
+*/
+
 using System;
 
 namespace ListaBib
@@ -29,19 +35,15 @@ namespace ListaBib
             last = null;
         }
 
-        void push_first(T val)
-        {
-            Element<T> elem = new Element<T>(val, null, null);
-            size++;
-            first = elem;
-            last = elem;
-        }
-
+        // dodawanie elementu na początek
         public void push_front(T val)
         {
             if (this.is_empty())
             {
-                push_first(val);
+                Element<T> elem = new Element<T>(val, null, null);
+                size++;
+                first = elem;
+                last = elem;
             }else
             {
                 Element<T> elem = new Element<T>(val, null, first);
@@ -50,12 +52,16 @@ namespace ListaBib
                 size++;
             }
         }
-
-        public void push_last(T val)
+        
+        // dodawanie elementu na koniec
+        public void push_back(T val)
         {
             if (this.is_empty())
             {
-                push_first(val);
+                Element<T> elem = new Element<T>(val, null, null);
+                size++;
+                first = elem;
+                last = elem;
             }else
             {            
                 Element<T> elem = new Element<T>(val, last, null);
@@ -65,18 +71,20 @@ namespace ListaBib
             }
         }
 
-        public Element<T> pop_front()
+        // zwracanie elementu z początku
+        public T pop_front()
         {
-            if(this.is_empty()) return null;
-            Element<T> outval = first;
+            if(this.is_empty()) return default (T);
+            T outval = first.val;
             first = first.next;
             return outval;
         }
 
-        public Element<T> pop_back()
+        // zwaracnie elementu z końca
+        public T pop_back()
         {
-            if(this.is_empty()) return null;
-            Element<T> outval = last;
+            if(this.is_empty()) return default (T);
+            T outval = last.val;
             last = last.prev;
             return outval;
         }
@@ -84,21 +92,6 @@ namespace ListaBib
         public bool is_empty()
         {
             return size==0; 
-        }
-    }
-
-    public class Program
-    {
-        static void Main()
-        {
-            Lista<int> l = new Lista<int>();
-            l.push_front(1);
-            l.push_last(2);
-            l.push_front(3);
-
-            System.Console.WriteLine(l.pop_back().val);
-            System.Console.WriteLine(l.pop_back().val);
-            System.Console.WriteLine(l.pop_back().val);
         }
     }
 }
