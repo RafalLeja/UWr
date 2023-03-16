@@ -54,3 +54,12 @@
     (and (itr (node-elem t) (node-l t) -1)
         (itr (node-elem t) (node-r t) 1)))
 
+(define (sum-paths t)
+    (define (itr sum t)
+        (if (leaf? t)
+            (leaf)
+            (node 
+                (itr (+ sum (node-elem t)) (node-l t))
+                (+ sum (node-elem t))
+                (itr (+ sum (node-elem t)) (node-r t)))))
+    (itr 0 t))
