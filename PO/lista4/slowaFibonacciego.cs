@@ -8,47 +8,40 @@ using System.Collections;
 
 namespace fibonacci
 {
-    public class Slowo
+    public class SlowaFibonacciego : IEnumerable
     {
-        public string val;
+        private string[] _slowa;
+        public SlowaFibonacciego(int n)
+        {
+           _slowa = new string[n];
 
-        public Slowo(int n)
+           for (int i = 0; i < n; i++)
+           {
+                _slowa[i] = Slowo(i+1);
+           }
+        }
+
+        public string Slowo(int n)
         {
             if(n==1) 
             {
-                this.val = "b";
-                return;
+                return "b";
             }else if(n==2)
             {
-                this.val = "a";
-                return;
+                return "a";
             }else
             {
                 string s2 = "b";
                 string s1 = "a";
                 string s0 = "";
-                for (int i = 0; i < n; i++)
+                for (int i = 2; i < n; i++)
                 {
                     s0 = s1 + s2;
                     s2 = s1;
                     s1 = s0;
                 }
-                this.val = s0;
+                return s0;
             }
-        }
-    }
-
-    public class SlowaFibonacciego : IEnumerable
-    {
-        private Slowo[] _slowa;
-        public SlowaFibonacciego(int n)
-        {
-           _slowa = new Slowo[n];
-
-           for (int i = 0; i < n; i++)
-           {
-                _slowa[i] = new Slowo(i+1);
-           }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -64,11 +57,11 @@ namespace fibonacci
 
     public class SlowaEnum : IEnumerator
     {
-        public Slowo[] _slowa;
+        public string[] _slowa;
 
         int position = -1;
 
-        public SlowaEnum(Slowo[] list)
+        public SlowaEnum(string[] list)
         {
             _slowa = list;
         }
@@ -93,7 +86,7 @@ namespace fibonacci
             }
         }
 
-        public Slowo Current
+        public string Current
         {
             get
             {
@@ -111,10 +104,10 @@ namespace fibonacci
 
     public class Program
     {
-        public void Main()
+        public static void Main()
         {
             SlowaFibonacciego slowa = new SlowaFibonacciego(6);
-            foreach (Slowo s in slowa)
+            foreach (string s in slowa)
             {
                 System.Console.WriteLine(s);
             }
