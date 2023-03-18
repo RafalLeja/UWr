@@ -13,6 +13,10 @@
          (append ys (list y))) 
       null xs))
 
+
+
+
+
 ; foldr-reverse uzywa appenda -> czyli doklejania nowej listy na koniec starej
 ; kiedy dodajemy wiec nowy elemnt musimy przejsc wszystkie pozostale wczesniej
 ; najpierw mamy 10000 - > 10000 9999 -> 10000 9999 9998 -> ...

@@ -4,13 +4,13 @@
     #f)
 
 (define (singleton a)
-    (lambda (x) (equal? a x)))
+    (lambda (b) (equal? b a)))
 
 (define (in a s)
-    (s a))
+    (= #t (s a)))
 
-(define (union s t)
-    (lambda (x) (or (s x) (t x))))
+(define (union a b)
+    (lambda (x) (or (a x) (b x))))
 
-(define (intersect s t)
-    (lambda (x) (and (s x) (t x))))
+(define (intersect a b)
+    (lambda (x) (and (a x) (b x))))
