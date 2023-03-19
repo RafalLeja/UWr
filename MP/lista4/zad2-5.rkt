@@ -20,6 +20,8 @@
       x
       (f (car xs) (my-foldr f x (cdr xs)))))
 
+;------- zad 2
+
 (define (fold-tree f x t)
   (if (leaf? t)
       x
@@ -41,7 +43,9 @@
                                 (cons +inf.0 -inf.0) t))
 
 (define (flatten t)
-    (fold-tree (lambda (x y z) (list x y z)) null t))
+    (fold-tree (lambda (x y z) (append y (cons x null) z)) null t))
+
+;------- zad 3
 
 (define (bst? t)
     (define (itr prev t dir)
@@ -63,3 +67,25 @@
                 (+ sum (node-elem t))
                 (itr (+ sum (node-elem t)) (node-r t)))))
     (itr 0 t))
+
+;------- zad 5
+
+(define (insert-bst x t)
+  (cond [(leaf? t) (node (leaf) x (leaf))]
+        [(node? t)
+         (cond 
+                [(< x (node-elem t))
+                 (node (insert-bst x (node-l t))
+                       (node-elem t)
+                       (node-r t))]
+                [else
+                 (node (node-l t)
+                       (node-elem t)
+                       (insert-bst x (node-r t)))])]))
+
+(define (tree-sort l)
+    (define (itr l)
+        (if (null? (cdr l))
+            (insert-bst (car l) (leaf))
+            (insert-bst (car l) (itr (cdr l)))))
+    (flatten (itr l)))
