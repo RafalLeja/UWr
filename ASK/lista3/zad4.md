@@ -15,3 +15,9 @@ $1.1000111100 * 2^{-1} + 1.1011101011 * 2^{10} =
 $a+(b+c) = c$
 
 ``` 0 11001 1011101011```
+
+guard = ostatni pozostały bit
+round = pierwszy usunięty bit
+sticky = ^ ucinanych bitów
+
+r & (g | s)
