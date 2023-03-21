@@ -1,5 +1,7 @@
 /*
-
+    Rafał Leja
+    PO: słowa Fibbonaciego, lista 4, zadanie 2
+    > mcs slowaFibbonacciego.cs
     https://learn.microsoft.com/en-us/dotnet/api/system.collections.ienumerable?view=net-8.0
 */
 
@@ -8,11 +10,16 @@ using System.Collections;
 
 namespace fibonacci
 {
+    // klasa SlowaFibonacciego implementuje IEnumerable
     public class SlowaFibonacciego : IEnumerable
     {
+        // tablica do przechowywania słów
         private string[] _slowa;
+
+        // konstruktor
         public SlowaFibonacciego(int n)
         {
+            // konstrukcja tablicy
            _slowa = new string[n];
 
            for (int i = 0; i < n; i++)
@@ -21,84 +28,19 @@ namespace fibonacci
            }
         }
 
+        // rekurencyjna funkcja generująca kolejne słowa
         public string Slowo(int n)
         {
-            if(n==1) 
-            {
-                return "b";
-            }else if(n==2)
-            {
-                return "a";
-            }else
-            {
-                string s2 = "b";
-                string s1 = "a";
-                string s0 = "";
-                for (int i = 2; i < n; i++)
-                {
-                    s0 = s1 + s2;
-                    s2 = s1;
-                    s1 = s0;
-                }
-                return s0;
-            }
+            if(n==1) return "b";
+            if(n==2) return "a";
+            return Slowo(n-1)+Slowo(n-2);
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        // implementacja funkcji GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
-            return (IEnumerator) GetEnumerator();
-        }
-
-        public SlowaEnum GetEnumerator()
-        {
-            return new SlowaEnum(_slowa);
-        }
-    }
-
-    public class SlowaEnum : IEnumerator
-    {
-        public string[] _slowa;
-
-        int position = -1;
-
-        public SlowaEnum(string[] list)
-        {
-            _slowa = list;
-        }
-
-        public bool MoveNext()
-        {
-            position++;
-            return (position < _slowa.Length);
-
-        }
-
-        public void Reset()
-        {
-            position = -1;
-        }
-
-        object IEnumerator.Current
-        {
-            get
-            {
-                return Current;
-            }
-        }
-
-        public string Current
-        {
-            get
-            {
-                try
-                {
-                    return _slowa[position];
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    throw new InvalidOperationException();
-                }
-            }
+            // odwoływanie się do Enumeratora wbudowanej klasy Array
+            return _slowa.GetEnumerator();
         }
     }
 
