@@ -1,4 +1,4 @@
-```0 01100 01000000000```
+```0 01111 10010000000```
 {x} <= znak
 {5x} <= wykładnik
 {11x} <= mantysa
@@ -7,7 +7,7 @@ skoro wykładnik ma 5 bitów i jest bez znaku to zakres to <0, 32>
 
 00000 jest zarezerwowane przez 0 gdy matysa = 0 i liczby subnormalne
 11111 jest zarezerwowane przez inf gdy mantysa = 0 i NaN
- 
+
 więc żeby uzyskać zakres <-14, 15> musimy odejmować 15 od liczby wykładnika
 
 # 16 bit:
