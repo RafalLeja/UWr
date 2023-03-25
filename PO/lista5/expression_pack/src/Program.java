@@ -3,17 +3,14 @@ import java.util.Map;
 
 public class Program {
     public static void main(String[] args) {
-        Expression expr = new Add(
-            new Const(7), 
-            new Pow( 
-                new Const(3), 
-                new Variable("x")));
+        Expression expr = new Pow( new Variable("x"), new Const( 5 ));
 
         Map<String, Integer> params = new HashMap<String, Integer>();
 
-        params.put("x", 7);
+        params.put("x", 2);
 
-        System.out.println(expr.evaluate(params));
+        //System.out.println(expr.evaluate(params));
         System.out.println(expr.toString());
+        System.out.println(expr.derivative().toString());
     }
 }

@@ -80,6 +80,42 @@ public class Expression {
         }
     }
 
+    public Expression derivative() {
+        if (!operator) {
+            return new Const(0);
+        }
+
+        if (val < 0) {
+            return new Const(0);
+        }
+
+        Expression l = left.derivative();
+        Expression r = right.derivative();
+
+        switch (val) {
+            case 0:
+                return new Add(l, r);
+            
+            case 1:
+                return new Sub(l, r);
+
+            case 2:
+                return new Mult(l, r);
+                
+            case 3:
+                return new Div(l, r);
+
+            case 4:
+                if (left.operator && left.val < 0) {
+                    return new Mult( right, new Pow( left, new Sub( right, new Const( 1 ) ) ) );
+                }
+                return new Pow( l, r );
+
+            default:
+                return new Const(0);
+        }
+    }
+
     public String toString() {
         if (!operator) {
             return Integer.toString(val);
