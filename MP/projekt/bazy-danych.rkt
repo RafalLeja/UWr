@@ -20,10 +20,21 @@
             (list "Paris" "France" 105 #t)
             (list "Rennes" "France" 50 #f))))
 
+(define (equal-type? type symbol)
+    (cond 
+            [(equal? symbol 'string) (string? type)]
+            [(equal? symbol 'number) (number? type)]
+            [(equal? symbol 'boolean) (boolean? type)]
+            [(equal? symbol 'symbol) (symbol? type)]))
+
 (define (table-schema-check row tab)
-    (define (itr col)
-        (cond 
-            [(equal? (cdr (car col)) 'string) ()])))
+    (define (itr r ci)
+        (if (null? ci)
+            #t
+            (if (equal-type? (car r) (column-info-type (car ci)))
+                (itr (cdr r) (cdr ci))
+                #f)))
+    (itr row (table-schema tab)))
 
 ; (define (table-insert row tab)
 ;     (cond [(equal? (cdr row) (table-schema tab))]))
