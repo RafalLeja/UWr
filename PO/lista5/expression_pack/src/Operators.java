@@ -1,3 +1,9 @@
+/*
+ * Rafał Leja
+ * PO: lista5 zadanie 2 i 4, wyrażenia arytmetyczne oraz pochodna
+ * jdk 20
+ */
+
 class Add extends Expression {
     public Add(Expression left, Expression right) {
         super(true, "", 0, left, right);
