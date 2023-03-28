@@ -33,4 +33,5 @@ movq %rdx, %rax    # Skopiuj zmienioną wartość do %rax
 W powyższym kodzie wykorzystywane są trzy instrukcje:
 
 movq %rax, %rdx - Kopiowanie wartości z rejestru %rax do %rdx.
-andq $0xdf, %rdx - Wyzerowanie 6. bitu w rejestrze %rdx, co spowoduje zamianę małych liter na duże litery. Bit 6 odpowiada za wielkość litery w kodzie ASCII, gdzie wartość 32 (0x20) oznacza małą literę, a wartość 0 (0
+andq $0xdf, %rdx - Wyzerowanie 6. bitu w rejestrze %rdx, co spowoduje zamianę małych liter na duże litery. Bit 6 odpowiada
+a wielkość litery w kodzie ASCII, gdzie wartość 32 (0x20) oznacza małą literę, a wartość 0 (0
