@@ -51,7 +51,19 @@
                 (itr (add1 i) idt diff t))))
     (itr 0 idx (length tab) tab))
 
-(define (project sym tab)
-    (define idx 
-        (get-right-idx sym tab))
-    (make-table (select-elems idx (table-schema tab)) (map (lambda (x) (select-elems idx x)) (table-rows tab))))
+(define (type-comp a b)
+    (cond 
+            [(string? a) (string<? a b)]
+            [(integer? a) (< a b)]
+            [(boolean? a) (if (equal? a b)
+                            #f
+                            a)]
+            [(symbol? a) (symbol<? a b)]))
+
+(define (test-sort list)
+  (sort list type-comp))
+
+#;(define (table-sort cols tab)
+    (define idx (get-right-idx cols tab))
+    
+) 

@@ -113,9 +113,12 @@
 
 ; Zmiana nazwy
 
-#;(define (table-rename col ncol tab)
-  ;; uzupełnij
-  )
+(define (table-rename col ncol tab)
+  (define (itr t)
+        (if (equal? col (column-info-name (car t)))
+            (cons (make-column-info ncol (column-info-type (car t))) (cdr t))
+            (cons (car t) (itr (cdr t)))))
+    (make-table (itr (table-schema tab)) (table-rows tab)))
 
 ; Złączenie kartezjańskie
 
