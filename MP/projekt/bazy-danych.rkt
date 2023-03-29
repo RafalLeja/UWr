@@ -27,14 +27,31 @@
             [(equal? symbol 'boolean) (boolean? type)]
             [(equal? symbol 'symbol) (symbol? type)]))
 
-(define (table-schema-check row tab)
-    (define (itr r ci)
-        (if (null? ci)
-            #t
-            (if (equal-type? (car r) (column-info-type (car ci)))
-                (itr (cdr r) (cdr ci))
-                #f)))
-    (itr row (table-schema tab)))
+(define (get-right-idx sym tab)
+    (define (itr i t)
+        (if (null? t)
+            null
+            (if (member (column-info-name (car t)) sym)
+                (cons i (itr (add1 i) (cdr t)))
+                (itr (add1 i) (cdr t)))))
+    (itr 0 (table-schema tab)))
 
-; (define (table-insert row tab)
-;     (cond [(equal? (cdr row) (table-schema tab))]))
+(define test 
+    (list
+        (list 1 2 3 4 5)
+        (list 6 7 8 9 10)
+    ))
+
+(define (select-elems idx tab)
+    (define (itr i idt diff t)
+        (if (= i diff)
+            '()
+            (if (member i idt)
+                (cons (list-ref t i) (itr (add1 i) idt diff t))
+                (itr (add1 i) idt diff t))))
+    (itr 0 idx (length tab) tab))
+
+(define (project sym tab)
+    (define idx 
+        (get-right-idx sym tab))
+    (make-table (select-elems idx (table-schema tab)) (map (lambda (x) (select-elems idx x)) (table-rows tab))))
