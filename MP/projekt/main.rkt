@@ -94,9 +94,46 @@
 
 ; Sortowanie
 
-#;(define (table-sort cols tab)
-  ;; uzupełnij
-  )
+(define (table-sort cols tab)
+  (define (find-idx sym tab)
+    (define (itr i t)
+        (if (null? t)
+            -1
+            (if (equal? (column-info-name (car t)) sym)
+                i
+                (itr (add1 i) (cdr t)))))
+    (itr 0 (table-schema tab)))
+  (define (get-ordered-idx sym tab)
+    (define (itr i)
+        (if (null? i)
+            null
+            (cons (find-idx (car i) tab) (get-ordered-idx (cdr i) tab))))
+    (itr sym))
+  (define (select-elems idx tab)
+    (define (itr i)
+        (if (null? i)
+            null
+            (cons (list-ref tab (car i)) (itr (cdr i)))))
+    (itr idx))
+  (define (type-comp a b)
+    (cond 
+            [(string? a) (string<? a b)]
+            [(integer? a) (< a b)]
+            [(boolean? a) (if (equal? a b)
+                            #f
+                            a)]
+            [(symbol? a) (symbol<? a b)]))
+  (define (multi-type-comp a b lst)
+    (define (itr a_col b_col)
+      (if (null? a_col)
+        #f
+        (if (type-comp (car a_col) (car b_col))
+          #t
+          (itr (cdr a_col) (cdr b_col)))))
+    (itr (select-elems lst a) (select-elems lst b)))
+  (define idx (get-ordered-idx cols tab))
+  (make-table (table-schema tab) (sort (table-rows tab) (lambda (a b) (multi-type-comp a b idx)))))
+
 
 ; Selekcja
 

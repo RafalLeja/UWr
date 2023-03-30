@@ -68,17 +68,15 @@
     (itr 0 idx (length tab) tab))
 
 (define (select-elems2 idx tab)
-    (define (itr i idt diff t)
-        (if (= i diff)
-            '()
-            (if (member i idt)
-                (cons (list-ref t i) (itr (add1 i) idt diff t))
-                (itr (add1 i) idt diff t))))
-    (itr 0 idx (length tab) tab))
+    (define (itr i)
+        (if (null? i)
+            null
+            (cons (list-ref tab (car i)) (itr (cdr i)))))
+    (itr idx))
 
 (define (type-comp a b)
     (cond 
-            [(string? a) (string>? a b)]
+            [(string? a) (string<? a b)]
             [(integer? a) (< a b)]
             [(boolean? a) (if (equal? a b)
                             #f
@@ -87,13 +85,12 @@
 
 (define (multi-type-comp a b lst)
   (define (itr a_col b_col)
-    (print a_col)
     (if (null? a_col)
       #f
       (if (type-comp (car a_col) (car b_col))
-        (itr (cdr a_col) (cdr b_col))
-        #t)))
-  (itr (select-elems lst a) (select-elems lst b)))
+        #t
+        (itr (cdr a_col) (cdr b_col)))))
+  (itr (select-elems2 lst a) (select-elems2 lst b)))
 
 (define (test-sort list)
   (sort list type-comp))
