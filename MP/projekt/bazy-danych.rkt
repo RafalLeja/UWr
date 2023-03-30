@@ -36,6 +36,22 @@
                 (itr (add1 i) (cdr t)))))
     (itr 0 (table-schema tab)))
 
+(define (get-idx sym tab)
+    (define (itr i t)
+        (if (null? t)
+            -1
+            (if (equal? (column-info-name (car t)) sym)
+                i
+                (itr (add1 i) (cdr t)))))
+    (itr 0 (table-schema tab)))
+
+(define (get-ord-idx sym tab)
+    (define (itr i)
+        (if (null? i)
+            null
+            (cons (get-idx (car i) tab) (get-ord-idx (cdr i) tab))))
+    (itr sym))
+
 (define test 
     (list
         (list 1 2 3 4 5)
@@ -51,19 +67,37 @@
                 (itr (add1 i) idt diff t))))
     (itr 0 idx (length tab) tab))
 
+(define (select-elems2 idx tab)
+    (define (itr i idt diff t)
+        (if (= i diff)
+            '()
+            (if (member i idt)
+                (cons (list-ref t i) (itr (add1 i) idt diff t))
+                (itr (add1 i) idt diff t))))
+    (itr 0 idx (length tab) tab))
+
 (define (type-comp a b)
     (cond 
-            [(string? a) (string<? a b)]
+            [(string? a) (string>? a b)]
             [(integer? a) (< a b)]
             [(boolean? a) (if (equal? a b)
                             #f
                             a)]
             [(symbol? a) (symbol<? a b)]))
 
+(define (multi-type-comp a b lst)
+  (define (itr a_col b_col)
+    (print a_col)
+    (if (null? a_col)
+      #f
+      (if (type-comp (car a_col) (car b_col))
+        (itr (cdr a_col) (cdr b_col))
+        #t)))
+  (itr (select-elems lst a) (select-elems lst b)))
+
 (define (test-sort list)
   (sort list type-comp))
 
-#;(define (table-sort cols tab)
-    (define idx (get-right-idx cols tab))
-    
-) 
+(define (table-sort cols tab)
+  (define idx (get-ord-idx cols tab))
+  (make-table (table-schema tab) (sort (table-rows tab) (lambda (a b) (multi-type-comp a b idx))))) 
