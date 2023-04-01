@@ -98,3 +98,14 @@
 (define (table-sort cols tab)
   (define idx (get-ord-idx cols tab))
   (make-table (table-schema tab) (sort (table-rows tab) (lambda (a b) (multi-type-comp a b idx))))) 
+
+(define-struct and-f (l r))
+(define-struct or-f (l r))
+(define-struct not-f (e))
+(define-struct eq-f (name val))
+(define-struct eq2-f (name name2))
+(define-struct lt-f (name val))
+
+(define (form-interpreter form)
+    (cond 
+        []))
