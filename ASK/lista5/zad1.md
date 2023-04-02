@@ -2,12 +2,7 @@
 addu:
     movq %rdi, %rax       # result = x
     addq %rsi, %rax       # result += y
-    cmpq %rsi, %rax       # compare result with y
-    jae overflow          # jump if result is greater or equal to y
-    cmpq %rdi, %rax       # compare result with x
-    jae done              # jump if result is greater or equal to x
-    jmp overflow          # otherwise, jump to overflow
-done:
+    jc overflow          # jump if CF = 1
     ret
 overflow:
     movq $-1, %rax        # return ULONG_MAX
@@ -20,9 +15,8 @@ Rozwiązanie przy użyciu instrukcji `sbb`:
 addu:
     movq %rdi, %rax        # result = x
     addq %rsi, %rax        # result += y
-    cmpq %rsi, %rax        # compare result with y
-    sbbq %rax, %rax        # set result to -1 if result < y, otherwise 0
-    cmovnb %rdi, %rax      # set result to x if result < y, otherwise keep result
+    sbbq $0, %rbx          # 0 lub -1
+    orq %rbx, %rax         #or na wyniku
     ret
 ```
 
