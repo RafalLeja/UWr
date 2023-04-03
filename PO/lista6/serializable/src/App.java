@@ -5,8 +5,6 @@ import java.io.ObjectOutputStream;
 
 public class App {
   public static void main(String[] args) throws Exception {
-    System.out.println("Hello, World!");
-
     Lista<Integer> oryginalnaLista = new Lista<Integer>();
     oryginalnaLista.add(2);
     oryginalnaLista.add(0);
