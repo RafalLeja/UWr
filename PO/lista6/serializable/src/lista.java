@@ -1,7 +1,9 @@
+/* Rafał Leja
+ * lista 6 zadanie 1 i 2, Serializable, Collections
+ */
+
 import java.io.Serializable;
 import java.security.InvalidParameterException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 class Element<T> implements Serializable
 {
@@ -20,32 +22,7 @@ class Element<T> implements Serializable
   }
 }
 
-class ListaIterator<T> implements Iterator<T> {
-  private Element<T> current;
-
-  public ListaIterator(Element<T> start) {
-    current = start;
-  }
-
-  public boolean hasNext() {
-    return current != null;
-  }
-
-  public T next() {
-    if (!hasNext()) {
-      throw new NoSuchElementException();
-    }
-    T val = current.val;
-    current = current.next;
-    return val;
-  }
-
-  public void remove() {
-    throw new UnsupportedOperationException();
-  }
-}
-
-class Lista<T> implements Serializable, Iterable<T> {
+class Lista<T> implements Serializable {
   public int size;
   Element<T> first;
   Element<T> last;
@@ -104,9 +81,8 @@ class Lista<T> implements Serializable, Iterable<T> {
   public T pop_front()
   {
     // gdy lista jest pusta,
-    // zgłaszam wyjątek zgodnie z dokumentacją:
-    // https://learn.microsoft.com/pl-pl/dotnet/csharp/-
-    // fundamentals/exceptions/creating-and-throwing-exceptions
+    // zgłaszam wyjątek
+
     if (this.isEmpty())
     {
       throw new InvalidParameterException(
@@ -144,107 +120,6 @@ class Lista<T> implements Serializable, Iterable<T> {
   public boolean add(T val) {
     this.push_back(val);
     return true;
-  }
-
-  
-  
-  public boolean addAll(Lista<T> c) {
-    for (T item : c) {
-      add(item);
-    }
-    return true;
-    }
-    
-    public void clear() {
-      size = 0;
-    first = null;
-    last = null;
-  }
-  
-  public boolean contains(T o) {
-    for (Element<T> curr = first; curr != null; curr = curr.next) {
-      if (curr.val.equals(o)) {
-        return true;
-    }
-  }
-    return false;
-  }
-  
-  public boolean containsAll(Lista<T> c) {
-    for (T item : c) {
-      if (!contains(item)) {
-        return false;
-      }
-    }
-    return true;
-  }
-  
-  public Iterator<T> iterator() {
-    return new ListaIterator<T>(first);
-  }
-  
-  // metoda usuwająca wszystkie elementy z danej kolekcji
-  public boolean removeAll(Lista<T> c) {
-    boolean modified = false;
-    for (T item : c) {
-      modified = remove(item) || modified;
-    }
-    return modified;
-  }
-  
-  // metoda usuwająca podany element z kolekcji
-  public boolean remove(T o) {
-    Element<T> curr = first;
-    while (curr != null) {
-      if (curr.val.equals(o)) {
-        if (curr == first) {
-          first = curr.next;
-          if (first != null) {
-            first.prev = null;
-          }
-        } else if (curr == last) {
-          last = curr.prev;
-          if (last != null) {
-            last.next = null;
-          }
-        } else {
-          curr.prev.next = curr.next;
-          curr.next.prev = curr.prev;
-        }
-      size--;
-      return true;
-      }
-      curr = curr.next;
-    }
-    return false;
-  }
-
-  // metoda zachowująca tylko elementy zawarte w danej kolekcji
-  public boolean retainAll(Lista<T> c) {
-    boolean modified = false;
-    Element<T> curr = first;
-    while (curr != null) {
-      if (!c.contains(curr.val)) {
-        if (curr == first) {
-          first = curr.next;
-          if (first != null) {
-            first.prev = null;
-          }
-        } else if (curr == last) {
-          last = curr.prev;
-          if (last != null) {
-            last.next = null;
-          }
-        } else {
-          curr.prev.next = curr.next;
-          curr.next.prev = curr.prev;
-        }
-          size--;
-          modified = true;
-      }
-      curr = curr.next;
-    }
-    return modified;
   }
 }
 
