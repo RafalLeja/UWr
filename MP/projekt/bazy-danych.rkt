@@ -155,3 +155,7 @@
         [(eq-f? form) (select-values (eq-f-name form) (eq-f-val form) table)]
         [(eq2-f? form) (select-equal-values (eq2-f-name form) (eq2-f-name2 form) table)]
         [(lt-f? form) (select-lower-values (lt-f-name form) (lt-f-val form) table)]))
+
+
+(define (table-select form table)
+  (make-table (table-schema table) (form-interpreter form table)))
