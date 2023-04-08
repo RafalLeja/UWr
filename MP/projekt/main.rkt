@@ -45,25 +45,135 @@
 
 (define (empty-table columns) (table columns '()))
 
+;--- funkcje pomocnicze
+
+;funkcja sprawdzająca typ
+(define (equal-type? type symbol)
+  (cond 
+          [(equal? symbol 'string) (string? type)]
+          [(equal? symbol 'number) (number? type)]
+          [(equal? symbol 'boolean) (boolean? type)]
+          [(equal? symbol 'symbol) (symbol? type)]))
+
+;funkcja sprawdzająca poprawność wiersza
+(define (table-schema-check row tab)
+  (define (itr r ci)
+      (if (null? ci)
+          #t
+          (if (equal-type? (car r) (column-info-type (car ci)))
+              (itr (cdr r) (cdr ci))
+              #f)))
+  (if (= (length row) (length (table-schema tab)))
+      (itr row (table-schema tab))
+      #f))
+
+
+; (define (select-elems idx elem-tab)
+;   (define (itr i idt diff t)
+;       (if (= i diff)
+;           '()
+;           (if (member i idt)
+;               (cons (list-ref t i) (itr (add1 i) idt diff t))
+;               (itr (add1 i) idt diff t))))
+;   (itr 0 idx (length elem-tab) elem-tab))
+
+;znajdowanie pierwszego indeksu symbolu
+(define (find-idx sym tab)
+  (define (itr i t)
+      (if (null? t)
+          -1
+          (if (equal? (column-info-name (car t)) sym)
+              i
+              (itr (add1 i) (cdr t)))))
+  (itr 0 (table-schema tab)))
+
+;znajdowanie indeksów kolumn
+(define (get-ordered-idx sym tab)
+  (define (itr i)
+      (if (null? i)
+          null
+          (cons (find-idx (car i) tab) (get-ordered-idx (cdr i) tab))))
+  (itr sym))
+
+;filtrowanie listy przy pomocy listy indeksów
+(define (select-elems idx tab)
+  (define (itr i)
+      (if (null? i)
+          null
+          (cons (list-ref tab (car i)) (itr (cdr i)))))
+  (itr idx))
+
+(define (type-comp a b)
+  (cond 
+          [(string? a) (string<? a b)]
+          [(integer? a) (< a b)]
+          [(boolean? a) (if (equal? a b)
+                          #f
+                          a)]
+          [(symbol? a) (symbol<? a b)]))
+
+(define (multi-type-comp a b lst)
+  (define (itr a_col b_col)
+    (if (null? a_col)
+      #f
+      (if (type-comp (car a_col) (car b_col))
+        #t
+        (itr (cdr a_col) (cdr b_col)))))
+  (itr (select-elems lst a) (select-elems lst b)))
+
+(define (intersection lst1 lst2)
+  (define (itr l)
+    (if (not (check-duplicates l))
+      '()
+      (cons (check-duplicates l) (itr (remove (check-duplicates l) l)))))
+  (itr (append lst1 lst2)))
+
+(define (union lst1 lst2)
+  (remove-duplicates (append lst1 lst2)))
+
+(define (get-idx sym tab)
+  (define (itr i t)
+    (if (null? t)
+      -1
+      (if (equal? (column-info-name (car t)) sym)
+        i
+        (itr (add1 i) (cdr t)))))
+  (itr 0 (table-schema tab)))
+
+(define (select-values name val table)
+  (define idx (get-idx name table))
+  (define (itr l)
+    (if (null? l)
+      l
+      (if (equal? val (list-ref (car l) idx))
+        (cons (car l) (itr (cdr l)))
+        (itr (cdr l)))))
+  (itr (table-rows table)))
+
+(define (select-equal-values name name2 table)
+  (define idx (get-idx name table))
+  (define idx2 (get-idx name2 table))
+  (define (itr l)
+    (if (null? l)
+      l
+      (if (equal? (list-ref (car l) idx2) (list-ref (car l) idx))
+        (cons (car l) (itr (cdr l)))
+        (itr (cdr l)))))
+  (itr (table-rows table)))
+
+(define (select-lower-values name val table)
+  (define idx (get-idx name table))
+  (define (itr l)
+    (if (null? l)
+      l
+      (if (type-comp (list-ref (car l) idx) val)
+        (cons (car l) (itr (cdr l)))
+        (itr (cdr l)))))
+  (itr (table-rows table)))
+
 ; Wstawianie
 
 (define (table-insert row tab)
-  (define (equal-type? type symbol)
-    (cond 
-            [(equal? symbol 'string) (string? type)]
-            [(equal? symbol 'number) (number? type)]
-            [(equal? symbol 'boolean) (boolean? type)]
-            [(equal? symbol 'symbol) (symbol? type)]))
-  (define (table-schema-check row tab)
-    (define (itr r ci)
-        (if (null? ci)
-            #t
-            (if (equal-type? (car r) (column-info-type (car ci)))
-                (itr (cdr r) (cdr ci))
-                #f)))
-    (if (= (length row) (length (table-schema tab)))
-        (itr row (table-schema tab))
-        #f))
   (if (table-schema-check row tab)
         (make-table (table-schema tab) (append (table-rows tab) (list row)))
         (error "złe typy danych"))
@@ -72,65 +182,13 @@
 ; Projekcja
 
 (define (table-project cols tab)
-  (define (get-right-idx sym idx-tab)
-    (define (itr i t)
-        (if (null? t)
-            null
-            (if (member (column-info-name (car t)) sym)
-                (cons i (itr (add1 i) (cdr t)))
-                (itr (add1 i) (cdr t)))))
-    (itr 0 (table-schema idx-tab)))
-  (define (select-elems idx elem-tab)
-    (define (itr i idt diff t)
-        (if (= i diff)
-            '()
-            (if (member i idt)
-                (cons (list-ref t i) (itr (add1 i) idt diff t))
-                (itr (add1 i) idt diff t))))
-    (itr 0 idx (length elem-tab) elem-tab))
   (define idx 
-        (get-right-idx cols tab))
+        (get-ordered-idx cols tab))
     (make-table (select-elems idx (table-schema tab)) (map (lambda (x) (select-elems idx x)) (table-rows tab))))
 
 ; Sortowanie
 
 (define (table-sort cols tab)
-  (define (find-idx sym tab)
-    (define (itr i t)
-        (if (null? t)
-            -1
-            (if (equal? (column-info-name (car t)) sym)
-                i
-                (itr (add1 i) (cdr t)))))
-    (itr 0 (table-schema tab)))
-  (define (get-ordered-idx sym tab)
-    (define (itr i)
-        (if (null? i)
-            null
-            (cons (find-idx (car i) tab) (get-ordered-idx (cdr i) tab))))
-    (itr sym))
-  (define (select-elems idx tab)
-    (define (itr i)
-        (if (null? i)
-            null
-            (cons (list-ref tab (car i)) (itr (cdr i)))))
-    (itr idx))
-  (define (type-comp a b)
-    (cond 
-            [(string? a) (string<? a b)]
-            [(integer? a) (< a b)]
-            [(boolean? a) (if (equal? a b)
-                            #f
-                            a)]
-            [(symbol? a) (symbol<? a b)]))
-  (define (multi-type-comp a b lst)
-    (define (itr a_col b_col)
-      (if (null? a_col)
-        #f
-        (if (type-comp (car a_col) (car b_col))
-          #t
-          (itr (cdr a_col) (cdr b_col)))))
-    (itr (select-elems lst a) (select-elems lst b)))
   (define idx (get-ordered-idx cols tab))
   (make-table (table-schema tab) (sort (table-rows tab) (lambda (a b) (multi-type-comp a b idx)))))
 
@@ -145,58 +203,6 @@
 (define-struct lt-f (name val))
 
 (define (table-select form tab)
-  (define (type-comp a b)
-    (cond 
-      [(string? a) (string<? a b)]
-      [(integer? a) (< a b)]
-      [(boolean? a) (if (equal? a b)
-                        #f
-                        a)]
-      [(symbol? a) (symbol<? a b)]))
-  (define (intersection lst1 lst2)
-    (define (itr l)
-      (if (not (check-duplicates l))
-        '()
-        (cons (check-duplicates l) (itr (remove (check-duplicates l) l)))))
-    (itr (append lst1 lst2)))
-  (define (union lst1 lst2)
-    (remove-duplicates (append lst1 lst2)))
-  (define (get-idx sym tab)
-    (define (itr i t)
-      (if (null? t)
-        -1
-        (if (equal? (column-info-name (car t)) sym)
-          i
-          (itr (add1 i) (cdr t)))))
-    (itr 0 (table-schema tab)))
-  (define (select-values name val table)
-    (define idx (get-idx name table))
-    (define (itr l)
-      (if (null? l)
-        l
-        (if (equal? val (list-ref (car l) idx))
-          (cons (car l) (itr (cdr l)))
-          (itr (cdr l)))))
-    (itr (table-rows table)))
-  (define (select-equal-values name name2 table)
-    (define idx (get-idx name table))
-    (define idx2 (get-idx name2 table))
-    (define (itr l)
-      (if (null? l)
-        l
-        (if (equal? (list-ref (car l) idx2) (list-ref (car l) idx))
-          (cons (car l) (itr (cdr l)))
-          (itr (cdr l)))))
-    (itr (table-rows table)))
-  (define (select-lower-values name val table)
-    (define idx (get-idx name table))
-    (define (itr l)
-      (if (null? l)
-        l
-        (if (type-comp (list-ref (car l) idx) val)
-          (cons (car l) (itr (cdr l)))
-          (itr (cdr l)))))
-    (itr (table-rows table)))
   (define (form-interpreter form table)
     (cond 
       [(and-f? form) (intersection (form-interpreter (and-f-l form) table) (form-interpreter (and-f-r form) table))]
