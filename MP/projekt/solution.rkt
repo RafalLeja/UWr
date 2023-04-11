@@ -1,6 +1,6 @@
 #lang racket
 
-#;(provide (struct-out column-info)
+(provide (struct-out column-info)
          (struct-out table)
          (struct-out and-f)
          (struct-out or-f)
@@ -67,16 +67,6 @@
       (itr row (table-schema tab))
       #f))
 
-
-; (define (select-elems idx elem-tab)
-;   (define (itr i idt diff t)
-;       (if (= i diff)
-;           '()
-;           (if (member i idt)
-;               (cons (list-ref t i) (itr (add1 i) idt diff t))
-;               (itr (add1 i) idt diff t))))
-;   (itr 0 idx (length elem-tab) elem-tab))
-
 ;znajdowanie pierwszego indeksu symbolu
 (define (find-idx sym tab)
   (define (itr i t)
@@ -103,6 +93,7 @@
           (cons (list-ref tab (car i)) (itr (cdr i)))))
   (itr idx))
 
+;porównywanie dla dowolnego typu
 (define (type-comp a b)
   (cond 
           [(string? a) (string<? a b)]
@@ -112,6 +103,7 @@
                           a)]
           [(symbol? a) (symbol<? a b)]))
 
+;funkcja porównawcza
 (define (multi-type-comp a b lst)
   (define (itr a_col b_col)
     (if (null? a_col)
@@ -121,6 +113,7 @@
         (itr (cdr a_col) (cdr b_col)))))
   (itr (select-elems lst a) (select-elems lst b)))
 
+;część wspólna zbiorów
 (define (intersection lst1 lst2)
   (define (itr l)
     (if (not (check-duplicates l))
@@ -128,9 +121,11 @@
       (cons (check-duplicates l) (itr (remove (check-duplicates l) l)))))
   (itr (append lst1 lst2)))
 
+;suma zbiorów
 (define (union lst1 lst2)
   (remove-duplicates (append lst1 lst2)))
 
+;znajdz pierwszy indeks
 (define (get-idx sym tab)
   (define (itr i t)
     (if (null? t)
@@ -140,6 +135,7 @@
         (itr (add1 i) (cdr t)))))
   (itr 0 (table-schema tab)))
 
+;zwróć wartości równe val
 (define (select-values name val table)
   (define idx (get-idx name table))
   (define (itr l)
@@ -150,6 +146,7 @@
         (itr (cdr l)))))
   (itr (table-rows table)))
 
+;zwróć wiersze o równych kolumnach
 (define (select-equal-values name name2 table)
   (define idx (get-idx name table))
   (define idx2 (get-idx name2 table))
@@ -161,6 +158,7 @@
         (itr (cdr l)))))
   (itr (table-rows table)))
 
+;zwróć wiersze mniejsze niż val
 (define (select-lower-values name val table)
   (define idx (get-idx name table))
   (define (itr l)
@@ -170,6 +168,26 @@
         (cons (car l) (itr (cdr l)))
         (itr (cdr l)))))
   (itr (table-rows table)))
+
+;łączenie wszystkich wierszy tab2 z wierszem tab1
+(define (cross-join tab1 tab2)
+  (define (itr t)
+    (if (null? t)
+      t 
+      (cons 
+        (append tab1 (car t))
+        (itr (cdr t)))))
+  (itr tab2))
+
+;usuwanie duplikatów i błędnych wierszy
+(define (unduplicate lst1)
+  (define (itr l)
+    (if (null? l)
+      l 
+      (if (check-duplicates (car l))
+        (cons (remove-duplicates (car l)) (itr (cdr l)))
+        (itr (cdr l)))))
+  (itr lst1))
 
 ; Wstawianie
 
@@ -224,13 +242,17 @@
 
 ; Złączenie kartezjańskie
 
-#;(define (table-cross-join tab1 tab2)
-  ;; uzupełnij
-  )
+(define (table-cross-join tab1 tab2)
+  (make-table 
+    (append (table-schema tab1) (table-schema tab2))
+    (append-map (lambda (x) (cross-join x (table-rows tab2))) (table-rows tab1))))
 
 ; Złączenie
 
-#;(define (table-natural-join tab1 tab2)
-  ;; uzupełnij
-  )
+(define (table-natural-join tab1 tab2)
+  (define table (table-cross-join tab1 tab2))
+  (define schema (remove-duplicates (table-schema table)))
+  (make-table
+    schema
+    (unduplicate (table-rows table))))
 
