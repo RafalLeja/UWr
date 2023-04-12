@@ -98,9 +98,9 @@
   (cond 
           [(string? a) (string<? a b)]
           [(integer? a) (< a b)]
-          [(boolean? a) (if (equal? a b)
+          [(boolean? a) (if (boolean=? a b)
                           #f
-                          a)]
+                          b)]
           [(symbol? a) (symbol<? a b)]))
 
 ;funkcja porównawcza

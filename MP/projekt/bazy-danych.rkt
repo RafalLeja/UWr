@@ -98,9 +98,9 @@
   (cond 
           [(string? a) (string<? a b)]
           [(integer? a) (< a b)]
-          [(boolean? a) (if (equal? a b)
+          [(boolean? a) (if (boolean=? a b)
                           #f
-                          a)]
+                          b)]
           [(symbol? a) (symbol<? a b)]))
 
 ;funkcja porównawcza
@@ -246,6 +246,28 @@
         (cons (remove-duplicates (car l)) (itr (cdr l)))
         (itr (cdr l)))))
   (itr lst1))
+
+; #;(define (smart-join cols tab1 tab2)
+;   (define (itr c r)
+;     (cond 
+;       [(null? r) 
+;         '()]
+;       [(null? c) 
+;         (itr cols (cdr r))]
+;       [(null? (table-select 
+;                 (eq-f 
+;                   (car cols)
+;                   (list-ref 
+;                     (car r)
+;                     (find-idx (car c) tab1)))))
+;         (itr cols (cdr r))]
+;       [(not (null? (table-select 
+;                 (eq-f 
+;                   (car cols)
+;                   (list-ref 
+;                     (car r)
+;                     (find-idx (car c) tab1))))))
+;         ])))
 
 (define (table-natural-join tab1 tab2)
   (define table (table-cross-join tab1 tab2))
