@@ -23,21 +23,24 @@ pointless:
 
 ```C
 long pointless(long n, long *p) {
+  long result;
     if (n <= 0) {
-        return 0;
+        result = 0;
     } else {
-        long temp = pointless(n - 1, p);
-        *p += 2 * temp;
-        return temp;
+        result = pointless(2*n, p);
     }
+    n += result
+    *p = n;
+    return result
 }
 ```
 
 Rekord aktywacji (stack frame) zawiera następujące elementy:
+1. adres powrotu
+2. %r14
+3. %rbx
+4. %rax
 
- - Rejestry zapisane przez funkcję wołaną (callee-saved registers): %r14, %rbx
- - Zmienne lokalne: brak
- - Adres powrotu: wartość z wierzchołka stosu (%rsp) po instrukcji "addq $8, %rsp"
 
 Wiersz 11 (po wywołaniu rekurencyjnym) modyfikuje wartość rejestru %rsp, aby utworzyć nowy stos dla rekurencji. Zgodnie z [1, 3.2.2], "w momencie wejścia do funkcji %rsp musi być wielokrotnością 16". W tym przypadku wartość %rsp jest przesuwana o 8 bajtów po wykonaniu instrukcji "addq $8, %rsp". Zatem wartość %rsp w wierszu 11 jest podzielna przez 16.
 

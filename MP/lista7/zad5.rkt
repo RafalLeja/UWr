@@ -1,7 +1,7 @@
 #lang racket
 
 (define (foldl-map f a xs)
-  (parametric->/c [x y] (-> (-> x y (values x y)) y (listof x) (values (listof y) y)))
+  (parametric->/c [x y z] (-> (-> x y (cons/c z y)) y (listof x) (cons/c (listof z) y)))
   (define (it a xs ys)
     (if (null? xs)
       (cons (reverse ys) a)
