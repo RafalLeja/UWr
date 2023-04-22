@@ -55,7 +55,7 @@ struct T puzzle2(long *a, long n) {
 
 struct T* puzzle8(struct T* ret, long* a, long n)
 
-cqto Convert quadword in %rax to octoword in %rdx:%rax 
+cqto Convert quadword in %rax to ocotword in %rdx:%rax 
 
 idivq S:
  - Signed divide %rdx:%rax by S

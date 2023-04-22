@@ -15,6 +15,14 @@ puzzle6:
     ret
 ```
 
+cqto Convert quadword in %rax to octoword in %rdx:%rax 
+
+idivq S:
+ - Signed divide %rdx:%rax by S
+ - Quotient stored in %rax
+ - Remainder stored in %rdx
+
+
 |Rekordy aktywacji funkcji        |rozmiar|
 |---------------------------------|-------|
 |return address                   |8      |
