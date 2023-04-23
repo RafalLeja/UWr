@@ -16,6 +16,6 @@ class Powierzchnia
   end
 
   def cale=(val)
-    @ha = val / 15500031
+    @ha = val / 15500031.0
   end
 end
