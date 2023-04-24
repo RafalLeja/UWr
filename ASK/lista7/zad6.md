@@ -25,6 +25,7 @@ eval:
   subq    %rcx, %rdx
   movq    %rdx, 16(%rax)
   ret
+
 wrap:
   subq    $72, %rsp
   movq    %rdx, (%rsp)
