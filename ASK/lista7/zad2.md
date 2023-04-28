@@ -1,13 +1,13 @@
 ```C
 typedef struct {
-    int x[A][B];
-    long y;
-} str1;
+    int x[A][B];    //45*4 = 180 + 4
+    long y;         //8 
+} str1;             //192
 
 typedef struct {
-    char array[B];    B <= 8B 
-    int t;            = 4B
-    short s[A];       16 >= 2*A <= 20
+    char array[B];  //B <= 8B 
+    int t;          //= 4B
+    short s[A];     //16 >= 2*A <= 20
     long u;
 } str2;
 
