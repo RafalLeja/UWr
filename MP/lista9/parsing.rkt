@@ -1,10 +1,10 @@
 #lang racket
 
-(require (only-in plait s-exp))
+(require (only-in plait s-exp-content))
 (provide 
   (contract-out 
     [run-parser 
-      (-> (listof (list/c any/c procedure?)) s-exp any/c)]))
+      (-> (listof (list/c any/c procedure?)) s-exp-content any/c)]))
 
 (define (match-sexp pat s)
   (match pat

@@ -1,9 +1,10 @@
-#lang racket
+#lang plait
 
-(require (only-in plait s-exp-content))
+;(require (only-in plait s-exp-content))
 
 (require "syntax.rkt")
-(require "parser.rkt")
+(require (typed-in "parser.rkt"
+  [run-parser : ((Listof ('a * (-> 'b))) S-Exp -> Exp)]))
 
 (define op-parser
   `((+ ,op-add)
