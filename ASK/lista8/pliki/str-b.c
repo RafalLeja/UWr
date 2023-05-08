@@ -1,3 +1,5 @@
 char *somestr(void) {
-  return "Hello, world!";
+  static char word[14] = "Hello, world!";
+  return word;
+  // return "Hello, world!";
 }
