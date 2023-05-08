@@ -1,7 +1,12 @@
 #lang racket
 (require "syntax.rkt")
 (require (only-in plait s-exp-content))
-(provide parse-Exp)
+(provide 
+  (contract-out 
+    [run-parser 
+      (-> (listof (list/c (listof any/c) procedure?)) s-exp-content any/c)]
+    [match-sexp
+      (-> (listof (list/c (listof any/c) procedure?)) s-exp-content exp)]))
 
 (define (match-sexp pat s)
   (match pat
