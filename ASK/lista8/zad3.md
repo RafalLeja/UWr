@@ -11,7 +11,7 @@ int main() {        //silny
 #include <stdio.h>
 
 char main;          //slaby
-//char main = 'a;  -> multiple definitions of 'main'        
+//char main = 'a';  -> multiple definitions of 'main'        
 
 void p2() {         //silny
   //make = 21; -> Segmentation fault (core dumped)
