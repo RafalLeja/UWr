@@ -53,12 +53,28 @@
   (gate-nand w2 w3 data)
   (gate-nand out w1 (wire-nand out w3)))
 
+;; actions --------------------------
+
+(struct action (time proc))
+
 ;; sim ------------------------------
 
 (struct sim (time heap))
 
 (define (make-sim)
-  (sim 0 (make-heap <=)))
+  (sim 0 (make-heap (lambda (a b) (<= (action-time a) (action-time b))))))
+
+(define (run-heap h t)
+  (cond
+      [(= (heap-count heap) 0) (void)]
+      [(<= ct (action-time (heap-min heap))) ()]))
+
+(define (sim-wait! s t)
+  (let 
+    ([ct (+ sim-time t)]
+    [heap (sim-heap)])
+    (run-heap h ct)
+    (sim ct (sim-heap s))))
 
 (struct wire (sim value actions))
 
