@@ -11,3 +11,7 @@ start.s:
 
    6:   e8 00 00 00 00          call   b <_start+0xb>
 ```
+
+Symbol resolution – It associates each symbol reference with exactly one symbol definition .Every symbol has a  predefined task.
+    
+Relocation – It relocates code and data section and modifies the symbol references to the relocated memory locations.

@@ -1,3 +1,15 @@
+```
+gcc -ggdb -Og -Wall -g0 -fno-common -S -o data.s data.c
+
+
+-ggdb -> Produce debugging information for use by GDB. This means to use the most expressive format available (DWARF, stabs, or the native format if neither of those are supported), including GDB extensions if at all possible. 
+-Og -> Optimize debugging experience. -Og should be the optimization level of choice for the standard edit-compile-debug cycle, offering a reasonable level of optimization while maintaining fast compilation and a good debugging experience.
+-Wall -> This enables all the warnings about constructions that some users consider questionable, and that are easy to avoid (or modify to prevent the warning), even in conjunction with macros. 
+-fno-common -> The default is -fno-common, which specifies that the compiler places uninitialized global variables in the BSS section of the object file.
+-S -> generuj plik asm
+-o -> nazwa pliku wyjściowego
+```
+
 /usr/lib/gcc/x86_64-linux-gnu/10/cc1 -quiet -v -imultiarch x86_64-linux-gnu data.c -quiet -dumpbase data.c -mtune=generic -march=x86-64 -auxbase data -ggdb -Og -Wall -version -fasynchronous-unwind-tables -o /tmp/ccVTNnCh.s
 
 ```ASM
