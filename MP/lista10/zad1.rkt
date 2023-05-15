@@ -13,6 +13,7 @@
 
 (define-type Exp
   (numE [n : Number])
+  (op1E [op : Op] [e : Exp])
   (opE [op : Op] [e : (Listof Exp)]))
 
 ;; parse ----------------------------------------
@@ -21,6 +22,11 @@
   (cond
     [(s-exp-match? `NUMBER s)
      (numE (s-exp->number s))]
+    [(s-exp-match? `{SYMBOL} s)
+      (numE 0)]
+    [(s-exp-match? `{SYMBOL ANY} s) 
+      (op1E (parse-op (s-exp->symbol (first (s-exp->list s))))
+        (parse (second (s-exp->list s))))]
     [(s-exp-match? `{SYMBOL ANY ...} s)
      (opE (parse-op (s-exp->symbol (first (s-exp->list s))))
           (map parse (rest (s-exp->list s))))]
@@ -76,7 +82,8 @@
 (define (eval [e : Exp]) : Value
   (type-case Exp e
     [(numE n) n]
-    [(opE o e) (foldr (lambda (el s) ((op->proc o) (eval el) s)) (op->init o) e)]))
+    [(op1E o n) ((op->proc o) (op->init o) (eval n))]
+    [(opE o e) (foldr (lambda (el s) ((op->proc o) s (eval el))) (eval (first e)) (rest e))]))
 
 (define (run [e : S-Exp]) : Value
   (eval (parse e)))
