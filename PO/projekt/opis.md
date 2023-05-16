@@ -1,0 +1,51 @@
+Projekt: Gra 2048 napisana w Ruby
+
+Autor: Rafał Leja 340879
+
+Opis projektu:
+Projekt polega na stworzeniu gry 2048 przy użyciu języka programowania Ruby oraz biblioteki ruby2d. Gra 2048 to logiczna gra planszowa, w której gracz musi łączyć kafelki o tej samej wartości, aby ostatecznie uzyskać kafelek o wartości 2048.
+
+Opis gry:
+Gra 2048 odbywa się na kwadratowej planszy, która składa się z pól o różnych wartościach. Gracz może poruszać kafelkami w czterech kierunkach: w górę, w dół, w lewo i w prawo. Po wykonaniu ruchu, na planszy pojawia się nowy kafelek o wartości 2 lub 4. Jeżeli dwa kafelki o tej samej wartości są przesunięte w jednym kierunku, to scalają się, tworząc jeden kafelek o sumie ich wartości. Celem gry jest osiągnięcie kafelka o wartości 2048.
+
+Opis implementacji:
+Gra 2048 zostanie zaimplementowana w oparciu o programowanie obiektowe w języku Ruby, przy pomocy biblioteki ruby2d. Projekt będzie składał się z kilku klas, które będą reprezentować różne elementy gry, takie jak plansza, kafelki, gracz itp.
+
+1. Klasa  "Kafelek":
+   - Klasa reprezentująca pojedynczy kafelek na planszy.
+   - Będzie przechowywać wartość kafelka i posiadać metody do pobierania i ustawiania wartości.
+  
+
+2. Klasa "Plansza":
+   - Klasa reprezentująca planszę gry.
+   - Będzie przechowywać wszystkie kafelki i zarządzać ich położeniem i wartościami.
+   - Będzie posiadać metody do tworzenia nowego kafelka, wykonywania ruchów i sprawdzania warunków końca gry.
+
+
+3. Klasa "Intro":
+   - Klasa reprezentująca początek programu.
+   - Będzie wyświetlać tytuł oraz twórce gry.
+   - Będzie posiadać metode do pobierania nazwy gracza. 
+
+
+4. Klasa "Tablica":
+   - Klasa reprezentująca tablice wyników końcowych.
+   - Będzie wyświetlać wyniki wszystkich graczy.
+   - Będzie zapisywać wyniki do pliku.
+
+
+5. Klasa "Wyniki":
+   - Klasa reprezentująca wyniki.
+   - Będzie zliczać i wyświetlać aktualny oraz najwyższy wynik.
+   - Będzie posiadać metodę aktualizującą wyniki.
+
+
+6. Klasa "Gracz":
+   - Klasa reprezentująca gracza.
+   - Odpowiedzialna za zapisywanie nazwy oraz wyników gracza.
+
+
+7. Klasa "Scena":
+   - Główna klasa reprezentująca wyświetlanie ekranów.
+   - Będzie zarządzać wyświetlaniem innych klas, takimich jak plansza i Tablica.
+   - Będzie posiadać metodę główną wyświetlającą scene oraz wszystkie istotne elementy.

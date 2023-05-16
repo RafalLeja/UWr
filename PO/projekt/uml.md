@@ -1,12 +1,21 @@
 ```mermaid
 classDiagram
-  DrawnElement <|-- Plansza
-  Plansza o-- Blok
-  Scene *-- Wyniki
-  DrawnElement <|-- Scene
-  DrawnElement: +item
-  DrawnElement: +render()
-  DrawnElement: +draw()
+  Plansza o-- "1..9" Blok
+  Tablica o-- Gracz
+  Scena *-- Wyniki
+  Scena *-- Plansza
+  class Intro{
+    +dodajGracza()
+  }
+  class Tablica{
+    +int * wyniki
+    +zapisz()
+  }
+  class Gracz{
+    +string nazwa
+    +int wynik
+    +int najlepszyWynik
+  }
   class Plansza{
     +Blok * bloki
     +add()
@@ -16,15 +25,14 @@ classDiagram
     +right()
   }
   class Blok{
-    +int value
+    +int wartość
   }
   class Wyniki{
-    +int highscore
-    +int
+    +int najwyższyWynik
+    +int wynik
     +addScore()
   }
-  class Scene{
-    +name
+  class Scena{
     update()
     keyStroke()
   } 
