@@ -158,7 +158,11 @@
      (let ([v1 (eval e1 env)])
        (eval e2 (extend-env env x v1)))]
     [(mletE args e) 
-      (numE 4)]))
+      (let (map 
+                (lambda (x) (pair (parse (first (s-exp->list x)))
+                                  (parse (second (s-exp->list x))))) 
+                (s-exp->list (second (s-exp->list s))))
+              (parse (third (s-exp->list s))))]))
 
 (define (run [e : S-Exp]) : Value
   (eval (parse e) mt-env))
