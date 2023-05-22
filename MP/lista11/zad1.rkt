@@ -13,7 +13,8 @@
   (opE [op : Op] [l : Exp] [r : Exp])
   (ifE [b : Exp] [l : Exp] [r : Exp])
   (condE [cs : (Listof (Exp * Exp))])
-  (errorE [loc : Symbol] [msg : String]))
+  (errorE [loc : Symbol] [msg : String])
+  (tryE [e1 : Exp] [e2 : Exp]))
 
 ;; parse ----------------------------------------
 
@@ -30,6 +31,9 @@
     [(s-exp-match? `{error SYMBOL STRING} s)
      (errorE (s-exp->symbol (second (s-exp->list s)))
              (s-exp->string (third (s-exp->list s))))]
+    [(s-exp-match? `{try ANY ANY} s)
+      (tryE (parse-exp (second (s-exp->list s)))
+          (parse-exp (third (s-exp->list s))))]
     [(s-exp-match? `{SYMBOL ANY ANY} s)
      (opE (parse-op (s-exp->symbol (first (s-exp->list s))))
           (parse-exp (second (s-exp->list s)))
@@ -96,11 +100,6 @@
   (errorA [loc : Symbol] [msg : String]))
 
 ;; error monad
-
-(define (try e1 e2)
-  (if (errorA? (eval e1))
-    (eval e2)
-    (eval e1)))
 
 (define (err [l : Symbol] [m : String]) : Answer
   (errorA l m))
@@ -177,7 +176,11 @@
     [(condE cs)
      (eval (cond->if cs))]
     [(errorE l m)
-     (err l m)]))
+     (err l m)]
+    [(tryE e1 e2)
+      (if (errorA? (eval e1)) 
+        (eval e2)
+        (eval e1))]))
 
 (define (cond->if [cs : (Listof (Exp * Exp))]) : Exp
   (type-case (Listof (Exp * Exp)) cs
@@ -211,7 +214,7 @@
         (valueA (numV 8)))
   (test (run `{cond})
         (errorA 'cond "no matching clause"))
-  (test (try (parse-exp `{cond}) (parse-exp `{+ 1 1}))
+  (test (run `{try {cond} 2})
         (valueA (numV 2))))
 
 

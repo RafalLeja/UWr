@@ -6,15 +6,19 @@
 ;; abstract syntax -------------------------------
 
 (define-type Op
-  (add) (sub) (mul) (div) (eql) (leq))
+  (add)
+  (sub)
+  (mul)
+  (div)
+  (eql)
+  (leq))
 
 (define-type Exp
   (numE [n : Number])
   (opE [op : Op] [l : Exp] [r : Exp])
   (ifE [b : Exp] [l : Exp] [r : Exp])
   (varE [x : Symbol])
-  (letE [x : Symbol] [e1 : Exp] [e2 : Exp])
-  (mletE [args : (Listof (Exp * Exp))] [e2 : Exp]))
+  (letE [x : Symbol] [e1 : Exp] [e2 : Exp]))
 
 ;; parse ----------------------------------------
 
@@ -22,13 +26,6 @@
   (cond
     [(s-exp-match? `NUMBER s)
      (numE (s-exp->number s))]
-    [(s-exp-match? `{let ((SYMBOL ANY) ...) ANY} s)
-      (mletE (map 
-                (lambda (x) (pair (parse (first (s-exp->list x)))
-                                  (parse (second (s-exp->list x)))
-                                  )) 
-                (s-exp->list (second (s-exp->list s))))
-              (parse (third (s-exp->list s))))]
     [(s-exp-match? `{SYMBOL ANY ANY} s)
      (opE (parse-op (s-exp->symbol (first (s-exp->list s))))
           (parse (second (s-exp->list s)))
@@ -87,6 +84,25 @@
   (numV [n : Number])
   (boolV [b : Boolean]))
 
+(define-type Binding
+  (bind [name : Symbol]
+        [val : Value]))
+
+;; environments
+
+(define-type-alias Env (Listof Binding))
+
+(define mt-env empty)
+(define (extend-env [env : Env] [x : Symbol] [v : Value]) : Env
+  (cons (bind x v) env))
+(define (lookup-env [n : Symbol] [env : Env]) : Value
+  (type-case (Listof Binding) env
+    [empty (error 'lookup "unbound variable")]
+    [(cons b rst-env) (cond
+                        [(eq? n (bind-name b))
+                         (bind-val b)]
+                        [else (lookup-env n rst-env)])]))
+
 ;; primitive operations
 
 (define (op-num-num->proc [f : (Number Number -> Number)]) : (Value Value -> Value)
@@ -122,25 +138,6 @@
     [(eql) (op-num-bool->proc =)]
     [(leq) (op-num-bool->proc <=)]))
 
-;; environments
-
-(define-type Binding
-  (bind [name : Symbol]
-        [val : Value]))
-
-(define-type-alias Env (Listof Binding))
-
-(define mt-env empty)
-(define (extend-env [env : Env] [x : Symbol] [v : Value]) : Env
-  (cons (bind x v) env))
-(define (lookup-env [n : Symbol] [env : Env]) : Value
-  (type-case (Listof Binding) env
-    [empty (error 'lookup "unbound variable")]
-    [(cons b rst-env) (cond
-                        [(eq? n (bind-name b))
-                         (bind-val b)]
-                        [else (lookup-env n rst-env)])]))
-
 ;; evaluation function
 
 (define (eval [e : Exp] [env : Env]) : Value
@@ -157,14 +154,7 @@
      (lookup-env x env)]
     [(letE x e1 e2)
      (let ([v1 (eval e1 env)])
-       (eval e2 (extend-env env x v1)))]
-    [(mletE args e) 
-      (let (map 
-                (lambda (x) (cons (eval (fst x) env)
-                                  (eval (snd x) env))) 
-                args)
-              (eval e env))
-      ]))
+       (eval e2 (extend-env env x v1)))]))
 
 (define (run [e : S-Exp]) : Value
   (eval (parse e) mt-env))
@@ -203,3 +193,122 @@
 
 (define (main [e : S-Exp]) : Void
   (print-value (eval (parse e) mt-env)))
+
+;; lexical addressing —————————————————————————————————
+
+;; target
+
+(define-type ExpA
+  (numA [n : Number])
+  (opA [op : Op] [l : ExpA] [r : ExpA])
+  (ifA [b : ExpA] [l : ExpA] [r : ExpA])
+  (varA [n : Number])
+  (letA [a1 : ExpA] [a2 : ExpA]))
+
+;; environments (lists of entities)
+
+(define-type-alias (EnvA 'a) (Listof 'a))
+
+(define mt-envA empty)
+
+(define (extend-envA [env : (EnvA 'a)] [x : 'a]) : (EnvA 'a)
+  (cons x env))
+
+(define (lookup-envA [n : Number] [env : (EnvA 'a)]) : 'a
+  (list-ref env n))
+
+;; evaluation function
+
+(define (evalA [a : ExpA] [env : (EnvA Value)]) : Value
+  (type-case ExpA a
+    [(numA n) (numV n)]
+    [(opA o l r) ((op->proc o) (evalA l env) (evalA r env))]
+    [(ifA b l r)
+     (type-case Value (evalA b env)
+       [(boolV v)
+        (if v (evalA l env) (evalA r env))]
+       [else
+        (error 'eval "type error")])]
+    [(varA n)
+     (lookup-envA n env)]
+    [(letA e1 e2)
+     (let ([v1 (evalA e1 env)])
+       (evalA e2 (extend-envA env v1)))]))
+
+(define (runA [s : S-Exp]) : Value
+  (evalA (translate (parse s) mt-envA) mt-envA))
+
+;; translation function
+
+(define (address-of [x : Symbol] [env : (EnvA Symbol)]) : Number
+  (type-case (EnvA Symbol) env
+    [empty
+     (error 'address-of "unbound variable")]
+    [(cons y rst-env)
+     (if (eq? x y)
+         0
+         (+ 1 (address-of x rst-env)))]))
+
+(define (translate [e : Exp] [env : (EnvA Symbol)]) : ExpA
+  (type-case Exp e
+    [(numE n)
+     (numA n)]
+    [(opE o l r)
+     (opA o (translate l env) (translate r env))]
+    [(ifE b l r)
+     (ifA (translate b env)
+          (translate l env)
+          (translate r env))]
+    [(varE x)
+     (varA (address-of x env))]
+    [(letE x e1 e2)
+     (letA (translate e1 env)
+           (translate e2 (extend-envA env x)))]))
+
+(define c 0)
+(define (next-name)
+  (begin 
+    (set! c (+ c 1))
+    (string->symbol (string-append "var-" (to-string c)))))
+
+(define (lexToNamed [e : ExpA] [env : (EnvA Symbol)])
+  (type-case ExpA e
+    [(numA n)
+      (numE n)]
+    [(opA op l r) 
+      (opE op (lexToNamed l env) (lexToNamed r env))]
+    [(ifA b t f)
+      (ifE 
+          (lexToNamed b env)
+          (lexToNamed t env)
+          (lexToNamed f env))]
+    [(varA v)
+      (varE (lookup-envA v env))]
+    [(letA e1 e2)
+      (let ([v (next-name)]) 
+           (letE v (lexToNamed e1 env)
+                 (lexToNamed e2 (extend-envA env v))))]))
+
+(module+ test
+  (test (run `2)
+        (runA `2))
+  (test (run `{+ 2 1})
+        (runA `{+ 2 1}))
+  (test (run `{* 2 1})
+        (runA `{* 2 1}))
+  (test (run `{+ {* 2 3} {+ 5 8}})
+        (runA `{+ {* 2 3} {+ 5 8}}))
+  (test (run `{= 0 1})
+        (runA `{= 0 1}))
+  (test (run `{if {= 0 1} {* 3 4} 8})
+        (runA `{if {= 0 1} {* 3 4} 8}))
+  (test (run `{let x 1 {+ x 1}})
+        (runA `{let x 1 {+ x 1}}))
+  (test (run `{let x 1 {+ x {let y 2 {* x y}}}})
+        (runA `{let x 1 {+ x {let y 2 {* x y}}}}))
+  (test (run `{let x 1
+                {+ x {let x {+ x 1}
+                       {* x 3}}}})
+        (runA `{let x 1
+                 {+ x {let x {+ x 1}
+                        {* x 3}}}})))

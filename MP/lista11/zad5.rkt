@@ -14,7 +14,8 @@
   (ifE [b : Exp] [l : Exp] [r : Exp])
   (varE [x : Symbol])
   (letE [x : Symbol] [e1 : Exp] [e2 : Exp])
-  (mletE [args : (Listof (Exp * Exp))] [e2 : Exp]))
+  (lamE [x : Symbol] [e : Exp])
+  (appE [e1 : Exp] [e2 : Exp]))
 
 ;; parse ----------------------------------------
 
@@ -22,13 +23,11 @@
   (cond
     [(s-exp-match? `NUMBER s)
      (numE (s-exp->number s))]
-    [(s-exp-match? `{let ((SYMBOL ANY) ...) ANY} s)
-      (mletE (map 
-                (lambda (x) (pair (parse (first (s-exp->list x)))
-                                  (parse (second (s-exp->list x)))
-                                  )) 
-                (s-exp->list (second (s-exp->list s))))
-              (parse (third (s-exp->list s))))]
+    [(s-exp-match? `{lambda {SYMBOL} ANY} s)
+     (lamE (s-exp->symbol
+            (first (s-exp->list 
+                    (second (s-exp->list s)))))
+           (parse (third (s-exp->list s))))]
     [(s-exp-match? `{SYMBOL ANY ANY} s)
      (opE (parse-op (s-exp->symbol (first (s-exp->list s))))
           (parse (second (s-exp->list s)))
@@ -43,6 +42,9 @@
      (letE (s-exp->symbol (second (s-exp->list s)))
            (parse (third (s-exp->list s)))
            (parse (fourth (s-exp->list s))))]
+    [(s-exp-match? `{ANY ANY} s)
+     (appE (parse (first (s-exp->list s)))
+           (parse (second (s-exp->list s))))]
     [else (error 'parse "invalid input")]))
 
 (define (parse-op [op : Symbol]) : Op
@@ -72,12 +74,17 @@
              (numE 8)))
   (test/exn (parse `{{+ 1 2}})
             "invalid input")
-  (test/exn (parse `{+ 1})
-            "invalid input")
+  (test (parse `{+ 1})
+        (appE (varE '+) (numE 1)))
   (test/exn (parse `{^ 1 2})
             "unknown operator")
   (test (parse `{let x 1 {+ x 1}})
-        (letE 'x (numE 1) (opE (add) (varE 'x) (numE 1)))))
+        (letE 'x (numE 1) (opE (add) (varE 'x) (numE 1))))
+  (test (parse `{lambda {x} 9})
+        (lamE 'x (numE 9)))
+  (test (parse `{double 9})
+        (appE (varE 'double) (numE 9))))
+
 
 ;; eval --------------------------------------
 
@@ -85,7 +92,51 @@
 
 (define-type Value
   (numV [n : Number])
-  (boolV [b : Boolean]))
+  (boolV [b : Boolean])
+  (funV [f : (Value -> Value)]))
+
+(define-type Binding
+  (bind [name : Symbol]
+        [val : Value]))
+
+;; environments
+
+(define-type-alias Env (Listof Binding))
+
+(define mt-env empty)
+(define (extend-env [env : Env] [x : Symbol] [v : Value]) : Env
+  (cons (bind x v) env))
+(define (lookup-env [n : Symbol] [env : Env]) : Value
+  (type-case (Listof Binding) env
+    [empty (error 'lookup "unbound variable")]
+    [(cons b rst-env) (cond
+                        [(eq? n (bind-name b))
+                         (bind-val b)]
+                        [else (lookup-env n rst-env)])]))
+
+;; variables
+
+(define (removeS [x : Symbol] [env : (Listof Symbol)]): (Listof Symbol)
+  (filter (λ (y) (not (eq? x y))) env))
+
+(define (fv [e : Exp] [binded : (Listof Symbol)])
+  (type-case Exp e
+    [(numE n) 
+      '()]
+    [(opE op l r) 
+      (append (fv l binded) (fv r binded))]
+    [(ifE b t f) 
+      (append (fv b binded) (append (fv t binded) (fv f binded)))]
+    [(varE v) 
+      (if (member v binded)
+        '()
+        (list v))]
+    [(letE x e1 e2) 
+      (append (fv e1 (append binded (list x))) (fv e2 (append binded (list x))))]
+    [(lamE x e)
+      (fv e (append binded (list x)))]
+    [(appE e1 e2)
+      (append (fv e1 binded) (fv e2 binded))]))
 
 ;; primitive operations
 
@@ -122,26 +173,7 @@
     [(eql) (op-num-bool->proc =)]
     [(leq) (op-num-bool->proc <=)]))
 
-;; environments
-
-(define-type Binding
-  (bind [name : Symbol]
-        [val : Value]))
-
-(define-type-alias Env (Listof Binding))
-
-(define mt-env empty)
-(define (extend-env [env : Env] [x : Symbol] [v : Value]) : Env
-  (cons (bind x v) env))
-(define (lookup-env [n : Symbol] [env : Env]) : Value
-  (type-case (Listof Binding) env
-    [empty (error 'lookup "unbound variable")]
-    [(cons b rst-env) (cond
-                        [(eq? n (bind-name b))
-                         (bind-val b)]
-                        [else (lookup-env n rst-env)])]))
-
-;; evaluation function
+;; evaluation function (eval/apply)
 
 (define (eval [e : Exp] [env : Env]) : Value
   (type-case Exp e
@@ -158,13 +190,16 @@
     [(letE x e1 e2)
      (let ([v1 (eval e1 env)])
        (eval e2 (extend-env env x v1)))]
-    [(mletE args e) 
-      (let (map 
-                (lambda (x) (cons (eval (fst x) env)
-                                  (eval (snd x) env))) 
-                args)
-              (eval e env))
-      ]))
+    [(lamE x b)
+     (funV (λ (v) (eval b (extend-env env x v))))]
+    [(appE e1 e2)
+     (apply (eval e1 env) (eval e2 env))]))
+
+(define (apply [v1 : Value] [v2 : Value]) : Value
+  (type-case Value v1
+    [(funV f) (f v2)]
+    [else (error 'apply "type error")]))
+
 
 (define (run [e : S-Exp]) : Value
   (eval (parse e) mt-env))
@@ -189,14 +224,21 @@
   (test (run `{let x 1
                 {+ x {let x {+ x 1}
                        {* x 3}}}})
-        (numV 7)))
+        (numV 7))
+  (test (run `{{lambda {x} {+ x 1}} 5})
+        (numV 6))
+  (test (fv (parse `{lambda {x} {+ x y}}) '())
+        (list 'y))
+  (test (fv (parse `{lambda {x} {+ x 5}}) '())
+        '()))
 
 ;; printer ———————————————————————————————————-
 
 (define (value->string [v : Value]) : String
   (type-case Value v
     [(numV n) (to-string n)]
-    [(boolV b) (if b "true" "false")]))
+    [(boolV b) (if b "true" "false")]
+    [(funV _) "#<procedure>"]))
 
 (define (print-value [v : Value]) : Void
   (display (value->string v)))
