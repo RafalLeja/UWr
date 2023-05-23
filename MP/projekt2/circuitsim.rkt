@@ -59,7 +59,7 @@
 
 ;; sim ------------------------------
 
-(struct sim (time heap))
+(struct sim ([time #:mutable] heap))
 
 (define (make-sim)
   (sim 0 (make-heap (lambda (a b) (<= (action-time a) (action-time b))))))
@@ -79,9 +79,8 @@
   (let 
     ([ct (+ (sim-time s) t)]
     [heap (sim-heap s)])
-    (print ct)
     (run-heap heap ct)
-    (set! s (sim ct heap))))
+    (set-sim-time! s ct)))
 
 (define (sim-add-action! s t proc)
   (let ([new-action (action t proc)])
@@ -89,41 +88,54 @@
 
 ;; wire -------------------------------------
 
-(struct wire (sim value actions))
+(struct wire (sim [value #:mutable] [actions #:mutable]))
 
 (define (make-wire sim)
   (wire sim #f '()))
 
 (define (wire-on-change! w a)
-  (a)
-  (wire (wire-sim w) (wire-value w) (append a (wire-actions w))))
+  a
+  (set-wire-actions! w (append (list a) (wire-actions w))))
 
 (define (wire-set! w v)
-  (wire (wire-sim w) v (wire-actions w))
-  (for-each (lambda (a) (a)) (wire-actions w)))
+  (set-wire-value! w v)
+  (for-each (lambda (a) a) (wire-actions w)))
 
 ;; gate -----------------------------
 
 (define (gate-not out in)
   (let ([sim (wire-sim out)])
-    (sim-add-action! 
-      sim 
-      (add1 (sim-time sim)) 
-      (lambda () ((wire-set! out (not (wire-value in))))))))
+    (wire-on-change! in
+      (lambda () ((sim-add-action! 
+        sim 
+        (add1 (sim-time sim)) 
+        (lambda () ((wire-set! out (not (wire-value in)))))))))))
   
 (define (gate-and out in1 in2)
   (let ([sim (wire-sim out)])
-    (sim-add-action! 
-      sim 
-      (add1 (sim-time sim)) 
-      (lambda () ((wire-set! out (and (wire-value in1) (wire-value in2))))))))
+    (wire-on-change! in1
+      (lambda () ((sim-add-action! 
+        sim 
+        (add1 (sim-time sim)) 
+        (lambda () ((wire-set! out (and (wire-value in1) (wire-value in2)))))))))
+    (wire-on-change! in2
+      (lambda () ((sim-add-action! 
+        sim 
+        (add1 (sim-time sim)) 
+        (lambda () ((wire-set! out (and (wire-value in1) (wire-value in2)))))))))))
 
 (define (gate-nand out in1 in2)
   (let ([sim (wire-sim out)])
-    (sim-add-action! 
-      sim 
-      (add1 (sim-time sim)) 
-      (lambda () ((wire-set! out (not (and (wire-value in1) (wire-value in2)))))))))
+    (wire-on-change! in1
+      (lambda () ((sim-add-action! 
+        sim 
+        (add1 (sim-time sim)) 
+        (lambda () ((wire-set! out (not (and (wire-value in1) (wire-value in2))))))))))
+    (wire-on-change! in1
+      (lambda () ((sim-add-action! 
+        sim 
+        (add1 (sim-time sim)) 
+        (lambda () ((wire-set! out (not (and (wire-value in1) (wire-value in2))))))))))))
 
 (define (gate-or out in1 in2)
   (let ([sim (wire-sim out)])
