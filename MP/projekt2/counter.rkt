@@ -1,5 +1,7 @@
 #lang racket
 (require "circuitsim.rkt")
+(require racket/trace)
+
 
 (define sim (make-sim))
 
