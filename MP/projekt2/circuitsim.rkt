@@ -10,6 +10,7 @@
           [sim-heap        (-> sim? heap?)]
           [heap-min        (-> heap? any/c)]
           [action-proc     (-> action? any/c)]
+          ;[heap-count      (-> heap? any/c)]
 
           [sim-add-action! (-> sim? positive? (-> any/c) void?)]
 
@@ -77,23 +78,41 @@
   (cond
       [(= (heap-count heap) 0) 
         (void)]
-      [(>= ct (action-time (heap-min heap))) 
-          (print (heap-count heap))
+      [(> ct (action-time (heap-min heap))) 
+          ;(print (heap-count heap))
           ((action-proc (heap-min heap))) 
-          (heap-remove-min! heap) 
+          (heap-remove-min! heap)
+
           (run-heap heap ct)]
-      [(< ct (action-time (heap-min heap))) 
+      [(<= ct (action-time (heap-min heap))) 
         (void)]))
+
+; (define (sim-wait! s t)
+;   (let 
+;     ([ct (+ (sim-time s) t)]
+;     [heap (sim-heap s)])
+;     (run-heap heap ct)
+;     (set-sim-time! s ct)))
 
 (define (sim-wait! s t)
   (let 
     ([ct (+ (sim-time s) t)]
     [heap (sim-heap s)])
-    (run-heap heap ct)
-    (set-sim-time! s ct)))
+    (cond
+      [(= (heap-count heap) 0) 
+        (set-sim-time! s ct)]
+      [(> ct (action-time (heap-min heap))) 
+          ;(print (heap-count heap))
+          (let ([curr (heap-min heap)])
+            (heap-remove-min! heap)
+            (set-sim-time! s (action-time curr))
+            ((action-proc curr)) 
+            (sim-wait! s (- ct (action-time curr))))]
+      [(<= ct (action-time (heap-min heap))) 
+        (set-sim-time! s ct)])))
 
 (define (sim-add-action! s t proc)
-    (heap-add! (sim-heap s) (action t proc)))
+    (heap-add! (sim-heap s) (action (+ (sim-time s) t) proc)))
 
 ;; wire -------------------------------------
 
@@ -103,12 +122,15 @@
   (wire sim #f '()))
 
 (define (wire-on-change! w a)
-  (a)
-  (set-wire-actions! w (append (list a) (wire-actions w))))
+  (set-wire-actions! w (append (wire-actions w) (list a)))
+  (a))
 
 (define (wire-set! w v)
-  (set-wire-value! w v)
-  (for-each (lambda (a) (a)) (wire-actions w)))
+  (if (not (eq? v (wire-value w)))
+    (begin 
+      (set-wire-value! w v)
+      (for-each (lambda (a) (a)) (wire-actions w)))
+    (void)))
 
 ;; gate -----------------------------
 
@@ -117,7 +139,7 @@
     (wire-on-change! in
       (lambda () (sim-add-action! 
         sim 
-        (add1 (sim-time sim)) 
+        1
         (lambda () (wire-set! out (not (wire-value in)))))))))
   
 (define (gate-and out in1 in2)
@@ -125,15 +147,12 @@
     (wire-on-change! in1
       (lambda () (sim-add-action! 
         sim 
-        (add1 (sim-time sim)) 
-        (lambda () (
-          wire-set! out (and (wire-value in1) (wire-value in2))
-          ;print "a"
-          )))))
+        1 
+        (lambda () (wire-set! out (and (wire-value in1) (wire-value in2)))))))
     (wire-on-change! in2
       (lambda () (sim-add-action! 
         sim 
-        (add1 (sim-time sim)) 
+        1 
         (lambda () (wire-set! out (and (wire-value in1) (wire-value in2)))))))))
 
 (define (gate-nand out in1 in2)
@@ -141,15 +160,12 @@
     (wire-on-change! in1
       (lambda () (sim-add-action! 
         sim 
-        (add1 (sim-time sim)) 
-        (lambda () (
-          wire-set! out (not (and (wire-value in1) (wire-value in2)))
-          ; print (not (and (wire-value in1) (wire-value in2)))
-          )))))
+        1 
+        (lambda () (wire-set! out (not (and (wire-value in1) (wire-value in2))))))))
     (wire-on-change! in2
       (lambda () (sim-add-action! 
         sim 
-        (add1 (sim-time sim)) 
+        1 
         (lambda () (wire-set! out (not (and (wire-value in1) (wire-value in2))))))))))
 
 (define (gate-or out in1 in2)
@@ -157,12 +173,12 @@
     (wire-on-change! in1
       (lambda () (sim-add-action! 
         sim 
-        (add1 (sim-time sim)) 
+        1 
         (lambda () (wire-set! out (or (wire-value in1) (wire-value in2)))))))
     (wire-on-change! in2
       (lambda () (sim-add-action! 
         sim 
-        (add1 (sim-time sim)) 
+        1 
         (lambda () (wire-set! out (or (wire-value in1) (wire-value in2)))))))))
 
 (define (gate-nor out in1 in2)
@@ -170,12 +186,12 @@
     (wire-on-change! in1
       (lambda () (sim-add-action! 
         sim 
-        (add1 (sim-time sim)) 
+        1 
         (lambda () (wire-set! out (not (or (wire-value in1) (wire-value in2))))))))
     (wire-on-change! in2
       (lambda () (sim-add-action! 
         sim 
-        (add1 (sim-time sim)) 
+        1 
         (lambda () (wire-set! out (not (or (wire-value in1) (wire-value in2))))))))))
 
 (define (gate-xor out in1 in2)
@@ -183,12 +199,12 @@
     (wire-on-change! in1
       (lambda () (sim-add-action! 
         sim 
-        (+ 2 (sim-time sim)) 
+        1
         (lambda () (wire-set! out (not (eq? (wire-value in1) (wire-value in2))))))))
     (wire-on-change! in2
       (lambda () (sim-add-action! 
         sim 
-        (+ 2 (sim-time sim)) 
+        1
         (lambda () (wire-set! out (not (eq? (wire-value in1) (wire-value in2))))))))))
 
 ;; wire gate -----------------------------------
@@ -222,3 +238,9 @@
   (let ([out (make-wire (wire-sim in1))])
     (gate-xor out in1 in2)
     out))
+
+; (trace flip-flop)
+; (trace make-wire)
+; (trace gate-xor)
+; (trace wire-xor)
+; (trace sim-add-action!)

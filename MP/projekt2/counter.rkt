@@ -5,8 +5,6 @@
 
 (define sim (make-sim))
 
-(sim-add-action! sim 3 (lambda () (print "a")))
-
 (define (make-counter n clk en)
   (if (= n 0)
       '()
