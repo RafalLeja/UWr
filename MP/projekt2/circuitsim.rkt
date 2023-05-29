@@ -107,7 +107,7 @@
             (heap-remove-min! heap)
             (set-sim-time! s (action-time curr))
             ((action-proc curr)) 
-            (sim-wait! s (- ct (action-time curr))))]
+            (sim-wait! s (- ct (action-time curr))))] ;;; ct = czas symulacji + argument - 
       [(<= ct (action-time (heap-min heap))) 
         (set-sim-time! s ct)])))
 

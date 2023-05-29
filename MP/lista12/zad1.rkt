@@ -5,8 +5,12 @@
 
 ;; abstract syntax -------------------------------
 
+(define-type Op
+  (add) (sub) (mul) (div) (eql) (leq))
+
 (define-type Exp
   (numE [n : Number])
+  (opE [op : Op] [l : Exp] [r : Exp])
   (ifE [b : Exp] [l : Exp] [r : Exp])
   (varE [x : Symbol])
   (letE [x : Symbol] [e1 : Exp] [e2 : Exp])
@@ -24,6 +28,10 @@
             (first (s-exp->list 
                     (second (s-exp->list s)))))
            (parse (third (s-exp->list s))))]
+    [(s-exp-match? `{SYMBOL ANY ANY} s)
+     (opE (parse-op (s-exp->symbol (first (s-exp->list s))))
+          (parse (second (s-exp->list s)))
+          (parse (third (s-exp->list s))))]
     [(s-exp-match? `{if ANY ANY ANY} s)
      (ifE (parse (second (s-exp->list s)))
           (parse (third (s-exp->list s)))
@@ -34,29 +42,48 @@
      (letE (s-exp->symbol (second (s-exp->list s)))
            (parse (third (s-exp->list s)))
            (parse (fourth (s-exp->list s))))]
-    [(s-exp-match? `{SYMBOL ANY ANY} s)
-     (appE (appE (varE (parse-op (s-exp->symbol (first (s-exp->list s)))))
-                 (parse (second (s-exp->list s))))
-           (parse (third (s-exp->list s))))]
     [(s-exp-match? `{ANY ANY} s)
      (appE (parse (first (s-exp->list s)))
            (parse (second (s-exp->list s))))]
     [else (error 'parse "invalid input")]))
 
-(define prim-ops '(+ - * / = <=))
-
-(define (parse-op [op : Symbol]) : Symbol
-  (if (member op prim-ops)
-      op 
-      (error 'parse "unknown operator")))
-
+(define (parse-op [op : Symbol]) : Op
+  (cond
+    [(eq? op '+) (add)]
+    [(eq? op '-) (sub)]
+    [(eq? op '*) (mul)]
+    [(eq? op '/) (div)]
+    [(eq? op '=) (eql)]
+    [(eq? op '<=) (leq)]
+    [else (error 'parse "unknown operator")]))
+                
 (module+ test
   (test (parse `2)
         (numE 2))
   (test (parse `{+ 2 1})
-        (appE (appE (varE '+) (numE 2)) (numE 1)))
+        (opE (add) (numE 2) (numE 1)))
   (test (parse `{* 3 4})
-        (appE (appE (varE '*) (numE 3)) (numE 4))))
+        (opE (mul) (numE 3) (numE 4)))
+  (test (parse `{+ {* 3 4} 8})
+        (opE (add)
+             (opE (mul) (numE 3) (numE 4))
+             (numE 8)))
+  (test (parse `{if {= 0 1} {* 3 4} 8})
+        (ifE (opE (eql) (numE 0) (numE 1))
+             (opE (mul) (numE 3) (numE 4))
+             (numE 8)))
+  (test/exn (parse `{{+ 1 2}})
+            "invalid input")
+  (test (parse `{+ 1})
+        (appE (varE '+) (numE 1)))
+  (test/exn (parse `{^ 1 2})
+            "unknown operator")
+  (test (parse `{let x 1 {+ x 1}})
+        (letE 'x (numE 1) (opE (add) (varE 'x) (numE 1))))
+  (test (parse `{lambda {x} 9})
+        (lamE 'x (numE 9)))
+  (test (parse `{double 9})
+        (appE (varE 'double) (numE 9))))
 
 
 ;; eval --------------------------------------
@@ -66,75 +93,68 @@
 (define-type Value
   (numV [n : Number])
   (boolV [b : Boolean])
-  (funV [x : Symbol] [e : Exp])
-  (primopV [f : (Value -> Value)]))
+  (funV [x : Symbol] [e : Exp] [env : Env]))
 
 (define-type Binding
   (bind [name : Symbol]
-        [val : Value]))
+        [val : (-> Value)])) ; val trzyma funkcje
 
 ;; environments
 
 (define-type-alias Env (Listof Binding))
 
 (define mt-env empty)
-(define (extend-env [env : Env] [x : Symbol] [v : Value]) : Env
+(define (extend-env [env : Env] [x : Symbol] [v : (-> Value)]) : Env
   (cons (bind x v) env))
 (define (lookup-env [n : Symbol] [env : Env]) : Value
   (type-case (Listof Binding) env
     [empty (error 'lookup "unbound variable")]
     [(cons b rst-env) (cond
                         [(eq? n (bind-name b))
-                         (bind-val b)]
+                         ((bind-val b))]
                         [else (lookup-env n rst-env)])]))
 
-;; primitive operations and the initial environment
+;; primitive operations
 
-(define (op-num-num->value [f : (Number Number -> Number)]) : Value 
-  (primopV
-   (λ (v1)
-     (type-case Value v1
-       [(numV n1)
-        (primopV
-         (λ (v2)
-           (type-case Value v2
-             [(numV n2)
-              (numV (f n1 n2))]
-             [else
-              (error 'eval "type error")])))]
-       [else
-        (error 'eval "type error")]))))
+(define (op-num-num->proc [f : (Number Number -> Number)]) : (Value Value -> Value)
+  (λ (v1 v2)
+    (type-case Value v1
+      [(numV n1)
+       (type-case Value v2
+         [(numV n2)
+          (numV (f n1 n2))]
+         [else
+          (error 'eval "type error")])]
+      [else
+       (error 'eval "type error")])))
 
-(define (op-num-bool->value [f : (Number Number -> Boolean)]) : Value 
-  (primopV
-   (λ (v1)
-     (type-case Value v1
-       [(numV n1)
-        (primopV
-         (λ (v2)
-           (type-case Value v2
-             [(numV n2)
-              (boolV (f n1 n2))]
-             [else
-              (error 'eval "type error")])))]
-       [else
-        (error 'eval "type error")]))))
+(define (op-num-bool->proc [f : (Number Number -> Boolean)]) : (Value Value -> Value)
+  (λ (v1 v2)
+    (type-case Value v1
+      [(numV n1)
+       (type-case Value v2
+         [(numV n2)
+          (boolV (f n1 n2))]
+         [else
+          (error 'eval "type error")])]
+      [else
+       (error 'eval "type error")])))
 
-(define init-env 
-  (foldr (λ (b env) (extend-env env (fst b) (snd b)))
-         mt-env 
-         (list (pair '+ (op-num-num->value +))
-               (pair '- (op-num-num->value -))
-               (pair '* (op-num-num->value *))
-               (pair '/ (op-num-num->value /))
-               (pair '= (op-num-bool->value =))
-               (pair '<= (op-num-bool->value <=)))))
+(define (op->proc [op : Op]) : (Value Value -> Value)
+  (type-case Op op
+    [(add) (op-num-num->proc +)]
+    [(sub) (op-num-num->proc -)]
+    [(mul) (op-num-num->proc *)]
+    [(div) (op-num-num->proc /)]
+    [(eql) (op-num-bool->proc =)]
+    [(leq) (op-num-bool->proc <=)]))
 
 ;; evaluation function (eval/apply)
 
 (define (eval [e : Exp] [env : Env]) : Value
   (type-case Exp e
     [(numE n) (numV n)]
+    [(opE o l r) ((op->proc o) (eval l env) (eval r env))]
     [(ifE b l r)
      (type-case Value (eval b env)
        [(boolV v)
@@ -144,23 +164,21 @@
     [(varE x)
      (lookup-env x env)]
     [(letE x e1 e2)
-     (let ([v1 (eval e1 env)])
+     (let ([v1 (lambda () (eval e1 env))])
        (eval e2 (extend-env env x v1)))]
     [(lamE x b)
-     (funV x b)]
+     (funV x b env)]
     [(appE e1 e2)
-     (apply (eval e1 env) (eval e2 env) env)])) ;przekazywanie env funkcji apply
+     (apply (eval e1 env) (lambda () (eval e2 env)))])) ; zwracamy funkcje na wartość
 
-(define (apply [v1 : Value] [v2 : Value] env) : Value
+(define (apply [v1 : Value] [v2 : (-> Value)]) : Value
   (type-case Value v1
-    [(funV x b)
-     (eval b (extend-env env x v2))] ; usunięcie env z funV bo chcemy używać nowszego env
-    [(primopV f)
-     (f v2)]
+    [(funV x b env)
+     (eval b (extend-env env x v2))]
     [else (error 'apply "not a function")]))
 
 (define (run [e : S-Exp]) : Value
-  (eval (parse e) init-env))
+  (eval (parse e) mt-env))
 
 (module+ test
   (test (run `2)
@@ -186,17 +204,9 @@
   (test (run `{{lambda {x} {+ x 1}} 5})
         (numV 6))
   (test (run `{lambda {x} {lambda {y} {+ x y}}})
-        (funV 'x
-              (lamE 'y (appE (appE (varE '+)
-                                      (varE 'x))
-                                (varE 'y)))
-              ))
-  (test (run `{let a 1
-                {let p {lambda {x} {+ x a}}
-                  {let a 10
-                    {p 0}}}})
-        (numV 10)))
-
+        (funV 'x (lamE 'y (opE (add) (varE 'x) (varE 'y))) mt-env))
+  (test (run `{{lambda {x} 42} {/ 1 0}})
+        (numV 42)))
 
 ;; printer ———————————————————————————————————-
 
@@ -204,11 +214,10 @@
   (type-case Value v
     [(numV n) (to-string n)]
     [(boolV b) (if b "true" "false")]
-    [(funV x e) "#<procedure>"]
-    [(primopV f) "#<primop>"]))
+    [(funV x e env) "#<procedure>"]))
 
 (define (print-value [v : Value]) : Void
   (display (value->string v)))
 
 (define (main [e : S-Exp]) : Void
-  (print-value (eval (parse e) init-env)))
+  (print-value (eval (parse e) mt-env)))

@@ -97,7 +97,7 @@
 (define-type Value
   (numV [n : Number])
   (boolV [b : Boolean])
-  (funV [x : Symbol] [e : Exp] [env : Env]))
+  (funV [e : ExpA] [env : (EnvA Value)])) ; zmiana na przetłumaczoną wersje
 
 (define-type Binding
   (bind [name : Symbol]
@@ -155,34 +155,34 @@
 
 ;; evaluation function
 
-(define (eval [e : Exp] [env : Env]) : Value
-  (type-case Exp e
-    [(numE n) (numV n)]
-    [(opE o l r) ((op->proc o) (eval l env) (eval r env))]
-    [(ifE b l r)
-     (type-case Value (eval b env)
-       [(boolV v)
-        (if v (eval l env) (eval r env))]
-       [else
-        (error 'eval "type error")])]
-    [(varE x)
-     (lookup-env x env)]
-    [(letE x e1 e2)
-     (let ([v1 (eval e1 env)])
-       (eval e2 (extend-env env x v1)))]
-    [(lamE x b)
-     (funV x b env)]
-    [(appE e1 e2)
-     (apply (eval e1 env) (eval e2 env))]))
+; (define (eval [e : Exp] [env : Env]) : Value
+;   (type-case Exp e
+;     [(numE n) (numV n)]
+;     [(opE o l r) ((op->proc o) (eval l env) (eval r env))]
+;     [(ifE b l r)
+;      (type-case Value (eval b env)
+;        [(boolV v)
+;         (if v (eval l env) (eval r env))]
+;        [else
+;         (error 'eval "type error")])]
+;     [(varE x)
+;      (lookup-env x env)]
+;     [(letE x e1 e2)
+;      (let ([v1 (eval e1 env)])
+;        (eval e2 (extend-env env x v1)))]
+;     [(lamE x b)
+;      (funV x b env)]
+;     [(appE e1 e2)
+;      (apply (eval e1 env) (eval e2 env))]))
 
-(define (apply [v1 : Value] [v2 : Value]) : Value
-  (type-case Value v1
-    [(funV x b env)
-     (eval b (extend-env env x v2))]
-    [else (error 'apply "not a function")]))
+; (define (apply [v1 : Value] [v2 : Value]) : Value
+;   (type-case Value v1
+;     [(funV b env)
+;      (eval b (extend-env env x v2))]
+;     [else (error 'apply "not a function")]))
 
 (define (run [e : S-Exp]) : Value
-  (eval (parse e) mt-env))
+  (evalA (translate (parse e) mt-env) mt-env))
 
 (module+ test
   (test (run `2)
@@ -212,13 +212,13 @@
   (type-case Value v
     [(numV n) (to-string n)]
     [(boolV b) (if b "true" "false")]
-    [(funV x e env) "#<procedure>"]))
+    [(funV e env) "#<procedure>"]))
 
 (define (print-value [v : Value]) : Void
   (display (value->string v)))
 
 (define (main [e : S-Exp]) : Void
-  (print-value (eval (parse e) mt-env)))
+  (print-value (evalA (translate (parse e) mt-env) mt-env)))
 
 ;; lexical addressing —————————————————————————————————
 
@@ -230,8 +230,8 @@
   (ifA [b : ExpA] [l : ExpA] [r : ExpA])
   (varA [n : Number])
   (letA [a1 : ExpA] [a2 : ExpA])
-  (lamA [x : Symbol] [e : ExpA])
-  (appA [e1 : ExpA] [e2 : ExpA]))
+  (lamA [e : ExpA])
+  (appA [e1 : ExpA] [e2 : ExpA])) ; dodanie lam i app bez symboli
 
 ;; environments (lists of entities)
 
@@ -262,15 +262,15 @@
     [(letA e1 e2)
      (let ([v1 (evalA e1 env)])
        (evalA e2 (extend-envA env v1)))]
-    [(lamA x b)
-     (funV x b env)]
+    [(lamA b)
+     (funV b env)]
     [(appA e1 e2)
-     (apply (evalA e1 env) (evalA e2 env))]))
+     (applyA (evalA e1 env) (evalA e2 env))]))
 
 (define (applyA [v1 : Value] [v2 : Value]) : Value
   (type-case Value v1
-    [(funV x b env)
-     (eval b (extend-env env x v2))]
+    [(funV b env)
+     (evalA b (extend-envA env v2))]
     [else (error 'apply "not a function")]))
 
 (define (runA [s : S-Exp]) : Value
@@ -303,7 +303,7 @@
      (letA (translate e1 env)
            (translate e2 (extend-envA env x)))]
     [(lamE x e)
-      (lamA x (translate e env))]
+      (lamA (translate e (extend-envA env x)))]
     [(appE e1 e2)
       (appA 
         (translate e1 env)

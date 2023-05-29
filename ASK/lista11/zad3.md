@@ -13,31 +13,35 @@
 | --- | ------ | ------ |
 | 8 | 2 | 2 |
 
-| Address | Tag | Index | Offset | Result     | Notes                            |
-| ------- | --- | ----- | ------ | ---------- | -------------------------------- |
-| 0       | 0   | 00000 | 00000  | compulsory | pusta pamięć
-| 4       | 0   | 00000 | 00100  | hit        | (z wpisu 0)                      |
-| 10/16   | 0   | 00000 | 10000  | hit        | (z wpisu 0)                      |
-| 84/132  | 0   | 00100 | 00100  | compulsory | pusta pamięć
-| 3c/60   |  
-| e8/232  | 0   | 00111 | 01000  | compulsory |
-| c8c/3212| s
-| a0/160  | 0   | 00101 | 00000  | compulsory |
-| 4       |
-| 400/1024| 1   | 00000 | 00000  | conflict   | zastąpi poprzedni wpis w i=0     |
-| 84/132  | 0   | 00000 | 11100  | conflict   | j/w                              |
-| 10/16   | 0   | 00100 | 01100  | hit        | (z wpisu 132)                    |
-| e8/232  | 11  | 00000 | 11000  | conflict   | zastąpi wpis o i=0               |
-| 884/2180| 0   | 00101 | 10100  | hit        | (z wpisu 160)                    |
-| c8c/3212| 10  | 00100 | 00100  | conflict   | zastąpi poprzedni wpis o i=00100 |
-|0        |
+| Address | Tag | Index | Result     | Notes                            |
+| ------- | --- | ----- | ---------- | -------------------------------- |
+| 0       | 0   |  0    | compulsory | pusta pamięć
+| 4       | 0   |  1    | compulsory | pusta pamięć   
+| 10      | 1   |  0    | compulsory | pusta pamięć    
+| 84      | 8   |  1    | compulsory | pusta pamięć
+| 3c      | 3   |  3    | compulsory | pusta pamięć 
+| e8      | 0   |  2    | compulsory | pusta pamięć
+| c8c     | c8  |  3    | compulsory | pusta pamięć
+| a0      | a   |  0    | conflict   | tag 0 zastąpiony
+| 4       | 0   |  1    | hit        | pamięć odczytana
+| 400     | 40  |  0    | conflict   | tag 1 zastąpiony
+| 84      | 8   |  1    | hit        | pamięć odczytana               
+| 10      | 1   |  0    | conflict   | tag a zastąpiony
+| e8      | e   |  2    | hit        | pamięć odczytana 
+| 884     | 88  |  1    | conflict   | tag 0 zastąpiony    
+| c8c     | c8  |  3    | hit        | pamięć odczytana
+| 0       | 0   |  0    | conflict   | tag 40 zastąpiony
 
-Efektywność: 4/12
+
+Efektywność: 4/16
 
 Zawartość pamięci:
 | Index | Tag |
 | ----- | --- |
-| 0 | 11 |
-| 100 | 10 |
-| 101 | 0 |
-| 111 | 0 |
+| 0     | 0   |
+|       | 1 |
+| 1     | 8 |
+|       | 88 |
+| 2     | e8 |
+| 3     | 3 |
+|       | c8 |

@@ -11,7 +11,8 @@
   (varE [x : Symbol])
   (letE [x : Symbol] [e1 : Exp] [e2 : Exp])
   (lamE [x : Symbol] [e : Exp])
-  (appE [e1 : Exp] [e2 : Exp]))
+  (appE [e1 : Exp] [e2 : Exp])
+  (recE [f : Symbol] [x : Symbol] [e : Exp])) ;--------------------------------
 
 ;; parse ----------------------------------------
 
@@ -24,6 +25,11 @@
             (first (s-exp->list 
                     (second (s-exp->list s)))))
            (parse (third (s-exp->list s))))]
+    [(s-exp-match? `{rec SYMBOL {SYMBOL} ANY} s) ;--------------------------------
+     (recE (s-exp->symbol (second (s-exp->list s)))
+           (s-exp->symbol (first (s-exp->list
+                                  (third (s-exp->list s)))))
+           (parse (fourth (s-exp->list s))))]
     [(s-exp-match? `{if ANY ANY ANY} s)
      (ifE (parse (second (s-exp->list s)))
           (parse (third (s-exp->list s)))
@@ -49,6 +55,7 @@
   (if (member op prim-ops)
       op 
       (error 'parse "unknown operator")))
+        
 
 (module+ test
   (test (parse `2)
@@ -58,7 +65,6 @@
   (test (parse `{* 3 4})
         (appE (appE (varE '*) (numE 3)) (numE 4))))
 
-
 ;; eval --------------------------------------
 
 ;; values
@@ -66,8 +72,9 @@
 (define-type Value
   (numV [n : Number])
   (boolV [b : Boolean])
-  (funV [x : Symbol] [e : Exp])
-  (primopV [f : (Value -> Value)]))
+  (funV [x : Symbol] [e : Exp] [env : Env])
+  (primopV [f : (Value -> Value)])
+  (recV [f : Symbol] [x : Symbol] [e : Exp] [env : Env])) ;--------------------------------
 
 (define-type Binding
   (bind [name : Symbol]
@@ -147,56 +154,34 @@
      (let ([v1 (eval e1 env)])
        (eval e2 (extend-env env x v1)))]
     [(lamE x b)
-     (funV x b)]
+     (funV x b env)]
     [(appE e1 e2)
-     (apply (eval e1 env) (eval e2 env) env)])) ;przekazywanie env funkcji apply
+     (apply (eval e1 env) (eval e2 env))]
+    [(recE f x e)
+     (recV f x e env)])) ;--------------------------------
 
-(define (apply [v1 : Value] [v2 : Value] env) : Value
+(define (apply [v1 : Value] [v2 : Value]) : Value
   (type-case Value v1
-    [(funV x b)
-     (eval b (extend-env env x v2))] ; usunięcie env z funV bo chcemy używać nowszego env
+    [(funV x b env)
+     (eval b (extend-env env x v2))]
     [(primopV f)
      (f v2)]
+    [(recV f x e env)
+     (eval e (extend-env (extend-env env x v2) f (recV f x e env)))] ;--------------------------------
     [else (error 'apply "not a function")]))
 
 (define (run [e : S-Exp]) : Value
   (eval (parse e) init-env))
 
 (module+ test
-  (test (run `2)
-        (numV 2))
-  (test (run `{+ 2 1})
-        (numV 3))
-  (test (run `{* 2 1})
-        (numV 2))
-  (test (run `{+ {* 2 3} {+ 5 8}})
-        (numV 19))
-  (test (run `{= 0 1})
-        (boolV #f))
-  (test (run `{if {= 0 1} {* 3 4} 8})
-        (numV 8))
-  (test (run `{let x 1 {+ x 1}})
-        (numV 2))
-  (test (run `{let x 1 {+ x {let y 2 {* x y}}}})
-        (numV 3))
-  (test (run `{let x 1
-                {+ x {let x {+ x 1}
-                       {* x 3}}}})
-        (numV 7))
-  (test (run `{{lambda {x} {+ x 1}} 5})
-        (numV 6))
-  (test (run `{lambda {x} {lambda {y} {+ x y}}})
-        (funV 'x
-              (lamE 'y (appE (appE (varE '+)
-                                      (varE 'x))
-                                (varE 'y)))
-              ))
-  (test (run `{let a 1
-                {let p {lambda {x} {+ x a}}
-                  {let a 10
-                    {p 0}}}})
-        (numV 10)))
-
+  (test (run `{{rec fact {n} {if {= n 0} 1 {* n {fact {- n 1}}}}} 5})
+        (numV 120))
+  (test (run `{{rec pow2 {n}
+                 {if {= n 0}
+                     1
+                     {* 2 {pow2 {- n 1}}}}}
+               5})
+        (numV 32)))
 
 ;; printer ———————————————————————————————————-
 
@@ -204,11 +189,21 @@
   (type-case Value v
     [(numV n) (to-string n)]
     [(boolV b) (if b "true" "false")]
-    [(funV x e) "#<procedure>"]
-    [(primopV f) "#<primop>"]))
+    [(funV x e env) "#<procedure>"]
+    [(primopV f) "#<primop>"]
+    [(recV f x e env) "#<recursive_procedure>"])) ;--------------------------------
 
 (define (print-value [v : Value]) : Void
   (display (value->string v)))
 
 (define (main [e : S-Exp]) : Void
   (print-value (eval (parse e) init-env)))
+
+
+; niemoglby bo jest inna skladnia haha 
+; po drugie rozszerzamy cala funkcje o nowa wartosc w letrec bo mamy mutowalne domkniecie a w letrecu zwyklym nie
+
+;letrec umożliwia wzajemną rekurencję jak zad 6? 
+;nwm czy to da się zrobic przy uzyciu rec
+
+;letrec może przypisywać wartości a nie funkcje?
