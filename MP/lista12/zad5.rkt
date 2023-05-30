@@ -12,7 +12,7 @@
   (letE [x : Symbol] [e1 : Exp] [e2 : Exp])
   (lamE [x : Symbol] [e : Exp])
   (appE [e1 : Exp] [e2 : Exp])
-  (recE [f : Symbol] [x : Symbol] [e : Exp])) ;--------------------------------
+  (recE [f : Symbol] [x : Symbol] [e : Exp])) ; dodanie wyrażenia rec
 
 ;; parse ----------------------------------------
 
@@ -25,7 +25,7 @@
             (first (s-exp->list 
                     (second (s-exp->list s)))))
            (parse (third (s-exp->list s))))]
-    [(s-exp-match? `{rec SYMBOL {SYMBOL} ANY} s) ;--------------------------------
+    [(s-exp-match? `{rec SYMBOL {SYMBOL} ANY} s) ; parsowanie rec
      (recE (s-exp->symbol (second (s-exp->list s)))
            (s-exp->symbol (first (s-exp->list
                                   (third (s-exp->list s)))))
@@ -74,7 +74,7 @@
   (boolV [b : Boolean])
   (funV [x : Symbol] [e : Exp] [env : Env])
   (primopV [f : (Value -> Value)])
-  (recV [f : Symbol] [x : Symbol] [e : Exp] [env : Env])) ;--------------------------------
+  (recV [f : Symbol] [x : Symbol] [e : Exp] [env : Env])) ; dodanie wartości funckji rekurencyjnej
 
 (define-type Binding
   (bind [name : Symbol]
@@ -167,7 +167,8 @@
     [(primopV f)
      (f v2)]
     [(recV f x e env)
-     (eval e (extend-env (extend-env env x v2) f (recV f x e env)))] ;--------------------------------
+     (eval e (extend-env (extend-env env x v2) f (recV f x e env)))]  ; rekurencyjne uruchamianie funkcji
+                                                                      ; na powiększonym środowisku
     [else (error 'apply "not a function")]))
 
 (define (run [e : S-Exp]) : Value
@@ -200,10 +201,3 @@
   (print-value (eval (parse e) init-env)))
 
 
-; niemoglby bo jest inna skladnia haha 
-; po drugie rozszerzamy cala funkcje o nowa wartosc w letrec bo mamy mutowalne domkniecie a w letrecu zwyklym nie
-
-;letrec umożliwia wzajemną rekurencję jak zad 6? 
-;nwm czy to da się zrobic przy uzyciu rec
-
-;letrec może przypisywać wartości a nie funkcje?
