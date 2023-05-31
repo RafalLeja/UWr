@@ -19,6 +19,9 @@ static size_t my_strlen(const char *s){
 }
 ```
 
+### Inlining: 
+  - podstawianie ciała funkcji w miejscu jej wołania
+
 ### Ile razy zostanie zawołana funkcja «my_strlen» w funkcji «my_index» i dlaczego?
  - funkcja «my_strlen» będzie wywoływana przy każdej iteracji, ponieważ kompilator przypuszcza że wynik tej funkcji może ulec zmianie
 
