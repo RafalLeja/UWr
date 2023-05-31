@@ -28,3 +28,5 @@ static size_t my_strlen(const char *s){
 ### Dodaj atrybut2 «pure» do funkcji «my_strlen». Czemu tym razem kompilator był w stanie lepiej zoptymalizować funkcję «my_index»? 
  - atrubut pure mówi kompilatorowi że dana funkcja ma zawsze taki sam wynik dla danego argumentu, przez co kompilator może zastąpić kolejne wywołania tej funkcji wartością pierwszego wywołania
 
+### Następnie uzupełnij ciało funkcji «my_strlen» tak, by wykonywała to samo co «strlen». Następnie usuń atrybut «pure» i dodając słowo kluczowe «static» zawęź zakres widoczności funkcji do bieżącej jednostki translacji. Co się stało w wyniku przeprowadzenia inliningu? Czy kompilatorowi udało się samemu wywnioskować, że funkcja jest czysta?
+ - Kompilator wywołuję wbudowaną funkcje strlen zamiast my_strlen oraz wykrył że strlen jest pure w tym kontekście.

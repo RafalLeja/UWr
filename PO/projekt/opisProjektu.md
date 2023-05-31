@@ -49,5 +49,5 @@ Gra 2048 zostanie zaimplementowana w oparciu o programowanie obiektowe w języku
 
 7. Klasa "Scene":
    - Główna klasa reprezentująca wyświetlanie ekranów.
-   - Będzie zarządzać wyświetlaniem innych klas, takimich jak Leaderboard i Canvas.
+   - Będzie zarządzać wyświetlaniem innych klas, takich jak Leaderboard i Canvas.
    - Będzie posiadać metodę główną wyświetlającą scene oraz wszystkie istotne elementy.

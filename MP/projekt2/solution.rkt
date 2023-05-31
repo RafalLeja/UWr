@@ -88,7 +88,7 @@
 (struct wire (sim [value #:mutable] [actions #:mutable]))
 
 (define (make-wire sim)
-  (wire sim #f '()))
+  (wire sim #f null))
 
 (define (wire-on-change! w a)
   (set-wire-actions! w (append (wire-actions w) (list a)))
@@ -104,77 +104,69 @@
 ;; gate -----------------------------
 
 (define (gate-not out in)
-  (let ([sim (wire-sim out)])
-    (wire-on-change! in
+  (let*
+   ([sim (wire-sim out)]
+    [proc 
       (lambda () (sim-add-action! 
         sim 
         1
-        (lambda () (wire-set! out (not (wire-value in)))))))))
+        (lambda () (wire-set! out (not (wire-value in))))))])
+    (wire-on-change! in proc)))
   
 (define (gate-and out in1 in2)
-  (let ([sim (wire-sim out)])
-    (wire-on-change! in1
+  (let*
+   ([sim (wire-sim out)]
+    [proc 
       (lambda () (sim-add-action! 
         sim 
         1 
-        (lambda () (wire-set! out (and (wire-value in1) (wire-value in2)))))))
-    (wire-on-change! in2
-      (lambda () (sim-add-action! 
-        sim 
-        1 
-        (lambda () (wire-set! out (and (wire-value in1) (wire-value in2)))))))))
+        (lambda () (wire-set! out (and (wire-value in1) (wire-value in2))))))])
+    (wire-on-change! in1 proc)
+    (wire-on-change! in2 proc)))
 
 (define (gate-nand out in1 in2)
-  (let ([sim (wire-sim out)])
-    (wire-on-change! in1
+  (let*
+   ([sim (wire-sim out)]
+    [proc 
       (lambda () (sim-add-action! 
         sim 
         1 
-        (lambda () (wire-set! out (not (and (wire-value in1) (wire-value in2))))))))
-    (wire-on-change! in2
-      (lambda () (sim-add-action! 
-        sim 
-        1 
-        (lambda () (wire-set! out (not (and (wire-value in1) (wire-value in2))))))))))
+        (lambda () (wire-set! out (nand (wire-value in1) (wire-value in2))))))])
+    (wire-on-change! in1 proc)
+    (wire-on-change! in2 proc)))
 
 (define (gate-or out in1 in2)
-  (let ([sim (wire-sim out)])
-    (wire-on-change! in1
+  (let* 
+   ([sim (wire-sim out)]
+    [proc 
       (lambda () (sim-add-action! 
         sim 
         1 
-        (lambda () (wire-set! out (or (wire-value in1) (wire-value in2)))))))
-    (wire-on-change! in2
-      (lambda () (sim-add-action! 
-        sim 
-        1 
-        (lambda () (wire-set! out (or (wire-value in1) (wire-value in2)))))))))
+        (lambda () (wire-set! out (or (wire-value in1) (wire-value in2))))))])
+    (wire-on-change! in1 proc)
+    (wire-on-change! in2 proc)))
 
 (define (gate-nor out in1 in2)
-  (let ([sim (wire-sim out)])
-    (wire-on-change! in1
+  (let* 
+   ([sim (wire-sim out)]
+    [proc 
       (lambda () (sim-add-action! 
         sim 
         1 
-        (lambda () (wire-set! out (not (or (wire-value in1) (wire-value in2))))))))
-    (wire-on-change! in2
-      (lambda () (sim-add-action! 
-        sim 
-        1 
-        (lambda () (wire-set! out (not (or (wire-value in1) (wire-value in2))))))))))
+        (lambda () (wire-set! out (nor (wire-value in1) (wire-value in2))))))])
+    (wire-on-change! in1 proc)
+    (wire-on-change! in2 proc)))
 
 (define (gate-xor out in1 in2)
-  (let ([sim (wire-sim out)])
-    (wire-on-change! in1
+  (let* 
+   ([sim (wire-sim out)]
+    [proc 
       (lambda () (sim-add-action! 
         sim 
-        1
-        (lambda () (wire-set! out (not (eq? (wire-value in1) (wire-value in2))))))))
-    (wire-on-change! in2
-      (lambda () (sim-add-action! 
-        sim 
-        1
-        (lambda () (wire-set! out (not (eq? (wire-value in1) (wire-value in2))))))))))
+        2 
+        (lambda () (wire-set! out (xor (wire-value in1) (wire-value in2))))))])
+    (wire-on-change! in1 proc)
+    (wire-on-change! in2 proc)))
 
 ;; wire gate -----------------------------------
 
