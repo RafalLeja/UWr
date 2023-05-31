@@ -2,6 +2,8 @@ Projekt: Gra 2048 napisana w Ruby
 
 Autor: Rafał Leja 340879
 
+Data: 16.05.2023
+
 Opis projektu:
 Projekt polega na stworzeniu gry 2048 przy użyciu języka programowania Ruby oraz biblioteki ruby2d. Gra 2048 to logiczna gra planszowa, w której gracz musi łączyć kafelki o tej samej wartości, aby ostatecznie uzyskać kafelek o wartości 2048.
 
@@ -11,12 +13,12 @@ Gra 2048 odbywa się na kwadratowej planszy, która składa się z pól o różn
 Opis implementacji:
 Gra 2048 zostanie zaimplementowana w oparciu o programowanie obiektowe w języku Ruby, przy pomocy biblioteki ruby2d. Projekt będzie składał się z kilku klas, które będą reprezentować różne elementy gry, takie jak plansza, kafelki, gracz itp.
 
-1. Klasa  "Kafelek":
+1. Klasa  "Block":
    - Klasa reprezentująca pojedynczy kafelek na planszy.
    - Będzie przechowywać wartość kafelka i posiadać metody do pobierania i ustawiania wartości.
   
 
-2. Klasa "Plansza":
+2. Klasa "Canvas":
    - Klasa reprezentująca planszę gry.
    - Będzie przechowywać wszystkie kafelki i zarządzać ich położeniem i wartościami.
    - Będzie posiadać metody do tworzenia nowego kafelka, wykonywania ruchów i sprawdzania warunków końca gry.
@@ -28,24 +30,24 @@ Gra 2048 zostanie zaimplementowana w oparciu o programowanie obiektowe w języku
    - Będzie posiadać metode do pobierania nazwy gracza. 
 
 
-4. Klasa "Tablica":
+4. Klasa "Leaderboard":
    - Klasa reprezentująca tablice wyników końcowych.
    - Będzie wyświetlać wyniki wszystkich graczy.
    - Będzie zapisywać wyniki do pliku.
 
 
-5. Klasa "Wyniki":
+5. Klasa "Results":
    - Klasa reprezentująca wyniki.
    - Będzie zliczać i wyświetlać aktualny oraz najwyższy wynik.
    - Będzie posiadać metodę aktualizującą wyniki.
 
 
-6. Klasa "Gracz":
+6. Klasa "Player":
    - Klasa reprezentująca gracza.
    - Odpowiedzialna za zapisywanie nazwy oraz wyników gracza.
 
 
-7. Klasa "Scena":
+7. Klasa "Scene":
    - Główna klasa reprezentująca wyświetlanie ekranów.
-   - Będzie zarządzać wyświetlaniem innych klas, takimich jak plansza i Tablica.
+   - Będzie zarządzać wyświetlaniem innych klas, takimich jak Leaderboard i Canvas.
    - Będzie posiadać metodę główną wyświetlającą scene oraz wszystkie istotne elementy.

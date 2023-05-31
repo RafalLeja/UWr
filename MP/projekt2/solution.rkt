@@ -55,11 +55,11 @@
 
 ;; actions --------------------------
 
-(struct action (time proc) #:transparent)
+(struct action (time proc))
 
 ;; sim ------------------------------
 
-(struct sim ([time #:mutable] [heap #:mutable]) #:transparent)
+(struct sim ([time #:mutable] [heap #:mutable]))
 
 (define (make-sim)
   (sim 0 (make-heap (lambda (a b) (<= (action-time a) (action-time b))))))
@@ -72,7 +72,6 @@
       [(= (heap-count heap) 0) 
         (set-sim-time! s ct)]
       [(> ct (action-time (heap-min heap))) 
-          ;(print (heap-count heap))
           (let ([curr (heap-min heap)])
             (heap-remove-min! heap)
             (set-sim-time! s (action-time curr))
@@ -86,7 +85,7 @@
 
 ;; wire -------------------------------------
 
-(struct wire (sim [value #:mutable] [actions #:mutable]) #:transparent)
+(struct wire (sim [value #:mutable] [actions #:mutable]))
 
 (define (make-wire sim)
   (wire sim #f '()))

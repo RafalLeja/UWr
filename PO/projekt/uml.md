@@ -1,38 +1,38 @@
 ```mermaid
 classDiagram
-  Plansza o-- "1..9" Blok
-  Tablica o-- Gracz
-  Scena *-- Wyniki
-  Scena *-- Plansza
+  Canvas o-- "1..9" Block
+  Leaderboard o-- Player
+  Scene *-- Results
+  Scene *-- Canvas
   class Intro{
     +dodajGracza()
   }
-  class Tablica{
+  class Leaderboard{
     +int * wyniki
     +zapisz()
   }
-  class Gracz{
+  class Player{
     +string nazwa
     +int wynik
     +int najlepszyWynik
   }
-  class Plansza{
-    +Blok * bloki
+  class Canvas{
+    +Block * bloki
     +add()
     +up()
     +down()
     +left()
     +right()
   }
-  class Blok{
+  class Block{
     +int wartość
   }
-  class Wyniki{
+  class Results{
     +int najwyższyWynik
     +int wynik
     +addScore()
   }
-  class Scena{
+  class Scene{
     update()
     keyStroke()
   } 
