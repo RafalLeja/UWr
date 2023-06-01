@@ -1,5 +1,5 @@
 #lang racket
-(require "solution.rkt")
+(require "szymon.rkt")
 (require racket/trace)
 
 
