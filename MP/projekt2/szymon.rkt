@@ -1,6 +1,6 @@
 #lang racket
 (require data/heap)
-(require racket/trace)
+
 
 (provide sim? wire?
          (contract-out
@@ -39,11 +39,7 @@
 (struct event (
                time
                action
-               ) #:transparent) ;definiujemy zdarzenie, czas akcja priorytet zdarzenia
-
-(define (compare-events event1 event2) ;porównywator zdarzeń
-  (<= (event-time event1) (event-time event2))
-  )
+               ) #:transparent) ;definiujemy zdarzenie, czas akcja zdarzenia
 
 ;uruchomienie symulacji sim, przez delta-t jednostek czasu
 (define (sim-wait! sim delta-t)
@@ -55,12 +51,11 @@
       [(= (heap-count evts) 0)
        (set-sim-current-time! sim left-time)
        ]
-      ;jeżeli jest czas na wywołanie akcji i przesunięci
+      ;jeżeli jest czas na wywołanie akcji i przesunięcie
       [(> left-time (event-time (heap-min evts)))
        (let ([min (heap-min evts)])
          (heap-remove-min! evts) ;usuwamy aktualne zdarzenie ze sterty
-         (set-sim-current-time! sim (event-time min))
-         (print (heap-count evts)) ;właściwe przesunięcie czasu symulacji o czas z danej akcji, ustalamy od razu czas, bo kolejne akcje  mogą być wywołane z aktualnej
+         (set-sim-current-time! sim (event-time min)) ;właściwe przesunięcie czasu symulacji o czas z danej akcji, ustalamy od razu czas, bo kolejne akcje  mogą być wywołane z aktualnej
          ((event-action min)) ;wywołanie akcji z danego wydarzenia
          (sim-wait! sim (- left-time (event-time min))) ;od czasu o jaki możemy się jeszcze przesunąć odejmujemy czas wykonania naszej akcji  
          )
@@ -81,7 +76,7 @@
 
 ;jak wygląda nasza symulacja
 (struct sim (
-  [current-time #:mutable]
+  [current-time #:mutable] ;struktura, z 'mutowalnym' stanem
   event-queue
   ) #:transparent
 )
@@ -89,9 +84,9 @@
 
 ;utworzenie symulacji
 (define (make-sim)
-  (sim 0
+  (sim 0 ;bierzący czas symulacji
        ; robię stertę event'ów
-       (make-heap (lambda (ev1 ev2) (<= (event-time ev1) (event-time ev2) )))
+       (make-heap (lambda (ev1 ev2) (<= (event-time ev1) (event-time ev2) ))) ;kolejka zdarzeń
        )
   )
 
@@ -104,26 +99,27 @@
 
 ;dodawanie akcji do symulacji, czyli utworzenie event'u
 (define (sim-add-action! sim time action)
-      (heap-add! (sim-event-queue sim) (event (+ (sim-time sim) time) action)) ;dodanie do sterty nowego even'tu
+      (heap-add! (sim-event-queue sim) (event (+ (sim-time sim) time) action)) ;dodanie do sterty nowego even'tu, wraz z podaniem za ile ma się zacząć
       )
 
 ;PRZEWODY
 
 ;utworzenie przewodu
 (struct wire 
-   (sim ; symulacja, do której przewód należy
+   (
     [val #:mutable] ;wartość w przewodzie #f albo #t
-    [on-change-procedures  #:mutable] ;kolekcja procedur do wywołania, gdy sygnał zmienie wartość
+    [on-change-procedures  #:mutable] ;kolekcja procedur do wywołania, gdy sygnał zmieni wartość
+    sim ; symulacja, do której przewód należy
     ) #:transparent 
 )
 
 ;utworzenie przewodu z daną symulacją
-;przewód należy do jednej symulacji, bo my 'puszczamy' naszą sumulację właśnie po przeowdzie byłby 'konflikt' sygnałów
+;przewód należy do jednej symulacji, bo my 'puszczamy' naszą symulację właśnie po przewodzie byłby 'konflikt' sygnałów
 (define (make-wire simulation)
   (wire
-   simulation
    #f
-   '()
+   null
+   simulation
    )
   )
 
@@ -137,12 +133,10 @@
 ;podłączamy do kabla akcję, która wykona się w razie zmiany jego stanu
 ;poniższa funkcja to wyzwalacz akcji, w razie zmiany
 (define (wire-on-change! wire action)
-  (begin
     ;dodanie akcji do przewodu
     (add-on-change-action wire action)
     ;wywołanie dodanej akcji
     (action)
-    )
   )
 
 
@@ -156,8 +150,8 @@
   (if (null? actions)
       void
       (begin
-        ((first actions))
-        (call-each-action (rest actions))
+        ((car actions))
+        (call-each-action (cdr actions))
         )
       )
   )
@@ -171,7 +165,7 @@
         (call-each-action (wire-on-change-procedures wire))
         (void)
         )
-      (void)
+      (void) ;jak wartość się nie zmieniła, nic nie robimy
       )
   )
 
@@ -219,7 +213,7 @@
        (lambda () (wire-set! wire-out (and (wire-value wire-in1) (wire-value wire-in2)))) ;sim-add-action przyjmuje akcję, stąd funkcja anonimowa
       ))
     )
-    (wire-on-change! wire-in1 update-output) ;jeżeli zmienie się sygnał w przewodzie 1, to wykonamy akcję która ANDuje obie wartości na kablach
+    (wire-on-change! wire-in1 update-output) ;jeżeli zmieni się sygnał w przewodzie 1, to wykonamy akcję która ANDuje obie wartości na kablach
     (wire-on-change! wire-in2 update-output)
   )
 
@@ -290,137 +284,38 @@
 
 
 
-
-
 ;PRZEWODY Z BRAMKAMI
 ;zwracamy przewód, złączony z bramką, która nim steruje
 
-;NOT
-(define (wire-not wire-in)
-  (let* ([out-sim (wire-sim wire-in)]
-         [wire-out (make-wire out-sim)]) ;tworzymy przewód w nowej symulacji, dla naszego wyjścia
-    (wire-on-change! wire-in
-                     (lambda ()
-                       (sim-add-action!
-                        (wire-sim wire-out)
-                        1
-                        (lambda () (wire-set! wire-out (not (wire-value wire-in))))
-                        )
-                       )
-                     )
-    wire-out
-    )
-  )
+(define (wire-not in)
+  (let ((new (make-wire (wire-sim in))))
+  (gate-not new in)
+  new))
 
-;AND
-(define (wire-and wire-in1 wire-in2)
-  (let* ([out-sim (wire-sim wire-in1)] ;tworzymy symulację do nowego przewodu
-         [wire-out (make-wire out-sim)]) ;tworzymy nowy przewód
-    (begin
-        (define update-output
-          (lambda ()
-          (sim-add-action! 
-           (wire-sim wire-out)
-           1
-           (lambda () (wire-set! wire-out (and (wire-value wire-in1) (wire-value wire-in2)))) 
-           ))
-          )
-        (wire-on-change! wire-in1 update-output)
-        (wire-on-change! wire-in2 update-output)
-      )
-    wire-out
-    )
-  )
+(define (wire-and in1 in2)
+  (let ((new (make-wire (wire-sim in1))))
+  (gate-and new in1 in2)
+  new))
 
+(define (wire-nand in1 in2)
+  (let ((new (make-wire (wire-sim in1))))
+  (gate-nand new in1 in2)
+  new))
 
+(define (wire-or in1 in2)
+  (let ((new (make-wire (wire-sim in1))))
+  (gate-or new in1 in2)
+  new))
 
+(define (wire-nor in1 in2)
+  (let ((new (make-wire (wire-sim in1))))
+  (gate-nor new in1 in2)
+  new))
 
-;NAND
-(define (wire-nand wire-in1 wire-in2)
-  (let* ([out-sim (wire-sim wire-in1)]
-         [wire-out (make-wire out-sim)])
-    (begin
-        (define update-output
-          (lambda ()
-          (sim-add-action! 
-           (wire-sim wire-out)
-           1
-           (lambda () (wire-set! wire-out (nand (wire-value wire-in1) (wire-value wire-in2))))
-           ))
-          )
-        (wire-on-change! wire-in1 update-output)
-        (wire-on-change! wire-in2 update-output)
-      )
-    wire-out
-    )
-  )
-
-
-
-;OR
-(define (wire-or wire-in1 wire-in2)
-  (let* ([out-sim (wire-sim wire-in1)]
-         [wire-out (make-wire out-sim)])
-    (begin
-        (define update-output
-          (lambda ()
-          (sim-add-action! 
-           (wire-sim wire-out)
-           1
-           (lambda () (wire-set! wire-out (or (wire-value wire-in1) (wire-value wire-in2))))
-           ))
-          )
-        (wire-on-change! wire-in1 update-output)
-        (wire-on-change! wire-in2 update-output)
-      )
-    wire-out
-    )
-  )
-
-
-
-
-;NOR
-(define (wire-nor wire-in1 wire-in2)
-  (let* ([out-sim (wire-sim wire-in1)]
-         [wire-out (make-wire out-sim)])
-    (begin
-        (define update-output
-          (lambda ()
-          (sim-add-action! 
-           (wire-sim wire-out)
-           1
-           (lambda () (wire-set! wire-out (nor (wire-value wire-in1) (wire-value wire-in2))))
-           ))
-          )
-        (wire-on-change! wire-in1 update-output)
-        (wire-on-change! wire-in2 update-output)
-      )
-    wire-out
-    )
-  )
-
-
-
-;XOR
-(define (wire-xor wire-in1 wire-in2)
-  (let* ([out-sim (wire-sim wire-in1)]
-         [wire-out (make-wire out-sim)])
-    (begin
-        (define update-output
-          (lambda ()
-          (sim-add-action! 
-           (wire-sim wire-out)
-           2
-           (lambda () (wire-set! wire-out (xor (wire-value wire-in1) (wire-value wire-in2))))
-           ))
-          )
-        (wire-on-change! wire-in1 update-output)
-        (wire-on-change! wire-in2 update-output)
-      )
-    wire-out
-    )
-  )
+(define (wire-xor in1 in2)
+  (let ((new (make-wire (wire-sim in1))))
+  (gate-xor new in1 in2)
+  new))
 
 
 
@@ -479,4 +374,4 @@
 ;(display (wire-value and-output-wire-2)) ; Powinno być true (#t)
 
 
-(trace wire-set! call-each-action wire-on-change! sim-wait! event-action)
+;(trace wire-xor gate-xor sim-add-action!)
