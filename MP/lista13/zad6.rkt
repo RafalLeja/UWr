@@ -97,7 +97,7 @@
 
 (define-type Binding
   (bind [name : Symbol]
-        [val : Value])) ; val trzyma funkcje
+        [val : Promise])) ; val trzyma funkcje
 
 (define-type Thunk
   (valueT [v : Value])
@@ -123,14 +123,14 @@
 (define-type-alias Env (Listof Binding))
 
 (define mt-env empty)
-(define (extend-env [env : Env] [x : Symbol] [v : Value]) : Env
-  (cons (bind x v) env))
+(define (extend-env [env : Env] [x : Symbol] [e : Exp]) : Env
+  (cons (bind x (delay e env)) env))
 (define (lookup-env [n : Symbol] [env : Env]) : Value
   (type-case (Listof Binding) env
     [empty (error 'lookup "unbound variable")]
     [(cons b rst-env) (cond
                         [(eq? n (bind-name b))
-                         (bind-val b)]
+                         (force (bind-val b))]
                         [else (lookup-env n rst-env)])]))
 
 ;; primitive operations
@@ -183,17 +183,16 @@
     [(varE x)
      (lookup-env x env)]
     [(letE x e1 e2)
-     (let ([v1 (delay e1 env)])
-       (eval e2 (extend-env env x v1)))]
+       (eval e2 (extend-env env x e1))]
     [(lamE x b)
      (funV x b env)]
     [(appE e1 e2)
-     (apply (eval e1 env) (force e2))])) ; zwracamy funkcje na wartość
+     (apply (eval e1 env) e2 env)])) ; zwracamy funkcje na wartość
 
-(define (apply [v1 : Value] [v2 : (-> Value)]) : Value
+(define (apply [v1 : Value] [e2 : Exp] [env : Env]) : Value
   (type-case Value v1
     [(funV x b env)
-     (eval b (extend-env env x v2))]
+     (eval b (extend-env env x e2))]
     [else (error 'apply "not a function")]))
 
 (define (run [e : S-Exp]) : Value

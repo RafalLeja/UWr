@@ -225,8 +225,16 @@
      (begin 
        (update-env! env x (eval e0 env))
        (voidV))]
-    [(whileE b e)
-      (numV 1)]
+    [(whileE b ie)
+      (let ([evB (eval b env)])
+        (type-case Value evB
+          [(boolV v) 
+            (if v 
+              (begin 
+                (eval ie env)
+                (eval e env))
+              (voidV))]
+        [else (error 'while "argument not a boolean")]))]
     [(readE)
       (numV (s-exp->number (read)))]
     [(writeE e)

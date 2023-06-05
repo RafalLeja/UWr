@@ -17,6 +17,13 @@ long neigh(long a[], long n, long i, long j) {
   + a[iy - jx]
   + a[iy - jy];
 }
+
+long neigh(long a[], long n, long i, long j) {
+  return a[(i-1)*n + j-1]
+  + a[(i-1)*n + j+1]
+  + a[(i+1)*n - j-1]
+  + a[(i+1)*n - j+1];
+}
 ```
 
 ### Eliminacja wspólnych podwyrażeń
