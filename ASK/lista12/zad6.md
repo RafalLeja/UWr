@@ -4,6 +4,9 @@
 ### Co musi zrobić, jeśli skok zostanie źle przewidziany?
   - usunąć przewidziane instrukcje i ponownie rozpocząć proces wydawania instrukcji. Jeśli predyktor skoków poprawnie przewiduje skok, procesor kontynuuje wykonanie programu z docelowego miejsca skoku. Jednakże, jeśli skok zostanie źle przewidziany, procesor musi cofnąć się do poprzedniego punktu wykonania i ponownie wykonać instrukcje z prawidłowego miejsca skoku.
 
+### Które skoki warunkowe warto zoptymalizować do instrukcji «cmov»?
+  - Instrukcja "cmov" (conditional move) jest instrukcją warunkową, która wykonuje przypisanie wartości na podstawie wyniku warunku. Instrukcja ta nie wymaga skoku, ponieważ wartość jest przypisywana bezpośrednio na podstawie warunku. Można ją zastosować, jeśli warunek skoku jest bezpośrednio związany z przypisaniem wartości do zmiennej.
+
 ```C
 void merge1(long src1[], long src2[], long dest[], long n) {
   long i1 = 0, i2 = 0;
