@@ -9,9 +9,10 @@ void foobar(long a[], size_t n, long y, long z) {
 
 void foobar(long a[], size_t n, long y, long z) {
     long x = y - z;
-
-  for (int i = 0; i < n; i++) {
-    a[i] = 7 * i + x * x;
+    x *= x;
+    for (int i = 0; i < n; i++) {
+    a[i] = x;
+    x += 7;
   }
 }
 ```

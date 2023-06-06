@@ -11,7 +11,7 @@ const char *my_index(const char *s, char v) {
 
 static size_t my_strlen(const char *s){
   long length = 0;
-  while (*s != ’\0’) {
+  while (*s != '\0') {
     s++;
     length++;
   }
