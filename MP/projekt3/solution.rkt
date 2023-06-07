@@ -18,6 +18,7 @@
   (appE [f : Symbol] [e : (Listof Exp)])
   (defE [b : (Listof Exp)] [e : Exp]))
 
+;; parser -----------------------------------------------
 
 (define (parse [s : S-Exp]) : Exp
   (cond
@@ -47,7 +48,14 @@
         (s-exp->symbol (second (s-exp->list s)))
         (map s-exp->symbol (s-exp->list (third (s-exp->list s))))
         (parse (list-ref (s-exp->list s) 4)))]
-    [else (error 'parse "invalid input")]))
+    [(s-exp-match? `{define {ANY ...} for ANY} s)
+      (defE 
+        (map parse (s-exp->list (second (s-exp->list s))))
+        (parse (fourth (s-exp->list s))))]
+    [else 
+      (begin 
+        (display s)
+        (error 'parse "invalid input"))]))
 
 (define (parse-op [op : Symbol]) : Op
   (cond
@@ -57,9 +65,15 @@
     [(eq? op '<=) (leq)]
     [else (error 'parse "unknown operator")]))
 
+(module+ test
+  (test (parse `{define {[fun fact (n) = {ifz n then 1 else {n * {fact ({n - 1})}}}]} for {fact (5)}})
+        (numE 3)))
+
+;; env ----------------------------------------------------
+
 (define-type Binding
   (bind [name : Symbol]
-        [val : Exp])) ; val trzyma funkcje
+        [val : Exp])) 
 
 (define-type-alias Env (Listof Binding))
 
@@ -74,21 +88,36 @@
                          (eval (bind-val b) env)]
                         [else (lookup-env n rst-env)])]))
 
+(define (<= a b)
+  (if (or (< a b) (= a b))
+    0
+    1))
+
+(define (op->proc [op : Op]) : (Value Value -> Value)
+  (type-case Op op
+    [(add) +]
+    [(sub) -]
+    [(mul) *]
+    [(leq) <=]))                    
+
 (define (eval [e : Exp] [env : Env]) : Value
   (type-case Exp e
-    [(numE n) (numV n)]
-    [(opE o l r) ((op->proc o) (eval l env) (eval r env))]
-    [(ifE b l r)
-     (type-case Value (eval b env)
-       [(boolV v)
-        (if v (eval l env) (eval r env))]
-       [else
-        (error 'eval "type error")])]
+    [(numE n) n]
+    [(opE l o r) ((op->proc o) (eval l env) (eval r env))]
+    [(ifE b t f)
+      (if (= 0 (eval b env))
+        (eval t env)
+        (eval f env))]
     [(varE x)
      (lookup-env x env)]
     [(letE x e1 e2)
-       (eval e2 (extend-env env x e1))]
+      (eval e2 (extend-env env x e1))]
     [(funE f x e)
-      ()]
+      32]
     [(appE e1 e2)
-     (apply (eval e1 env) e2 env)])) ; zwracamy funkcje na wartość
+     3]
+    [(defE e1 e2)
+      ; (begin 
+      ;   (foreach (lambda (x) (eval x env)) e1)
+      ;   (eval e2 env))
+        2]))
