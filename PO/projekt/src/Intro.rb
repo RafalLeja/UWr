@@ -2,10 +2,11 @@ require 'ruby2d'
 
 class Intro
   def initialize()
+    active = true
     @name = ""
   end
   def paint()
-    @text = Text.new('Podaj swoje imię', x:100, y:100)
+    @text = Text.new('Podaj swoje imię i wciśnij ENTER', x:100, y:100)
     @inputField = Text.new(@name, x:100, y:120)
   end
 
@@ -15,21 +16,19 @@ class Intro
 
   def type(c)
     paint()
-    puts c
     if(c.match(/[a-zA-Z]/) && c.length ==1 )
       @name += c 
     elsif c == "space"
       @name += " "
     elsif c == "enter"
-      end()
+      close()
     elsif c == "backspace"
-      puts c
       @name = @name.chop
     end
   end
 
-  def end()
-    puts koniec
+  def close()
+    @text.hide
   end
 end
 
