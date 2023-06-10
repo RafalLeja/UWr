@@ -7,8 +7,8 @@ class Scene
     @items.each { |n| n.add() }
   end
 
-  def event(e)
-    @items.each { |n| n.event(e) }
+  def event(e, state)
+    @items.each { |n| n.event(e, state) }
   end
 
   def hide()

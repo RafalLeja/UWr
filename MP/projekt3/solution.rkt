@@ -114,7 +114,7 @@
       (eval e2 (extend-env env x e1))]
     [(funE f x e)
       32]
-    [(appE e1 e2)
+    [(appE f e2)
      3]
     [(defE e1 e2)
       ; (begin 
