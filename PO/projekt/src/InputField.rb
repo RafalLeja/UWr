@@ -1,8 +1,9 @@
 class InputField
-  def initialize(x: 0, y: 0)
+  def initialize(x: 0, y: 0, text: "")
+    @state = 0
     @x = x
     @y = y
-    @text = ""
+    @text = text
   end
 
   def add()
@@ -11,13 +12,12 @@ class InputField
 
   def event(e, state)
     c = e.key.to_s
-    add()
     if(c.match(/[a-zA-Z]/) && c.length ==1 )
       @text += c 
     elsif c == "backspace"
       @text = @text.chop
-    elsif c == "enter"
-      state +=1
+    elsif c == "return"
+      state[0] = 1
     end
   end
 

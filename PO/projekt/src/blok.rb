@@ -1,7 +1,7 @@
 #klasa odpowiedzialna za obsługę kwadracików z liczbami
 class Blok
   def initialize(val, x, y, size)
-    @wartosc = val
+    @val = val
     @x = x
     @y = y
     @size = size
@@ -16,11 +16,25 @@ class Blok
     #   color: '#804f25'
     # )
 
-      obraz = Square.new(
-      x: @x, y: @y,
-      size: @size,
-      color: '#804f25'
+    obraz = Square.new(
+    x: @x, y: @y,
+    size: @size,
+    color: '#804f25'
     )
+
+    tekst = Text.new(
+      @val,
+      x: @x, y: @y
+    )
+
+  end
+
+  def val=(v)
+    @val = v
+  end
+
+  def val()
+    @val
   end
 
   def x=(v)

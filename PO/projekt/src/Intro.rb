@@ -14,7 +14,7 @@ class Intro
     paint()
   end
 
-  def type(c)
+  def event(c)
     paint()
     if(c.match(/[a-zA-Z]/) && c.length ==1 )
       @name += c 
