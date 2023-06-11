@@ -26,36 +26,82 @@ class Grid
 
   def event(e, state)
     check()
-    randomize()
     c = e.key.to_s
     if c == "w"
       up()
-      puts "w"
-    elsif c == "backspace"
-      @text = @text.chop
-    elsif c == "return"
-      state[0] = 1
+    elsif c == "s"
+      down()
+    elsif c == "d"
+      right()
+    elsif c == "a"
+      left()
     end
+    randomize()
   end
 
   def up()
     for x in 0..3 do
-      for y in [3, 2, 1] do
-        puts "a"
-        puts "#{x}, #{y}"
-        if @blocks[x*4+y].val == 0
-          # prevY += 1
-          break
+      for i in 0..3 do
+        for y in [3, 2, 1] do
+          if @blocks[x*4+y].val == 0
+          elsif @blocks[x*4+y].val == @blocks[x*4+(y-1)].val
+            @blocks[x*4+(y-1)].val *= 2
+            @blocks[x*4+y].val = 0
+          elsif @blocks[x*4+(y-1)].val == 0
+            @blocks[x*4+(y-1)].val = @blocks[x*4+y].val
+            @blocks[x*4+y].val = 0
+          end
         end
+      end
+    end
+  end
 
-        if @blocks[x*4+y].val == @blocks[x*4+(y-1)].val
-          @blocks[x*4+(y-1)].val *= 2
-          @blocks[x*4+y].val = 0
+  def left()
+    for y in 0..3 do
+      for i in 0..3 do
+        for x in [3, 2, 1] do
+          if @blocks[x*4+y].val == 0
+          elsif @blocks[x*4+y].val == @blocks[(x-1)*4+y].val
+            @blocks[(x-1)*4+y].val *= 2
+            @blocks[x*4+y].val = 0
+          elsif @blocks[(x-1)*4+y].val == 0
+            @blocks[(x-1)*4+y].val = @blocks[x*4+y].val
+            @blocks[x*4+y].val = 0
+          end
         end
+      end
+    end
+  end
 
-        if @blocks[x*4+(y-1)].val == 0
-          @blocks[x*4+(y-1)].val = @blocks[x*4+y].val
-          @blocks[x*4+y].val = 0
+  def right()
+    for y in 0..3 do
+      for i in 0..3 do
+        for x in [0, 1, 2] do
+          if @blocks[x*4+y].val == 0
+          elsif @blocks[x*4+y].val == @blocks[(x+1)*4+y].val
+            @blocks[(x+1)*4+y].val *= 2
+            @blocks[x*4+y].val = 0
+          elsif @blocks[(x+1)*4+y].val == 0
+            @blocks[(x+1)*4+y].val = @blocks[x*4+y].val
+            @blocks[x*4+y].val = 0
+          end
+        end
+      end
+    end
+  end
+
+  def down()
+    for x in 0..3 do
+      for i in 0..3 do
+        for y in [0, 1, 2] do
+          if @blocks[x*4+y].val == 0
+          elsif @blocks[x*4+y].val == @blocks[x*4+(y+1)].val
+            @blocks[x*4+(y+1)].val *= 2
+            @blocks[x*4+y].val = 0
+          elsif @blocks[x*4+(y+1)].val == 0
+            @blocks[x*4+(y+1)].val = @blocks[x*4+y].val
+            @blocks[x*4+y].val = 0
+          end
         end
       end
     end

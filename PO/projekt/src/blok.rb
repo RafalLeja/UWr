@@ -19,13 +19,19 @@ class Blok
     obraz = Square.new(
     x: @x, y: @y,
     size: @size,
-    color: '#804f25'
+    color:
+      if @val == 0
+        [0.5, 0.28, 0.1, 1]
+      else
+        [0.5 + (Math.log(@val, 2)/11), 0.28 + (Math.log(@val, 2)/11), 0.1, 1]
+      end
     )
-
-    tekst = Text.new(
-      @val,
-      x: @x, y: @y
-    )
+    if @val != 0 
+      tekst = Text.new(
+        @val,
+        x: @x + @size/2, y: @y + @size/2
+      )
+    end
 
   end
 

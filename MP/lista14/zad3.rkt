@@ -19,18 +19,19 @@
 
 ; (define-type-alias (M 'a) 'a)
 
-(define-type (M 'a)
-  (valM [val : 'a])
-  (errM (l : String) (m : String)))
+(define-type-alias State Number)
+
+(define-type-alias (M 'a) (State - > ('a * State)))
+
 
 (define (returnM [v : 'a]) : (M 'a)
-  (valM v))
+  v)
 
 (define (bindM [c : (M 'a)] [f : ('a -> (M 'b))]) : (M 'b)
-  (f (valM-val c)))
+  (f c))
 
-(define (errorM [l : String] [m : String]) : (M 'a)
-  (errM l m))
+(define (errorM [l : Symbol] [m : String]) : (M 'a)
+  (error l m))
 
 (define (showM [c : (M Value)]) : String
   (value->string c))
@@ -39,13 +40,10 @@
   (numV [n : Number])
   (funV [f : (Value -> (M Value))]))
 
-(define (value->string [v : (M Value)]) : String
-  (if (valM? v)
-    (string-append "value: " 
-      (type-case Value (valM-val v)
-        [(numV n) (to-string n)]
-        [(funV _) "#<procedure>"]))
-    (string-append "error in " (string-append (errM-l v) (string-append ": " (errM-m v))))))
+(define (value->string [v : Value]) : String
+  (type-case Value v
+    [(numV n) (to-string n)]
+    [(funV _) "#<procedure>"]))
 
 ;; environments
 
@@ -63,7 +61,7 @@
 (define (lookup-env [x : Symbol] [env : Env]) : (M Value)
   (type-case (Listof Binding) env
     [empty
-     (errorM "lookup-env" "unbound variable")]
+     (errorM 'lookup-env "unbound variable")]
     [(cons b rst-env)
      (cond
        [(eq? x (bind-name b))
@@ -81,9 +79,9 @@
          [(numV n2)
           (returnM (numV (f n1 n2)))]
          [else
-          (errorM "prim-op" "not a number")])]
+          (errorM 'prim-op "not a number")])]
       [else
-       (errorM "prim-op" "not a number")])))
+       (errorM 'prim-op "not a number")])))
 
 (define (op->proc [op : Op]) : (Value Value -> (M Value))
   (type-case Op op
@@ -113,30 +111,30 @@
 (define (apply [v0 : Value] [v1 : Value]) : (M Value)
   (type-case Value v0
     [(funV f) (f v1)]
-    [else (errorM "apply" "not a function")]))
+    [else (errorM 'apply "not a function")]))
 
 (define (run [e : S-Exp]) : String
   (showM (eval (parse e) mt-env)))
 
-; (module+ test
-;   (test (run `2)
-;         "2")
-;   (test (run `{+ 2 1})
-;         "3")
-;   (test (run `{* 2 1})
-;         "2")
-;   (test (run `{+ {* 2 3} {+ 5 8}})
-;         "19")
-;   (test (run `{{lambda {x} {+ x 1}} 5})
-;         "6")
-;   (test (run `{lambda {x} {+ x 1}})
-;         "#<procedure>")
-;   (test/exn (run `{1 2})
-;             "not a function")
-;   (test/exn (run `x)
-;             "unbound variable")
-;   (test/exn (run `{+ 1 {lambda {x} x}})
-;             "not a number"))
+(module+ test
+  (test (run `2)
+        "2")
+  (test (run `{+ 2 1})
+        "3")
+  (test (run `{* 2 1})
+        "2")
+  (test (run `{+ {* 2 3} {+ 5 8}})
+        "19")
+  (test (run `{{lambda {x} {+ x 1}} 5})
+        "6")
+  (test (run `{lambda {x} {+ x 1}})
+        "#<procedure>")
+  (test/exn (run `{1 2})
+            "not a function")
+  (test/exn (run `x)
+            "unbound variable")
+  (test/exn (run `{+ 1 {lambda {x} x}})
+            "not a number"))
 
 ;; parse ----------------------------------------
 
@@ -166,18 +164,3 @@
     [(eq? op '-) (sub)]
     [(eq? op '*) (mul)]
     [else (error 'parse "unknown operator")]))
-
-(module+ test
-  (test (run `{+ {* 2 3} {+ 5 8}})
-  "value: 19")
-  (test (run `{{ lambda { x } {+ x 1}} 5})
-  "value: 6")
-  (test (run `{ lambda { x } {+ x 1}})
-  "value: #<procedure>")
-  (test (run `{1 2})
-  "error in apply: not a function")
-  (test (run `x)
-  "error in lookup-env: unbound variable")
-  (test (run `{+ 1 { lambda { x } x }})
-  "error in prim-op: not a number"))
-
