@@ -3,3 +3,5 @@
 ### qsort (9.4%)
 
 możemy ograniczyć wywoływanie tych funkcji lub napisać swoje, szybsze
+
+optymalizacja compare_ele
