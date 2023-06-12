@@ -71,21 +71,26 @@
 
 ;; env ----------------------------------------------------
 
+(define-type Item
+  (valI [v : Value])
+  (funcI [args : (Listof Symbol)] [e : Exp] [env : Env]))
+
 (define-type Binding
   (bind [name : Symbol]
-        [val : Exp])) 
+        [val : Item])) 
 
 (define-type-alias Env (Listof Binding))
 
 (define mt-env empty)
-(define (extend-env [env : Env] [x : Symbol] [e : Exp]) : Env
+(define (extend-env [env : Env] [x : Symbol] [e : Item]) : Env
   (cons (bind x e) env))
-(define (lookup-env [n : Symbol] [env : Env]) : Value
+
+(define (lookup-env [n : Symbol] [env : Env]) : Item
   (type-case (Listof Binding) env
     [empty (error 'lookup "unbound variable")]
     [(cons b rst-env) (cond
                         [(eq? n (bind-name b))
-                         (eval (bind-val b) env)]
+                          (bind-val b)]
                         [else (lookup-env n rst-env)])]))
 
 (define (<= a b)
@@ -109,9 +114,9 @@
         (eval t env)
         (eval f env))]
     [(varE x)
-     (lookup-env x env)]
+     (valI-v (lookup-env x env))]
     [(letE x e1 e2)
-      (eval e2 (extend-env env x e1))]
+      (eval e2 (extend-env env x (valI (eval e1 env))))]
     [(funE f x e)
       32]
     [(appE f e2)
@@ -121,3 +126,10 @@
       ;   (foreach (lambda (x) (eval x env)) e1)
       ;   (eval e2 env))
         2]))
+
+(define (apply [f : Func-closure] [args : (Listof Value)]) : Value
+  (type-case Func-closure f
+    [(func-closure xs e env)
+     (eval-exp e (foldr (lambda (x env) (extend-env env (fst x) (snd x)))
+                        env
+                        (map2 pair xs args)))]))

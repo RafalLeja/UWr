@@ -21,7 +21,7 @@
 
 (define-type (M 'a)
   (valM [val : 'a])
-  (errM (l : String) (m : String)))
+  (errM (l : Symbol) (m : String)))
 
 (define (returnM [v : 'a]) : (M 'a)
   (valM v))
@@ -29,7 +29,7 @@
 (define (bindM [c : (M 'a)] [f : ('a -> (M 'b))]) : (M 'b)
   (f (valM-val c)))
 
-(define (errorM [l : String] [m : String]) : (M 'a)
+(define (errorM [l : Symbol] [m : String]) : (M 'a)
   (errM l m))
 
 (define (showM [c : (M Value)]) : String
@@ -45,7 +45,7 @@
       (type-case Value (valM-val v)
         [(numV n) (to-string n)]
         [(funV _) "#<procedure>"]))
-    (string-append "error in " (string-append (errM-l v) (string-append ": " (errM-m v))))))
+    (string-append "error in " (string-append (to-string (errM-l v)) (string-append ": " (errM-m v))))))
 
 ;; environments
 
@@ -63,7 +63,7 @@
 (define (lookup-env [x : Symbol] [env : Env]) : (M Value)
   (type-case (Listof Binding) env
     [empty
-     (errorM "lookup-env" "unbound variable")]
+     (errorM 'lookup-env "unbound variable")]
     [(cons b rst-env)
      (cond
        [(eq? x (bind-name b))
@@ -81,9 +81,9 @@
          [(numV n2)
           (returnM (numV (f n1 n2)))]
          [else
-          (errorM "prim-op" "not a number")])]
+          (errorM 'prim-op "not a number")])]
       [else
-       (errorM "prim-op" "not a number")])))
+       (errorM 'prim-op "not a number")])))
 
 (define (op->proc [op : Op]) : (Value Value -> (M Value))
   (type-case Op op
@@ -113,7 +113,7 @@
 (define (apply [v0 : Value] [v1 : Value]) : (M Value)
   (type-case Value v0
     [(funV f) (f v1)]
-    [else (errorM "apply" "not a function")]))
+    [else (errorM 'apply "not a function")]))
 
 (define (run [e : S-Exp]) : String
   (showM (eval (parse e) mt-env)))

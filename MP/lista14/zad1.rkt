@@ -47,7 +47,7 @@
     [(do () a)
      a]
     [(do ([x1 a1] [x2 a2] ...) a)
-     (bind a1 (λ (x1) (do ([x2 a2] ...) a)))]))
+     (bindM a1 (λ (x1) (do ([x2 a2] ...) a)))]))
 
 (define-type Binding
   (bind [name : Symbol]
@@ -93,23 +93,39 @@
 
 ;; evaluation function (eval/apply)
 
+; (define (eval [e : Exp] [env : Env]) : (M Value)
+;   (type-case Exp e
+;     [(numE n)
+;      (numV n)]
+;     [(opE o e1 e2)
+;      ((λ (v1) ((λ (v2) ((op->proc o) v1 v2)) 
+;               (eval e2 env))) 
+;       (eval e1 env))]
+;     [(varE x)
+;      (lookup-env x env)]
+;     [(lamE x b)
+;      (funV (λ (v) (eval b (extend-env env x v))))]
+;     [(appE e0 e1)
+;      ((λ (v0) ((λ (v1) (apply v0 v1)) 
+;                 (eval e1 env))) 
+;       (eval e0 env))]))
+
 (define (eval [e : Exp] [env : Env]) : (M Value)
   (type-case Exp e
     [(numE n)
-     (numV n)]
+     (returnM (numV n))]
     [(opE o e1 e2)
-      (do 
-          ([v1 (eval e2 env)]
-          [v2 (eval e1 env)])
-        ((op->proc o) v1 v2))]
+      (do ([v1 (eval e1 env)]
+          [v2 (eval e2 env)])
+        (returnM ((op->proc o) v1 v2)))]
     [(varE x)
      (lookup-env x env)]
     [(lamE x b)
-     (funV (λ (v) (eval b (extend-env env x v))))]
+     (returnM (funV (λ (v) (eval b (extend-env env x v)))))]
     [(appE e0 e1)
-     ((λ (v0) ((λ (v1) (apply v0 v1)) 
-                (eval e1 env))) 
-      (eval e0 env))]))
+     (bindM (eval e0 env)
+            (λ (v0) (bindM (eval e1 env)
+                           (λ (v1) (apply v0 v1)))))]))
 
 (define (apply [v0 : Value] [v1 : Value]) : (M Value)
   (type-case Value v0
