@@ -4,6 +4,7 @@ require_relative 'Scene'
 require_relative 'InputField'
 require_relative 'Blok'
 require_relative 'Grid'
+require_relative 'ScoreCounter'
 
 # https://coderspacket.com/creating-a-puzzle-game-2048-in-c
 
@@ -22,7 +23,12 @@ intro = Scene.new([
 ])
 
 game = Scene.new([
-  Grid.new(Window)
+  grid = Grid.new(Window),
+  score = ScoreCounter.new(grid, Window)
+])
+
+finish = Scene.new([
+  
 ])
 
 # przechowujemy stan w tablicy ponieważ w przeciwieństwie do klasy Int,

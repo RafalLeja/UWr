@@ -25,7 +25,7 @@ class Grid
   end
 
   def event(e, state)
-    check()
+    check(state)
     c = e.key.to_s
     if c == "w"
       up()
@@ -36,7 +36,14 @@ class Grid
     elsif c == "a"
       left()
     end
-    randomize()
+  end
+
+  def sum()
+    sum = 0
+    for i in 0..15 do
+      sum += @blocks[i].val
+    end
+    return sum
   end
 
   def up()
@@ -54,6 +61,7 @@ class Grid
         end
       end
     end
+    randomize()
   end
 
   def left()
@@ -71,6 +79,7 @@ class Grid
         end
       end
     end
+    randomize()
   end
 
   def right()
@@ -88,6 +97,7 @@ class Grid
         end
       end
     end
+    randomize()
   end
 
   def down()
@@ -105,6 +115,7 @@ class Grid
         end
       end
     end
+    randomize()
   end
 
   def randomize()
@@ -118,7 +129,7 @@ class Grid
     end
   end
 
-  def check()
+  def check(state)
     sum = 0
     for i in 0..15 do    
       if @blocks[i].val == 0
@@ -127,6 +138,7 @@ class Grid
     end
     if sum == 0
       puts "koniec gry"
+      state[0] = 2
     end
   end
 end
