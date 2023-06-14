@@ -50,12 +50,21 @@
         (parse (list-ref (s-exp->list s) 4)))]
     [(s-exp-match? `{define {ANY ...} for ANY} s)
       (defE 
-        (map parse (s-exp->list (second (s-exp->list s))))
+        (let ([funcs (map parse (s-exp->list (second (s-exp->list s))))])
+          (if (check-unique (map funE-f funcs))
+            funcs
+            (error 'syntax "duplicate function names")))
         (parse (fourth (s-exp->list s))))]
     [else 
       (begin 
         (display s)
         (error 'parse "invalSd input"))]))
+
+(define (check-unique xs) : Boolean
+  (cond 
+    [(empty? xs) #t]
+    [(member (first xs) (rest xs)) #f]
+    [else (check-unique (rest xs))]))
 
 (define (parse-op [op : Symbol]) : Op
   (cond
