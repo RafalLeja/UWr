@@ -17,14 +17,22 @@ set resizable: true
 WIDTH = Window.width
 HEIGHT = Window.height
 
-playerName = ""
+if File.exists?("score.txt")
+  scoreFile = File.open("score.txt", "r")
+  scoreTable = Marshal.load(scoreFile)
+  File.clos
+else
+  scoreTable = Hash.new(-1)
+end
+
+playerScore = ["", 0]
 intro = Scene.new([
-  InputField.new( x: 50, y: 50, text: playerName)
+  InputField.new( x: 50, y: 50, text: playerScore)
 ])
 
 game = Scene.new([
   grid = Grid.new(Window),
-  score = ScoreCounter.new(grid, Window)
+  score = ScoreCounter.new(grid, Window, playerScore)
 ])
 
 finish = Scene.new([
@@ -39,6 +47,7 @@ scenes = [intro, game]
 
 on :key_up do |event|
   scenes[state[0]].event(event, state)
+  puts playerScore
 end
 
 update do
