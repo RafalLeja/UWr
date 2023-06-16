@@ -5,6 +5,7 @@ require_relative 'InputField'
 require_relative 'Blok'
 require_relative 'Grid'
 require_relative 'ScoreCounter'
+require_relative 'Leaderboard'
 
 # https://coderspacket.com/creating-a-puzzle-game-2048-in-c
 
@@ -17,10 +18,10 @@ set resizable: true
 WIDTH = Window.width
 HEIGHT = Window.height
 
-if File.exists?("score.txt")
-  scoreFile = File.open("score.txt", "r")
-  scoreTable = Marshal.load(scoreFile)
-  File.clos
+if File.exists?("score")
+  scoreFile = File.open("score", "r")
+  tmpStr = scoreFile.read
+  scoreTable = Marshal.load(tmpStr)
 else
   scoreTable = Hash.new(-1)
 end
@@ -36,18 +37,18 @@ game = Scene.new([
 ])
 
 finish = Scene.new([
-  
-])
+  Leaderboard.new(playerScore, scoreTable, Window)
+]) 
+
 
 # przechowujemy stan w tablicy ponieważ w przeciwieństwie do klasy Int,
 # klasa array jest przekazywana jako wzkaźnik,
 # co pozwala nam ją zmieniać w innych klasach
 state = [0]
-scenes = [intro, game]
+scenes = [intro, game, finish]
 
 on :key_up do |event|
   scenes[state[0]].event(event, state)
-  puts playerScore
 end
 
 update do

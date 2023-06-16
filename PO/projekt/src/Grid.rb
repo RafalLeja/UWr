@@ -137,7 +137,6 @@ class Grid
       end
     end
     if sum == 0
-      puts "koniec gry"
       state[0] = 2
     end
   end
