@@ -8,10 +8,11 @@ class Scene
   end
 
   def event(e, state)
-    @items.each { |n| n.event(e, state) }
-  end
-
-  def hide()
-    @items.each { |n| n.hide() }
+    @items.each do |item|
+      begin
+        item.event(e, state)
+      rescue NoMethodError
+      end
+    end  
   end
 end

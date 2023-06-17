@@ -12,8 +12,11 @@ require_relative 'Leaderboard'
 colorBackground = Color.new('#a66a35')
 colorForeground = Color.new('#804f25')
 
-set title: "Hello World!"
+set title: "2048 by Rafał Leja"
+set background: colorBackground
 set resizable: true
+set width: 960
+set height: 540
 
 WIDTH = Window.width
 HEIGHT = Window.height
@@ -28,7 +31,36 @@ end
 
 playerScore = ["", 0]
 intro = Scene.new([
-  InputField.new( x: 50, y: 50, text: playerScore)
+  Text.new( 
+    "2048", 
+    x: WIDTH/2 - 50,
+    y: HEIGHT/10,
+    size: 50
+    ),
+  Text.new( 
+    "Rafał Leja", 
+    x: WIDTH/2 - 24.5,
+    y: HEIGHT/5,
+    size: 14
+    ),
+  Text.new(
+    "Podaj imię gracza:",
+    x: WIDTH/2 - 150,
+    y: HEIGHT/4,
+    size: 35
+    ),
+    InputField.new( 
+      text: playerScore,
+      x: WIDTH/2,
+      y: HEIGHT/2.5,
+      size: 30
+      ),
+    Text.new(
+      "Wciśnij ENTER aby rozpocząć grę",
+      x: WIDTH/2 - 150,
+      y: HEIGHT*0.6,
+      size: 20
+      )
 ])
 
 game = Scene.new([
@@ -55,7 +87,5 @@ update do
   clear
   scenes[state[0]].add()
 end
-set title: "2048 by Rafał Leja"
-set background: colorBackground
 
 show
