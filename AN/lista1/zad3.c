@@ -22,8 +22,8 @@ int main(int argc, char const *argv[])
   float f = 11;
   for (double i = 11; i < 21; i++)
   {
-    printf("f_d(%.0f) = %f ", d, f_d(d));
-    printf("f_f(%.0f) = %f\n", f, f_f(f));
+    printf("f_d(%.0f) = %e ", d, f_d(pow(10, -d)));
+    printf("f_f(%.0f) = %e\n", f, f_f(pow(10, -f)));
     d++;
     f++;
   }
