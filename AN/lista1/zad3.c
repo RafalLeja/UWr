@@ -4,14 +4,14 @@
 double f_d(double x){
   double pot = pow(x, 2);
   x = 1-cos(17*x);
-  x = 14*x/pot;
+  x = 14.0*x/pot;
   return x;
 }
 
 float f_f(float x){
   float pot = powf(x, 2);
   x = 1-cosf(17*x);
-  x = 14*x/pot;
+  x = 14.0*x/pot;
   return x;
 }
 
