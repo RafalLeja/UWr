@@ -2,6 +2,7 @@
 # zadanie 2 lista 2 "sudan"
 # 7.10.2023
 
+
 mem = {
     "0|0|0" : 0
 }
