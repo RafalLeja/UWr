@@ -6,11 +6,15 @@
 import random as r
 import urllib.request
 
+# pobieranie Pana Tadeusza
 content = urllib.request.urlopen("https://www.gutenberg.org/files/31536/31536-0.txt").read().decode()
+# usuwanie nagłówka
+content = content[1880:]
 
 def uprosc_zdanie(tekst, dl_slowa, liczba_slow):
     tekst = tekst.replace(".", "")
     words = []
+    
     for slowo in tekst.split(" "):
         if len(slowo.replace(",", "")) > dl_slowa:
             continue
