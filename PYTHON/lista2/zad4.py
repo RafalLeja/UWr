@@ -9,12 +9,12 @@ import urllib.request
 # pobieranie Pana Tadeusza
 content = urllib.request.urlopen("https://www.gutenberg.org/files/31536/31536-0.txt").read().decode()
 # usuwanie nagłówka
-content = content[1880:]
+content = content[1883:2061]
 
 def uprosc_zdanie(tekst, dl_slowa, liczba_slow):
     tekst = tekst.replace(".", "")
     words = []
-    
+
     for slowo in tekst.split(" "):
         if len(slowo.replace(",", "")) > dl_slowa:
             continue
@@ -28,7 +28,7 @@ def uprosc_zdanie(tekst, dl_slowa, liczba_slow):
     return output.capitalize()
 
 out = ""
-for zdanie in content.split("."):
-    out += uprosc_zdanie(zdanie, 8, 5) + " "
+for zdanie in content.split("\r\n"):
+    out = f'{out}{uprosc_zdanie(zdanie, 8, 5)}\r\n'    
 
 print(out)

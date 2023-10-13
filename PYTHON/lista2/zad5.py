@@ -3,7 +3,11 @@
 # 12.10.2023
 
 import urllib.request
+
+# pobieranie Pana Tadeusza
 content = urllib.request.urlopen("https://www.gutenberg.org/files/31536/31536-0.txt").read().decode()
+# usuwanie nagłówka i wybieranie fragmentu
+content = content[1883:2061]
 
 def kompresja(slowo):
   out = []
@@ -24,4 +28,6 @@ def dekompresja(komp):
     out = out + "".join([komp[idx][0]]*komp[idx][1])
   return out
 
-print(kompresja(content))    
+print(content)
+# print(kompresja(content))    
+# print(dekompresja(kompresja(content)))    
