@@ -24,10 +24,8 @@ def kompresja(slowo):
 def dekompresja(komp):
   out = ""
   for idx in range(len(komp)):
-    print([komp[idx][0]]*komp[idx][1])
     out = out + "".join([komp[idx][0]]*komp[idx][1])
   return out
 
-print(content)
-# print(kompresja(content))    
-# print(dekompresja(kompresja(content)))    
+print(kompresja(content))    
+print(dekompresja(kompresja(content)))    

@@ -8,7 +8,7 @@ import urllib.request
 
 # pobieranie Pana Tadeusza
 content = urllib.request.urlopen("https://www.gutenberg.org/files/31536/31536-0.txt").read().decode()
-# usuwanie nagłówka
+# usuwanie nagłówka i wybieranie fragmentu
 content = content[1883:2061]
 
 def uprosc_zdanie(tekst, dl_slowa, liczba_slow):
