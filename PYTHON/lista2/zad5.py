@@ -28,4 +28,4 @@ def dekompresja(komp):
   return out
 
 print(kompresja(content))    
-print(dekompresja(kompresja(content)))    
+print(dekompresja(kompresja(content)))
