@@ -11,7 +11,7 @@ double f(double x){
 int main(int argc, char const *argv[])
 {
 
-  printf("0.001 = %e\n", pow(0.001, 14)-1);
+  printf("0.001 = %e\n", pow(0.001, 14)+1);
   printf("f(0.001) = %e", f(0.001));
   return 0;
 }
