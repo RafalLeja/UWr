@@ -1,5 +1,5 @@
 # Rafał Leja
-# zadanie 2 lista 3 "labirynt"
+# zadanie 3 lista 3 "labirynt"
 # 17.10.2023
 
 from collections import deque
