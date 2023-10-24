@@ -1,16 +1,21 @@
+# Rafał Leja 340879
+# zadanie 5 lista 4 "kryptorym"
+# 24.10.2023
+
+
 import operator
 
 def rozwiazanie_kryptorym(p1,p2,s,op):
   rozwiazania = []
   dict = litery(p1,p2,s)
   for x in range(10**len(dict)):
+    print(f"{x}/{10**len(dict)}")
     i = 1
     for key in dict.keys():
-      dict[key] = (x % (10**i)) - (x % (10**(i-1)))
+      dict[key] = (x//(10**(i-1))) % 10
       i += 1
     if kryptorym(p1,p2,s,op,dict):
       rozwiazania.append(dict.copy())
-    print(dict)
   return rozwiazania
 
 def kryptorym(p1,p2,s,op,dict):
@@ -34,8 +39,7 @@ def litery(s1,s2,s3):
   for x in s1+s2+s3:
     if x not in dict:
       dict[x] = 0
-  
   return dict
 
-print(rozwiazanie_kryptorym("kioto","osaka","tokio",operator.add))
-# print(rozwiazanie_kryptorym("a","a","b",operator.mul))
+for rozwiazanie in rozwiazanie_kryptorym("kioto","osaka","tokio",operator.add):
+  print(rozwiazanie)

@@ -1,3 +1,7 @@
+# Rafał Leja 340879
+# zadanie 1 lista 4 "liczby pierwsze"
+# 24.10.2023
+
 import timeit
 import math
 
@@ -57,12 +61,12 @@ out = [x for x in range(2, n+1) if prime(x) ]
 p_f = '''
 out = list(filter(prime, range(2,n+1)))
 '''
-# print(pierwsze_imperatywna(31))
-# print(pierwsze_skladana(31))
-# print(pierwsze_funkcyjna(524288))
+print(pierwsze_imperatywna(50))
+print(pierwsze_skladana(50))
+print(pierwsze_funkcyjna(50))
 
 print("n p_i p_s p_f")
-for x in range(1,14): 
+for x in range(5,15): 
   i = timeit.timeit(setup=f"{setup}\nn = {int(math.pow(2,x))}", stmt=p_i, number=10)
   s = timeit.timeit(setup=f"{setup}\nn = {int(math.pow(2,x))}", stmt=p_s, number=10)
   f = timeit.timeit(setup=f"{setup}\nn = {int(math.pow(2,x))}", stmt=p_f, number=10)
