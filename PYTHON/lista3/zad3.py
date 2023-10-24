@@ -49,3 +49,4 @@ def ucieczka(labirynt, start):
 
 print(ucieczka(labirynt, (1,1)))
 
+print(labirynt)
