@@ -5,13 +5,11 @@
 import urllib.request
 import bs4
 import re
-from multiprocessing import Pool
-from multiprocessing import freeze_support
+import multiprocessing as mp
 
 def index(urls):
-  with Pool(4) as p:
-    idx = dict(*p.map(wordDict, urls))
-
+  with mp.Pool() as p:
+    idx = dict(p.map(wordDict, urls))
   return idx
 
 def wordDict(url):
@@ -51,3 +49,5 @@ chlopiIndex = index(["https://wolnelektury.pl/katalog/lektura/chlopi-czesc-pierw
                   "https://wolnelektury.pl/katalog/lektura/reymont-chlopi-zima.html",
                   "https://wolnelektury.pl/katalog/lektura/chlopi-czesc-trzecia-wiosna.html",
                   "https://wolnelektury.pl/katalog/lektura/chlopi-czesc-czwarta-lato.html"])
+
+print(search(chlopiIndex, "jagusia"))
