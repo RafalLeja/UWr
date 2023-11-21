@@ -1,4 +1,4 @@
-# klucz API do accuweather należy umieścic w pliku apiKey.txt
+# klucz API do accuweather należy umieścic w pliku api.key
 
 import asyncio
 import aiohttp
@@ -33,14 +33,11 @@ async def fetchWTHR(client, keyFile, query):
              "PP" : forecastData[0]["PrecipitationProbability"],
              "Temp" : forecastData[0]["Temperature"]["Value"]}
   return outDict
-  
-  
-  
 
 async def main():
   async with aiohttp.ClientSession() as client:
     htmlRKT = await fetch(client)
-    dataWTHR = await fetchWTHR(client, "apiKEY.txt", "Wrocław")
+    dataWTHR = await fetchWTHR(client, "api.key", "Wrocław")
     dataRKT = json.loads(htmlRKT)
     printLaunch(dataRKT)
     printWeather(dataWTHR)
