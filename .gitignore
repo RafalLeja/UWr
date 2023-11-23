@@ -12,6 +12,9 @@
 
 *.class
 
+# Private keys
+*.key
+
 # Local History for Visual Studio Code
 .history/
 
