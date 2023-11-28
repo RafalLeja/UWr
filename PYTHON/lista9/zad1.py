@@ -1,3 +1,7 @@
+# Rafał Leja
+# lista 9 wykresy
+# 28/11/2023
+
 import asyncio
 import aiohttp
 import csv
@@ -39,6 +43,7 @@ def jsonAvg(dane):
             out.append(s/i)
             s =0
             i =0
+    out.append(s/i)
     return out
 
 async def main():
@@ -51,21 +56,37 @@ async def main():
     dolar2022 = jsonAvg(json.loads(dolar2022))
 
     mies = [i+1 for i in range(12)]
-    fig, axs = plt.subplots(2)
-    axs[0].bar(mies, rok2021, width=1, color="blue", edgecolor="white", linewidth=0.7)
-    axs[0].set(title='Inflacja w Polsce w 2021 r.',
-               ylabel="Wzkaźnik inflacji względem poprzedniego miesiąca",
-               xlabel="Miesiąc")
-    axs[1].bar(mies, rok2022, width=1, color="blue", edgecolor="white", linewidth=0.7)
-    axs[1].set(title="Inflacja w Polsce w 2022 r.",
-               ylabel="Wzkaźnik inflacji względem poprzedniego miesiąca",
+    fig, (ax1a, ax2a) = plt.subplots(2)
+
+    fig.suptitle("Inflacja w Polsce względem analogicznego miesiąca zeszłego roku")
+    l1 = ax1a.bar(mies, rok2021, width=1, color="blue", edgecolor="white", linewidth=0.7)
+    ax1a.set(ylim=(95,120),
+             title='2021',
+             ylabel="%",
+             xlabel="Miesiąc")
+    
+    ax1b = ax1a.twinx()
+    l2, = ax1b.plot(mies, dolar2021, color="red")
+    ax1b.set(ylabel="USD/PLN",
+             ylim=(3.7,5))
+    ax1a.legend((l1, l2), ('współczynnik inflacji', "kurs USD/PLN"), loc='upper left')
+    
+    l3 = ax2a.bar(mies, rok2022, width=1, color="blue", edgecolor="white", linewidth=0.7)
+    ax2a.set(ylim=(95,120),
+               title="2022",
+               ytick=1,
+               ylabel="%",
                xlabel="Miesiąc")
     
+    ax2b = ax2a.twinx()
+    l4, = ax2b.plot(mies, dolar2022, color="red")
+    ax2b.set(ylabel="USD/PLN",
+             ylim=(3.7,5))
+    ax2a.legend((l3, l4), ('współczynnik inflacji', "kurs USD/PLN"), loc='upper left')
+
     for ax in fig.get_axes():
         ax.label_outer()
 
     plt.show()
-
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) # Bez tej linijki program zgłasza RuntimeError na Windowsie
 
 asyncio.run(main())
