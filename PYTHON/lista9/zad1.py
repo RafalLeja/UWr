@@ -8,9 +8,6 @@ import csv
 import matplotlib.pyplot as plt
 import json
 from statsmodels.tsa.statespace.sarimax import SARIMAX
-import numpy as np
-from sklearn.linear_model import LinearRegression
-
 
 def daneCSV(plik):
     with open(plik, encoding='utf-8') as csvfile:
@@ -60,7 +57,7 @@ def flat(arr):
     return out
 
 async def main():
-    daneInf = np.array(daneCSV('inflacja.csv'))
+    daneInf = daneCSV('inflacja.csv')
     async with aiohttp.ClientSession() as client:
         dolar2021 = await fetch(client, "https://api.nbp.pl/api/exchangerates/rates/a/usd/2021-01-01/2021-12-31/?format=json")
         dolar2022 = await fetch(client, "https://api.nbp.pl/api/exchangerates/rates/a/usd/2022-01-01/2022-12-31/?format=json")
@@ -70,7 +67,7 @@ async def main():
 
     mies = [i+1 for i in range(12)]
 
-    fig, (ax1a, ax2a, ax3) = plt.subplots(1, 3)
+    fig, (ax1a, ax2a, ax3) = plt.subplots(3)
 
     fig.suptitle("Inflacja w Polsce względem analogicznego miesiąca zeszłego roku")
     l1 = ax1a.bar(mies, daneInf[2], width=1, color="blue", edgecolor="white", linewidth=0.7)
@@ -110,8 +107,11 @@ async def main():
                ylabel="%",
                xlabel="Miesiąc")
     
+    print(daneInf[0][:10])
     ax3b = ax3.twinx()
     l6, = ax3b.plot(mies[:10], daneInf[0][:10], color="black")
+    ax3b.set(ylim=(95,120),
+            ylabel="%")
 
     ax3.legend((l5, l6), ('dane przewidywanie', 'dane rzeczywiste'))
 
