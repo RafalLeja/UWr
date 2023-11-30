@@ -9,13 +9,26 @@ import numpy as np
 #                 [0, 0, 0], 
 #                 [1, 2, 1]])
 
-img = cv.imread('source.png', cv.IMREAD_GRAYSCALE)
+img = cv.imread('source2.png', cv.IMREAD_GRAYSCALE)
 
-thresh = 235
-im_bw = cv.threshold(img, thresh, 255, cv.THRESH_BINARY)[1]
+thresh = 215
+im_dn = cv.fastNlMeansDenoising(img, None, 10, 7, 21)
+im_bw = cv.threshold(im_dn, thresh, 255, cv.THRESH_BINARY)[1]
+# kernel = np.array([[1,1,1], [1,0,1], [1,1,1]])
+# im_sh = cv.filter2D(im_bw, -1, kernel)
+im_blur = cv.blur(im_bw, (5,5))
+im_bw2 = cv.threshold(im_blur, 140, 255, cv.THRESH_BINARY)[1]
 
-filtered = cv.Canny(im_bw, 150, 50)
-thinned = cv.ximgproc.thinning(im_bw)
+
+# filtered = cv.Canny(im_bw, 150, 50)
+# thinned = cv.ximgproc.thinning(img, thinningType=cv.ximgproc.THINNING_GUOHALL)
 # filtered = cv.Sobel(src=img, ddepth=-1, dx=gx, dy=gy)
 # filtered = cv.filter2D(src=img, ddepth=-1, kernel=kernel)
-cv.imwrite('filtered.png', thinned)
+# cv.imshow('im_bw', im_bw)
+# cv.imshow('filtered', filtered)
+# cv.imshow('thinned', thinned)
+
+cv.waitKey(0)
+cv.destroyAllWindows()
+
+cv.imwrite('filtered.png', im_bw2)
