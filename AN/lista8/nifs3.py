@@ -46,9 +46,8 @@ def interpolMatrix(points, values):
     u[k] = (d(k)-lam(k)*u[k-1])/p[k]
   
   m[n] = 0
-  m[n-1] = u[n-2]
 
-  for k in range(n-2,1,-1):
+  for k in range(n-1,1,-1):
     m[k] = u[k] + q[k]*m[k+1]
   
   return m
@@ -71,7 +70,7 @@ def interpolValue(x, points, values, m):
   return s
 
 
-M = 1000
+M = 10000
 dogX = [0 for i in range(M)]
 dogY = [0 for i in range(M)]
 mx = interpolMatrix(tn, xn)
