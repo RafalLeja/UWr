@@ -54,9 +54,8 @@ def interpolMatrix(points, values):
   return m
 
 
-def interpolValue(x, points, values):
+def interpolValue(x, points, values, m):
   n = len(values) - 1
-  m = interpolMatrix(points, values)
 
   def h(k):
     return points[k] - points[k-1]
@@ -75,13 +74,12 @@ def interpolValue(x, points, values):
 M = 1000
 dogX = [0 for i in range(M)]
 dogY = [0 for i in range(M)]
+mx = interpolMatrix(tn, xn)
+my = interpolMatrix(tn, yn)
+
 for i in range(M):
-  dogX[i] = interpolValue(i/M, tn, xn)
-  dogY[i] = interpolValue(i/M, tn, yn)
-
-
-print(xn[94])
-print(interpolValue(1, tn, xn))
+  dogX[i] = interpolValue(i/M, tn, xn, mx)
+  dogY[i] = interpolValue(i/M, tn, yn, my)
 
 plt.plot(dogX, dogY)
 plt.show()
