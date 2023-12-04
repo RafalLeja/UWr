@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 
 xn = [5.5, 8.5, 10.5, 13, 17, 20.5, 24.5, 28, 32.5, 37.5, 40.5, 42.5, 45, 47,
 49.5, 50.5, 51, 51.5, 52.5, 53, 52.8, 52, 51.5, 53, 54, 55, 56, 55.5, 54.5, 54, 55, 57, 58.5,
@@ -20,10 +19,10 @@ tn = [i/95 for i in range(95)]
 
 def interpolMatrix(points, values):
   n = len(values) - 1
-  q = np.zeros(n)
-  u = np.zeros(n)
-  p = np.zeros(n)
-  m = np.zeros(n+1)
+  q = [0 for i in range(n)]
+  u = [0 for i in range(n)]
+  p = [0 for i in range(n)]
+  m = [0 for i in range(n+1)]
   q[0] = 0
   u[0] = 0
 
@@ -74,8 +73,8 @@ def interpolValue(x, points, values):
 
 
 M = 1000
-dogX = np.zeros(M)
-dogY = np.zeros(M)
+dogX = [0 for i in range(M)]
+dogY = [0 for i in range(M)]
 for i in range(M):
   dogX[i] = interpolValue(i/M, tn, xn)
   dogY[i] = interpolValue(i/M, tn, yn)
