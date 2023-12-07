@@ -2,10 +2,11 @@ import tkinter as tk
 from tkinter import ttk
 
 class Line:
-  def __init__(self, name, type):
+  def __init__(self, name, line_type):
     self.name = name
-    self.type = type
+    self.line_type = line_type
     self.points = []
+
 
 class BezierPaint:
   def __init__(self, root):
@@ -42,9 +43,10 @@ class BezierPaint:
     
     self.line_types = ["bezier", "NIFS3"]
     self.selected_line_type = self.line_types[0]
-    self.selected_line_name = "Nowa linia"
+    self.selected_line_name = tk.StringVar()
+    self.selected_line_name.set("Nowa krzywa")
 
-    self.lines = [Line(self.selected_line_name, self.selected_line_type)]
+    self.lines = [Line(self.selected_line_name.get(), self.selected_line_type)]
     self.selected_line = self.lines[0]
 
     self.tool_frame = ttk.LabelFrame(self.root, text="Tools")
@@ -53,8 +55,9 @@ class BezierPaint:
     self.line_name_label = ttk.Label(self.tool_frame, text="Nazwa krzywej:")
     self.line_name_label.pack(side=tk.TOP, padx=5, pady=5)
 
-    self.line_name_input = ttk.Entry(self.tool_frame)
-    self.line_name_input.pack(side=tk.TOP, padx=5, pady=5, fill=tk.Y)
+    self.validate_name = self.tool_frame.register(self.change_line_name)
+    self.line_name_input = ttk.Entry(self.tool_frame, textvariable=self.selected_line_name, validate="all", validatecommand=(self.validate_name, '%P'))
+    self.line_name_input.pack(side=tk.TOP, padx=5, pady=5)
 
     self.line_type_label = ttk.Label(self.tool_frame, text="Typ krzywej:")
     self.line_type_label.pack(side=tk.TOP, padx=5, pady=5)
@@ -64,8 +67,16 @@ class BezierPaint:
     self.line_type_combobox.pack(side=tk.TOP, padx=5, pady=5)
     self.line_type_combobox.bind("<<ComboboxSelected>>", lambda event: self.select_line_type(self.line_type_combobox.get()))
 
-    self.new_line_button = ttk.Button(self.tool_frame, text="nowa krzywa", command=self.add_new_line(self.selected_line_name, self.selected_line_type))
+    self.new_line_button = ttk.Button(self.tool_frame, text="Dodaj krzywą", command=self.add_new_line)
     self.new_line_button.pack(side=tk.TOP, padx=5, pady=5)
+
+    self.lines_label = ttk.Label(self.tool_frame, text="Krzywe:")
+    self.lines_label.pack(side=tk.TOP, padx=5, pady=5)
+
+    self.lines_combobox = ttk.Combobox(self.tool_frame, values=[ l.name for l in self.lines ], state="readonly", postcommand=self.update_lines_box)
+    self.lines_combobox.current(0)
+    self.lines_combobox.pack(side=tk.TOP, padx=5, pady=5)
+    self.lines_combobox.bind("<<ComboboxSelected>>", lambda event: self.select_line(self.lines_combobox.get()))
 
     self.pen_button = ttk.Button(self.tool_frame, text="Pen", command=self.select_pen_tool)
     self.pen_button.pack(side=tk.TOP, padx=5, pady=5)
@@ -74,19 +85,46 @@ class BezierPaint:
     self.eraser_button.pack(side=tk.TOP, padx=5, pady=5)
 
 
-    self.clear_button = ttk.Button(self.tool_frame, text="Clear Canvas", command=self.clear_canvas)
+    self.clear_button = ttk.Button(self.tool_frame, text="Wyczyść rysunek", command=self.clear_canvas)
     self.clear_button.pack(side=tk.TOP, padx=5, pady=5)
 
   def setup_events(self):
     self.canvas.bind("<B1-Motion>", self.draw)
     self.canvas.bind("<ButtonRelease-1>", self.release)
 
-  def add_new_line(self, name, type):
-    self.lines.append(Line(name, type))
 
-  def select_line_type(self, type):
-    self.selected_line_type = type
-    self.selected_line.type = type
+
+  def change_line_name(self, text):
+    if text in self.lines_combobox['values']:
+      return False
+    self.selected_line.name = text
+    idx = next(i for i,v in enumerate(self.lines) if v.name == text)
+    self.lines_combobox.current(idx)
+    return True
+
+  def add_new_line(self):
+    line = Line(f'Nowa krzywa{len(self.lines)}', self.line_types[0])
+    self.lines.append(line)
+    self.update_lines_box()
+    self.select_line(line.name)
+    self.lines_combobox.current(len(self.lines)-1)
+
+  def delete_line(self):
+    return
+
+  def update_lines_box(self):
+    list = [l.name for l in self.lines]
+    self.lines_combobox['values'] = list
+
+  def select_line_type(self, l_type):
+    self.selected_line_type = l_type
+    self.selected_line.line_type = l_type
+
+  def select_line(self, line_name):
+    idx = next(i for i,v in enumerate(self.lines) if v.name == line_name)
+    self.selected_line = self.lines[idx]
+    self.selected_line_type = self.lines[idx].line_type
+    self.selected_line_name.set(self.lines[idx].name)
 
   def select_pen_tool(self):
     self.selected_tool = "pen"
