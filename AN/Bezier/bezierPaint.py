@@ -144,7 +144,7 @@ class BezierPaint:
   def draw(self, event):
     self.canvas.delete("all")
     R = 5
-    RES = 20
+    RES = 100
     for line in self.lines:
       if self.selected_line == line:
         if self.selected_tool == "new":
@@ -161,17 +161,18 @@ class BezierPaint:
             if abs(point[0] - event.x) < 3*R and abs(point[1] - event.y) < 3*R:
               self.selected_line.points[i] = (event.x, event.y)
           self.canvas.create_oval(point[0] - R, point[1] - R , point[0] + R, point[1] + R, outline='red')
-      if len(line.points) > 0:
+      if len(line.points) > 1:
         if line.line_type == "bezier":
           p = [] 
-          for i in range(1,RES):
+          for i in range(RES):
             p.append(list(self.de_casteljau(i/RES, line.points)))
           self.canvas.create_line(*p)
         if line.line_type == "NIFS3":
           mX = self.interpolMatrix(line.points[:, 0])
           mY = self.interpolMatrix(line.points[:, 1])
+          # print(line.points
           p = []
-          for i in range(1,RES):
+          for i in range(RES):
             p.append(self.interpolValue(i/RES, line.points[:, 0], mX))
             p.append(self.interpolValue(i/RES, line.points[:, 1], mY))
           self.canvas.create_line(*p)
@@ -257,21 +258,27 @@ class BezierPaint:
   def interpolValue(self, x, values, m):
     n = len(values) - 1
 
+    # points = [x/n for x in range(0,n)]
+
     def points(x):
       return x/n
 
     def h(k):
       return points(k) - points(k-1)
 
-    i = n-1
-    while x - points(i) < 0:
+    i = n
+    while x <= points(i-1):
       i = i-1
 
-    print(i)
-    a = (m[i+1]-m[i])/(6*h(i))
-    b = m[i]/2
-    c = (((values[i+1] - values[i])/h(i)) - (h(i)*(m[i+1]+2*m[i])/6))
-    s = values[i] + (x-points(i))*(c+(x-points(i))*(b+(x-points(i))*a))
+    # a = (m[i+1]-m[i])/(6*h(i))
+    # b = m[i]/2
+    # c = (((values[i+1] - values[i])/h(i)) - (h(i)*(m[i+1]+2*m[i])/6))
+    # s = values[i] + (x-points(i))*(c+(x-points(i))*(b+(x-points(i))*a))
+    a = m[i-1]*((points(i) - x)**3)/6
+    b = m[i]*((x - points(i)-1)**3)/6
+    c = (values[i-1]-(m[i-1]*(h(i)**2)/6))*(points(i)-x)
+    d = (values[i]-(m[i]*(h(i)**2)/6))*(x-points(i-1))
+    s = (a + b + c + d)/h(i)
     return s
 
   def de_casteljau(self, t, points):
