@@ -14,7 +14,7 @@ yn = [41, 40.5, 40, 40.5, 41.5, 41.5, 42, 42.5, 43.5, 45, 47, 49.5, 53, 57, 59,
 27.5, 27.5, 26.5, 23.5, 21, 19, 17, 14.5, 11.5, 8, 4, 1, 0, 0.5, 3, 6.50, 10, 13, 16.5, 20.5,
 25.5, 29, 33, 35, 36.5, 39, 41]
 
-tn = [i/95 for i in range(95)]
+tn = [i/95 for i in range(95 +1 )]
 
 
 def interpolMatrix(points, values):
@@ -63,10 +63,16 @@ def interpolValue(x, points, values, m):
   while x - points[i] < 0:
     i = i-1
   
-  a = (m[i+1]-m[i])/(6*h(i))
-  b = m[i]/2
-  c = (((values[i+1] - values[i])/h(i)) - (h(i)*(m[i+1]+2*m[i])/6))
-  s = values[i] + (x-points[i])*(c+(x-points[i])*(b+(x-points[i])*a))
+  # a = (m[i+1]-m[i])/(6*h(i))
+  # b = m[i]/2
+  # c = (((values[i+1] - values[i])/h(i)) - (h(i)*(m[i+1]+2*m[i])/6))
+  # s = values[i] + (x-points[i])*(c+(x-points[i])*(b+(x-points[i])*a))
+
+  a = (m[i]*((points[i+1] - x)**3))/6
+  b = (m[i+1]*((x - points[i+1]-1)**3))/6
+  c = (values[i]-(m[i]*(h(i+1)**2)/6))*(points[i+1]-x)
+  d = (values[i+1]-(m[i+1]*(h(i+1)**2)/6))*(x-points[i])
+  s = (a + b + c + d)/h(i-1)
   return s
 
 
@@ -76,9 +82,10 @@ dogY = [0 for i in range(M)]
 mx = interpolMatrix(tn, xn)
 my = interpolMatrix(tn, yn)
 
-for i in range(M):
-  dogX[i] = interpolValue(i/M, tn, xn, mx)
-  dogY[i] = interpolValue(i/M, tn, yn, my)
-
+# for i in range(M):
+#   dogX[i] = interpolValue(i/M, tn, xn, mx)
+#   dogY[i] = interpolValue(i/M, tn, yn, my)
+print(len(xn))
+print(interpolValue(0, tn, xn, mx))
 plt.plot(dogX, dogY)
 plt.show()
