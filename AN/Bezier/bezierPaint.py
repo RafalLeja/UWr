@@ -47,6 +47,8 @@ class BezierPaint:
     self.selected_line_name = tk.StringVar()
     self.selected_line_name.set("Nowa krzywa")
 
+    self.selected_point = None
+
     self.lines = [Line(self.selected_line_name.get(), self.selected_line_type)]
     self.selected_line = self.lines[0]
 
@@ -148,19 +150,26 @@ class BezierPaint:
     for line in self.lines:
       if self.selected_line == line:
         if self.selected_tool == "new":
-          line.points = np.append(line.points, [(event.x, event.y)], axis=0)
+          new_point = (event.x, event.y)
+          line.points = np.append(line.points, [new_point], axis=0)
+          self.selected_point = new_point
           self.select_move_point_tool()
 
+        min_dist = 0
+        min_point = 0
         for i, point in enumerate(line.points):
-          if self.selected_tool == "delete":
-            if abs(point[0] - event.x) < R and abs(point[1] - event.y) < R:
+          if self.selected_point == None:
+            dist = np.sqrt((event.x - point[0])**2+(event.y - point[1])**2)
+          if point == self.selected_point:
+            if self.selected_tool == "delete":
               self.selected_line.points = np.delete(line.points, i, axis=0)
               self.select_move_point_tool()
               return
-          elif self.selected_tool == "move":
-            if abs(point[0] - event.x) < 3*R and abs(point[1] - event.y) < 3*R:
+            elif self.selected_tool == "move":
               self.selected_line.points[i] = (event.x, event.y)
-          self.canvas.create_oval(point[0] - R, point[1] - R , point[0] + R, point[1] + R, outline='red')
+            self.canvas.create_oval(point[0] - R, point[1] - R , point[0] + R, point[1] + R, outline='red', fill='red')  
+          else:        
+            self.canvas.create_oval(point[0] - R, point[1] - R , point[0] + R, point[1] + R, outline='red')
       if len(line.points) > 1:
         if line.line_type == "bezier":
           p = [] 
@@ -290,6 +299,7 @@ class BezierPaint:
     return p[0]
 
   def release(self, event):
+    self.selected_point = None
     self.prev_x = None
     self.prev_y = None
 
