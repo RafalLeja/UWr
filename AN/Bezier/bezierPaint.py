@@ -155,18 +155,23 @@ class BezierPaint:
           self.selected_point = new_point
           self.select_move_point_tool()
 
-        min_dist = 0
-        min_point = 0
+        min_dist = 10000
+        min_point = None
         for i, point in enumerate(line.points):
           if self.selected_point == None:
             dist = np.sqrt((event.x - point[0])**2+(event.y - point[1])**2)
-          if point == self.selected_point:
+            if dist < min_dist:
+              min_dist = dist
+              min_point = point
+            self.selected_point=min_point
+          if all(point) == all(self.selected_point):
             if self.selected_tool == "delete":
               self.selected_line.points = np.delete(line.points, i, axis=0)
               self.select_move_point_tool()
               return
             elif self.selected_tool == "move":
-              self.selected_line.points[i] = (event.x, event.y)
+              self.selected_line.points[i][0] = event.x
+              self.selected_line.points[i][1] = event.y
             self.canvas.create_oval(point[0] - R, point[1] - R , point[0] + R, point[1] + R, outline='red', fill='red')  
           else:        
             self.canvas.create_oval(point[0] - R, point[1] - R , point[0] + R, point[1] + R, outline='red')
