@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 xn = [5.5, 8.5, 10.5, 13, 17, 20.5, 24.5, 28, 32.5, 37.5, 40.5, 42.5, 45, 47,
 49.5, 50.5, 51, 51.5, 52.5, 53, 52.8, 52, 51.5, 53, 54, 55, 56, 55.5, 54.5, 54, 55, 57, 58.5,
@@ -17,75 +18,73 @@ yn = [41, 40.5, 40, 40.5, 41.5, 41.5, 42, 42.5, 43.5, 45, 47, 49.5, 53, 57, 59,
 tn = [i/95 for i in range(95 +1 )]
 
 
-def interpolMatrix(points, values):
-  n = len(values) - 1
-  q = [0 for i in range(n)]
-  u = [0 for i in range(n)]
-  p = [0 for i in range(n)]
-  m = [0 for i in range(n+1)]
-  q[0] = 0
-  u[0] = 0
+def interpolMatrix(values):
+    points = [i/95 for i in range(len(values))]
+    n = len(values) -1
 
-  def h(k):
-    return points[k] - points[k-1]
-  
-  def lam(k):
-    return h(k)/(h(k)+h(k+1))
-  
-  def f(a,b):
-    if a == b:
-      return values[a]
-    return (f(a+1,b) - f(a,b-1))/(points[b]-points[a])
-  
-  def d(k):
-    return 6*f(k-1,k+1)
-
-  for k in range(1,n-1):
-    p[k] = 2+(q[k-1]*lam(k))
-    q[k] = (lam(k)-1)/p[k]
-    u[k] = (d(k)-lam(k)*u[k-1])/p[k]
-  
-  m[n] = 0
-
-  for k in range(n-1,1,-1):
-    m[k] = u[k] + q[k]*m[k+1]
-  
-  return m
+    q = np.zeros(n)
+    u = np.zeros(n)
+    p = np.zeros(n)
+    m = np.zeros(n+1)
 
 
-def interpolValue(x, points, values, m):
-  n = len(values) - 1
+    def h(k):
+        return points[k] - points[k-1]
 
-  def h(k):
-    return points[k] - points[k-1]
+    def lam(k):
+        return h(k)/(h(k)+h(k+1))
 
-  i = n-1
-  while x - points[i] < 0:
-    i = i-1
-  
-  # a = (m[i+1]-m[i])/(6*h(i))
-  # b = m[i]/2
-  # c = (((values[i+1] - values[i])/h(i)) - (h(i)*(m[i+1]+2*m[i])/6))
-  # s = values[i] + (x-points[i])*(c+(x-points[i])*(b+(x-points[i])*a))
+    def f(a, b):
+        if a == b:
+            return values[a]
+        return (f(a+1, b) - f(a, b-1))/(points[b]-points[a])
 
-  a = (m[i]*((points[i+1] - x)**3))/6
-  b = (m[i+1]*((x - points[i+1]-1)**3))/6
-  c = (values[i]-(m[i]*(h(i+1)**2)/6))*(points[i+1]-x)
-  d = (values[i+1]-(m[i+1]*(h(i+1)**2)/6))*(x-points[i])
-  s = (a + b + c + d)/h(i-1)
-  return s
+    def d(k):
+        return 6*f(k-1, k+1)
+
+    for k in range(1, n):
+        p[k] = 2 + (q[k-1]*lam(k))
+        q[k] = (lam(k)-1)/p[k]
+        u[k] = (d(k)-lam(k)*u[k-1])/p[k]
+
+    m[n-1] = u[n-1]
+
+    for k in range(n-2, 0, -1):
+        m[k] = u[k] + q[k]*m[k+1]
+
+    return m
+
+def interpolValue(x, values, m):
+    points = [i/95 for i in range(len(values))]
+    n = len(values) - 1
+
+    def h(k):
+        return points[k] - points[k-1]
+
+    for i in range(1, n+1):
+        if points[i-1] <= x and x < points[i]:
+            break
+
+
+    a = (m[i-1]*((points[i] - x)**3))/6
+    b = (m[i]*((x - points[i-1])**3))/6
+    c = (values[i-1] - (m[i-1]*(h(i)**2)/6))*(points[i] - x)
+    d = (values[i] - (m[i]*(h(i)**2)/6))*(x - points[i-1])
+    s = (a + b + c + d)/h(i)
+
+    return s
 
 
 M = 10000
 dogX = [0 for i in range(M)]
 dogY = [0 for i in range(M)]
-mx = interpolMatrix(tn, xn)
-my = interpolMatrix(tn, yn)
+mx = interpolMatrix(xn)
+my = interpolMatrix(yn)
 
-# for i in range(M):
-#   dogX[i] = interpolValue(i/M, tn, xn, mx)
-#   dogY[i] = interpolValue(i/M, tn, yn, my)
-print(len(xn))
-print(interpolValue(0, tn, xn, mx))
+for i in range(M):
+  dogX[i] = interpolValue(i/M, xn, mx)
+  dogY[i] = interpolValue(i/M, yn, my)
+# print(len(xn))
+# print(interpolValue(0, tn, xn, mx))
 plt.plot(dogX, dogY)
 plt.show()
