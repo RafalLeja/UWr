@@ -68,13 +68,13 @@ mx = interpolMatrix(points, x)
 my = interpolMatrix(points, y)
 px=[]
 py=[]
-# for i in range(M+1):
-#   # print(i)
-#   px.append(interpolValue(i/M, points, x, mx))
-#   py.append(interpolValue(i/M, points, y, my))
+for i in range(M+1):
+  # print(i)
+  px.append(interpolValue(i/M, points, x, mx))
+  py.append(interpolValue(i/M, points, y, my))
 
 print(interpolValue(1, points, x, mx))
-# plt.plot(points, px, color='blue', linewidth=1)
+plt.plot(px, py, color='blue', linewidth=1)
 # plt.plot(tn, x, color='blue', linewidth=1)
 # plt.plot(tn, y, color='blue', linewidth=1)
 
