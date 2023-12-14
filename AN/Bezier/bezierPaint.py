@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter.filedialog import askopenfilename, asksaveasfilename
+from PIL import Image,ImageTk
 import numpy as np
 
 class Line:
@@ -40,18 +42,23 @@ class BezierPaint:
 
     # File menu
     self.file_menu = tk.Menu(self.navbar, tearoff=False)
-    self.navbar.add_cascade(label="File", menu=self.file_menu)
-    self.file_menu.add_command(label="Save Snapshot", command=self.take_snapshot)
+    self.navbar.add_cascade(label="Plik", menu=self.file_menu)
+    self.file_menu.add_command(label="Wypisz linie", command=self.write_lines)
+    self.file_menu.add_command(label="Zapisz postęp", command=self.take_snapshot)
     self.file_menu.add_separator()
-    self.file_menu.add_command(label="Exit", command=self.root.quit)
+    self.file_menu.add_command(label="Wyjście", command=self.root.quit)
 
     # Edit menu
     self.edit_menu = tk.Menu(self.navbar, tearoff=False)
-    self.navbar.add_cascade(label="Edit", menu=self.edit_menu)
-    self.edit_menu.add_command(label="Undo", command=self.undo)
+    self.navbar.add_cascade(label="Edycja", menu=self.edit_menu)
+    self.edit_menu.add_command(label="Dodaj tło", command=self.add_background)
+    self.file_menu.add_separator()
+    self.edit_menu.add_command(label="Cofnij", command=self.undo)
 
   def setup_tools(self):
     self.selected_tool = "new"
+
+    self.background_image = None
     
     self.line_types = ["bezier", "NIFS3"]
     self.selected_line_type = self.line_types[0]
@@ -116,6 +123,13 @@ class BezierPaint:
     idx = next(i for i,v in enumerate(self.lines) if v.name == text)
     self.lines_combobox.current(idx)
     return True
+  
+  def add_background(self):
+    filename = askopenfilename()
+    img = ImageTk.PhotoImage(Image.open(filename))
+    self.background_image = img
+    self.draw(-50, -50)
+    return
 
   def add_new_line(self):
     line = Line(f'Nowa krzywa{len(self.lines)}', self.line_types[0])
@@ -161,8 +175,10 @@ class BezierPaint:
 
   def draw(self, x, y):
     self.canvas.delete("all")
-    R = 5
+    R = 10
     RES = 200
+    if self.background_image != None:
+      self.canvas.create_image(0,0,anchor='nw', image=self.background_image)
     for line in self.lines:
       if self.selected_line == line:
         if self.selected_tool == "new" and x >= 0:
@@ -171,7 +187,7 @@ class BezierPaint:
           self.selected_point = new_point
           self.select_move_point_tool()
 
-        min_dist = 2*R
+        min_dist = R
         min_point = None
         for point in line.points:
           if self.selected_point == None:
@@ -189,7 +205,7 @@ class BezierPaint:
             elif self.selected_tool == "move":
               self.selected_line.points[i].x = x
               self.selected_line.points[i].y = y
-            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', fill='red')  
+            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', width=R/3)  
           else:        
             self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red')
       if len(line.points) > 1:
@@ -203,7 +219,6 @@ class BezierPaint:
           Y = [ i.y for i in line.points]
           mX = self.interpolMatrix(X)
           mY = self.interpolMatrix(Y)
-          print(X)
           p = []
           for i in range(0, RES+1):
             p.append(self.interpolValue(i/RES, X, mX))
@@ -285,6 +300,18 @@ class BezierPaint:
     self.canvas.delete("all")
     self.lines = [Line(self.selected_line_name.get(), self.selected_line_type)]
 
+  def write_lines(self):
+    filename = asksaveasfilename()
+    file = open(filename, "wt")
+    for line in self.lines:
+      file.write(f"{line.name} typu {line.line_type}:\n  X = [ ")
+      for p in line.points:
+        file.write(str(p.x) + ", ")
+      file.write("]\n  Y = [ ")
+      for p in line.points:
+        file.write(str(p.y) + ", ")
+      file.write("]\n")
+    file.close
 
   def take_snapshot(self):
     self.canvas.postscript(file="snapshot.eps")
