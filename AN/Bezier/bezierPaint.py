@@ -6,8 +6,19 @@ class Line:
   def __init__(self, name, line_type):
     self.name = name
     self.line_type = line_type
-    self.points = np.empty([0, 2])
+    self.points = []
 
+class Point:
+  def __init__(self, x, y):
+    self.x = x
+    self.y = y
+    self.id = np.random.randint(0, 100000)
+
+  def __mul__(self, num):
+    return np.array([self.x * num, self.y * num])
+
+  # def __add__(self, p):
+  #   return np.array(self.x + p.x, self.y + self.y)
 
 class BezierPaint:
   def __init__(self, root):
@@ -94,7 +105,7 @@ class BezierPaint:
     self.clear_button.pack(side=tk.TOP, padx=5, pady=5)
 
   def setup_events(self):
-    self.canvas.bind("<B1-Motion>", self.draw)
+    self.canvas.bind("<B1-Motion>", self.drawEvent)
     self.canvas.bind("<ButtonRelease-1>", self.release)
 
   def change_line_name(self, text):
@@ -123,6 +134,7 @@ class BezierPaint:
   def select_line_type(self, l_type):
     self.selected_line.line_type = l_type
     self.selected_line_type = l_type
+    self.draw(-50, -50)
 
   def update_types_box(self):
     self.line_type_combobox.current(0 + (self.selected_line_type == "NIFS3"))
@@ -132,6 +144,7 @@ class BezierPaint:
     self.selected_line = self.lines[idx]
     self.selected_line_type = self.lines[idx].line_type
     self.selected_line_name.set(self.lines[idx].name)
+    self.draw(-50, -50)
     self.update_types_box()
 
   def select_new_point_tool(self):
@@ -143,38 +156,42 @@ class BezierPaint:
   def select_delete_point_tool(self):
     self.selected_tool = "delete"
 
-  def draw(self, event):
+  def drawEvent(self, event):
+    self.draw(event.x , event.y)
+
+  def draw(self, x, y):
     self.canvas.delete("all")
     R = 5
-    RES = 100
+    RES = 200
     for line in self.lines:
       if self.selected_line == line:
-        if self.selected_tool == "new":
-          new_point = (event.x, event.y)
-          line.points = np.append(line.points, [new_point], axis=0)
+        if self.selected_tool == "new" and x >= 0:
+          new_point = Point(x, y)
+          line.points = np.append(line.points, new_point)
           self.selected_point = new_point
           self.select_move_point_tool()
 
-        min_dist = 10000
+        min_dist = 2*R
         min_point = None
-        for i, point in enumerate(line.points):
+        for point in line.points:
           if self.selected_point == None:
-            dist = np.sqrt((event.x - point[0])**2+(event.y - point[1])**2)
+            dist = np.sqrt((x - point.x)**2+(y - point.y)**2)
             if dist < min_dist:
               min_dist = dist
               min_point = point
             self.selected_point=min_point
-          if all(point) == all(self.selected_point):
+        for i, point in enumerate(line.points):
+          if point == self.selected_point:
             if self.selected_tool == "delete":
-              self.selected_line.points = np.delete(line.points, i, axis=0)
+              self.selected_line.points = np.delete(line.points, i)
               self.select_move_point_tool()
               return
             elif self.selected_tool == "move":
-              self.selected_line.points[i][0] = event.x
-              self.selected_line.points[i][1] = event.y
-            self.canvas.create_oval(point[0] - R, point[1] - R , point[0] + R, point[1] + R, outline='red', fill='red')  
+              self.selected_line.points[i].x = x
+              self.selected_line.points[i].y = y
+            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', fill='red')  
           else:        
-            self.canvas.create_oval(point[0] - R, point[1] - R , point[0] + R, point[1] + R, outline='red')
+            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red')
       if len(line.points) > 1:
         if line.line_type == "bezier":
           p = [] 
@@ -182,56 +199,22 @@ class BezierPaint:
             p.append(list(self.de_casteljau(i/RES, line.points)))
           self.canvas.create_line(*p)
         if line.line_type == "NIFS3":
-          mX = self.interpolMatrix(line.points[:, 0])
-          mY = self.interpolMatrix(line.points[:, 1])
-          # print(line.points
+          X = [ i.x for i in line.points]
+          Y = [ i.y for i in line.points]
+          mX = self.interpolMatrix(X)
+          mY = self.interpolMatrix(Y)
+          print(X)
           p = []
-          for i in range(RES):
-            p.append(self.interpolValue(i/RES, line.points[:, 0], mX))
-            p.append(self.interpolValue(i/RES, line.points[:, 1], mY))
+          for i in range(0, RES+1):
+            p.append(self.interpolValue(i/RES, X, mX))
+            p.append(self.interpolValue(i/RES, Y, mY))
           self.canvas.create_line(*p)
 
-    # if self.selected_tool == "pen":
-    #   if self.prev_x is not None and self.prev_y is not None:
-    #     if self.selected_pen_type == "line":
-    #       self.canvas.create_line(self.prev_x, self.prev_y, event.x, event.y, fill=self.selected_color,
-    #                               width=self.selected_size, smooth=True)
-    #     elif self.selected_pen_type == "round":
-    #       x1 = event.x - self.selected_size
-    #       y1 = event.y - self.selected_size
-    #       x2 = event.x + self.selected_size
-    #       y2 = event.y + self.selected_size
-    #       self.canvas.create_oval(x1, y1, x2, y2, fill=self.selected_color, outline=self.selected_color)
-    #     elif self.selected_pen_type == "square":
-    #       x1 = event.x - self.selected_size
-    #       y1 = event.y - self.selected_size
-    #       x2 = event.x + self.selected_size
-    #       y2 = event.y + self.selected_size
-    #       self.canvas.create_rectangle(x1, y1, x2, y2, fill=self.selected_color, outline=self.selected_color)
-    #     elif self.selected_pen_type == "arrow":
-    #       x1 = event.x - self.selected_size
-    #       y1 = event.y - self.selected_size
-    #       x2 = event.x + self.selected_size
-    #       y2 = event.y + self.selected_size
-    #       self.canvas.create_polygon(x1, y1, x1, y2, event.x, y2, fill=self.selected_color,
-    #                                 outline=self.selected_color)
-    #     elif self.selected_pen_type == "diamond":
-    #       x1 = event.x - self.selected_size
-    #       y1 = event.y
-    #       x2 = event.x
-    #       y2 = event.y - self.selected_size
-    #       x3 = event.x + self.selected_size
-    #       y3 = event.y
-    #       x4 = event.x
-    #       y4 = event.y + self.selected_size
-    #       self.canvas.create_polygon(x1, y1, x2, y2, x3, y3, x4, y4, fill=self.selected_color,
-    #                                 outline=self.selected_color)
-    #   self.prev_x = event.x
-    #   self.prev_y = event.y
     
-  def interpolMatrix(values):
-    points = [i/95 for i in range(len(values))]
+  def interpolMatrix(self, values):
     n = len(values) -1
+    points = [i/n for i in range(len(values))]
+
 
     q = np.zeros(n)
     u = np.zeros(n)
@@ -266,9 +249,9 @@ class BezierPaint:
     return m
 
 
-  def interpolValue(x, values, m):
-    points = [i/95 for i in range(len(values))]
+  def interpolValue(self, x, values, m):
     n = len(values) - 1
+    points = [i/n for i in range(len(values))]
 
     def h(k):
       return points[k] - points[k-1]
@@ -276,7 +259,6 @@ class BezierPaint:
     for i in range(1, n+1):
       if points[i-1] <= x and x < points[i]:
         break
-
 
     a = (m[i-1]*((points[i] - x)**3))/6
     b = (m[i]*((x - points[i-1])**3))/6
@@ -291,7 +273,7 @@ class BezierPaint:
     n = len(p)
     for i in range(1, n):
       for j in range(n-i):
-        p[j] = (1-t)*p[j] + t*p[j+1]
+        p[j] = p[j]*(1-t) + p[j+1]*t
     return p[0]
 
   def release(self, event):
