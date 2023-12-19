@@ -18,9 +18,7 @@ class Point:
 
   def __mul__(self, num):
     return np.array([self.x * num, self.y * num])
-
-  # def __add__(self, p):
-  #   return np.array(self.x + p.x, self.y + self.y)
+  
 
 class BezierPaint:
   def __init__(self, root):
@@ -113,6 +111,7 @@ class BezierPaint:
 
   def setup_events(self):
     self.canvas.bind("<B1-Motion>", self.drawEvent)
+    self.canvas.bind("<Button-1>", self.drawEvent)
     self.canvas.bind("<ButtonRelease-1>", self.release)
 
   def change_line_name(self, text):
@@ -176,7 +175,7 @@ class BezierPaint:
   def draw(self, x, y):
     self.canvas.delete("all")
     R = 10
-    RES = 200
+    RES = 500
     if self.background_image != None:
       self.canvas.create_image(0,0,anchor='nw', image=self.background_image)
     for line in self.lines:
@@ -202,7 +201,7 @@ class BezierPaint:
               self.selected_line.points = np.delete(line.points, i)
               self.select_move_point_tool()
               return
-            elif self.selected_tool == "move":
+            elif self.selected_tool == "move" and x < self.canvas.winfo_width() and y < self.canvas.winfo_height() and x >=0 and y >= 0:
               self.selected_line.points[i].x = x
               self.selected_line.points[i].y = y
             self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', width=R/3)  

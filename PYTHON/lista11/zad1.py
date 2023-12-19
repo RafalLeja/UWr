@@ -1,3 +1,7 @@
+# Rafał Leja 340879
+# lista 11 zadanie 1
+# 15-12-2023
+
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import declarative_base, Session, relationship
 from datetime import datetime
@@ -104,31 +108,26 @@ def main():
 
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
 
-    # Add Book
-    add_book_parser = subparsers.add_parser('add_book', help='Add a new book')
-    add_book_parser.add_argument('--title', required=True, help='Title of the book')
-    add_book_parser.add_argument('--author', required=True, help='Author of the book')
-    add_book_parser.add_argument('--year', required=True, type=int, help='Year of publication')
+    add_book_parser = subparsers.add_parser('dodaj_ksiazke', help='Dodaj nowa ksiazke')
+    add_book_parser.add_argument('--tytul', required=True, help='Tytul ksiazki')
+    add_book_parser.add_argument('--autor', required=True, help='Autor ksiazki')
+    add_book_parser.add_argument('--rok', required=True, type=int, help='Rok wydania')
 
-    # Add Friend
-    add_friend_parser = subparsers.add_parser('add_friend', help='Add a new friend')
-    add_friend_parser.add_argument('--name', required=True, help='Name of the friend')
-    add_friend_parser.add_argument('--email', required=True, help='Email of the friend')
+    add_friend_parser = subparsers.add_parser('dodaj_przyjaciela', help='Dodaj nowego przyjaciela')
+    add_friend_parser.add_argument('--imie', required=True, help='Imie przyjaciela')
+    add_friend_parser.add_argument('--email', required=True, help='Email przyjaciela')
 
-    # Borrow Book
-    borrow_book_parser = subparsers.add_parser('borrow_book', help='Borrow a book')
-    borrow_book_parser.add_argument('--book_id', required=True, type=int, help='ID of the book to borrow')
-    borrow_book_parser.add_argument('--friend_id', required=True, type=int, help='ID of the friend borrowing the book')
+    borrow_book_parser = subparsers.add_parser('wypozycz_ksiazke', help='Wypozycz ksiazke')
+    borrow_book_parser.add_argument('--ksiazka_id', required=True, type=int, help='ID ksiazki do wypozyczenia')
+    borrow_book_parser.add_argument('--przyjaciel_id', required=True, type=int, help='ID przyjaciela wypozyczajacego ksiazke')
 
-    # Return Book
-    return_book_parser = subparsers.add_parser('return_book', help='Return a borrowed book')
-    return_book_parser.add_argument('--book_id', required=True, type=int, help='ID of the book to return')
+    return_book_parser = subparsers.add_parser('oddaj_ksiazke', help='Oddaj wypozyczona ksiazke')
+    return_book_parser.add_argument('--ksiazka_id', required=True, type=int, help='ID ksiazki do oddania')
 
-    # List Books
-    list_books_parser = subparsers.add_parser('list_books', help='List all books')
+    list_books_parser = subparsers.add_parser('lista_ksiazek', help='Wyswietl wszystkie ksiazki')
 
-    # List Friends
-    list_friends_parser = subparsers.add_parser('list_friends', help='List all friends')
+    list_friends_parser = subparsers.add_parser('lista_przyjaciol', help='Wyswietl wszystkich przyjaciol')
+
 
     args = parser.parse_args()
 
@@ -149,6 +148,4 @@ def main():
 
     session.close()
 
-
-if __name__ == '__main__':
-    main()
+main()
