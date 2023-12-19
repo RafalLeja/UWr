@@ -1,0 +1,6 @@
+Nowa krzywa typu NIFS3:
+  X = [ 157, 136, 151, 108, 49, 46, 52, ]
+  Y = [ 101, 84, 170, 186, 98, 197, 103, ]
+Nowa krzywa1 typu bezier:
+  X = [ ]
+  Y = [ ]

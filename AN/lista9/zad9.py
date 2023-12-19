@@ -25,14 +25,14 @@ tn = [i/95 for i in range(95)]
 #     return (tmp + tn * t * controlpoints[n]);
 
 
-def de_casteljau(t, points):
-  p = points.copy()
-  n = len(p)
-  for i in range(1, n):
-    for j in range(n-i):
-      p[j] = (1-t)*p[j] + t*p[j+1]
+# def de_casteljau(t, points):
+#   p = points.copy()
+#   n = len(p)
+#   for i in range(1, n):
+#     for j in range(n-i):
+#       p[j] = (1-t)*p[j] + t*p[j+1]
 
-  return p[0]
+#   return p[0]
 
 def B(n, i, t):
   newton = math.comb(n, i)
@@ -63,11 +63,10 @@ for i in range(0, M+1):
   bX.append(p2[0])
   bY.append(p2[1])
 # print(krzywa(1/2, weights, points))
-print(B(4,4,1))
 plt.xlim(0, 35)
 plt.ylim(0, 35)
 plt.scatter(points[:,0], points[:,1])
-plt.plot(curveX, curveY, color="orange")
 plt.plot(bX, bY, color="blue")
+plt.plot(curveX, curveY, color="orange")
 # plt.scatter(points[:, 0], points[:, 1])
 plt.show()
