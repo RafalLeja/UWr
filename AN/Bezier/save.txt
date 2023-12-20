@@ -1,0 +1,6 @@
+Nowa krzywa typu bezier:
+  X = [ 234, 317, 717, 427, ]
+  Y = [ 313, 186, 256, 468, ]
+Nowa krzywa1 typu bezier:
+  X = [ 185, 529, 136, ]
+  Y = [ 466, 192, 125, ]

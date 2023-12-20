@@ -42,7 +42,7 @@ class BezierPaint:
     self.file_menu = tk.Menu(self.navbar, tearoff=False)
     self.navbar.add_cascade(label="Plik", menu=self.file_menu)
     self.file_menu.add_command(label="Wypisz linie", command=self.write_lines)
-    self.file_menu.add_command(label="Zapisz postęp", command=self.take_snapshot)
+    self.file_menu.add_command(label="Wczytaj linie", command=self.read_lines)
     self.file_menu.add_separator()
     self.file_menu.add_command(label="Wyjście", command=self.root.quit)
 
@@ -50,8 +50,6 @@ class BezierPaint:
     self.edit_menu = tk.Menu(self.navbar, tearoff=False)
     self.navbar.add_cascade(label="Edycja", menu=self.edit_menu)
     self.edit_menu.add_command(label="Dodaj tło", command=self.add_background)
-    self.file_menu.add_separator()
-    self.edit_menu.add_command(label="Cofnij", command=self.undo)
 
   def setup_tools(self):
     self.selected_tool = "new"
@@ -303,7 +301,7 @@ class BezierPaint:
     filename = asksaveasfilename()
     file = open(filename, "wt")
     for line in self.lines:
-      file.write(f"{line.name} typu {line.line_type}:\n  X = [ ")
+      file.write(f"\"{line.name}\" {line.line_type}:\n  X = [ ")
       for p in line.points:
         file.write(str(p.x) + ", ")
       file.write("]\n  Y = [ ")
@@ -312,8 +310,29 @@ class BezierPaint:
       file.write("]\n")
     file.close
 
-  def take_snapshot(self):
-    self.canvas.postscript(file="snapshot.eps")
+  def read_lines(self):
+    filename = askopenfilename()
+    file = open(filename, "rt")
+    for line in file.readlines():
+      if line[0] == "\"":
+        nameStart = line.find("\"")
+        nameEnd = line.find("\"", nameStart+1)
+        name = line[nameStart+1:nameEnd]
+        
+        line = line.split()
+        continue
+      if line[0] == "  X":
+        pX = []
+        for i in range(2, len(line)-1):
+          self.lines[-1].points.append(Point(int(line[i][:-1]), 0))
+        continue
+      if line[0] == "  Y":
+        for i in range(2, len(line)-1):
+          self.lines[-1].points[i-2].y = int(line[i][:-1])
+        continue
+    file.close
+    self.update_lines_box()
+    self.select_line(self.lines[-1].name)
 
   def undo(self):
     items = self.canvas.find_all()
