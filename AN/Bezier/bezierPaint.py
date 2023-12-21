@@ -182,7 +182,7 @@ class BezierPaint:
           new_point = Point(x, y)
           line.points = np.append(line.points, new_point)
           self.selected_point = new_point
-          self.select_move_point_tool()
+          self.selected_tool = "new_added"
 
         min_dist = R
         min_point = None
@@ -198,6 +198,7 @@ class BezierPaint:
             if self.selected_tool == "delete":
               self.selected_line.points = np.delete(line.points, i)
               self.select_move_point_tool()
+              self.draw(-50, -50)
               return
             elif self.selected_tool == "move" and x < self.canvas.winfo_width() and y < self.canvas.winfo_height() and x >=0 and y >= 0:
               self.selected_line.points[i].x = x
@@ -222,6 +223,12 @@ class BezierPaint:
             p.append(self.interpolValue(i/RES, Y, mY))
           self.canvas.create_line(*p)
 
+  def release(self, event):
+    if self.selected_tool == "new_added":
+      self.selected_tool = "new"
+    self.selected_point = None
+    self.prev_x = None
+    self.prev_y = None
     
   def interpolMatrix(self, values):
     n = len(values) -1
@@ -288,10 +295,6 @@ class BezierPaint:
         p[j] = p[j]*(1-t) + p[j+1]*t
     return p[0]
 
-  def release(self, event):
-    self.selected_point = None
-    self.prev_x = None
-    self.prev_y = None
 
   def clear_canvas(self):
     self.canvas.delete("all")
