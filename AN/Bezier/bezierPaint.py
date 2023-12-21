@@ -299,40 +299,71 @@ class BezierPaint:
 
   def write_lines(self):
     filename = asksaveasfilename()
+    if filename == ():
+      return
+
     file = open(filename, "wt")
     for line in self.lines:
-      file.write(f"\"{line.name}\" {line.line_type}:\n  X = [ ")
+      file.write(f"\"{line.name}\" \"{line.line_type}\":\n  X = [ ")
       for p in line.points:
+        if p == line.points[-1]:
+          file.write(str(p.x))
+          break
         file.write(str(p.x) + ", ")
       file.write("]\n  Y = [ ")
       for p in line.points:
+        if p == line.points[-1]:
+          file.write(str(p.y))
+          break
         file.write(str(p.y) + ", ")
       file.write("]\n")
     file.close
 
   def read_lines(self):
+
     filename = askopenfilename()
+    if filename == ():
+      return
+
     file = open(filename, "rt")
+    self.lines = []
+    name = ""
+    pX, pY = [], []
+    idx = 0
     for line in file.readlines():
       if line[0] == "\"":
+        if idx > 0:
+          points = [Point(pX[i], pY[i]) for i in range(len(pX))]
+          new_line = Line(name, type_name)
+          new_line.points = points
+          self.lines.append(new_line)
         nameStart = line.find("\"")
         nameEnd = line.find("\"", nameStart+1)
         name = line[nameStart+1:nameEnd]
-        
-        line = line.split()
+        typeStart = line.find("\"", nameEnd+1)
+        typeEnd = line.find("\"", typeStart+1)
+        type_name = line[typeStart+1:typeEnd]
+        idx += 1
         continue
-      if line[0] == "  X":
+      if line[:3] == "  X":
         pX = []
-        for i in range(2, len(line)-1):
-          self.lines[-1].points.append(Point(int(line[i][:-1]), 0))
+        for l in line[8:-2].split(", "):
+          pX.append(int(l))
         continue
-      if line[0] == "  Y":
-        for i in range(2, len(line)-1):
-          self.lines[-1].points[i-2].y = int(line[i][:-1])
+      if line[:3] == "  Y":
+        pY = []
+        for l in line[8:-2].split(", "):
+          pY.append(int(l))
         continue
+    points = [Point(pX[i], pY[i]) for i in range(len(pX))]
+    new_line = Line(name, type_name)
+    new_line.points = points
+    self.lines.append(new_line)
     file.close
+    self.select_line(self.lines[0].name)
     self.update_lines_box()
-    self.select_line(self.lines[-1].name)
+    self.select_move_point_tool()
+    self.draw(-50, -50)
 
   def undo(self):
     items = self.canvas.find_all()
