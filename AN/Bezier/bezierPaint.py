@@ -98,6 +98,9 @@ class BezierPaint:
     self.new_point_button = ttk.Button(self.tool_frame, text="Dodaj punkt", command=self.select_new_point_tool)
     self.new_point_button.pack(side=tk.TOP, padx=5, pady=5)
 
+    self.dp_point_button = ttk.Button(self.tool_frame, text="Duplikuj punkt", command=self.select_dp_point_tool)
+    self.dp_point_button.pack(side=tk.TOP, padx=5, pady=5)
+
     self.move_point_button = ttk.Button(self.tool_frame, text="Przesuń punkt", command=self.select_move_point_tool)
     self.move_point_button.pack(side=tk.TOP, padx=5, pady=5)
 
@@ -161,6 +164,9 @@ class BezierPaint:
   def select_new_point_tool(self):
     self.selected_tool = "new"
 
+  def select_dp_point_tool(self):
+    self.selected_tool = "dp"
+
   def select_move_point_tool(self):
     self.selected_tool = "move"
 
@@ -195,6 +201,11 @@ class BezierPaint:
             self.selected_point=min_point
         for i, point in enumerate(line.points):
           if point == self.selected_point:
+            if self.selected_tool == "dp":
+              new_point = Point(self.selected_point.x + 4*R, self.selected_point.y)
+              line.points = np.insert(line.points, i, new_point)
+              self.selected_point = new_point
+              self.selected_tool = "dp_added"
             if self.selected_tool == "delete":
               self.selected_line.points = np.delete(line.points, i)
               self.select_move_point_tool()
@@ -226,6 +237,8 @@ class BezierPaint:
   def release(self, event):
     if self.selected_tool == "new_added":
       self.selected_tool = "new"
+    if self.selected_tool == "dp_added":
+      self.selected_tool = "dp"
     self.selected_point = None
     self.prev_x = None
     self.prev_y = None
