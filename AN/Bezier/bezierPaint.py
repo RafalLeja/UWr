@@ -332,6 +332,10 @@ class BezierPaint:
     close_button = tk.Button(selectionWindow, text="Zamknij", command=selectionWindow.destroy).pack()
     ok_button = tk.Button(selectionWindow, text="Połącz", command=lambda: self.join_lines).pack()
 
+    linesA_combobox = ttk.Combobox(self.tool_frame, values=[ l.name for l in self.lines ], state="readonly", postcommand=self.update_lines_box)
+    linesA_combobox.current(0)
+    linesA_combobox.pack(side=tk.TOP, padx=5, pady=5)
+
     return
 
   def clear_canvas(self):
