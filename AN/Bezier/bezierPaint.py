@@ -51,6 +51,7 @@ class BezierPaint:
     self.edit_menu = tk.Menu(self.navbar, tearoff=False)
     self.navbar.add_cascade(label="Edycja", menu=self.edit_menu)
     self.edit_menu.add_command(label="Dodaj tło", command=self.add_background)
+    self.edit_menu.add_command(label="Połącz krzywe Beziera", command=self.join_lines_widget)
 
   def setup_tools(self):
     self.selected_tool = "new"
@@ -315,6 +316,23 @@ class BezierPaint:
       b = b*(n-i)/(i+1)
     return p*1
 
+  def join_lines(self, lines):
+    return
+
+  def join_lines_widget(self):
+    beziers = [l for l in self.lines if l.line_type == "bezier"]
+    if len(beziers) < 2:
+      return
+    selectionWindow = tk.Toplevel(self.root)
+    selectionWindow.title("Wybierz krzywe do połączenia")
+    selectionWindow.geometry("400x200")
+    selectionWindow.resizable(False, False)
+    selectionWindow.grab_set()
+    Label = tk.Label(selectionWindow, text="Wybierz krzywe do połączenia").pack()
+    close_button = tk.Button(selectionWindow, text="Zamknij", command=selectionWindow.destroy).pack()
+    ok_button = tk.Button(selectionWindow, text="Połącz", command=lambda: self.join_lines).pack()
+
+    return
 
   def clear_canvas(self):
     self.canvas.delete("all")
