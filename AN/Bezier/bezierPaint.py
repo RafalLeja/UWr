@@ -328,13 +328,47 @@ class BezierPaint:
     selectionWindow.geometry("400x200")
     selectionWindow.resizable(False, False)
     selectionWindow.grab_set()
-    Label = tk.Label(selectionWindow, text="Wybierz krzywe do połączenia").pack()
-    close_button = tk.Button(selectionWindow, text="Zamknij", command=selectionWindow.destroy).pack()
-    ok_button = tk.Button(selectionWindow, text="Połącz", command=lambda: self.join_lines).pack()
 
-    linesA_combobox = ttk.Combobox(self.tool_frame, values=[ l.name for l in self.lines ], state="readonly", postcommand=self.update_lines_box)
+    Label = tk.Label(selectionWindow, text="Wybierz krzywe do połączenia")
+    Label.pack(side=tk.TOP, padx=5, pady=5)
+
+    frameLeft = tk.PanedWindow(selectionWindow, orient=tk.VERTICAL)
+    frameLeft.pack(side=tk.LEFT, padx=5, pady=5)
+
+    frameRight = tk.PanedWindow(selectionWindow, orient=tk.VERTICAL)
+    frameRight.pack(side=tk.RIGHT, padx=5, pady=5)
+
+    frameCenter = tk.PanedWindow(selectionWindow, orient=tk.HORIZONTAL)
+    frameCenter.pack(side=tk.TOP, padx=5, pady=5)
+
+    lineA_start = 0
+    startA = tk.Radiobutton(selectionWindow, text="Początek", variable=lineA_start, value=0)
+    frameLeft.add(startA)
+    endA = tk.Radiobutton(selectionWindow, text="Koniec", variable=lineA_start, value=1)
+    frameLeft.add(endA)
+
+    linesA_combobox = ttk.Combobox(selectionWindow, values=[ l.name for l in self.lines ], state="readonly", postcommand=self.update_lines_box)
     linesA_combobox.current(0)
-    linesA_combobox.pack(side=tk.TOP, padx=5, pady=5)
+    frameLeft.add(linesA_combobox)
+
+    lineB_start = 0
+    startB = tk.Radiobutton(selectionWindow, text="Początek", variable=lineB_start, value=0)
+    frameRight.add(startB)
+    endB = tk.Radiobutton(selectionWindow, text="Koniec", variable=lineB_start, value=1)
+    frameRight.add(endB)
+
+    linesB_combobox = ttk.Combobox(selectionWindow, values=[ l.name for l in self.lines ], state="readonly", postcommand=self.update_lines_box)
+    linesB_combobox.current(0)
+    frameRight.add(linesB_combobox)
+
+    frameCenter.add(frameLeft)
+    frameCenter.add(frameRight)
+
+    close_button = tk.Button(selectionWindow, text="Zamknij", command=selectionWindow.destroy)
+    close_button.pack(side=tk.LEFT, padx=5, pady=1)
+
+    ok_button = tk.Button(selectionWindow, text="Połącz", command=self.join_lines)
+    ok_button.pack(side=tk.RIGHT, padx=5, pady=1)
 
     return
 
