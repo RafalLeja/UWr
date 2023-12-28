@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from PIL import Image,ImageTk
 import numpy as np
+import math
 
 class Line:
   def __init__(self, name, line_type):
@@ -202,10 +203,12 @@ class BezierPaint:
         for i, point in enumerate(line.points):
           if point == self.selected_point:
             if self.selected_tool == "dp":
-              new_point = Point(self.selected_point.x + 4*R, self.selected_point.y)
+              new_point = Point(self.selected_point.x - 2*R, self.selected_point.y)
+              self.selected_point.x += 2*R
               line.points = np.insert(line.points, i, new_point)
               self.selected_point = new_point
               self.selected_tool = "dp_added"
+              self.draw(-50, -50)
             if self.selected_tool == "delete":
               self.selected_line.points = np.delete(line.points, i)
               self.select_move_point_tool()
@@ -221,7 +224,7 @@ class BezierPaint:
         if line.line_type == "bezier":
           p = [] 
           for i in range(RES):
-            p.append(list(self.de_casteljau(i/RES, line.points)))
+            p.append(list(self.casteljau(i/RES, line.points)))
           self.canvas.create_line(*p)
         if line.line_type == "NIFS3":
           X = [ i.x for i in line.points]
@@ -299,14 +302,18 @@ class BezierPaint:
     s = (a + b + c + d)/h(i)
 
     return s
-
-  def de_casteljau(self, t, points):
-    p = points.copy()
-    n = len(p)
-    for i in range(1, n):
-      for j in range(n-i):
-        p[j] = p[j]*(1-t) + p[j+1]*t
-    return p[0]
+    
+  def casteljau(self, t, points):
+    n = len(points)-1
+    s=1-t
+    b=n
+    d=t
+    p=points[0]
+    for i in range(1, n+1):
+      p = p*s + points[i]*d*b
+      d *= t
+      b = b*(n-i)/(i+1)
+    return p*1
 
 
   def clear_canvas(self):
