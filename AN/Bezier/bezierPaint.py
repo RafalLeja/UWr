@@ -317,13 +317,20 @@ class BezierPaint:
     return p*1
 
   def join_lines(self, window, lineA, lineB, startA, startB):
-    print(lineA.name, lineB.name, startA, startB)
     window.destroy()
-
+    if lineA == lineB:
+      return
+    connectionX = (lineA.points[-startA+(startA*-1)-(startA-1)*1].x + lineB.points[-startB+(startB*-1)-(startB-1)*1].x) /2
+    connectionY = (lineA.points[-startA+(startA*-1)-(startA-1)*1].y + lineB.points[-startB+(startB*-1)-(startB-1)*1].y) /2
+    lineB.points[-startB].x = connectionX 
+    lineA.points[-startA].x = connectionX
+    lineB.points[-startB].y = connectionY
+    lineA.points[-startA].y = connectionY
+    self.draw(-50, -50)
     return
 
   def join_lines_widget(self):
-    beziers = [l for l in self.lines if l.line_type == "bezier"]
+    beziers = [l for l in self.lines if l.line_type == "bezier" and len(l.points) > 2]
     if len(beziers) < 2:
       return
     selectionWindow = tk.Toplevel(self.root)
@@ -332,7 +339,7 @@ class BezierPaint:
     selectionWindow.resizable(False, False)
     selectionWindow.grab_set()
 
-    Label = tk.Label(selectionWindow, text="Wybierz krzywe do połączenia")
+    Label = tk.Label(selectionWindow, text="Linie muszą mieć przynajmniej trzy punkty")
     Label.pack(side=tk.TOP, padx=5, pady=5)
 
     frameLeft = tk.PanedWindow(selectionWindow, orient=tk.VERTICAL)
