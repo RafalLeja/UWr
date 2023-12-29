@@ -316,7 +316,8 @@ class BezierPaint:
       b = b*(n-i)/(i+1)
     return p*1
 
-  def join_lines(self, lines):
+  def join_lines(self, lineA, lineB, startA, startB):
+    print(lineA.name, lineB.name, startA, startB)
     return
 
   def join_lines_widget(self):
@@ -341,7 +342,7 @@ class BezierPaint:
     frameCenter = tk.PanedWindow(selectionWindow, orient=tk.HORIZONTAL)
     frameCenter.pack(side=tk.TOP, padx=5, pady=5)
 
-    lineA_start = 0
+    lineA_start = tk.IntVar()
     startA = tk.Radiobutton(selectionWindow, text="Początek", variable=lineA_start, value=0)
     frameLeft.add(startA)
     endA = tk.Radiobutton(selectionWindow, text="Koniec", variable=lineA_start, value=1)
@@ -351,7 +352,7 @@ class BezierPaint:
     linesA_combobox.current(0)
     frameLeft.add(linesA_combobox)
 
-    lineB_start = 0
+    lineB_start = tk.IntVar()
     startB = tk.Radiobutton(selectionWindow, text="Początek", variable=lineB_start, value=0)
     frameRight.add(startB)
     endB = tk.Radiobutton(selectionWindow, text="Koniec", variable=lineB_start, value=1)
@@ -367,7 +368,7 @@ class BezierPaint:
     close_button = tk.Button(selectionWindow, text="Zamknij", command=selectionWindow.destroy)
     close_button.pack(side=tk.LEFT, padx=5, pady=1)
 
-    ok_button = tk.Button(selectionWindow, text="Połącz", command=self.join_lines)
+    ok_button = tk.Button(selectionWindow, text="Połącz", command=lambda: self.join_lines(self.lines[linesA_combobox.current()], self.lines[linesB_combobox.current()], lineA_start.get(), lineB_start.get()))
     ok_button.pack(side=tk.RIGHT, padx=5, pady=1)
 
     return
