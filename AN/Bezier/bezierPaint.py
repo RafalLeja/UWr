@@ -316,8 +316,10 @@ class BezierPaint:
       b = b*(n-i)/(i+1)
     return p*1
 
-  def join_lines(self, lineA, lineB, startA, startB):
+  def join_lines(self, window, lineA, lineB, startA, startB):
     print(lineA.name, lineB.name, startA, startB)
+    window.destroy()
+
     return
 
   def join_lines_widget(self):
@@ -368,7 +370,7 @@ class BezierPaint:
     close_button = tk.Button(selectionWindow, text="Zamknij", command=selectionWindow.destroy)
     close_button.pack(side=tk.LEFT, padx=5, pady=1)
 
-    ok_button = tk.Button(selectionWindow, text="Połącz", command=lambda: self.join_lines(self.lines[linesA_combobox.current()], self.lines[linesB_combobox.current()], lineA_start.get(), lineB_start.get()))
+    ok_button = tk.Button(selectionWindow, text="Połącz", command=lambda: self.join_lines(selectionWindow, self.lines[linesA_combobox.current()], self.lines[linesB_combobox.current()], lineA_start.get(), lineB_start.get()))
     ok_button.pack(side=tk.RIGHT, padx=5, pady=1)
 
     return
