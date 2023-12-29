@@ -109,6 +109,9 @@ class BezierPaint:
     self.delete_point_button = ttk.Button(self.tool_frame, text="Usuń punkt", command=self.select_delete_point_tool)
     self.delete_point_button.pack(side=tk.TOP, padx=5, pady=5)
 
+    self.delete_line_button = ttk.Button(self.tool_frame, text="Usuń krzywą", command=self.delete_line)
+    self.delete_line_button.pack(side=tk.TOP, padx=5, pady=5)
+
     self.clear_button = ttk.Button(self.tool_frame, text="Wyczyść rysunek", command=self.clear_canvas)
     self.clear_button.pack(side=tk.TOP, padx=5, pady=5)
 
@@ -141,6 +144,13 @@ class BezierPaint:
     self.lines_combobox.current(len(self.lines)-1)
 
   def delete_line(self):
+    if len(self.lines) == 1:
+      return
+    idx = next(i for i,v in enumerate(self.lines) if v.name == self.selected_line.name)
+    del self.lines[idx]
+    self.select_line(self.lines[0].name)
+    self.update_lines_box()
+    self.lines_combobox.current(0)
     return
 
   def update_lines_box(self):
@@ -318,7 +328,7 @@ class BezierPaint:
 
   def join_lines(self, window, lineA, lineB, startA, startB):
     window.destroy()
-    if lineA == lineB:
+    if lineA == lineB and startA == startB:
       return
     connectionX = (lineA.points[-startA+(startA*-1)-(startA-1)*1].x + lineB.points[-startB+(startB*-1)-(startB-1)*1].x) /2
     connectionY = (lineA.points[-startA+(startA*-1)-(startA-1)*1].y + lineB.points[-startB+(startB*-1)-(startB-1)*1].y) /2
@@ -331,15 +341,13 @@ class BezierPaint:
 
   def join_lines_widget(self):
     beziers = [l for l in self.lines if l.line_type == "bezier" and len(l.points) > 2]
-    if len(beziers) < 2:
-      return
     selectionWindow = tk.Toplevel(self.root)
     selectionWindow.title("Wybierz krzywe do połączenia")
     selectionWindow.geometry("400x200")
     selectionWindow.resizable(False, False)
     selectionWindow.grab_set()
 
-    Label = tk.Label(selectionWindow, text="Linie muszą mieć przynajmniej trzy punkty")
+    Label = tk.Label(selectionWindow, text="Linie muszą mieć przynajmniej trzy punkty, będą połączone w środku dwóch ostatnich punktów")
     Label.pack(side=tk.TOP, padx=5, pady=5)
 
     frameLeft = tk.PanedWindow(selectionWindow, orient=tk.VERTICAL)
