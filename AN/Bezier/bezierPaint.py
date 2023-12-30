@@ -66,7 +66,7 @@ class BezierPaint:
     self.background_image = None
     self.grid = False
     
-    self.line_types = ["bezier", "NIFS3"]
+    self.line_types = ["bezier", "NIFS3", "Wpełnienie"]
     self.selected_line_type = self.line_types[0]
     self.selected_line_name = tk.StringVar()
     self.selected_line_name.set("Nowa krzywa")
@@ -246,6 +246,7 @@ class BezierPaint:
               min_point = point
             self.selected_point=min_point
         for i, point in enumerate(line.points):
+
           if point == self.selected_point:
             if self.selected_tool == "dp":
               new_point = Point(self.selected_point.x - 2*R, self.selected_point.y)
@@ -254,7 +255,7 @@ class BezierPaint:
               self.selected_point = new_point
               self.selected_tool = "dp_added"
               self.draw(-50, -50)
-            if self.selected_tool == "delete":
+            elif self.selected_tool == "delete":
               self.selected_line.points = np.delete(line.points, i)
               self.select_move_point_tool()
               self.draw(-50, -50)
@@ -262,7 +263,15 @@ class BezierPaint:
             elif self.selected_tool == "move" and x < self.canvas.winfo_width() and y < self.canvas.winfo_height() and x >=0 and y >= 0:
               self.selected_line.points[i].x = x
               self.selected_line.points[i].y = y
-            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', width=R/3)  
+
+            if line.line_type == "Wpełnienie":
+              self.canvas.create_line(point.x-R, point.y-R, point.x+R, point.y+R, fill='green', width=R/3)
+              self.canvas.create_line(point.x-R, point.y+R, point.x+R, point.y-R, fill='green', width=R/3)
+            else:
+              self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', width=R/3)  
+          elif line.line_type == "Wpełnienie":
+            self.canvas.create_line(point.x-R, point.y-R, point.x+R, point.y+R, fill='green')
+            self.canvas.create_line(point.x-R, point.y+R, point.x+R, point.y-R, fill='green')
           else:        
             self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red')
       if len(line.points) > 1:
