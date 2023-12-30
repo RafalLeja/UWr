@@ -59,6 +59,7 @@ class BezierPaint:
     self.italic_menu.add_command(label="<-", command=lambda: self.italic(-1))
 
     self.edit_menu.add_command(label="Połącz krzywe Beziera", command=self.join_lines_widget)
+    self.edit_menu.add_command(label="Wyczysc rysunek", command=self.clear_canvas)
 
   def setup_tools(self):
     self.selected_tool = "new"
@@ -120,9 +121,6 @@ class BezierPaint:
     self.delete_line_button = ttk.Button(self.tool_frame, text="Usuń krzywą", command=self.delete_line)
     self.delete_line_button.pack(side=tk.TOP, padx=5, pady=5)
 
-    self.clear_button = ttk.Button(self.tool_frame, text="Wyczyść rysunek", command=self.clear_canvas)
-    self.clear_button.pack(side=tk.TOP, padx=5, pady=5)
-
   def setup_events(self):
     self.canvas.bind("<B1-Motion>", self.drawEvent)
     self.canvas.bind("<Button-1>", self.drawEvent)
@@ -161,7 +159,10 @@ class BezierPaint:
     return
 
   def add_new_line(self):
-    line = Line(f'Nowa krzywa{len(self.lines)}', self.line_types[0])
+    name = f'Nowa krzywa{len(self.lines)}'
+    while name in [l.name for l in self.lines]:
+      name = f'Nowa krzywa{len(self.lines)+1}'
+    line = Line(name, self.line_types[0])
     self.lines.append(line)
     self.update_lines_box()
     self.select_line(line.name)
@@ -436,6 +437,7 @@ class BezierPaint:
   def clear_canvas(self):
     self.canvas.delete("all")
     self.lines = [Line(self.selected_line_name.get(), self.selected_line_type)]
+    self.draw(-50, -50)
 
   def write_lines(self):
     filename = asksaveasfilename()
@@ -460,7 +462,6 @@ class BezierPaint:
     file.close
 
   def read_lines(self):
-
     filename = askopenfilename()
     if filename == ():
       return
@@ -504,11 +505,6 @@ class BezierPaint:
     self.update_lines_box()
     self.select_move_point_tool()
     self.draw(-50, -50)
-
-  def undo(self):
-    items = self.canvas.find_all()
-    if items:
-      self.canvas.delete(items[-1])
 
 if __name__ == "__main__":
   root = tk.Tk()
