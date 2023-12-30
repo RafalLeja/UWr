@@ -66,7 +66,7 @@ class BezierPaint:
     self.background_image = None
     self.grid = False
     
-    self.line_types = ["bezier", "NIFS3", "Wpełnienie"]
+    self.line_types = ["bezier", "NIFS3", "Kolor"]
     self.selected_line_type = self.line_types[0]
     self.selected_line_name = tk.StringVar()
     self.selected_line_name.set("Nowa krzywa")
@@ -264,12 +264,12 @@ class BezierPaint:
               self.selected_line.points[i].x = x
               self.selected_line.points[i].y = y
 
-            if line.line_type == "Wpełnienie":
+            if line.line_type == "Kolor":
               self.canvas.create_line(point.x-R, point.y-R, point.x+R, point.y+R, fill='green', width=R/3)
               self.canvas.create_line(point.x-R, point.y+R, point.x+R, point.y-R, fill='green', width=R/3)
             else:
               self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', width=R/3)  
-          elif line.line_type == "Wpełnienie":
+          elif line.line_type == "Kolor":
             self.canvas.create_line(point.x-R, point.y-R, point.x+R, point.y+R, fill='green')
             self.canvas.create_line(point.x-R, point.y+R, point.x+R, point.y-R, fill='green')
           else:        
