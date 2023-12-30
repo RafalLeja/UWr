@@ -50,6 +50,7 @@ class BezierPaint:
     # Edit menu
     self.edit_menu = tk.Menu(self.navbar, tearoff=False)
     self.navbar.add_cascade(label="Edycja", menu=self.edit_menu)
+    self.edit_menu.add_command(label="Dodaj siatke", command=self.add_grid)
     self.edit_menu.add_command(label="Dodaj tło", command=self.add_background)
     self.edit_menu.add_command(label="Połącz krzywe Beziera", command=self.join_lines_widget)
 
@@ -129,6 +130,19 @@ class BezierPaint:
     self.lines_combobox.current(idx)
     return True
   
+  def add_grid(self):
+    self.canvas.delete("all")
+    D = 100
+    for i in range(0, self.canvas_width, D):
+      self.canvas.create_line(i, 0, i, self.canvas_height, fill="grey")
+    for i in range(0, self.canvas_height, D):
+      self.canvas.create_line(0, i, self.canvas_width, i, fill="grey")
+    midX = ((self.canvas_width/D)//2)*D
+    midY = ((self.canvas_height/D)//2)*D
+    self.canvas.create_line(midX, 0, midX, self.canvas_height, fill="black", width=3)
+    self.canvas.create_line(0, midY, self.canvas_width, midY, fill="black", width=3)
+    return
+
   def add_background(self):
     filename = askopenfilename()
     img = ImageTk.PhotoImage(Image.open(filename))
