@@ -50,15 +50,21 @@ class BezierPaint:
     # Edit menu
     self.edit_menu = tk.Menu(self.navbar, tearoff=False)
     self.navbar.add_cascade(label="Edycja", menu=self.edit_menu)
-    self.edit_menu.add_command(label="Dodaj siatke", command=self.add_grid)
+    self.edit_menu.add_command(label="Siatka", command=self.add_grid)
     self.edit_menu.add_command(label="Dodaj tło", command=self.add_background)
-    self.edit_menu.add_command(label="Kursywa", command=self.italic)
+
+    self.italic_menu = tk.Menu(self.edit_menu, tearoff=False)
+    self.edit_menu.add_cascade(label="Kursywa", menu=self.italic_menu)
+    self.italic_menu.add_command(label="->", command=lambda: self.italic(1))
+    self.italic_menu.add_command(label="<-", command=lambda: self.italic(-1))
+
     self.edit_menu.add_command(label="Połącz krzywe Beziera", command=self.join_lines_widget)
 
   def setup_tools(self):
     self.selected_tool = "new"
 
     self.background_image = None
+    self.grid = False
     
     self.line_types = ["bezier", "NIFS3"]
     self.selected_line_type = self.line_types[0]
@@ -122,16 +128,6 @@ class BezierPaint:
     self.canvas.bind("<Button-1>", self.drawEvent)
     self.canvas.bind("<ButtonRelease-1>", self.release)
 
-  def italic(self):
-    D = 100
-    R = 0.2
-    self.canvas.delete("all")
-    midY = ((self.canvas_height/D)//2)*D
-    for line in self.lines:
-      for i, point in enumerate(line.points):
-        dist = point.y - midY
-        line.points[i].x = point.x + (dist * R)
-
   def change_line_name(self, text):
     if text in self.lines_combobox['values']:
       return False
@@ -141,17 +137,20 @@ class BezierPaint:
     self.lines_combobox.current(idx)
     return True
   
-  def add_grid(self):
+  def italic(self, direction):
     D = 100
+    R = 0.4
     self.canvas.delete("all")
-    for i in range(0, self.canvas_width, D):
-      self.canvas.create_line(i, 0, i, self.canvas_height, fill="grey")
-    for i in range(0, self.canvas_height, D):
-      self.canvas.create_line(0, i, self.canvas_width, i, fill="grey")
-    midX = ((self.canvas_width/D)//2)*D
     midY = ((self.canvas_height/D)//2)*D
-    self.canvas.create_line(midX, 0, midX, self.canvas_height, fill="black", width=3)
-    self.canvas.create_line(0, midY, self.canvas_width, midY, fill="black", width=3)
+    for line in self.lines:
+      for i, point in enumerate(line.points):
+        dist = point.y - midY
+        line.points[i].x = point.x - (dist * R)*direction
+    self.draw(-50, -50)
+  
+  def add_grid(self):
+    self.grid = not self.grid
+    self.draw(-50, -50)
     return
 
   def add_background(self):
@@ -217,8 +216,18 @@ class BezierPaint:
     self.canvas.delete("all")
     R = 10
     RES = 500
+    D = 100
     if self.background_image != None:
       self.canvas.create_image(0,0,anchor='nw', image=self.background_image)
+    if self.grid:
+      for i in range(0, self.canvas_width, D):
+        self.canvas.create_line(i, 0, i, self.canvas_height, fill="grey")
+      for i in range(0, self.canvas_height, D):
+        self.canvas.create_line(0, i, self.canvas_width, i, fill="grey")
+      midX = ((self.canvas_width/D)//2)*D
+      midY = ((self.canvas_height/D)//2)*D
+      self.canvas.create_line(midX, 0, midX, self.canvas_height, fill="black", width=3)
+      self.canvas.create_line(0, midY, self.canvas_width, midY, fill="black", width=3)
     for line in self.lines:
       if self.selected_line == line:
         if self.selected_tool == "new" and x >= 0:
