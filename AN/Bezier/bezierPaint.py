@@ -52,6 +52,7 @@ class BezierPaint:
     self.navbar.add_cascade(label="Edycja", menu=self.edit_menu)
     self.edit_menu.add_command(label="Dodaj siatke", command=self.add_grid)
     self.edit_menu.add_command(label="Dodaj tło", command=self.add_background)
+    self.edit_menu.add_command(label="Kursywa", command=self.italic)
     self.edit_menu.add_command(label="Połącz krzywe Beziera", command=self.join_lines_widget)
 
   def setup_tools(self):
@@ -121,6 +122,16 @@ class BezierPaint:
     self.canvas.bind("<Button-1>", self.drawEvent)
     self.canvas.bind("<ButtonRelease-1>", self.release)
 
+  def italic(self):
+    D = 100
+    R = 0.2
+    self.canvas.delete("all")
+    midY = ((self.canvas_height/D)//2)*D
+    for line in self.lines:
+      for i, point in enumerate(line.points):
+        dist = point.y - midY
+        line.points[i].x = point.x + (dist * R)
+
   def change_line_name(self, text):
     if text in self.lines_combobox['values']:
       return False
@@ -131,8 +142,8 @@ class BezierPaint:
     return True
   
   def add_grid(self):
-    self.canvas.delete("all")
     D = 100
+    self.canvas.delete("all")
     for i in range(0, self.canvas_width, D):
       self.canvas.create_line(i, 0, i, self.canvas_height, fill="grey")
     for i in range(0, self.canvas_height, D):
