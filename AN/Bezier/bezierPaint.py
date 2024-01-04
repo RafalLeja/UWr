@@ -25,7 +25,7 @@ class BezierPaint:
   def __init__(self, root):
     self.root = root
     self.canvas_width = 800
-    self.canvas_height = 600
+    self.canvas_height = 800
     self.canvas = tk.Canvas(self.root, width=self.canvas_width, height=self.canvas_height, bg="white", bd=3, relief=tk.SUNKEN)
     self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
     self.setup_navbar()
@@ -273,6 +273,10 @@ class BezierPaint:
           elif line.line_type == "Kolor":
             self.canvas.create_line(point.x-R, point.y-R, point.x+R, point.y+R, fill='green')
             self.canvas.create_line(point.x-R, point.y+R, point.x+R, point.y-R, fill='green')
+          elif i == 0:
+            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='blue', width=R/3)
+          elif i == len(line.points)-1:
+            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='orange', width=R/3)
           else:        
             self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red')
       if len(line.points) > 1:
