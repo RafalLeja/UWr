@@ -378,8 +378,8 @@ class BezierPaint:
     window.destroy()
     if lineA == lineB and startA == startB:
       return
-    connectionX = (lineA.points[-startA+(startA*-1)-(startA-1)*1].x + lineB.points[-startB+(startB*-1)-(startB-1)*1].x) /2
-    connectionY = (lineA.points[-startA+(startA*-1)-(startA-1)*1].y + lineB.points[-startB+(startB*-1)-(startB-1)*1].y) /2
+    connectionX = (lineA.points[-startA+(startA*-1)-(startA-1)*1].x + lineB.points[-startB+(startB*-1)-(startB-1)*1].x) //2
+    connectionY = (lineA.points[-startA+(startA*-1)-(startA-1)*1].y + lineB.points[-startB+(startB*-1)-(startB-1)*1].y) //2
     lineB.points[-startB].x = connectionX 
     lineA.points[-startA].x = connectionX
     lineB.points[-startB].y = connectionY

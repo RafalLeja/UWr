@@ -16,13 +16,15 @@ def read_lines(src):
   for line in file.readlines():
     if line[0] == "\"":
       if idx > 0:
-        points = [[pX[i], pY[i]] for i in range(len(pX))]
+        points = np.array([[pX[i], pY[i]] for i in range(len(pX))])
         if type_name == "bezier":
-          beziers.append([points])
+          beziers.append(points)
         elif type_name == "NIFS3":
           nifs.append([pX, pY])
         elif type_name == "Kolor":
-          colors.append([pX, pY])
+          for i in range(len(pX)):
+            colors.append([pX[i], pY[i]])
+
       nameStart = line.find("\"")
       nameEnd = line.find("\"", nameStart+1)
       name = line[nameStart+1:nameEnd]
@@ -42,13 +44,14 @@ def read_lines(src):
         pY.append(int(l))
       continue
 
-  points = [[pX[i], pY[i]] for i in range(len(pX))]
+  points = np.array([[pX[i], pY[i]] for i in range(len(pX))])
   if type_name == "bezier":
-    beziers.append([points])
+    beziers.append(points)
   elif type_name == "NIFS3":
     nifs.append([pX, pY])
   elif type_name == "Kolor":
-    colors.append([pX, pY])
+    for i in range(len(pX)):
+      colors.append([pX[i], pY[i]])
 
   file.close
   return [beziers, nifs, colors]
@@ -65,7 +68,7 @@ def casteljau(t, points):
     b = b*(n-i)/(i+1)
   return p*1
 
-def interpolMatrix(self, values):
+def interpolMatrix(values):
   n = len(values) -1
   points = [i/n for i in range(len(values))]
 
@@ -102,7 +105,7 @@ def interpolMatrix(self, values):
 
   return m
 
-def interpolValue(self, x, values, m):
+def interpolValue(x, values, m):
   n = len(values) - 1
   points = [i/n for i in range(len(values))]
 
@@ -125,12 +128,12 @@ def draw_letter(src, img, start, color):
   RES = 1000
   beziers, nifs, colors = read_lines(src)
   for b in beziers:
-    for i in range(len(b[0])):
+    for i in range(len(b)):
       b[i][0] += start[0]
       b[i][1] += start[1]
     p = [] 
     for i in range(RES):
-      p.append(list(casteljau(i/RES, b)))
+      p.append(tuple(list(casteljau(i/RES, b))))
     img.line(p, fill=color, width=1)
   for n in nifs:
     for i in range(len(n[0])):
@@ -143,28 +146,34 @@ def draw_letter(src, img, start, color):
       p.append(interpolValue(i/RES, n[0], mX))
       p.append(interpolValue(i/RES, n[1], mY))
     img.line(*p, fill=color, width=1)
+  new_colors = []
   for c in colors:
-    ImageDraw.floodfill(img, (c[0]+start[0], c[1]+start[1]), color)
+    new_colors.append([c[0]+start[0], c[1]+start[1]])
+  return new_colors
 
 
 def main():
   letter_width = 800
   letter_height = 800
-  text = "Hello World"
-  src = "AN/Bezier/letters"
+  text = "AAA A"
+  src = "C:/Users/rafal/Desktop/UWr/AN/Bezier/litery"
 
   total_width = letter_width * len(text)
   with Image.new("RGB", (total_width, letter_height), (255, 255, 255)) as img:
     start = [0, 0]
     d = ImageDraw.Draw(img)
+    colors = np.empty((0, 2))
     for i in text:
       if i == " ":
         start[0] += letter_width
         continue
-      draw_letter(src+"/"+i+".txt", img, start, (0, 0, 0))
+      new_colors = draw_letter(src+"/"+i.upper()+".txt", d, start, (0, 0, 0))
+      colors = np.concatenate((colors, new_colors), axis=0)
       start[0] += letter_width
-
-    img.save("AN/Bezier/wyraz.png")
+    for c in colors:
+      print(c)
+      ImageDraw.floodfill(img, tuple(c), (0, 0, 0))
+    img.save("C:/Users/rafal/Desktop/UWr/AN/Bezier/wyraz.png")
 
 
 if __name__ == "__main__":
