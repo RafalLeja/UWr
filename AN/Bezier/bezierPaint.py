@@ -449,9 +449,14 @@ class BezierPaint:
       return
 
     file = open(filename, "wt")
+    width = [self.canvas_width, 0]
     for line in self.lines:
       file.write(f"\"{line.name}\" \"{line.line_type}\":\n  X = [ ")
       for p in line.points:
+        if p.x < width[0]:
+          width[0] = p.x
+        if p.x > width[1]:
+          width[1] = p.x
         if p == line.points[-1]:
           file.write(str(p.x))
           break
@@ -463,6 +468,7 @@ class BezierPaint:
           break
         file.write(str(p.y) + ", ")
       file.write("]\n")
+    file.write(f"width={width[0]},{width[1]}")
     file.close
 
   def read_lines(self):
@@ -499,6 +505,8 @@ class BezierPaint:
         pY = []
         for l in line[8:-2].split(", "):
           pY.append(int(l))
+        continue
+      if line[0] == "w":
         continue
     points = [Point(pX[i], pY[i]) for i in range(len(pX))]
     new_line = Line(name, type_name)

@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw
 import numpy as np
 
-def read_lines(src):
+def read_curves(src):
   filename = src
   if filename == ():
     return
@@ -11,6 +11,7 @@ def read_lines(src):
   nifs = []
   colors = []
   pX, pY = [], []
+  width = []
   type_name = ""
   idx = 0
   for line in file.readlines():
@@ -43,6 +44,10 @@ def read_lines(src):
       for l in line[8:-2].split(", "):
         pY.append(int(l))
       continue
+    if line[0] == "w":
+      for l in line[7:].split(","):
+        width.append(int(l))
+      continue
 
   points = np.array([[pX[i], pY[i]] for i in range(len(pX))])
   if type_name == "bezier":
@@ -54,7 +59,7 @@ def read_lines(src):
       colors.append([pX[i], pY[i]])
 
   file.close
-  return [beziers, nifs, colors]
+  return [beziers, nifs, colors, width]
 
 def casteljau(t, points):
   n = len(points)-1
@@ -124,55 +129,60 @@ def interpolValue(x, values, m):
 
   return s
 
-def draw_letter(src, img, start, color):
+def draw_letter(letter, img, start, color):
   RES = 1000
-  beziers, nifs, colors = read_lines(src)
+  beziers, nifs, colors, width = letter
   for b in beziers:
-    for i in range(len(b)):
-      b[i][0] += start[0]
-      b[i][1] += start[1]
     p = [] 
     for i in range(RES):
       p.append(tuple(list(casteljau(i/RES, b))))
+      p[i]=tuple([p[i][0]+start[0], p[i][1]+start[1]])
     img.line(p, fill=color, width=1)
   for n in nifs:
-    for i in range(len(n[0])):
-      n[0][i] += start[0]
-      n[1][i] += start[1]
     mX = interpolMatrix(n[0])
     mY = interpolMatrix(n[1])
     p = []
     for i in range(0, RES+1):
-      p.append(interpolValue(i/RES, n[0], mX))
-      p.append(interpolValue(i/RES, n[1], mY))
+      p.append(interpolValue(i/RES, n[0], mX)+start[0])
+      p.append(interpolValue(i/RES, n[1], mY)+start[1])
     img.line(*p, fill=color, width=1)
-  new_colors = []
-  for c in colors:
-    new_colors.append([c[0]+start[0], c[1]+start[1]])
-  return new_colors
+
 
 
 def main():
   letter_width = 800
   letter_height = 800
-  text = "AAA A"
+  total_width = 0
+  separator = 0
+  text = "aA a a AAa"
   src = "C:/Users/rafal/Desktop/UWr/AN/Bezier/litery"
 
-  total_width = letter_width * len(text)
+  text = text.upper()
+  letters = dict()
+  for i in text:
+    if i == " ":
+      total_width += letter_width
+      continue
+    if i not in letters.keys():
+      letters[i] = read_curves(src+"/"+i+".txt")
+
+    total_width += separator + letters[i][3][1] - letters[i][3][0]
+
   with Image.new("RGB", (total_width, letter_height), (255, 255, 255)) as img:
     start = [0, 0]
     d = ImageDraw.Draw(img)
-    colors = np.empty((0, 2))
     for i in text:
       if i == " ":
-        start[0] += letter_width
+        start[0] += 800 + separator
         continue
-      new_colors = draw_letter(src+"/"+i.upper()+".txt", d, start, (0, 0, 0))
-      colors = np.concatenate((colors, new_colors), axis=0)
-      start[0] += letter_width
-    for c in colors:
-      print(c)
-      ImageDraw.floodfill(img, tuple(c), (0, 0, 0))
+     
+      draw_letter(letters[i], d, start, (0, 0, 0))
+      for c in letters[i][2]:
+        nc = tuple([c[0] + start[0], c[1]])
+        ImageDraw.floodfill(img, nc, (0, 0, 0))
+
+      start[0] += separator + letters[i][3][1] - letters[i][3][0]
+
     img.save("C:/Users/rafal/Desktop/UWr/AN/Bezier/wyraz.png")
 
 
