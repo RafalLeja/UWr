@@ -92,6 +92,7 @@ def main():
   argparser.add_argument("-c", "--color", type=str, default="black")
   argparser.add_argument("-bg", "--background", type=str, default="white")
   argparser.add_argument("-o", "--output", type=str, default="./napis.png")
+  argparser.add_argument("-i", "--italic", type=bool, default=False)
 
   args = argparser.parse_args()
   
@@ -113,8 +114,22 @@ def main():
       continue
     if i not in letters.keys():
       letters[i] = read_curves(src+"/"+i+".txt")
+      if args.italic:
+        R = 0.4
+        midY = letter_height/2
+        for line in letters[i][0]:
+          for p in line:
+            dist = p[1] - midY
+            p[0] -= int((dist * R))
+        for line in letters[i][1]:
+          for p in line:
+            dist = p[1] - midY
+            p[0] -= int((dist * R))
+        for j in range(len(letters[i][2])):
+          letters[i][2][j][0] -= int((letters[i][2][j][1] - midY) * R)
 
     total_width += separator + letters[i][3][1] - letters[i][3][0]
+
 
   with Image.new("RGB", (total_width, letter_height), background) as img:
     start = [0, 0]
