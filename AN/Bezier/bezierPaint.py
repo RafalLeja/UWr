@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from PIL import Image,ImageTk
 import numpy as np
-import math
+import utils
 
 class Line:
   def __init__(self, name, line_type):
@@ -268,32 +268,36 @@ class BezierPaint:
             if line.line_type == "Kolor":
               self.canvas.create_line(point.x-R, point.y-R, point.x+R, point.y+R, fill='green', width=R/3)
               self.canvas.create_line(point.x-R, point.y+R, point.x+R, point.y-R, fill='green', width=R/3)
+            elif i == 0:
+              self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='blue', width=R/3)
+            elif i == len(line.points)-1:
+              self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', width=R/3)
             else:
-              self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', width=R/3)  
+              self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='green', width=R/3)  
           elif line.line_type == "Kolor":
             self.canvas.create_line(point.x-R, point.y-R, point.x+R, point.y+R, fill='green')
             self.canvas.create_line(point.x-R, point.y+R, point.x+R, point.y-R, fill='green')
           elif i == 0:
             self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='blue', width=R/3)
           elif i == len(line.points)-1:
-            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='orange', width=R/3)
+            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red', width=R/3)
           else:        
-            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='red')
+            self.canvas.create_oval(point.x - R, point.y - R , point.x + R, point.y + R, outline='black')
       if len(line.points) > 1:
         if line.line_type == "bezier":
           p = [] 
           for i in range(RES):
-            p.append(list(self.casteljau(i/RES, line.points)))
+            p.append(list(utils.casteljau(i/RES, line.points)))
           self.canvas.create_line(*p)
         if line.line_type == "NIFS3":
           X = [ i.x for i in line.points]
           Y = [ i.y for i in line.points]
-          mX = self.interpolMatrix(X)
-          mY = self.interpolMatrix(Y)
+          mX = utils.interpolMatrix(X)
+          mY = utils.interpolMatrix(Y)
           p = []
           for i in range(0, RES+1):
-            p.append(self.interpolValue(i/RES, X, mX))
-            p.append(self.interpolValue(i/RES, Y, mY))
+            p.append(utils.interpolValue(i/RES, X, mX))
+            p.append(utils.interpolValue(i/RES, Y, mY))
           self.canvas.create_line(*p)
 
   def release(self, event):
@@ -304,75 +308,6 @@ class BezierPaint:
     self.selected_point = None
     self.prev_x = None
     self.prev_y = None
-    
-  def interpolMatrix(self, values):
-    n = len(values) -1
-    points = [i/n for i in range(len(values))]
-
-
-    q = np.zeros(n)
-    u = np.zeros(n)
-    p = np.zeros(n)
-    m = np.zeros(n+1)
-
-
-    def h(k):
-      return points[k] - points[k-1]
-
-    def lam(k):
-      return h(k)/(h(k)+h(k+1))
-
-    def f(a, b):
-      if a == b:
-        return values[a]
-      return (f(a+1, b) - f(a, b-1))/(points[b]-points[a])
-
-    def d(k):
-      return 6*f(k-1, k+1)
-
-    for k in range(1, n):
-      p[k] = 2 + (q[k-1]*lam(k))
-      q[k] = (lam(k)-1)/p[k]
-      u[k] = (d(k)-lam(k)*u[k-1])/p[k]
-
-    m[n-1] = u[n-1]
-
-    for k in range(n-2, 0, -1):
-      m[k] = u[k] + q[k]*m[k+1]
-
-    return m
-
-
-  def interpolValue(self, x, values, m):
-    n = len(values) - 1
-    points = [i/n for i in range(len(values))]
-
-    def h(k):
-      return points[k] - points[k-1]
-
-    for i in range(1, n+1):
-      if points[i-1] <= x and x < points[i]:
-        break
-
-    a = (m[i-1]*((points[i] - x)**3))/6
-    b = (m[i]*((x - points[i-1])**3))/6
-    c = (values[i-1] - (m[i-1]*(h(i)**2)/6))*(points[i] - x)
-    d = (values[i] - (m[i]*(h(i)**2)/6))*(x - points[i-1])
-    s = (a + b + c + d)/h(i)
-
-    return s
-    
-  def casteljau(self, t, points):
-    n = len(points)-1
-    s=1-t
-    b=n
-    d=t
-    p=points[0]
-    for i in range(1, n+1):
-      p = p*s + points[i]*d*b
-      d *= t
-      b = b*(n-i)/(i+1)
-    return p*1
 
   def join_lines(self, window, lineA, lineB, startA, startB):
     window.destroy()

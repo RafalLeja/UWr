@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw
 import numpy as np
+import utils
 
 def read_curves(src):
   filename = src
@@ -61,90 +62,22 @@ def read_curves(src):
   file.close
   return [beziers, nifs, colors, width]
 
-def casteljau(t, points):
-  n = len(points)-1
-  s=1-t
-  b=n
-  d=t
-  p=points[0]
-  for i in range(1, n+1):
-    p = p*s + points[i]*d*b
-    d *= t
-    b = b*(n-i)/(i+1)
-  return p*1
-
-def interpolMatrix(values):
-  n = len(values) -1
-  points = [i/n for i in range(len(values))]
-
-
-  q = np.zeros(n)
-  u = np.zeros(n)
-  p = np.zeros(n)
-  m = np.zeros(n+1)
-
-
-  def h(k):
-    return points[k] - points[k-1]
-
-  def lam(k):
-    return h(k)/(h(k)+h(k+1))
-
-  def f(a, b):
-    if a == b:
-      return values[a]
-    return (f(a+1, b) - f(a, b-1))/(points[b]-points[a])
-
-  def d(k):
-    return 6*f(k-1, k+1)
-
-  for k in range(1, n):
-    p[k] = 2 + (q[k-1]*lam(k))
-    q[k] = (lam(k)-1)/p[k]
-    u[k] = (d(k)-lam(k)*u[k-1])/p[k]
-
-  m[n-1] = u[n-1]
-
-  for k in range(n-2, 0, -1):
-    m[k] = u[k] + q[k]*m[k+1]
-
-  return m
-
-def interpolValue(x, values, m):
-  n = len(values) - 1
-  points = [i/n for i in range(len(values))]
-
-  def h(k):
-    return points[k] - points[k-1]
-
-  for i in range(1, n+1):
-    if points[i-1] <= x and x < points[i]:
-      break
-
-  a = (m[i-1]*((points[i] - x)**3))/6
-  b = (m[i]*((x - points[i-1])**3))/6
-  c = (values[i-1] - (m[i-1]*(h(i)**2)/6))*(points[i] - x)
-  d = (values[i] - (m[i]*(h(i)**2)/6))*(x - points[i-1])
-  s = (a + b + c + d)/h(i)
-
-  return s
-
 def draw_letter(letter, img, start, color):
   RES = 1000
   beziers, nifs, colors, width = letter
   for b in beziers:
     p = [] 
     for i in range(RES):
-      p.append(tuple(list(casteljau(i/RES, b))))
+      p.append(tuple(list(utils.casteljau(i/RES, b))))
       p[i]=tuple([p[i][0]+start[0], p[i][1]+start[1]])
     img.line(p, fill=color, width=1)
   for n in nifs:
-    mX = interpolMatrix(n[0])
-    mY = interpolMatrix(n[1])
+    mX = utils.interpolMatrix(n[0])
+    mY = utils.interpolMatrix(n[1])
     p = []
     for i in range(0, RES+1):
-      p.append(interpolValue(i/RES, n[0], mX)+start[0])
-      p.append(interpolValue(i/RES, n[1], mY)+start[1])
+      p.append(utils.interpolValue(i/RES, n[0], mX)+start[0])
+      p.append(utils.interpolValue(i/RES, n[1], mY)+start[1])
     img.line(*p, fill=color, width=1)
 
 
@@ -155,7 +88,7 @@ def main():
   total_width = 0
   separator = 0
   text = "aA a a AAa"
-  src = "C:/Users/rafal/Desktop/UWr/AN/Bezier/litery"
+  src = "./litery"
 
   text = text.upper()
   letters = dict()
@@ -183,7 +116,7 @@ def main():
 
       start[0] += separator + letters[i][3][1] - letters[i][3][0]
 
-    img.save("C:/Users/rafal/Desktop/UWr/AN/Bezier/wyraz.png")
+    img.save("./wyraz.png")
 
 
 if __name__ == "__main__":
