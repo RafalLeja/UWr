@@ -81,7 +81,7 @@ def draw_letter(letter, img, start, color):
     for i in range(0, RES+1):
       p.append(utils.interpolValue(i/RES, n[0], mX)+start[0])
       p.append(utils.interpolValue(i/RES, n[1], mY)+start[1])
-    img.line(*p, fill=color, width=1)
+    img.line(p, fill=color, width=1)
 
 def main():
   argparser = argparse.ArgumentParser()
