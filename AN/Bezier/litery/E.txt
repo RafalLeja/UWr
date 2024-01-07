@@ -1,0 +1,46 @@
+"Nowa krzywa" "bezier":
+  X = [ 200, 199]
+  Y = [ 146, 550]
+"Nowa krzywa2" "bezier":
+  X = [ 257, 550]
+  Y = [ 99, 99]
+"Nowa krzywa3" "bezier":
+  X = [ 549, 600, 601, 548]
+  Y = [ 100, 98, 197, 199]
+"Nowa krzywa4" "bezier":
+  X = [ 352, 554]
+  Y = [ 200, 199]
+"Nowa krzywa5" "bezier":
+  X = [ 352, 301, 301, 302, 354]
+  Y = [ 200, 201, 253, 300, 299]
+"Nowa krzywa6" "bezier":
+  X = [ 352, 555]
+  Y = [ 299, 299]
+"Nowa krzywa7" "bezier":
+  X = [ 551, 600, 599, 552]
+  Y = [ 299, 300, 400, 399]
+"Nowa krzywa8" "bezier":
+  X = [ 558, 348]
+  Y = [ 399, 401]
+"Nowa krzywa9" "bezier":
+  X = [ 351, 299, 297, 298, 350]
+  Y = [ 400, 400, 451, 502, 499]
+"Nowa krzywa10" "bezier":
+  X = [ 346, 553]
+  Y = [ 500, 501]
+"Nowa krzywa11" "bezier":
+  X = [ 549, 599, 599, 543]
+  Y = [ 500, 499, 599, 601]
+"Nowa krzywa12" "bezier":
+  X = [ 551, 250]
+  Y = [ 600, 601]
+"Nowa krzywa13" "bezier":
+  X = [ 201, 201, 257]
+  Y = [ 147, 101, 100]
+"Nowa krzywa14" "bezier":
+  X = [ 200, 201, 253]
+  Y = [ 547, 598, 600]
+"Nowa krzywa15" "Kolor":
+  X = [ 248]
+  Y = [ 314]
+width=199,587

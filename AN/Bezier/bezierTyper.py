@@ -107,6 +107,8 @@ def main():
 
   text = text.upper()
   letters = dict()
+  if args.italic:
+    total_width += 60*len(text)
 
   for i in text:
     if i == " ":

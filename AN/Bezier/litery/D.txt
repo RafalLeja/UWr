@@ -1,0 +1,16 @@
+"Nowa krzywa" "bezier":
+  X = [ 200, 200]
+  Y = [ 601, 99]
+"Nowa krzywa1" "bezier":
+  X = [ 200, 566, 579, 657, 192]
+  Y = [ 101, 83, 312, 626, 597]
+"Nowa krzywa2" "bezier":
+  X = [ 278, 279]
+  Y = [ 190, 512]
+"Nowa krzywa3" "bezier":
+  X = [ 278, 526, 540, 276]
+  Y = [ 190, 191, 525, 511]
+"Nowa krzywa4" "Kolor":
+  X = [ 234]
+  Y = [ 281]
+width=199,548
