@@ -136,10 +136,9 @@ class BezierPaint:
     return True
   
   def italic(self, direction):
-    D = 100
     R = 0.4
     self.canvas.delete("all")
-    midY = ((self.canvas_height/D)//2)*D
+    midY = self.canvas_height//2
     for line in self.lines:
       for i, point in enumerate(line.points):
         dist = point.y - midY
