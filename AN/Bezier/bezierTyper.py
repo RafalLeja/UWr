@@ -1,13 +1,16 @@
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageColor
 import numpy as np
 import utils
+import argparse
 
 def read_curves(src):
   filename = src
-  if filename == ():
-    return
+  try:
+    file = open(filename, "rt")
+  except OSError as e:
+    print(f"Nie można otworzyć {filename}: {e}")
+    exit(1)
 
-  file = open(filename, "rt")
   beziers = []
   nifs = []
   colors = []
@@ -80,18 +83,30 @@ def draw_letter(letter, img, start, color):
       p.append(utils.interpolValue(i/RES, n[1], mY)+start[1])
     img.line(*p, fill=color, width=1)
 
-
-
 def main():
+  argparser = argparse.ArgumentParser()
+
+  argparser.add_argument("-s", "--separator_space", type=int, default=50)
+  argparser.add_argument("-t", "--text", type=str, default="Hello World!")
+  argparser.add_argument("-src", "--source", type=str, default="./litery")
+  argparser.add_argument("-c", "--color", type=str, default="black")
+  argparser.add_argument("-bg", "--background", type=str, default="white")
+  argparser.add_argument("-o", "--output", type=str, default="./napis.png")
+
+  args = argparser.parse_args()
+  
   letter_width = 800
   letter_height = 800
   total_width = 0
-  separator = 0
-  text = "aA a a AAa"
-  src = "./litery"
+  separator = args.separator_space
+  text = args.text
+  src = args.source
+  color = args.color
+  background = args.background
 
   text = text.upper()
   letters = dict()
+
   for i in text:
     if i == " ":
       total_width += letter_width
@@ -101,22 +116,24 @@ def main():
 
     total_width += separator + letters[i][3][1] - letters[i][3][0]
 
-  with Image.new("RGB", (total_width, letter_height), (255, 255, 255)) as img:
+  with Image.new("RGB", (total_width, letter_height), background) as img:
     start = [0, 0]
     d = ImageDraw.Draw(img)
     for i in text:
       if i == " ":
         start[0] += 800 + separator
         continue
+
+      start[0] -= letters[i][3][0]
      
-      draw_letter(letters[i], d, start, (0, 0, 0))
+      draw_letter(letters[i], d, start, color)
       for c in letters[i][2]:
         nc = tuple([c[0] + start[0], c[1]])
-        ImageDraw.floodfill(img, nc, (0, 0, 0))
+        ImageDraw.floodfill(img, nc, value=ImageColor.getrgb(color))
 
       start[0] += separator + letters[i][3][1] - letters[i][3][0]
 
-    img.save("./wyraz.png")
+    img.save(args.output)
 
 
 if __name__ == "__main__":

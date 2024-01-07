@@ -379,8 +379,9 @@ class BezierPaint:
     self.draw(-50, -50)
 
   def write_lines(self):
+    RES = 100
     filename = asksaveasfilename()
-    if filename == ():
+    if filename == "":
       return
 
     file = open(filename, "wt")
@@ -388,10 +389,6 @@ class BezierPaint:
     for line in self.lines:
       file.write(f"\"{line.name}\" \"{line.line_type}\":\n  X = [ ")
       for p in line.points:
-        if p.x < width[0]:
-          width[0] = p.x
-        if p.x > width[1]:
-          width[1] = p.x
         if p == line.points[-1]:
           file.write(str(p.x))
           break
@@ -403,12 +400,30 @@ class BezierPaint:
           break
         file.write(str(p.y) + ", ")
       file.write("]\n")
-    file.write(f"width={width[0]},{width[1]}")
+      # liczenie szerokosci litery
+      if len(line.points) > 1:
+        if line.line_type == "bezier":
+          for i in range(RES):
+            x = utils.casteljau(i/RES, line.points)[0]
+            if x > width[1]:
+              width[1] = x
+            if width[0] > x:
+              width[0] = x
+        if line.line_type == "NIFS3":
+          X = [ i.x for i in line.points]
+          mX = utils.interpolMatrix(X)
+          for i in range(0, RES+1):
+            x = utils.interpolValue(i/RES, X, mX) 
+            if x > width[1]:
+              width[1] = x
+            if width[0] > x:
+              width[0] = x
+    file.write(f"width={int(width[0])},{int(width[1])}")
     file.close
 
   def read_lines(self):
     filename = askopenfilename()
-    if filename == ():
+    if filename == "":
       return
 
     file = open(filename, "rt")

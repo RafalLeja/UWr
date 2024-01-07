@@ -25,4 +25,4 @@
 "Nowa krzywa8" "Kolor":
   X = [ 547, 490]
   Y = [ 261, 335]
-width=98,702
+width=98,701
