@@ -214,7 +214,7 @@ class BezierPaint:
   def draw(self, x, y):
     self.canvas.delete("all")
     R = 10
-    RES = 500
+    RES = 300
     D = 100
     if self.background_image != None:
       self.canvas.create_image(0,0,anchor='nw', image=self.background_image)
@@ -469,5 +469,6 @@ class BezierPaint:
 if __name__ == "__main__":
   root = tk.Tk()
   root.title("Paint Application")
+  root.resizable(False, False)
   app = BezierPaint(root)
   root.mainloop()
