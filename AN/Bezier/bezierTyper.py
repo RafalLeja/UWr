@@ -49,7 +49,7 @@ def read_curves(src):
         pY.append(int(l))
       continue
     if line[0] == "w":
-      for l in line[7:].split(","):
+      for l in line[6:].split(","):
         width.append(int(l))
       continue
 
@@ -122,9 +122,9 @@ def main():
             dist = p[1] - midY
             p[0] -= int((dist * R))
         for line in letters[i][1]:
-          for p in line:
-            dist = p[1] - midY
-            p[0] -= int((dist * R))
+          for p in range(len(line[0])):
+            dist = line[1][p] - midY
+            line[0][p] -= int((dist * R))
         for j in range(len(letters[i][2])):
           letters[i][2][j][0] -= int((letters[i][2][j][1] - midY) * R)
 
@@ -146,10 +146,9 @@ def main():
         nc = tuple([c[0] + start[0], c[1]])
         ImageDraw.floodfill(img, nc, value=ImageColor.getrgb(color))
 
-      start[0] += separator + letters[i][3][1] - letters[i][3][0]
+      start[0] += separator + letters[i][3][1]
 
     img.save(args.output)
-
 
 if __name__ == "__main__":
   main()
