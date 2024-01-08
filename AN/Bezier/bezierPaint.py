@@ -157,9 +157,12 @@ class BezierPaint:
     return
 
   def add_new_line(self):
-    name = f'Nowa krzywa{len(self.lines)}'
-    while name in [l.name for l in self.lines]:
-      name = f'Nowa krzywa{len(self.lines)+1}'
+    count = len(self.lines)
+    name = f'Nowa krzywa{count}'
+    names = [l.name for l in self.lines]
+    while name in names:
+      count += 1
+      name = f'Nowa krzywa{count}'
     line = Line(name, self.line_types[0])
     self.lines.append(line)
     self.update_lines_box()
