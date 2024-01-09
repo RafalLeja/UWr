@@ -93,6 +93,7 @@ def main():
   argparser.add_argument("-bg", "--background", type=str, default="white")
   argparser.add_argument("-o", "--output", type=str, default="./napis.png")
   argparser.add_argument("-i", "--italic", type=bool, default=False)
+  argparser.add_argument("-u", "--uppercase", type=bool, default=True)
 
   args = argparser.parse_args()
   
@@ -105,7 +106,9 @@ def main():
   color = args.color
   background = args.background
 
-  text = text.upper()
+  if args.uppercase:
+    text = text.upper()
+
   letters = dict()
   if args.italic:
     total_width += 60*len(text)
