@@ -1,5 +1,9 @@
+# Rafał Leja 340879
+# konkurs 2 ANL
+
 import numpy as np
 
+# algorytm z ćwiczeń
 def casteljau(t, points):
   n = len(points)-1
   s=1-t
@@ -12,6 +16,7 @@ def casteljau(t, points):
     b = b*(n-i)/(i+1)
   return p*1
 
+# algorytm z wykładu
 def interpolMatrix(values):
   n = len(values) -1
   points = [i/n for i in range(len(values))]

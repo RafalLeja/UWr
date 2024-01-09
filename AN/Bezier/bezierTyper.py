@@ -1,3 +1,6 @@
+# Rafał Leja 340879
+# konkurs 2 ANL
+
 from PIL import Image, ImageDraw, ImageColor
 import numpy as np
 import utils
@@ -65,6 +68,7 @@ def read_curves(src):
   file.close
   return [beziers, nifs, colors, width]
 
+
 def draw_letter(letter, img, start, color):
   RES = 1000
   beziers, nifs, colors, width = letter
@@ -86,13 +90,13 @@ def draw_letter(letter, img, start, color):
 def main():
   argparser = argparse.ArgumentParser()
 
-  argparser.add_argument("-s", "--separator_space", type=int, default=50)
-  argparser.add_argument("-t", "--text", type=str, default="Hello World")
-  argparser.add_argument("-src", "--source", type=str, default="./litery")
-  argparser.add_argument("-c", "--color", type=str, default="black")
-  argparser.add_argument("-bg", "--background", type=str, default="white")
-  argparser.add_argument("-o", "--output", type=str, default="./napis.png")
-  argparser.add_argument("-i", "--italic", type=bool, default=False)
+  argparser.add_argument("-s", "--separator_space", type=int, default=50, help="odstęp między literami")
+  argparser.add_argument("-t", "--text", type=str, default="Hello World", help="tekst do napisania")
+  argparser.add_argument("-src", "--source", type=str, default="./litery", help="folder z plikami liter")
+  argparser.add_argument("-c", "--color", type=str, default="black", help="kolor napisu")
+  argparser.add_argument("-bg", "--background", type=str, default="white", help="kolor tła")
+  argparser.add_argument("-o", "--output", type=str, default="./napis.png", help="nazwa pliku wyjściowego")
+  argparser.add_argument("-i", "--italic", type=bool, default=False, help="czy napis ma być pochylony")
 
   args = argparser.parse_args()
   

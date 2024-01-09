@@ -1,3 +1,6 @@
+# Rafał Leja 340879
+# konkurs 2 ANL
+
 import tkinter as tk
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
@@ -473,7 +476,7 @@ class BezierPaint:
 
 if __name__ == "__main__":
   root = tk.Tk()
-  root.title("Paint Application")
+  root.title("bezierPaint")
   root.resizable(False, False)
   app = BezierPaint(root)
   root.mainloop()
