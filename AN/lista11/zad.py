@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from PIL import Image
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
@@ -34,20 +33,20 @@ def aproksymacja_sredniokwardratowa(x, n, xk, yk):
     wynikiDlaX.append(1)
     # P1 = x - c1 => 5n + 7
     c1 = sum(xk)/len(xk) # 3n + 3 - mnożeń, 2n - dodawań
-    wynikiWielomianow.append([xk[i] - c1 for i in range(len(xk))]) # (n+1)
-    wynikiDlaX.append((x-c1)) # 1
+    wynikiWielomianow.append([xk[i] - c1 for i in range(len(xk))]) # (n+1) odejmowań
+    wynikiDlaX.append((x-c1)) # 1 odejmowanie
     xQkQk = 0
     QkQk = 0
-    # PK = (x - ck)Qk - dkQk-1 => 
-    prevQkQk = iloczyn(wynikiWielomianow[0], wynikiWielomianow[0])
+    # PK = (x - ck)Qk - dkQk-1 => (n-1)((9n+9)+6)
+    prevQkQk = len(xk) # z pamięci
     for i in range(2, n+1):
-        xQkQk = iloczyn(xk, wynikiWielomianow[i-1], wynikiWielomianow[i-1])
-        QkQk = iloczyn(wynikiWielomianow[i-1], wynikiWielomianow[i-1])
-        ck = xQkQk/QkQk
-        dk = QkQk/prevQkQk
-        Qk = [(xk[j] - ck)*wynikiWielomianow[i-1][j] - dk*wynikiWielomianow[i-2][j] for j in range(len(xk))]
+        xQkQk = iloczyn(xk, wynikiWielomianow[i-1], wynikiWielomianow[i-1]) # 3(n+1) mnożeń, n dodawań
+        QkQk = iloczyn(wynikiWielomianow[i-1], wynikiWielomianow[i-1]) # 2(n+1) mnożeń, n dodawań
+        ck = xQkQk/QkQk # 1 dzielenie
+        dk = QkQk/prevQkQk # 1 dzielenie
+        Qk = [(xk[j] - ck)*wynikiWielomianow[i-1][j] - dk*wynikiWielomianow[i-2][j] for j in range(len(xk))] # (n+1)*( 2 mnożenia, 2 dodawania)
         wynikiWielomianow.append(Qk)
-        wynikiDlaX.append((x - ck)*wynikiDlaX[i-1] - dk*wynikiDlaX[i-2])
+        wynikiDlaX.append((x - ck)*wynikiDlaX[i-1] - dk*wynikiDlaX[i-2]) # 2 mnożenia, 2 dodawania
         prevQkQk = QkQk
 
     wspolczynniki = []
@@ -72,8 +71,8 @@ ax.plot(Xpoints, f(Xpoints), color='red')
 fig.savefig('a.png')
 ax.cla()
 
-plt.ylim(-5, 90)
 ax.scatter(df['x'], df['y'])
+plt.ylim(-5, 90)
 ax.plot(Xpoints, Lagrange(Xpoints, df['x'], df['y']), color='green')
 fig.savefig('b.png')
 ax.cla()
