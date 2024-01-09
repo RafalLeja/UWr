@@ -388,6 +388,8 @@ class BezierPaint:
     file = open(filename, "wt")
     width = [self.canvas_width, 0]
     for line in self.lines:
+      if len(line.points) < 1:
+        continue
       file.write(f"\"{line.name}\" \"{line.line_type}\":\n  X = [ ")
       for p in line.points:
         if p == line.points[-1]:
