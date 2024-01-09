@@ -87,13 +87,12 @@ def main():
   argparser = argparse.ArgumentParser()
 
   argparser.add_argument("-s", "--separator_space", type=int, default=50)
-  argparser.add_argument("-t", "--text", type=str, default="Hello World!")
+  argparser.add_argument("-t", "--text", type=str, default="Hello World")
   argparser.add_argument("-src", "--source", type=str, default="./litery")
   argparser.add_argument("-c", "--color", type=str, default="black")
   argparser.add_argument("-bg", "--background", type=str, default="white")
   argparser.add_argument("-o", "--output", type=str, default="./napis.png")
   argparser.add_argument("-i", "--italic", type=bool, default=False)
-  argparser.add_argument("-u", "--uppercase", type=bool, default=True)
 
   args = argparser.parse_args()
   
@@ -106,16 +105,16 @@ def main():
   color = args.color
   background = args.background
 
-  if args.uppercase:
-    text = text.upper()
+  text = text.upper()
 
   letters = dict()
   if args.italic:
-    total_width += 60*len(text)
+    total_width += 125
+
 
   for i in text:
     if i == " ":
-      total_width += letter_width
+      total_width += 600
       continue
     if i not in letters.keys():
       letters[i] = read_curves(src+"/"+i+".txt")
@@ -138,12 +137,14 @@ def main():
 
   with Image.new("RGB", (total_width, letter_height), background) as img:
     start = [0, 0]
+    if args.italic:
+      start[0] += 70
     d = ImageDraw.Draw(img)
     for i in text:
       if i == " ":
-        start[0] += 800 + separator
+        start[0] += 600 + separator
         continue
-
+      
       start[0] -= letters[i][3][0]
      
       draw_letter(letters[i], d, start, color)
