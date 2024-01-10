@@ -1,5 +1,4 @@
 import math
-import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -15,16 +14,27 @@ def g(x):
 def i(x):
     return x**2
 
-def Romberg(fn, a, b, n):
-    space = np.linspace(a, b, 100)
-    plt.plot(space, [fn(x) for x in space], color='red')
-    h = (b-a)/n
-    tn = [a + i*h for i in range(n+1)]
+def T(i, fn, a, b):
+    h = (b-a)/(2**i)
+    tn = [a + i*h for i in range(2**i+1)]
     sum = 0
-    for i in range(len(tn)-1):
-        plt.plot([tn[i], tn[i+1]], [fn(tn[i]), fn(tn[i+1])], color='blue')
-        sum += h*(fn(tn[i]) + fn(tn[i+1]))/2
-    plt.show()
-    return sum
+    for j in range(2**i):
+        sum += (fn(tn[j])+fn(tn[j+1]))/2
+    return h*sum
 
-print(Romberg(h, -3, 3, 15))
+def Romberg(fn, a, b, n):
+    tablica = [[0 for i in range(n+1)] for j in range(n+1)]
+    for i in range(n+1):
+        tablica[0][i] = T(i, fn, a, b)
+
+    for col in range(1,n+1):
+        for row in range(n+1-col):
+            tablica[col][row+col] = 4**col * tablica[col-1][row+col] - tablica[col-1][row-1+col] / (4**col-1)
+    
+    return tablica
+
+tab1 = Romberg(h, -3, 3, 20)
+for x in range(len(tab1)):
+    for y in range(len(tab1[0])):
+        print(format(tab1[y][x], "e"), end=", ")
+    print("\n")
