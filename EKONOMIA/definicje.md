@@ -33,7 +33,7 @@ substancji, regulacje przestrzenne, ograniczenia wolności słowa
 
 ## prohibicja a równowaga rynkowa
 
-![wykres_równowagi](wykres1.png)
+![wykres_równowagi](./image/definicje/wykres1.png)
 
 ## przykłady dodatkowych efektów prohibicji narkotykowej
 
@@ -81,6 +81,8 @@ szybciej, niż odkąd działa bank centralny
 możliwe, choć kosztowne
 -  Mniej handlu, mniej przepływów kapitału
 
+# Wykład 4 Ekonomia delfacji
+
 ## deflacja cenowa a pieniężna
  - deflacja (pieniężna), gdy spada jego podaż
  - deflacja (cenowa) ze spadkiem poziomu cen
@@ -107,46 +109,186 @@ wcześniej; większa skłonność do sprzedaży innych dóbr (np. pracy) za pien
  - Deflacyjny kryzys
  - Inflacyjny wzrost gospodarczy
  - Inflacyjny kryzys
-## czynniki rozwoju gospodarczego
 
-## wzrost osczędności a rozwój gospodarczy
+# Wykład 5 Rozwój gospodarczy
 
-## instytucje sprzyjające rozwojowi gospdoarki
+## czynniki rozwoju gospodarczego + wzrost osczędności a rozwój gospodarczy
 
+ - Wzrost ilości zasobów:
+    - Pracy
+    - Ziemi
+ - Pogłębianie i nowe formy podziału pracy
+ - Nowe technologie
+ - Wzrost oszczędności i pogłębienie struktury kapitałowej
+    1) Spadek popytu na dobra konsumpcyjne
+    2) Wzrost inwestycji w sektorach oddalonych od konsumpcji „Efekt Ricarda”
+    3) Nowa, bardziej kapitałochłonna struktura produkcji
+## instytucje sprzyjające rozwojowi gospodarki
+- ??
+- banki
+- ubezpieczalnie
 ## rewolucja przemysłowa wg Deirdre McCloskey
+Deirdre McCloskey: dotychczasowe wytłumaczenia rewolucji przemysłowej (czynniki
+instytucjonalne, handel zagraniczny, wyzysk kolonialny, dostępność węgla etc.) nie są
+w stanie wytłumaczyć przytłaczającej ilości wzrostu gospodarczego, który
+obserwowaliśmy
+
+# Wykład Rozwój gospodarczy - skąd się bierze
 
 ## grodzenia a rewolucja przemysłowa
-
+ - Grodzenia to zmiana sposobu uprawy ziemi – z wielu drobnych poletek oddalonych
+od siebie na zwarte pola odgrodzone często płotami/murami/żywopłotami
+ - Zamiana praw do kolektywnego korzystania z ziemi na indywidualne
+ - Zarówno drogą nieformalnych porozumień, jak i aktami parlamentu
+ - Zwiększenie wydajności rolnictwa
+ - Na północy Anglii relatywnie wcześnie – np. XVI wiek
+ - W XVIII wieku – głównie na południu – tam rewolucja przemysłowa nie wybuchła
+ - Wbrew krytykom ogradzanie szło zwykle z rosnącą populacją ogradzanych wiosek, a
+nie wędrującym po drogach proletariatem
 ## niewolnictwo a rozwój gospodarczy
-
+ - W XVIII wieku już raczej normalne zyski z kapitału – możliwe, że większe w
+przypadku samego łapania niewolników
+ - Pomimo wzrostu liczby przewożonych niewolników zyski na osobę spadały
+ - Relatywnie otwarty rynek, duża konkurencja, sporo czynników ryzyka
+ - Dlaczego niewolnictwo zadziałało jako motor rozwoju akurat wtedy i tam?
+ - Czy porzucenie niewolnictwa to wynik interesów burżuazji a nie zmian etycznych?
 ## arystokracja a rewolucja przemysłowa
 
 ## kolonializm a rozwój gospodarczy
+Jeśli weźmie się pod uwagę koszty utrzymania kolonii i wyższe ceny płacone za
+towary tam produkowane objęte protekcją celną, to dla społeczeństwa Wielkiej
+Brytanii kolonie często mogły być kosztem netto; skupione korzyści – rozproszone
+koszty
+
+# Wykład 7 Spory wokół Wielkiego Kryzysu
 
 ## przyczyny kryzysu według Keynesistów
-
-## przyczyny kryzysu według moentarystów
-
+ - Interpretacja podkonsumpcyjna, keynesowska: główną przyczyną kryzysu spadek
+nominalnych wydatków; ludzie zarabiają za mało, żeby wykupić produkt; zwolnienia
+tylko pogłębiają ten problem;
+ - Płace są sztywne w dół, więc deflacja cen konsumpcyjnych nie przekłada się na spadek
+kosztów produkcji;
+ - Potrzebna silna odpowiedź państwa (zwiększenie wydatków, kreowanie inwestycji),
+która nastąpiła poprzez Nowy Ład Roosevelta
+ - Problemy z tą interpretacją: w polityce zastosowano szereg propozycji zgłaszanych
+przez ten obóz:
+    - program niezmniejszania płac przez duże firmy, żeby pracownicy mogli wykupić
+produkcję,
+    - gwałtowny przyrost wydatków rządowych
+ - Taka polityka gospodarcza szła ręka w rękę z pogłębiającym się kryzysem
+## przyczyny kryzysu według monetarystów
+ - Interpretacja monetarystyczna: Friedman, Schwartz,
+historia monetarna USA (1963);
+ - Przyczyną był gwałtowny spadek podaży pieniądza;
+ - System Rezerwy Federalnej nie spełnił swojego
+zadania, gdy pozwolił na spadek podaży pieniądza
+ - Problemy z interpretacją monetarystyczną
+    - problemy były silnie sektorowe, a nie dotykały wszystkich branż równomiernie;
+    - Fed próbował wtłaczać pieniądze do gospodarki, ale mnożnik kreacji pieniądza
+przestał działać – może taka polityka powodowała spadek zaufania do banków i
+jeszcze większe wycofywanie złota z banków,
+    - dlaczego kryzys się zaczął – duże spadki podaży pieniądza nastąpiły później
 ## przyczyny kryzysu według szkoły austriackiej
-
+ - 1963 r. – Murray Rothbard, Wielki Kryzys w Ameryce
+ - problemem ekspansja kredytowa podczas lat 20. Fed
+podtrzymywał ją dwukrotnie, obniżając stopy, żeby nie
+dopuścić do recesji.
+ - Nagromadzenie błędów według ATCK – zwłaszcza w
+sektorach odległych od konsumpcji.
+ - Eksperyment stabilnych cen konsumpcyjnych nie
+przyniósł stabilności makroekonomicznej. Przy rosnącej
+produktywności ceny powinny spadać.
+ - Dlaczego kryzys tak długi? Bo nie pozwolono na upłynnienie błędnych inwestycji i
+restrukturyzację gospodarki.
+ - Pierwszy raz zastosowano agresywną politykę fiskalną, regulacyjną i monetarną w
+odpowiedzi na kryzys, przez co zasoby nie przepływały w gospodarce do lepiej
+rozwijających się branż, jak to miało miejsca w latach 1920-1921, gdy stosowano
+odwrotną politykę
 ## polityka fiskalna i pieniężna podczas kryzysu 1920-1921
 
+# Wykład 8 Grecja i niemieckie oszczędzności
+
 ## problemy greckiej gospodarki przed 2008 rokiem
-
+- Wejście do strefy euro – chwilowe obniżenie deficytu finansów publicznych, by
+zmierzać w stronę kryteriów konwergencji
+- Obniżenie oprocentowania greckiego długu – zbliżenie się do rentowności
+niemieckich obligacji
+- Spadek kosztów obsługi długu publicznego
+- Zwiększenie innych wydatków publicznych zamiast redukcji deficytu
+- Relatywnie duży sektor publiczny
+- Etatyzacja życia gospodarczego
+- Niska stopa zatrudnienia
+- Mało konkurencyjny eksport (poza turystyką)
+- Uzależnienie od strefy euro – strefa euro jako tragedia wspólnego pastwiska
 ## wydatki państwa po wybuchu kryzysu 2008 roku
-
+- Do Grecji napływa pieniądz kreowany przez system bankowy strefy euro (obligacje
+rządu plus kredyty dla gospodarstw domowych)
+- Wraz z wybuchem kryzysu zmienia się postrzeganie ryzyka i coraz trudniej o
+dodatkowe finansowanie
+- Widać oznaki spowolnienia gospodarczego
+- Rząd realizuje programy stymulujące gospodarkę (wyższe wydatki, wyższy deficyt
+finansów publicznych)
 ## składniki programów oszczędnościowych dla Grecji
-
+- Pożyczki dla Grecji udzielane pod szeregiem warunków:
+  - Obniżanie wydatków
+  - Podwyżki podatków
+  - Reformy strukturalne
+- Krytyka programów oszczędnościowych z punktu widzenia keynesowskiej
+makroekonomii
+- Co tu robią podwyżki podatków?
 ## polityka fiskalna według badań Alesiny
+- Systematyczne badanie programów oszczędnościowych w krajach rozwiniętych
+- Wynik – duża różnica pomiędzy cięciami wydatków a podnoszeniem podatków
+- Problemy dla keynesowskiej makroekonomii
+
+# Wykład 9 Dyskusje o Bitcoinie
 
 ## Popularność Bitcoina na świecie
+<p style="text-aligin: left"><img src="./image/definicje/wykres2.png"></p>
+<!-- ![wykres_bitcoin_kontynenty](./image/definicje/wykres2.png) -->
+<p style="text-aligin: right"><img src="./image/definicje/wykres3.png"></p>
+<!-- ![wykres_bitcoin_kraje](./image/definicje/wykres3.png) -->
 
 ## Bitcoin a teoremat regresji
-
+- Teoremat regresji – potrzebny do wytłumaczenia powstania siły nabywczej
+pieniądza (SNP) bez popadania w logiczne błędne koło. Skąd bierze się popyt na
+pieniądz dzisiaj, który ukształtuje dzisiejszą SNP? Ze znajomości wczorajszej SNP.
+Skąd wzięła się wczorajsza SNP? Ze znajomości SNP z przedwczoraj...
+- Rozwiązanie – Ludwig von Mises, Theorie des Geldes und der Umlaufsmittel (1912) –
+nie musimy się cofać w nieskończoność – ta regresja ma koniec. W pewnym
+momencie gospodarki barterowej dobro, które zostało środkiem wymiany, było
+wyceniane ze względu na jego wartość użytkową lub w produkcji innych dóbr.
+- Sam Mises – nie wykluczał powstania czystego pieniądza „znakowego”/fiat money;
+niektórzy jego zwolennicy (np. Murray Rothbard) – atak na koncepcję prywatnych
+pustych walut, bo nie spełnią teorematu regresji
+- Próby pogodzenia teorematu z Bitcoinem:
+    - Bitcoin oferował coś użytecznego – np. poczucie przynależności lub system
+transakcyjny
+    - Bitcoin nic nie musiał spełniać, bo wszedł już do gospodarki pieniężnej – mógł
+wyrobić sobie stosunek wymiany z pieniądzem bez żadnych dodatkowych warunków
 ## Bitcoin a cykle koniunkturalne
-
+- Czy hipotetyczna gospodarka standardu Bitcoina byłaby makroekonomicznie
+stabilna?
+- Głosy za: w Bitcoinie trudno wyobrazić sobie bankowość z rezerwą cząstkową, więc
+nie będzie ekspansji kredytowej, która zaburzałaby ustalanie się stopy procentowej
+na rynku; każda ilość pieniądza (jeśli tylko jest podzielny) wystarczy do obsłużenia
+transakcji
+- Głosy przeciw: ograniczony zasób Bitcoina to recepta na deflacyjne problemy.
+Wersja silniejsza: długotrwała deflacja jest ogólnie zła; Wersja słabsza: deflacja jest
+OK, jeśli pochodzi ze wzrostu produktywności, ale nie jest OK, jeśli pochodzi ze
+spadku szybkości obiegu pieniądza; Wersja trzecia: premia deflacyjna w BTC będzie
+zbyt duża, by ustaliła się dodatnia stopa procentowa.
 ## Bitcoin a ekologia
-
+- Ślad węglowy Bitcoina
+- Tesla – akceptacja BTC, a potem zaprzestanie, póki BTC nie stanie się bardziej
+„zielony”
+- Z czym porównać ślad węglowy BTC?
+- Z całym systemem bankowym, którego funkcje pełni? Potencjalnie BTC z
+blockchainem ma potencjał, żeby wyeliminować duże zużycie prądu
+- Sam prąd szybko staje się coraz bardziej zielony
+- Kopanie BTC mogą służyć np. do produkcji ciepła
+- Jakie straty ekologiczne przynosi państwowy pieniądz z rezerwą cząstkową, jeśli
+ATCK ma rację?
 ## Definicja dóbr publicznych
 
 ## Edukacja jako dobro publiczne
