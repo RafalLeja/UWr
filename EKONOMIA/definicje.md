@@ -289,26 +289,84 @@ blockchainem ma potencjał, żeby wyeliminować duże zużycie prądu
 - Kopanie BTC mogą służyć np. do produkcji ciepła
 - Jakie straty ekologiczne przynosi państwowy pieniądz z rezerwą cząstkową, jeśli
 ATCK ma rację?
+
+# Wykład 11 Dlaczego państwo ma dostarczać niektóre dobra
+
 ## Definicja dóbr publicznych
-
+dobra charakteryzujące się brakiem możliwości wyłączenia ich z konsumpcji oraz jednocześnie ich niekonkurencyjnością w konsumpcji
 ## Edukacja jako dobro publiczne
-
+Edukacja jest często uważana za dobro publiczne ze względu na swoje charakterystyki. Jest to dobro, które nie może być wyłączone z konsumpcji przez jednostki oraz nie jest konkurencyjne w konsumpcji. Oznacza to, że gdy jedna osoba korzysta z edukacji, nie ogranicza to możliwości korzystania z niej przez inne osoby. Ponadto, edukacja ma istotne znaczenie dla rozwoju społeczeństwa i gospodarki, dlatego często państwo angażuje się w jej dostarczanie i finansowanie
 ## Przykłady dóbr publicznych dostarczanych prywatnie
-
+Istnieje szereg dóbr publicznych, które są dostarczane przez rynek: np. fale radiowe
+lub niekodowany sygnał telewizji
 ## Dobra publiczne a subiektywizm w ekonomii
+Definicja dobra publicznego a subiektywizm w ekonomii (pacyfiści a obrona
+narodowa)
+
+# Wykład 12 Migracje a światowy dobrobyt
 
 ## Zmiana cen czynnika produkcji a produktywność
-
+- zmiana pracy na lepiej płatną oznacza poprawę koordynacji gospodarczej – czynnik
+produkcji trafia tam, gdzie przynosi większy przychód krańcowy
+- ta sama zasada działa przy przekraczaniu granic – wzrost zarobków imigrantów
+oznacza większą światową produkcję
+- dlaczego fryzjer w Polsce zarabia więcej niż na Ukrainie, a w Niemczech więcej niż w
+Polsce?
 ## potencjalne zyski ze swobodnej migracji
+Jak duże są ewentualne zyski do znalezienia w tym względzie?
 
+„A literature summary by Clemens (2011) cited estimates that free global labor
+mobility would increase gross world product (GWP), also called “world GDP”, by
+somewhere in the range of 67-147%. The estimates suggest that even partial
+liberalizations of migration could yield gains greater than the estimated gains from
+complete free trade or free capital flows.”
 ## Dlaczego płace mogą nie spadać przy napływie imigrantów
-
+- Nowe formy podziału pracy – nowe stanowiska dla menedżerów niższego szczebla,
+nowe miejsca pracy dla osób lepiej znających język i lokalną kulturę
+- Nowi pracownicy będą też konsumentami – wzrasta popyt na różnego rodzaju dobra
+i dochody czynników produkcji tam zatrudnionych
+- Dzięki większej dostępności pracowników opłaca się podejmować inwestycje, które
+wcześniej były wstrzymywane
 ## Imigranci a obciążenia budżetu
+- USA – im młodszy imigrant, tym większe zyski netto dla budżetu przyniesie;
+najbardziej „na minusie” fiskalnie są natywni mieszkańcy
+- Zwiększenie liczebności populacji nie musi wcale prowadzić do większych wydatków
+na czyste dobra publiczne
+- „Europejski” a „amerykański” model migracji: procedura azylowa a pozwolenia na
+pracę; dostęp do rynku pracy; pomoc w znalezieniu mieszkania; polityka integracji
+kulturowej
+- Czy najpierw należy znieść „państwo opiekuńcze”, a dopiero potem otworzyć się na
+migracje?
+
+# Wykład 13 Ekonomia a zmiany klimatyczne
 
 ## Technologiczne efekty zewnętrzne
 
 ## Koszty ograniczania zmian klimatu
-
+- Polityka ograniczania zmian klimatycznych będzie miała swój koszt (ubytek PKB
+wywołany zmianą alokacji zasobów względem wzorca wynikającego z kalkulacji
+ekonomicznej)
+- Zmiany klimatyczne mogą mieć czasami pozytywny wpływ na gospodarkę danego
+regionu (np. wyższa temperatura umożliwia więcej rolniczych działalności; winnice
+koło Wrocławia)
 ## Korzyści z ograniczania zmian klimatu
-
+- Zmiany klimatyczne mogę mieć czasami negatywny wpływ na gospodarkę
+(podnoszenie poziomu wód, zbyt wysokie temperatury dla większości możliwych
+upraw itp.)
+- Próby oszacowania tych kosztów i korzyści sugerują, że obecnie zmiany klimatyczne
+będą coraz bardziej netto niekorzystne
+- Istnieje koszt zewnętrzny – ludzie gospodarując prowadzą do pojawienia się strat
+wśród osób, które nie są producentami (np. zalewanie wysp na Pacyfiku)
+- Taka polityczna przyniesie też pewne korzyści w postaci ograniczenia szkód
+wywołanych zmianą klimatu
 ## Rynkowe produkty ograniczające zmiany klimatyczne
+- Wielu przedsiębiorców na tyle przejęło się problemem klimatu, że skoncentrowali
+prawie całą swoją działalność na wdrażaniu produktów, które pozwolą na
+ograniczenie emisji dwutlenku węgla i zatrzymanie/spowolnienie zmian klimatycznych
+- Wykorzystują przy tym całe spektrum możliwości, jakie dają współczesne
+zglobalizowane rynki (rynki kapitałowe, łańcuchy dostaw, masowość)
+- Dynamiczny rozwój kilku technologii, które powodują, że eliminacja dużej części
+emisji dwutlenku węgla staje się realna
+- Przejście z silników spalinowych na silniki elektryczne wydatnie zwiększa
+efektywność energetyczną (musimy wytwarzać dużo mniej energii, by otrzymać ten
+sam rezultat)
