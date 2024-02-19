@@ -12,6 +12,10 @@
 
 *.class
 
+# Visual Paradigrim Helper Files
+*.bak_000f
+*.lck
+
 # Private keys
 *.key
 
