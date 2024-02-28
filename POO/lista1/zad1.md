@@ -1,14 +1,12 @@
 # F
 
-- Przydatność  to  zestaw  funkcji  aplikacji,  które  pozwalają  użytkownikom osiągać ich cele,
-- Dokładność to zdolność aplikacji do dostarczenia prawidłowych wyników operacji (bądź takich, które mieszczą się w uzgodnionych ramach),
-- Zdolność do współpracy z innymi systemami to możliwość rozwiązania do zachodzenia w interakcje z jednym bądź wieloma wskazanymi systemam
+- Rozwiązania związane z zarządzaniem użytkownikami muszą pozwalać na gromadzenie i przechowywanie danych o jego użytkownikach w zakresie niezbędnym do weryfikacji tożsamości użytkownika
+- Portal  www  i  aplikacje  webowe  muszą  zapewnić  poprawne  zbieranie, i przetwarzanie  danych  osobowych  użytkowników  zgodne  z  wymogami prawnymi oraz dobrymi praktykami
 
 # U
 
-- Zrozumiałość  -  cecha,  która  decyduje,  czy  oprogramowanie  jest zrozumiałe dla użytkowników: czy są oni w stanie ocenić, czy rozwiązanie spełnia ich wymagania oraz jak oprogramowanie może być do tego celu wykorzystane,
-- Przyswajalność  -  cecha  oprogramowania  określająca,  jak  łatwo użytkownikom jest nauczyć się i przyswoić zasady działania aplikacji,
-- Atrakcyjność - cecha określająca, jak bardzo rozwiązanie odbierane jest przez użytkowników jako atrakcyjne
+- Interakcja  użytkownika  z  portalem  www  oraz  aplikacjami  webowymi będzie  realizowana  za  pomocą  Graficznego  Interfejsu  Użytkownika, narzucającego standaryzację wyglądu
+- Portal Główny musi umożliwić tworzenie wielu różnych wersji językowych portali oraz stron WWW (które języki?)
 
 # R
 
