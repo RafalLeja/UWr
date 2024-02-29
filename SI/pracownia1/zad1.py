@@ -12,57 +12,59 @@ class State:
 
   def generateNeighbours(self):
     if self.color == "white":
-      for kX in [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']:
+      for kX in range(1, 9):
         for kY in range(1, 9):
           # pozycja nie zmieniona
-          if kX == self.wKing[0] and kY == int(self.wKing[1]):
+          if kX == self.wKing[0] and kY == self.wKing[1]:
             continue
           # ruch króla o więcej niż 1 pole
-          if abs(ord(kX) - ord(self.wKing[0])) > 1 or abs(int(kY) - int(self.wKing[1])) > 1:
+          if abs(kX - self.wKing[0]) > 1 or abs(kY - self.wKing[1]) > 1:
             continue
           # ruch króla na pole wieży
-          if kX == self.wTower[0] and kY == int(self.wTower[1]):
+          if kX == self.wTower[0] and kY == self.wTower[1]:
             continue
           # ruch króla na pole bite przez czarnego króla
-          if abs(ord(kX) - ord(self.bKing[0])) < 2 and abs(int(kY) - int(self.bKing[1])) < 2:
+          if abs(kX - self.bKing[0]) < 2 and abs(kY - self.bKing[1]) < 2:
             continue
-          self.neighbours.append(State("black", kX + str(kY), self.wTower, self.bKing, self.parents + [self]))
+          self.neighbours.append(State("black", [kX, kY], self.wTower, self.bKing, self.parents + [self]))
       for tX in [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']:
         for tY in range(1, 9):
           # pozycja nie zmieniona
-          if tX == self.wTower[0] and tY == int(self.wTower[1]): 
+          if tX == self.wTower[0] and tY == self.wTower[1]: 
             continue
           # ruch wieży na ukos
-          if tX != self.wTower[0] and tY != int(self.wTower[1]):
+          if tX != self.wTower[0] and tY != self.wTower[1]:
             continue
           # ruch wieży na pole białego króla
-          if tX == self.wKing[0] and tY == int(self.wKing[1]):
+          if tX == self.wKing[0] and tY == self.wKing[1]:
             continue
           # ruch wieży na pole bite przez czarnego króla
-          if abs(ord(tX) - ord(self.bKing[0])) < 2 and abs(int(tY) - int(self.bKing[1])) < 2:
+          if abs(tX - self.bKing[0]) < 2 and abs(tY - self.bKing[1]) < 2:
             continue
-          self.neighbours.append(State("black", self.wKing, tX + str(tY), self.bKing, self.parents + [self]))
+          self.neighbours.append(State("black", self.wKing, [tX, tY], self.bKing, self.parents + [self]))
 
     else:
       for kX in [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']:
         for kY in range(1, 9):
           # pozycja się nie zmienia
-          if kX == self.bKing[0] and kY == int(self.bKing[1]):
+          if kX == self.bKing[0] and kY == self.bKing[1]:
             continue
           # ruch króla o więcej niż 1 pole
-          if abs(ord(kX) - ord(self.bKing[0])) > 1 or abs(kY - int(self.bKing[1])) > 1:
+          if abs(kX - self.bKing[0]) > 1 or abs(kY - self.bKing[1]) > 1:
             continue
           # ruch króla na pole bite przez wieżę
-          if kX == self.wTower[0] or kY == int(self.wTower[1]):
+          if kX == self.wTower[0] or kY == self.wTower[1]:
             continue
           # ruch króla na pole bite przez białego króla
-          if abs(ord(kX) - ord(self.wKing[0])) < 2 and abs(kY - int(self.wKing[1])) < 2:
+          if abs(kX - self.wKing[0]) < 2 and abs(kY - self.wKing[1]) < 2:
             continue
           # czy pozycja się powtarza?
-          self.neighbours.append(State("white", self.wKing, self.wTower, kX + str(kY), self.parents + [self]))
+          self.neighbours.append(State("white", self.wKing, self.wTower, [kX, kY], self.parents + [self]))
     
   def __str__(self):
-    return self.color + " " + self.wKing + " " + self.wTower + " " + self.bKing
+    return f"{self.color} {chr(self.wKing[0]+65)}{self.wKing[1]}\\
+      {chr(self.wTower[0]+65)}{self.wTower[1]}\\
+      {chr(self.bKing[0]+65)}{self.bKing[1]}"
   
   def checkMate(self):
     check = False
