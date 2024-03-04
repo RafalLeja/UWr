@@ -1,53 +1,32 @@
-import sys
+# Rafał Leja
+# 02.03.2024
 
 class State:
-  def __init__(self, words = [], buffer = "", parent = None):
+  def __init__(self, words = [], buffer = "", strength = 0, column = 0):
     self.words = words[:]
     self.buffer = buffer
-    self.children = []
-    self.strength = 0
-    self.parent = parent
+    self.strength = strength
+    self.column = column
   
   def add(self, letter, dict):
     self.buffer += letter
-    
-    for child in self.children:
-      child.add(letter, dict)
+    self.column += 1
 
-    if len(self.buffer) > 29:
-      self.strength = 0
-      return
-
+    # print(f"{self}: {self.buffer}, {self.words}")
     if self.buffer in dict:
+      branch = State(self.words, self.buffer, self.strength, self.column)
       self.strength += len(self.buffer)**2
-      self.children.append(State(self.words, self.buffer, self))
-      self.words.append(self.buffer)
+      self.words.append(self.column)
       self.buffer = ""
-    # print(f"{self}: {self.buffer}, {self.words}, {self.children}")
-
-  def strongest(self):
-    if len(self.children) == 0:
-      return [self.strength, self]
-    
-    else:
-      max = [0, []]
-      for child in self.children:
-        val = child.strongest()
-        if val[0] > max[0]:
-          max = val
-      if max[0] > self.strength:
-        return max
-    return [self.strength, self]
+      return branch
+    return None
   
 def main():
   dictionary_file = open("polish_words.txt", "r", encoding='utf-8')
   dictionary = set([])
 
   for word in dictionary_file:
-
     dictionary.add(word.strip())
-
-    # print(word.strip())
   dictionary_file.close()
 
   input_file = open('zad2_input.txt', "r", encoding='utf-8')
@@ -55,15 +34,40 @@ def main():
   
   for line in input_file:
     line = line.strip()
-    main_state = State()
-    for letter in line:
-      main_state.add(letter, dictionary)
-    
-    for word in main_state.strongest()[1].words:
-      output_file.write(word + " ")
-    output_file.write("\n")
+    states = [State()]
+    nextStates = []
+    i = 0
 
-  
+    for letter in line:
+      i += 1
+
+      if i % 15 == 0 and len(states) > 100:
+        states.sort(key=lambda x: x.strength, reverse=True)
+        states = states[:len(states)//4]
+
+      for state in states:
+        branch = state.add(letter, dictionary)
+
+        if branch != None:
+          nextStates.append(branch)
+
+      states += nextStates
+      nextStates = []
+    
+    maxStrength = 0
+    maxState = None
+    for state in states:
+      if state.strength > maxStrength:
+        maxStrength = state.strength
+        maxState = state
+    
+    numSpaces = 0
+    for space in maxState.words:
+      line = line[:space+numSpaces] + " " + line[space+numSpaces:]
+      numSpaces += 1
+
+    output_file.write(line + "\n")
+    print("Wrote line to file")
       
   return
 
