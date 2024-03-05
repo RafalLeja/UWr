@@ -1,19 +1,23 @@
+# Rafał Leja
+# 05.03.2024
+# zad4
+# Algorytm tworzy maskę o długości D, która jest złożona z samych jedynek. 
+# Następnie przesuwa ją po liście L, zliczając ilość bitów różnych od maski.
+# W każdym kroku zlicza również ilość bitów różnych od maski, które są poza zakresem maski.
+# Wynikiem jest najmniejsza z tych wartości.
+
 def opt_dist(L, D):
-  min = D
+  min = len(L)
   start = 0
   end = D
   mask = [1]*D
-  while end < len(L):
+  while end <= len(L):
     bits = listXor(L[start:end], mask)
+    bits += listClear(L, start, end)
     start += 1
     end += 1
-    if start - 1 >= 0 and L[start-1] == 1: # trzeba zamienić bit przed startem
-      bits += 1
-    if end + 1 < len(L) and L[end+1] == 1: # trzeba zamienić bit po end
-      bits += 1
     if bits < min:
       min = bits
-
   return min
 
 def listXor(L1, L2):
@@ -25,8 +29,23 @@ def listXor(L1, L2):
       bits += 1
   return bits
 
+def listClear(L, s, e):
+  bits = 0
+  for i in L[:s]:
+    if i == 1:
+      bits += 1
+  for i in L[e:]:
+    if i == 1:
+      bits += 1
+  return bits
+
 def main():
-  print(opt_dist([0,0,1,0,0,0,1,0,0,0], 2))
+  input_file = open('zad4_input.txt', 'r')
+  output_file = open('zad4_output.txt', 'w')
+  for line in input_file:
+    line = line.strip().split(" ")
+    out = opt_dist([int(x) for x in line[0]], int(line[1]))
+    output_file.write(str(out) + "\n")
   return
 
 if __name__ == "__main__":
