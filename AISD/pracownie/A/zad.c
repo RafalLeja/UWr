@@ -5,6 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void buildHeap(int n, unsigned short *Heap, unsigned short *Hierarchy);
+
+void moveDown(int i, int n, unsigned short *Heap, unsigned short *Hierarchy);
+
 int isParent(int a, int b, unsigned short *hierarchy);
 
 int main(void)
@@ -41,8 +45,20 @@ int isParent(int a, int b, unsigned short *hierarchy){
   return b == a;
 }
 
-// int isParent(int a, int b, unsigned short *hierarchy){
-//   if (a == 1 || a == b) return 1;
-//   if (b == 1) return 0;
-//   return isParent(a, hierarchy[b-2], hierarchy);
-// }
+void buildHeap(int n, unsigned short *Heap, unsigned short *Hierarchy){
+  for (int i = n/2 + n%2; i > 0; i--) {
+    printf("i = %d\n", i);
+    moveDown(i, n , Heap, Hierarchy);
+  }
+}
+
+void moveDown(int i, int n, unsigned short *Heap, unsigned short *Hierarchy){
+  int j = 0;
+  while (i!=j) {
+    j = i;
+    if (2*j <= n && Hierarchy[2*j] > Hierarchy[i]) i = 2*j;
+    if (2*j < n && Hierarchy[2*j+1] > Hierarchy[i]) i = 2*j+1;
+    unsigned short temp = Heap[j];
+    Heap[j] = Heap[i];
+    Heap[i] = temp;
+  }
