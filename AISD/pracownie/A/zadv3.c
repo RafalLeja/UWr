@@ -6,17 +6,17 @@
 #include <stdlib.h>
 
 struct Node {
-  // unsigned short v;
-  struct Node *parent;
-  struct Node *child;
-  struct Node *sibling;
+  unsigned short v;
   unsigned short inTime;
   unsigned short outTime;
+  // struct Node *parent;
+  struct Node *child;
+  struct Node *sibling;
 };
 
 int isParent(unsigned short a, unsigned short b, struct Node *tree);
 
-void dfsTimes(struct Node *v, unsigned short t);
+void dfsTimes(struct Node *v, struct Node *tree, unsigned short *hierarchy, unsigned short t);
 
 void buildTree(unsigned short *hierarchy, struct Node *tree, int n);
 
@@ -31,7 +31,7 @@ int main(void)
   struct Node *tree;
   tree = calloc(n, sizeof(struct Node));
 
-  printf("size of tree: %d\n", sizeof(struct Node));
+  // printf("size of tree: %d\n", sizeof(struct Node));
 
   for (unsigned short i = 0; i < n-1; i++) {
     scanf("%hu", &hierarchy[i]);
@@ -39,7 +39,7 @@ int main(void)
 
   buildTree(hierarchy, tree, n);
 
-  dfsTimes(tree, 1);
+  dfsTimes(tree, tree, hierarchy, 1);
 
   // for (int i = 0; i < n; i++) {
   //   printf("v: %hu, in: %hu, out: %hu\n", tree[i].v, tree[i].inTime, tree[i].outTime);
@@ -65,13 +65,13 @@ int main(void)
 }
 
 void buildTree(unsigned short *hierarchy, struct Node *tree, int n) {
-  // tree[0].v = 1;
+  tree[0].v = 1;
 
   for (int i = 1; i <= n-1; i++) {
     struct Node *parent = &tree[hierarchy[i-1]-1];
     struct Node *child = &tree[i];
-    // child->v = i+1;
-    child->parent = parent;
+    child->v = i+1;
+    // child->parent = parent;
     if (parent->child == NULL) {
       parent->child = child;
     } else {
@@ -84,21 +84,21 @@ void buildTree(unsigned short *hierarchy, struct Node *tree, int n) {
   }
 }
 
-void dfsTimes(struct Node *v, unsigned short t) {
+void dfsTimes(struct Node *v, struct Node *tree, unsigned short *hierarchy, unsigned short t) {
   v->inTime = t;
   v->outTime = t;
   struct Node *child = v->child;
   if (child != NULL) {
-    dfsTimes(child, t+1);
+    dfsTimes(child, tree, hierarchy, t+1);
     // v->outTime = child->outTime;
   }
   struct Node *sibling = v->sibling;
   if (sibling != NULL) {
-    dfsTimes(sibling, v->outTime+1);
+    dfsTimes(sibling, tree, hierarchy, v->outTime+1);
   }
-  struct Node *parent = v->parent;
-  if (parent != NULL) {
-    // printf("v: %hu, parent: %hu\n", v->v, parent->outTime);
+  if (v->v != 1) {
+    struct Node *parent = &tree[hierarchy[v->v-2]-1];
+    // printf("v: %hu, parent: %hu\n", v->v, parent->v);
     if (v->outTime > parent->outTime)
       parent->outTime = v->outTime;
   }
