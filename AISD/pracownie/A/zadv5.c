@@ -68,16 +68,20 @@ void buildTree(unsigned short *hierarchy, struct Node *tree, int n) {
   tree[0].child = 0;
   tree[0].sibling = 0;
 
+  struct Node *parent;
+  struct Node *child;
+  struct Node *sibling;
+
   for (int i = 1; i <= n-1; i++) {
-    struct Node *parent = &tree[hierarchy[i-1]-1];
-    struct Node *child = &tree[i];
+    parent = &tree[hierarchy[i-1]-1];
+    child = &tree[i];
     child->v = i+1;
     // printf("parent: %hu, child: %hu\n", parent->v, child->v);
     // child->parent = parent;
     if (parent->child == 0) {
       parent->child = child->v;
     } else {
-      struct Node *sibling = &tree[tree[parent->child-1].v - 1];
+      sibling = &tree[tree[parent->child-1].v - 1];
       while (tree[sibling->sibling-1].v != 0) {
         sibling = &tree[tree[sibling->sibling-1].v - 1];
       }
@@ -108,8 +112,10 @@ void dfsTimesItr(struct Node *v, struct Node *tree, unsigned short *hierarchy, u
 
   push(stack, &stackTop, v->child -1);
 
+  unsigned short u;
+
   for (int i = 1; i <= n-1; i++) {
-    unsigned short u = pop(stack, &stackTop);
+    u = pop(stack, &stackTop);
     // printf("u: %hu, child: %hu\n", u, tree[u].child);
     tree[u].inTime = tree[hierarchy[u-1]-1].outTime + 1;
     tree[u].outTime = tree[u].inTime;

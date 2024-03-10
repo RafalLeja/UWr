@@ -1,0 +1,77 @@
+desc: (none)
+cmd: ./zadv4
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=147202
+mem_heap_B=1024
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=148259
+mem_heap_B=1032
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=148316
+mem_heap_B=1082
+mem_heap_extra_B=46
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=151908
+mem_heap_B=1082
+mem_heap_extra_B=46
+mem_stacks_B=0
+heap_tree=peak
+n3: 1082 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x48D4BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 1024 0x48E3CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x48E2CDB: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
+    n1: 1024 0x48E3D95: _IO_default_uflow (genops.c:362)
+     n1: 1024 0x48B90CF: __vfscanf_internal (vfscanf-internal.c:628)
+      n1: 1024 0x48B8141: __isoc99_scanf (isoc99_scanf.c:30)
+       n0: 1024 0x109118: main (in /root/documents/UWr/AISD/pracownie/A/zadv4)
+ n0: 50 0x10913F: main (in /root/documents/UWr/AISD/pracownie/A/zadv4)
+ n0: 8 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=5
+#-----------
+time=151908
+mem_heap_B=1074
+mem_heap_extra_B=30
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=151938
+mem_heap_B=1024
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=154680
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
