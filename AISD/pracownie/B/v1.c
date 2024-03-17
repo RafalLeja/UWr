@@ -43,7 +43,7 @@ int main()
 }
 
 void divAndConq(struct point *points, struct point *minTri, int n){
-  if (n < 6)
+  if (n < 50)
   {
     find_min(points, minTri, n);
     return;
@@ -112,10 +112,10 @@ void find_min(struct point *points, struct point *minTri, int n){
   double min_circ = triangle(&points[0], &points[1], &points[2]);
   for (int x = 0; x < n; x++)
   {
-    for (int y = 0; y < n; y++)
+    for (int y = x+1; y < n; y++)
     {
       if (x == y) continue;
-      for (int z = 0; z < n; z++)
+      for (int z = y+1; z < n; z++)
       {
         if (z == x || z == y) continue;
         
