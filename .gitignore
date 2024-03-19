@@ -12,6 +12,9 @@
 
 *.class
 
+# big test file
+*BIG*
+
 # Visual Paradigrim Helper Files
 *.bak*
 *.lck

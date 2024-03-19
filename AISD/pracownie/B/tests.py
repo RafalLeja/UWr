@@ -1,5 +1,5 @@
 import random
-from subprocess import Popen, PIPE, STDOUT
+from subprocess import Popen, PIPE, STDOUT, TimeoutExpired
 import math
 
 def distance(x1, y1, x2, y2):
@@ -13,48 +13,58 @@ def triangle(res):
   return circ
 
 def main():
-  n = int(input())
+  inputFile = open('./test_set_1/ts1_input.txt', 'r').read()
+  resFile = open('./test_set_1/ts1_output.txt', 'r').read()
   visited = set()
 
-  inputStr = str(n) + '\n'
-  for i in range(n):
-    x = random.randint(-(10**7), 10**7)
-    y = random.randint(-(10**7), 10**7)
-    if (x, y) in visited:
-      i -= 1
+  results = resFile.split('\n')[0:-1]
+  for i in range(len(results)):
+    results[i] = float(results[i].split(' ')[2])
+
+  optComp = Popen(['gcc', 'opt.c', '-o', 'opt.exe', '-lm'], stdout=PIPE, stderr=STDOUT)
+
+  test = 0
+  testLines = 0
+  inputStr = ''
+  for (i, line) in enumerate(inputFile.split('\n')):
+    if testLines == 0:
+      if i != 0:
+        optCall = Popen(['./opt.exe'], stdout=PIPE, stdin=PIPE, stderr=STDOUT, text=True)
+        optRes, optErr = optCall.communicate(input=inputStr, timeout=60)
+        optCall.wait()
+
+
+
+
+        # print(optRes) 
+        optRes = optRes.split('\n')[0:3]
+
+        for i in range(len(optRes)):
+          optRes[i] = optRes[i].split(' ')
+          optRes[i] = [int(optRes[i][0]), int(optRes[i][1])]
+        
+        if round(triangle(optRes), 5) != round(results[test], 5):
+          print('Test failed')
+          print('Input:')
+          print(inputStr)
+          print('Optimal result:')
+          print(optRes)
+          print('circumference:' + str(triangle(optRes)))
+          print('Expected result:')
+          print(results[test])
+          print('Test number: ' + str(test + 1))
+        
+        else:
+          print('Test ' + str(test + 1) +  ' passed')
+
+        test += 1
+
+      testLines = int(line)
+      inputStr = line + '\n'
       continue
-    inputStr += str(x) 
-    inputStr += ' ' 
-    inputStr += str(y)
-    inputStr += '\n'
-    visited.add((x, y))
-
-  trivComp = Popen(['gcc', 'triv.c', '-o', 'triv.o', '-lm'], stdout=PIPE, stderr=STDOUT)
-  trivCall = Popen(['./triv.o'], stdout=PIPE, stdin=PIPE, stderr=STDOUT, text=True)
-  trivRes = trivCall.communicate(input=inputStr)[0]
-  trivRes = trivRes.split('\n')[0:3]
-  for i in range(len(trivRes)):
-    trivRes[i] = trivRes[i].split(' ')
-    trivRes[i] = [int(trivRes[i][0]), int(trivRes[i][1])]
-
-  optComp = Popen(['gcc', 'opt.c', '-o', 'opt.o', '-lm'], stdout=PIPE, stderr=STDOUT)
-  optCall = Popen(['./opt.o'], stdout=PIPE, stdin=PIPE, stderr=STDOUT, text=True)
-  optRes = optCall.communicate(input=inputStr)[0]
-  optRes = optRes.split('\n')[0:3]
-  for i in range(len(optRes)):
-    optRes[i] = optRes[i].split(' ')
-    optRes[i] = [int(optRes[i][0]), int(optRes[i][1])]
-
-  if round(triangle(trivRes), 5) != round(triangle(optRes), 5):
-    print('Test failed')
-    print('Input:')
-    print(inputStr)
-    print('Trivial result:')
-    print(trivRes)
-    print('circumference:' + str(triangle(trivRes)))
-    print('Optimal result:')
-    print(optRes)
-    print('circumference:' + str(triangle(optRes)))
+    else:
+      inputStr += line + '\n'
+      testLines -= 1
 
 if __name__ == '__main__':
   main()
