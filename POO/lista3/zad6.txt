@@ -1,0 +1,17 @@
+Zasada jednej odpowiedzialności (SRP) mówi,
+że klasa powinna mieć tylko jeden powód do zmiany.
+Innymi słowy, klasa powinna mieć tylko jedną odpowiedzialność.
+Na przykład, jeśli mamy klasę User,
+która zarządza danymi użytkownika i logowaniem użytkownika, 
+narusza to SRP, ponieważ są to dwie różne odpowiedzialności. 
+Lepszym podejściem byłoby podzielenie tej klasy na dwie klasy: UserData i UserAuthentication.
+
+Zasada segregacji interfejsów (ISP) mówi, 
+że żaden klient nie powinien być zmuszony do zależności od interfejsów, 
+których nie używa. Innymi słowy, 
+interfejsy powinny być małe i skoncentrowane na konkretnym zadaniu, 
+zamiast być dużymi "interfejsami wszechświata". 
+Na przykład, jeśli mamy interfejs List z metodami do manipulacji listą i indeksowaniem, 
+ale niektóre implementacje listy (takie jak LinkedList) nie obsługują efektywnego indeksowania, 
+to narusza to ISP. 
+Lepszym podejściem byłoby podzielenie tego interfejsu na dwa interfejsy: Collection i IndexedCollection.
