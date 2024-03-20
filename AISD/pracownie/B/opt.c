@@ -9,6 +9,7 @@ struct point {
 };
 
 void printPoints(struct point *points, int n) {
+  printf("Points:\n");
   for (int i = 0; i < n; i++) {
     printf("Point %d: x = %d, y = %d\n", i+1, points[i].x, points[i].y);
   }
@@ -40,7 +41,9 @@ int main()
 
   qsort(pointsX, n, sizeof(struct point), compX);
   qsort(pointsY, n, sizeof(struct point), compY);
-  
+
+  // printPoints(pointsX, n);
+
   // findMin(points, min, n);
   divAndConq(pointsX, pointsY, min, n);
 
@@ -54,14 +57,17 @@ int main()
 }
 
 double divAndConq(struct point *pointsX, struct point *pointsY, struct point *minTri, int n){
-
-
   if (n < 3)
   {
     return DBL_MAX;
   }
 
   int mid = n/2;
+  struct point *midPoint = calloc(1, sizeof(struct point));
+  midPoint->x = (pointsX[mid-1].x + pointsX[mid].x)/2;
+  midPoint->y = (pointsX[mid-1].y + pointsX[mid].y)/2;
+  printf("midPoint: x: %d, y: %d\n", midPoint->x, midPoint->y);
+  printPoints(pointsX, n);
 
   struct point *leftX = calloc(mid, sizeof(struct point));
   struct point *leftY = calloc(mid, sizeof(struct point));
@@ -76,13 +82,13 @@ double divAndConq(struct point *pointsX, struct point *pointsY, struct point *mi
   {
     if (i < mid)
     {
-      leftX[i] = pointsY[i];
+      leftX[i] = pointsX[i];
     }
     else
     {
-      rightX[i-mid] = pointsY[i];
+      rightX[i-mid] = pointsX[i];
     }
-    if (pointsY[i].x < pointsX[mid].x)
+    if (compX(&pointsY[i], midPoint) < 0)
     {
       leftY[l++] = pointsY[i];
     }
@@ -121,10 +127,10 @@ double divAndConq(struct point *pointsX, struct point *pointsY, struct point *mi
   }
   
   // findMin(left, minLeft, j);
-  stripSearch(leftY, minLeft, l, min_circ);
-  if (triangle(&minLeft[0], &minLeft[1], &minLeft[2]) < min_circ)
+  leftRes = stripSearch(leftY, minLeft, l, min_circ);
+  if (leftRes < min_circ)
   {
-    min_circ = triangle(&minLeft[0], &minLeft[1], &minLeft[2]);
+    min_circ = leftRes;
     minTri[0] = minLeft[0];
     minTri[1] = minLeft[1];
     minTri[2] = minLeft[2];
@@ -162,7 +168,14 @@ double findMin(struct point *points, struct point *minTri, int n){
 }
 
 double stripSearch(struct point *points, struct point *minTri, int n, double min_circ){
+  if (n < 3)
+  {
+    return DBL_MAX;
+  }
   // printPoints(points, n);
+  minTri[0] = points[0];
+  minTri[1] = points[1];
+  minTri[2] = points[2];
 
   for (int i = 0; i < n; i++)
   {
@@ -200,9 +213,28 @@ double triangle(struct point *a, struct point *b, struct point *c){
 }
 
 int compX(const void *a, const void *b){
-  return ((struct point*)a)->x < ((struct point*)b)->x;
+  // printf("a.x: %d, b.x: %d\n", ((struct point*)a)->x, ((struct point*)b)->x);
+  struct point *p1 = (struct point*)a;
+  struct point *p2 = (struct point*)b;
+  int out = (p1->x > p2->x) - (p1->x < p2->x);
+  // printf("out: %d\n", out);
+  if (out == 0)
+  {
+    return (p1->y > p2->y) - (p1->y < p2->y);
+  }
+  
+  
+  return out;
 }
 
 int compY(const void *a, const void *b){
-  return ((struct point*)a)->y < ((struct point*)b)->y;
+  struct point *p1 = (struct point*)a;
+  struct point *p2 = (struct point*)b;
+  int out = (p1->y > p2->y) - (p1->y < p2->y);
+  if (out == 0)
+  {
+    return (p1->x > p2->x) - (p1->x < p2->x);
+  }
+  
+  return out;
 }

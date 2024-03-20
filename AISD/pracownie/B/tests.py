@@ -1,6 +1,7 @@
 import random
-from subprocess import Popen, PIPE, STDOUT, TimeoutExpired
+import subprocess 
 import math
+import time
 
 def distance(x1, y1, x2, y2):
   return math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
@@ -15,13 +16,14 @@ def triangle(res):
 def main():
   inputFile = open('./test_set_1/ts1_input.txt', 'r').read()
   resFile = open('./test_set_1/ts1_output.txt', 'r').read()
+  failedFile = open('failed.txt', 'w')
   visited = set()
 
   results = resFile.split('\n')[0:-1]
   for i in range(len(results)):
     results[i] = float(results[i].split(' ')[2])
 
-  optComp = Popen(['gcc', 'opt.c', '-o', 'opt.exe', '-lm'], stdout=PIPE, stderr=STDOUT)
+  optComp = subprocess.run(['gcc', 'opt.c', '-o', 'opt.exe', '-lm'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
   test = 0
   testLines = 0
@@ -29,14 +31,26 @@ def main():
   for (i, line) in enumerate(inputFile.split('\n')):
     if testLines == 0:
       if i != 0:
-        optCall = Popen(['./opt.exe'], stdout=PIPE, stdin=PIPE, stderr=STDOUT, text=True)
-        optRes, optErr = optCall.communicate(input=inputStr, timeout=60)
-        optCall.wait()
+        # optRes = subprocess.run(['timeout 5'], text=True, capture_output=True, input=inputStr, timeout=60, shell=True)
+        optRes = subprocess.run(['./opt.exe'], text=True, capture_output=True, input=inputStr)
 
-
-
-
-        # print(optRes) 
+        timeout = 10
+        while optRes.returncode != 0:
+          if timeout == 0:
+            print('Test failed')
+            # print('Input: ')
+            # print(inputStr)
+            print('Optimal result: ')
+            print(optRes.stdout)
+            print('Expected result: ')
+            print(results[test])
+            print('Test number: ' + str(test + 1))
+            failedFile.write(inputStr)
+            break
+          timeout -= 1
+          time.sleep(1)
+        
+        optRes = optRes.stdout
         optRes = optRes.split('\n')[0:3]
 
         for i in range(len(optRes)):
