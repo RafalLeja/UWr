@@ -4,6 +4,7 @@ import math
 import time
 
 def distance(x1, y1, x2, y2):
+
   return math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
 
 def triangle(res):
@@ -23,25 +24,25 @@ def main():
   for i in range(len(results)):
     results[i] = float(results[i].split(' ')[2])
 
-  optComp = subprocess.run(['gcc', 'opt.c', '-o', 'opt.exe', '-lm'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+  optComp = subprocess.run(['g++', 'reverse.cpp', '-o', 'reverse.exe'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
   test = 0
   testLines = 0
   inputStr = ''
+  numOfPoints = 0
   for (i, line) in enumerate(inputFile.split('\n')):
     if testLines == 0:
       if i != 0:
         # optRes = subprocess.run(['timeout 5'], text=True, capture_output=True, input=inputStr, timeout=60, shell=True)
-        optRes = subprocess.run(['./opt.exe'], text=True, capture_output=True, input=inputStr)
+        optRes = subprocess.run(['./reverse.exe'], text=True, capture_output=True, input=inputStr)
 
         timeout = 10
         while optRes.returncode != 0:
           if timeout == 0:
-            print('Test failed')
-            # print('Input: ')
-            # print(inputStr)
+            print('Test failed timeout')
+            print('Input: ')
+            print(numOfPoints)
             print('Optimal result: ')
-            print(optRes.stdout)
             print('Expected result: ')
             print(results[test])
             print('Test number: ' + str(test + 1))
@@ -59,21 +60,25 @@ def main():
         
         if round(triangle(optRes), 5) != round(results[test], 5):
           print('Test failed')
-          print('Input:')
+          print('Input number:')
           print(inputStr)
           print('Optimal result:')
+          print(triangle(optRes))
           print(optRes)
-          print('circumference:' + str(triangle(optRes)))
+
+          # print('circumference:' + str(triangle(optRes)))
           print('Expected result:')
           print(results[test])
           print('Test number: ' + str(test + 1))
         
         else:
           print('Test ' + str(test + 1) +  ' passed')
+          print(optRes)
 
         test += 1
 
       testLines = int(line)
+      numOfPoints = testLines
       inputStr = line + '\n'
       continue
     else:
