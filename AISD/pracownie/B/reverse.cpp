@@ -78,27 +78,50 @@ double divAndConq(int n, const Point points[],
     minArr = minRight;
   }
 
-  static vector<Point> closeToTheLine;
-  int margin = (res > DBL_MAX/2) ? 2*BILLION : int(res/2);
-  closeToTheLine.clear();
-  closeToTheLine.reserve(n);
-  int start = 0;
+  // static vector<Point> closeToTheLine;
+  // int margin = (res > DBL_MAX/2) ? 2*BILLION : int(res/2);
+  // closeToTheLine.clear();
+  // closeToTheLine.reserve(n);
+  // int start = 0;
+  // for(int i=0;i<n;++i) {
+  //   Point p = pointsByY[i];
+  //   if(abs(p.x - midPoint.x) > margin) continue;
+  //   while(start < closeToTheLine.size() &&
+  //         p.y - closeToTheLine[start].y > margin) ++start;
+  //   for(int i=start;i<closeToTheLine.size();++i) {
+  //     for(int j=i+1;j<closeToTheLine.size();++j) {
+  //       if(perimeter(p, closeToTheLine[i], closeToTheLine[j]) < res) {
+  //         res = perimeter(p, closeToTheLine[i], closeToTheLine[j]);
+  //         minArr[0] = p;
+  //         minArr[1] = closeToTheLine[i];
+  //         minArr[2] = closeToTheLine[j];
+  //       }
+  //     }
+  //   }
+  //   closeToTheLine.push_back(p);
+  // }
+
+  static vector<Point> strip;
+  int margin = int(res/2);
+  strip.clear();
+  strip.reserve(n);
   for(int i=0;i<n;++i) {
-    Point p = pointsByY[i];
-    if(abs(p.x - midPoint.x) > margin) continue;
-    while(start < closeToTheLine.size() &&
-          p.y - closeToTheLine[start].y > margin) ++start;
-    for(int i=start;i<closeToTheLine.size();++i) {
-      for(int j=i+1;j<closeToTheLine.size();++j) {
-        if(perimeter(p, closeToTheLine[i], closeToTheLine[j]) < res) {
-          res = perimeter(p, closeToTheLine[i], closeToTheLine[j]);
-          minArr[0] = p;
-          minArr[1] = closeToTheLine[i];
-          minArr[2] = closeToTheLine[j];
+    if (abs(pointsByY[i].x - midPoint.x) <= margin) {
+      strip.push_back(pointsByY[i]);
+    }
+  }
+
+  for (int i = 0; i < strip.size(); i++) {
+    for (int j = i+1; j < strip.size(); j++) {
+      for (int k = j+1; k < strip.size(); k++) {
+        if (perimeter(strip[i], strip[j], strip[k]) < res) {
+          res = perimeter(strip[i], strip[j], strip[k]);
+          minArr[0] = strip[i];
+          minArr[1] = strip[j];
+          minArr[2] = strip[k];
         }
       }
     }
-    closeToTheLine.push_back(p);
   }
 
   return res;
