@@ -1,20 +1,15 @@
-#include <iostream>
 #include <algorithm>
 #include <cassert>
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
+#include <iostream>
 #include <array>
 #include <float.h>
 using namespace std;
-#define REP(i,n) for(int i=0;i<(n);++i)
-template<class T> inline int size(const T&c) { return c.size();}
 
-const int BILLION = 1000000000;
-// const double DBL_MAX = 1e20;
-typedef long long LL;
-
+const int SHIFT = 100000000;
 
 struct Point {
   int x,y;
@@ -24,18 +19,6 @@ struct Point {
 
 inline Point middle(const Point &a, const Point &b) {
   return Point((a.x+b.x)/2, (a.y+b.y)/2);
-}
-
-double distance(Point a, Point b) {
-  double x1 = a.x;
-  double y1 = a.y;
-  double x2 = b.x;
-  double y2 = b.y;
-  return sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
-}
-
-double perimeter(Point a, Point b, Point c) {
-  return distance(a, b) + distance(b, c) + distance(c, a);
 }
 
 bool compareX(Point a, Point b) {
@@ -52,36 +35,41 @@ bool compareY(Point a, Point b) {
   return a.y < b.y;
 }
 
-double calc(int n, const Point points[],
-            const vector<Point> &pointsByY, array<Point, 3> &minArr) {
-  if(n<3) return DBL_MAX;
-  int mid = n/2;
+double distance(Point a, Point b) {
+  return sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
+}
 
-  Point split = middle(points[mid-1], points[mid]);
+double perimeter(Point a, Point b, Point c) {
+  return distance(a, b) + distance(b, c) + distance(c, a);
+}
+
+double divAndConq(int n, const Point points[], const vector<Point> &pointsByY, array<Point, 3> &min) {
+  if(n<3) return DBL_MAX;
+  int left = n/2;
+  int right = n-left;
+  Point split = middle(points[left-1], points[left]);
   vector<Point> pointsByYLeft, pointsByYRight;
   array<Point, 3> minLeft, minRight;
-  pointsByYLeft.reserve(mid);
-  pointsByYRight.reserve(n-mid);
-  REP(i,n) {
+  pointsByYLeft.reserve(left);
+  pointsByYRight.reserve(right);
+  for (int i = 0; i < n; i++){
     if(compareX(pointsByY[i], split))
       pointsByYLeft.push_back(pointsByY[i]);
     else
       pointsByYRight.push_back(pointsByY[i]);
   }
   double res = DBL_MAX;
-  double leftRes =  calc(mid, points, pointsByYLeft, minLeft);
-  double rightRes = calc(n-mid, points+mid, pointsByYRight, minRight);
-  if (leftRes < rightRes) {
+  double leftRes = divAndConq(left, points, pointsByYLeft, minLeft);
+  double rightRes = divAndConq(right, points+left, pointsByYRight, minRight);
+  if(leftRes < rightRes) {
     res = leftRes;
-    minArr = minLeft;
+    min = minLeft;
   } else {
     res = rightRes;
-    minArr = minRight;
+    min = minRight;
   }
-
-
   static vector<Point> closeToTheLine;
-  int margin = (res > DBL_MAX/2) ? 2*BILLION : int(res/2);
+  int margin = (res > DBL_MAX/2) ? 2*SHIFT : int(res/2);
   closeToTheLine.clear();
   closeToTheLine.reserve(n);
   int start = 0;
@@ -94,44 +82,38 @@ double calc(int n, const Point points[],
       for(int j=i+1;j<closeToTheLine.size();++j) {
         if(perimeter(p, closeToTheLine[i], closeToTheLine[j]) < res) {
           res = perimeter(p, closeToTheLine[i], closeToTheLine[j]);
-          minArr[0] = p;
-          minArr[1] = closeToTheLine[i];
-          minArr[2] = closeToTheLine[j];
+          min[0] = p;
+          min[1] = closeToTheLine[i];
+          min[2] = closeToTheLine[j];
         }
       }
     }
     closeToTheLine.push_back(p);
   }
-
   return res;
 }
 
-// double calc(vector<Point> &points, array<Point, 3> &min) {
-//   sort(points.begin(), points.end(), cmpx);
-//   vector<Point> pointsByY = points;
-//   sort(pointsByY.begin(), pointsByY.end(), cmpy);
-//   return calc(points.size(), &points[0], pointsByY, min);
-// }
-
 int main() {
-  int n; scanf("%d", &n);
+  int n; 
+  scanf("%d", &n);
+  
   vector<Point> points;
-  array<Point, 3> min;
   points.reserve(n);
+  array<Point, 3> min;
+  
   for (int i = 0; i < n; i++) {
-    int x,y; scanf("%d%d", &x, &y);
-    points.push_back(Point(2*x-BILLION,2*y-BILLION));
+    int x,y; scanf("%d %d", &x, &y);
+    points.push_back(Point(2*x-SHIFT,2*y-SHIFT)); // żeby uniknąć tracenia liczb znaczących 
   }
+  vector<Point> pointsByY = points;
   
   sort(points.begin(), points.end(), compareX);
-  vector<Point> pointsByY = points;
   sort(pointsByY.begin(), pointsByY.end(), compareY);
-  
-  // double res = calc(points, min);
-  double res = calc(points.size(), &points[0], pointsByY, min);
 
+  double res = divAndConq(points.size(), &points[0], pointsByY, min);
+
+  // printf("%.15e\n", res/2);
   for(int i=0;i<3;++i) {
     printf("%d %d\n", min[i].x/2, min[i].y/2);
   }
-  
-}
+  }

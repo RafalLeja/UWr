@@ -26,6 +26,11 @@ def main():
 
   optComp = subprocess.run(['g++', 'reverse.cpp', '-o', 'reverse.exe'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
+  if optComp.returncode != 0:
+    print('Compilation failed')
+    print(optComp.stdout)
+    return
+
   test = 0
   testLines = 0
   inputStr = ''
@@ -61,7 +66,7 @@ def main():
         if round(triangle(optRes), 5) != round(results[test], 5):
           print('Test failed')
           print('Input number:')
-          print(inputStr)
+          # print(inputStr)
           print('Optimal result:')
           print(triangle(optRes))
           print(optRes)
