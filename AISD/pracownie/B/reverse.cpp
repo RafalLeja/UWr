@@ -1,21 +1,15 @@
 #include <iostream>
 #include <algorithm>
-#include <cassert>
 #include <cmath>
 #include <cstdio>
-#include <cstdlib>
 #include <vector>
 #include <array>
 #include <float.h>
+#include <cstdint>
 using namespace std;
-template<class T> inline int size(const T&c) { return c.size();}
-
-const int BILLION = 1000000000;
 
 struct Point {
   int x,y;
-  Point() {}
-  Point(int x,int y):x(x),y(y) {}
 };
 
 double distance(Point a, Point b) {
@@ -49,10 +43,10 @@ double divAndConq(int n, const Point points[],
   if(n<3) return DBL_MAX;
   int mid = n/2;
 
-  Point midPoint = Point(
+  Point midPoint = {
     (points[mid-1].x + points[mid].x)/2,
     (points[mid-1].y + points[mid].y)/2
-  );
+  };
 
   vector<Point> pointsByYLeft, pointsByYRight;
   pointsByYLeft.reserve(mid);
@@ -78,50 +72,38 @@ double divAndConq(int n, const Point points[],
     minArr = minRight;
   }
 
-  // static vector<Point> closeToTheLine;
-  // int margin = (res > DBL_MAX/2) ? 2*BILLION : int(res/2);
-  // closeToTheLine.clear();
-  // closeToTheLine.reserve(n);
-  // int start = 0;
-  // for(int i=0;i<n;++i) {
-  //   Point p = pointsByY[i];
-  //   if(abs(p.x - midPoint.x) > margin) continue;
-  //   while(start < closeToTheLine.size() &&
-  //         p.y - closeToTheLine[start].y > margin) ++start;
-  //   for(int i=start;i<closeToTheLine.size();++i) {
-  //     for(int j=i+1;j<closeToTheLine.size();++j) {
-  //       if(perimeter(p, closeToTheLine[i], closeToTheLine[j]) < res) {
-  //         res = perimeter(p, closeToTheLine[i], closeToTheLine[j]);
-  //         minArr[0] = p;
-  //         minArr[1] = closeToTheLine[i];
-  //         minArr[2] = closeToTheLine[j];
-  //       }
-  //     }
-  //   }
-  //   closeToTheLine.push_back(p);
-  // }
+  int margin = (res > DBL_MAX/2) ? INT32_MAX : res/2;
 
-  static vector<Point> strip;
-  int margin = int(res/2);
-  strip.clear();
-  strip.reserve(n);
-  for(int i=0;i<n;++i) {
-    if (abs(pointsByY[i].x - midPoint.x) <= margin) {
-      strip.push_back(pointsByY[i]);
+  vector<Point> box;
+  box.reserve(n);
+
+  int first = 0;
+  int last = 0;
+
+  for(int i = 0; i < n; i++) {
+
+    Point p = pointsByY[i];
+    
+    if(abs(p.x - midPoint.x) > margin) {
+      continue;
     }
-  }
 
-  for (int i = 0; i < strip.size(); i++) {
-    for (int j = i+1; j < strip.size(); j++) {
-      for (int k = j+1; k < strip.size(); k++) {
-        if (perimeter(strip[i], strip[j], strip[k]) < res) {
-          res = perimeter(strip[i], strip[j], strip[k]);
-          minArr[0] = strip[i];
-          minArr[1] = strip[j];
-          minArr[2] = strip[k];
+    while(first < last && p.y - box[first].y > margin) {
+      first++;
+    }
+
+    for(int j = first; j < last; j++) {
+      for(int k = j+1; k < last; k++) {
+        if(perimeter(p, box[j], box[k]) < res) {
+          res = perimeter(p, box[j], box[k]);
+          minArr[0] = p;
+          minArr[1] = box[j];
+          minArr[2] = box[k];
         }
       }
     }
+    box.push_back(p);
+    last++;
   }
 
   return res;
@@ -133,18 +115,19 @@ int main() {
   array<Point, 3> min;
   points.reserve(n);
   for (int i = 0; i < n; i++) {
-    int x,y; scanf("%d%d", &x, &y);
-    points.push_back(Point(2*x-BILLION,2*y-BILLION));
+    int x,y; scanf("%d %d", &x, &y);
+    points.push_back({x,y});
   }
   
+
   sort(points.begin(), points.end(), compareX);
   vector<Point> pointsByY = points;
   sort(pointsByY.begin(), pointsByY.end(), compareY);
   
-  double res = divAndConq(points.size(), &points[0], pointsByY, min);
+  divAndConq(points.size(), &points[0], pointsByY, min);
 
   for(int i=0;i<3;++i) {
-    printf("%d %d\n", min[i].x/2, min[i].y/2);
+    printf("%d %d\n", min[i].x, min[i].y);
   }
   
 }
