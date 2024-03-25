@@ -9,7 +9,7 @@
 using namespace std;
 
 struct Point {
-  int x,y;
+  long long x,y;
 };
 
 double distance(Point a, Point b) {
@@ -38,9 +38,11 @@ bool compareY(Point a, Point b) {
   return a.y < b.y;
 }
 
-double divAndConq(int n, const Point points[],
-            const vector<Point> &pointsByY, array<Point, 3> &minArr) {
-  if(n<3) return DBL_MAX;
+double divAndConq(int n, const Point points[], const vector<Point> &pointsByY, array<Point, 3> &minArr) {
+  if(n < 3){
+    return DBL_MAX;
+  }  
+
   int mid = n/2;
 
   Point midPoint = {
@@ -115,19 +117,19 @@ int main() {
   array<Point, 3> min;
   points.reserve(n);
   for (int i = 0; i < n; i++) {
-    int x,y; scanf("%d %d", &x, &y);
+    long long x,y; 
+    scanf("%lld %lld", &x, &y);
     points.push_back({x,y});
   }
   
-
   sort(points.begin(), points.end(), compareX);
   vector<Point> pointsByY = points;
   sort(pointsByY.begin(), pointsByY.end(), compareY);
   
   divAndConq(points.size(), &points[0], pointsByY, min);
 
-  for(int i=0;i<3;++i) {
-    printf("%d %d\n", min[i].x, min[i].y);
+  for(int i = 0; i < 3; ++i) {
+    printf("%lld %lld\n", min[i].x, min[i].y);
   }
   
 }
