@@ -24,8 +24,8 @@ def main():
   for i in range(len(results)):
     results[i] = float(results[i].split(' ')[2])
 
-  optComp = subprocess.run(['g++', 'reverse.cpp', '-o', 'reverse.exe'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-  # optComp = subprocess.run(['gcc', 'trojkaty.c', '-o', 'trojkaty.exe'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+  # optComp = subprocess.run(['g++', 'reverse.cpp', '-o', 'reverse.exe'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+  optComp = subprocess.run(['gcc', 'trojkaty.c', '-o', 'trojkaty.exe', '-lm'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
   if optComp.returncode != 0:
     print('Compilation failed')
@@ -40,19 +40,19 @@ def main():
     if testLines == 0:
       if i != 0:
         # optRes = subprocess.run(['timeout 5'], text=True, capture_output=True, input=inputStr, timeout=60, shell=True)
-        optRes = subprocess.run(['./reverse.exe'], text=True, capture_output=True, input=inputStr)
-        # optRes = subprocess.run(['./trojkaty.exe'], text=True, capture_output=True, input=inputStr)
+        # optRes = subprocess.run(['./reverse.exe'], text=True, capture_output=True, input=inputStr)
+        optRes = subprocess.run(['./trojkaty.exe'], text=True, capture_output=True, input=inputStr)
 
         timeout = 10
         while optRes.returncode != 0:
           if timeout == 0:
+            print('Test number: ' + str(test + 1))
             print('Test failed timeout')
             print('Input: ')
             print(numOfPoints)
             print('Optimal result: ')
             print('Expected result: ')
             print(results[test])
-            print('Test number: ' + str(test + 1))
             failedFile.write(inputStr)
             break
           timeout -= 1

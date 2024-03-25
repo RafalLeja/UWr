@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-struct point
+struct punkt
 {
     int x;
     int y;
@@ -11,33 +11,41 @@ struct point
 struct wynik
 {
     double obwod;
-    struct point a;
-    struct point b;
-    struct point c;
+    struct punkt a;
+    struct punkt b;
+    struct punkt c;
 } Wynik;
 
 int porownajY(const void *p1, const void *p2)
 {
-    struct point *a = (struct point *)p1;
-    struct point *b = (struct point *)p2;
+    struct punkt *a = (struct punkt *)p1;
+    struct punkt *b = (struct punkt *)p2;
+    if (a->y == b->y)
+    {
+        return a->x < b->x;
+    }
     return a->y < b->y;
 }
 
 int porownajX(const void *p1, const void *p2)
 {
-    struct point *a = (struct point *)p1;
-    struct point *b = (struct point *)p2;
+    struct punkt *a = (struct punkt *)p1;
+    struct punkt *b = (struct punkt *)p2;
+    if (a->x == b->x)
+    {
+        return a->y < b->y;
+    }
     return a->x < b->x;
 }
 
-double obwod(struct point p1, struct point p2, struct point p3)
+double obwod(struct punkt p1, struct punkt p2, struct punkt p3)
 {
-    long long x1 = p1.x;
-    long long x2 = p2.x;
-    long long x3 = p3.x;
-    long long y1 = p1.y;
-    long long y2 = p2.y;
-    long long y3 = p3.y;
+    double x1 = p1.x;
+    double x2 = p2.x;
+    double x3 = p3.x;
+    double y1 = p1.y;
+    double y2 = p2.y;
+    double y3 = p3.y;
 
     double bok1 = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
     double bok2 = sqrt(pow(x3 - x2, 2) + pow(y3 - y2, 2));
@@ -45,7 +53,7 @@ double obwod(struct point p1, struct point p2, struct point p3)
     return bok1 + bok2 + bok3;
 }
 
-struct wynik sprawdzenie1(struct point *punkty, int rozmiar)
+struct wynik sprawdzenie1(struct punkt *punkty, int rozmiar)
 {
     struct wynik wynik;
     wynik.obwod = INFINITY;
@@ -70,29 +78,13 @@ struct wynik sprawdzenie1(struct point *punkty, int rozmiar)
     return wynik;
 }
 
-struct wynik sprawdzenie2(struct point *punkty_y, int rozmiar, double v, int xsrodek)
+struct wynik sprawdzenie2(struct punkt *punkty_y, int rozmiar, double v, int xsrodek)
 {
-    struct point *temp = calloc(rozmiar, sizeof(struct point));
+    struct punkt *temp = calloc(rozmiar, sizeof(struct punkt));
     struct wynik wynik;
     wynik.obwod = INFINITY;
     int start = 0;
     int end = 0;
-    // for (int i = 0; i < rozmiar; i++)
-    // {
-    //     int tempRozmiar = 0;
-    //     temp[tempRozmiar++] = punkty[i];
-    //     int j = i + 1;
-    //     while (punkty[j].y <= punkty[i].y + v && j < rozmiar)
-    //     {
-    //         temp[tempRozmiar++] = punkty[j];
-    //         j++;
-    //     }
-    //     if (tempRozmiar >= 3)
-    //     {
-    //         struct wynik sprawdzenie = sprawdzenie1(temp, tempRozmiar);
-    //         wynik = (wynik.obwod < sprawdzenie.obwod) ? wynik : sprawdzenie;
-    //     }
-    // }
 
     for (int i = 0; i < rozmiar; i++) {
         if (abs(punkty_y[i].x - xsrodek) > v)
@@ -107,10 +99,12 @@ struct wynik sprawdzenie2(struct point *punkty_y, int rozmiar, double v, int xsr
             for (int i3 = i2+1; i3 < end; i3++) {
                 struct wynik temp;
                 temp.obwod = obwod(punkty_y[i], punkty_y[i2], punkty_y[i3]);
-                temp.a = punkty_y[i];
-                temp.b = punkty_y[i2];
-                temp.c = punkty_y[i3];
-                wynik = (wynik.obwod < temp.obwod) ? wynik : temp;
+                if (temp.obwod < wynik.obwod) {
+                    temp.a = punkty_y[i];
+                    temp.b = punkty_y[i2];
+                    temp.c = punkty_y[i3];
+                    wynik = temp;
+                }
             }
         }
         temp[end++] = punkty_y[i];
@@ -119,7 +113,7 @@ struct wynik sprawdzenie2(struct point *punkty_y, int rozmiar, double v, int xsr
     return wynik;
 }
 
-struct wynik najmniejszyObwod(struct point *punkty, struct point *punkty_y, int dol, int gora)
+struct wynik najmniejszyObwod(struct punkt *punkty, struct punkt *punkty_y, int dol, int gora)
 {
     struct wynik mininum;
     int zakres = gora - dol;
@@ -130,41 +124,80 @@ struct wynik najmniejszyObwod(struct point *punkty, struct point *punkty_y, int 
     }
 
     int srodek = dol + zakres / 2;
-    int xsrodek = (punkty[srodek].x + punkty[srodek + 1].x) / 2;
+    printf("srodek: %d\n", srodek);
+    double xsrodek = (punkty[srodek].x + punkty[srodek + 1].x) / 2.0;
+    struct punkt punktSrodek = {xsrodek, (punkty[srodek].y + punkty[srodek + 1].y) / 2.0}; 
 
-    struct point *lewyY = malloc(srodek * sizeof(struct point));
-    struct point *prawyY = malloc((gora - srodek) * sizeof(struct point));
+    printf("lewy %d, prawy %d\n", srodek, gora - srodek);
+    struct punkt *lewyY = malloc(srodek * sizeof(struct punkt));
+    struct punkt *prawyY = malloc((gora - srodek) * sizeof(struct punkt));
 
     int l = 0;
     int r = 0;
-    for (int i = dol; i < gora; i++) {
-        if (punkty_y[i].x > xsrodek) {
-            prawyY[r++] = punkty_y[i]; 
-        } else {
+    for (int i = 0; i < zakres; i++) {
+        printf("punkty_y[%d]: (%d,%d), xsrodek: %lf\n", i, punkty_y[i].x, punkty_y[i].y, xsrodek);
+        if (porownajX(&punkty_y[i], &punktSrodek)) {
             lewyY[l++] = punkty_y[i];
+        } else {
+            prawyY[r++] = punkty_y[i]; 
         }
     }
+    printf("l: %d, r: %d\n", l, r);
 
     struct wynik polowa1 = najmniejszyObwod(punkty, lewyY, dol, srodek);
     struct wynik polowa2 = najmniejszyObwod(punkty, prawyY, srodek + 1, gora);
     mininum = (polowa1.obwod < polowa2.obwod) ? polowa1 : polowa2;
     double v = mininum.obwod / 2;
 
-    struct point *temp = malloc(zakres * sizeof(struct point));
-    int tempRozmiar = 0;
+    // struct punkt *temp = malloc(zakres * sizeof(struct punkt));
+    // int tempRozmiar = 0;
     // int start = 0;
 
-    for (int i = dol; i < gora; i++)
-    {
-        if (abs(punkty_y[i].x - xsrodek) < v)
-        {
-            temp[tempRozmiar++] = punkty_y[i];
-        }
-    }
-    struct wynik sprawdzenie = sprawdzenie2(punkty_y, zakres, v, xsrodek);
-    mininum = (mininum.obwod < sprawdzenie.obwod) ? mininum : sprawdzenie;
-    free(temp);
+    // for (int i = dol; i < gora; i++)
+    // {
+    //     if (abs(punkty_y[i].x - xsrodek) < v)
+    //     {
+    //         temp[tempRozmiar++] = punkty_y[i];
+    //     }
+    // }
+    // struct wynik sprawdzenie = sprawdzenie2(punkty_y, zakres, v, xsrodek);
+    
+    printf("zakres: %d\n", zakres);
+    struct punkt *temp = calloc(zakres, sizeof(struct punkt));
+    // struct wynik wynik;
+    // wynik.obwod = INFINITY;
+    int start = 0;
+    int end = 0;
 
+    for (int i = 0; i < zakres; i++) {
+        if (abs(punkty_y[i].x - xsrodek) > v)
+        {
+            continue;        
+        }
+        while (start < end && punkty_y[i].y - temp[start].y > v)
+        {
+            start++;
+        }
+        for (int i2 = start; i2 < end; i2++) {
+            for (int i3 = i2+1; i3 < end; i3++) {
+                struct wynik tempWynik;
+                tempWynik.obwod = obwod(punkty_y[i], temp[i2], temp[i3]);
+                if (tempWynik.obwod < mininum.obwod) {
+                    tempWynik.a = punkty_y[i];
+                    tempWynik.b = temp[i2];
+                    tempWynik.c = temp[i3];
+                    mininum = tempWynik;
+                }
+            }
+        }
+        temp[end++] = punkty_y[i];
+    }
+    // free(temp);
+    
+    // mininum = (mininum.obwod < sprawdzenie.obwod) ? mininum : sprawdzenie;
+    free(temp);
+    free(lewyY);
+    free(prawyY);        
     return mininum;
 }
 
@@ -172,16 +205,16 @@ int main()
 {
     int n;
     scanf("%d", &n);
-    struct point *punkty = malloc(n * sizeof(struct point));
-    struct point *punkty_y = malloc(n * sizeof(struct point));
+    struct punkt *punkty = malloc(n * sizeof(struct punkt));
+    struct punkt *punkty_y = malloc(n * sizeof(struct punkt));
     for (int i = 0; i < n; i++)
     {
         scanf("%d %d", &punkty[i].x, &punkty[i].y);
         punkty_y[i] = punkty[i];
     }
 
-    qsort(punkty, n, sizeof(struct point), porownajX);
-    qsort(punkty_y, n, sizeof(struct point), porownajY);
+    qsort(punkty, n, sizeof(struct punkt), porownajX);
+    qsort(punkty_y, n, sizeof(struct punkt), porownajY);
 
     struct wynik result = najmniejszyObwod(punkty, punkty_y, 0, n);
     printf("%d %d\n", result.a.x, result.a.y);
