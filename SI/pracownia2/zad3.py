@@ -1,3 +1,5 @@
+import math
+
 moves = {'U' : (0, -1), 'D' : (0, 1), 'L' : (-1, 0), 'R' : (1, 0)}
 output_file = open('zad_output.txt', 'w')
 walls = set()
@@ -8,15 +10,26 @@ class State:
   def __init__(self, commandos, prevMoves = ''):
     self.commandos = tuple(sorted(set(commandos)))
     self.prevMoves = prevMoves
+    self.heuristic = 0
     if self.check():
       output_file.write(prevMoves)
       exit(0)
+
+    dists = []
+    for commando in self.commandos:
+      for goal in goals:
+        # dists.append(abs(commando[0] - goal[0]) + abs(commando[1] - goal[1]))
+        dists.append(math.sqrt(abs(commando[0] - goal[0])**2 + (commando[1] - goal[1])**2))
+    # self.heuristic = sum(dists)/len(dists)
+    self.heuristic = max(dists)
+    self.heuristic += len(self.prevMoves)
     # if len(self.prevMoves) % 10 == 0:
     #   print(self.commandos)
     return
 
   def __lt__(self, other):
-    return len(self.prevMoves) < len(other.prevMoves)
+    # return len(self.prevMoves) < len(other.prevMoves)
+    return self.heuristic < other.heuristic
 
   def check(self):
     for i in range(len(self.commandos)):
@@ -129,7 +142,6 @@ def findGoals(board):
 def main():
   input_file = open('zad_input.txt', 'r')
   MAX_MOVES = 150
-  usedMoves = 0
   
   lines = input_file.readlines()
   x = len(lines[0])-1
@@ -137,30 +149,8 @@ def main():
   board = []
   for line in lines:
     board.append(list(line.strip()))
-  
-  if x*2 + y*2 < MAX_MOVES/2:
-    usedMoves = x*2 + y*2
-    for i in range(x):
-      makeMove(board, 'R', output_file)
-    for i in range(y):
-      makeMove(board, 'D', output_file)
-    for i in range(x):
-      makeMove(board, 'L', output_file)
-    for i in range(y):
-      makeMove(board, 'U', output_file)
-  elif x + y < MAX_MOVES/2:
-    usedMoves = x + y
-    for i in range(y//2):
-      makeMove(board, 'U', output_file)
-    for i in range(x//2):
-      makeMove(board, 'R', output_file)
-    for i in range(y//2):
-      makeMove(board, 'D', output_file)
-    for i in range(x//2):
-      makeMove(board, 'L', output_file)
 
-
-  printBoard(board)
+  # printBoard(board)
 
   findWalls(board)
   findGoals(board)
@@ -174,7 +164,7 @@ def main():
       continue
     visited.add(state.commandos)
 
-    if len(state.prevMoves) > MAX_MOVES-userMoves:
+    if len(state.prevMoves) > MAX_MOVES:
       continue
     for nextState in state.nextStates():
       deque.append(nextState)
