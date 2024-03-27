@@ -10,25 +10,32 @@ class State:
   def __init__(self, commandos, prevMoves = ''):
     self.commandos = tuple(sorted(set(commandos)))
     self.prevMoves = prevMoves
-    self.heuristic = 0
+    self.heuristic = self.f()
     if self.check():
       output_file.write(prevMoves)
       exit(0)
 
+    return
+
+  def h(self):
     dists = []
     for commando in self.commandos:
       for goal in goals:
-        # dists.append(abs(commando[0] - goal[0]) + abs(commando[1] - goal[1]))
-        dists.append(math.sqrt(abs(commando[0] - goal[0])**2 + (commando[1] - goal[1])**2))
-    # self.heuristic = sum(dists)/len(dists)
-    self.heuristic = max(dists)
-    self.heuristic += len(self.prevMoves)
-    # if len(self.prevMoves) % 10 == 0:
-    #   print(self.commandos)
-    return
+        dists.append(abs(commando[0] - goal[0]) + abs(commando[1] - goal[1]))
+        # dists.append(math.sqrt(abs(commando[0] - goal[0])**2 + (commando[1] - goal[1])**2))
+    return max(dists)
+
+  def g(self):
+    return len(self.prevMoves)
+
+  def f(self):
+    W = 1
+    return self.g() + self.h() * W
 
   def __lt__(self, other):
     # return len(self.prevMoves) < len(other.prevMoves)
+    if self.heuristic == other.heuristic:
+      return len(self.commandos) < len(other.commandos)
     return self.heuristic < other.heuristic
 
   def check(self):

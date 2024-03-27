@@ -1,68 +1,48 @@
-import random
+import math
 
 moves = {'U' : (0, -1), 'D' : (0, 1), 'L' : (-1, 0), 'R' : (1, 0)}
 output_file = open('zad_output.txt', 'w')
 walls = set()
 goals = set()
-visitedMin = set()
 visited = set()
 
 class State:
   def __init__(self, commandos, prevMoves = ''):
+    self.commandos = tuple(sorted(set(commandos)))
     self.prevMoves = prevMoves
-    self.commandos = set(commandos)
-    if self.commandos <= goals:
+    self.heuristic = self.f()
+    if self.check():
       output_file.write(prevMoves)
       exit(0)
-    self.commandos = tuple(sorted(self.commandos))
+
     return
 
-  def __lt__(self, other):
-    return len(self.prevMoves) < len(other.prevMoves)
-
-  # def check(self):
-  #   for i in range(len(self.commandos)):
-  #     if self.commandos[i] not in goals:
-  #       return False
-  #   return True
-
-  def tryMove(self, direction):
-    newCommandos = ()
+  def h(self):
+    dists = []
     for commando in self.commandos:
-      newCommando = (commando[0] + moves[direction][0], commando[1] + moves[direction][1])
-      if newCommando in walls:
-        newCommandos += (commando,)
-      else:
-        newCommandos += (newCommando,)
-    return newCommandos
+      for goal in goals:
+        dists.append(abs(commando[0] - goal[0]) + abs(commando[1] - goal[1]))
+        # dists.append(math.sqrt(abs(commando[0] - goal[0])**2 + (commando[1] - goal[1])**2))
+    return max(dists)
 
-  def nextStates(self):
-    states = []
-    for direction in moves.keys():
-      newCommandos = self.tryMove(direction)
-      if newCommandos != self.commandos:
-        # print(self.prevMoves + direction)
-        states.append(State(newCommandos, self.prevMoves + direction))
-    return states
+  def g(self):
+    return len(self.prevMoves)
 
-class minimizingState:
-  def __init__(self, commandos, prevMoves = ''):
-    self.prevMoves = prevMoves
-    self.commandos = set(commandos)
-    # if len(self.commandos) <= 3:
-    #   output_file.write(prevMoves)
-    #   exit(0)
-    self.commandos = tuple(sorted(self.commandos))
-    return
+  def f(self):
+    W = 1000
+    return self.g() + self.h() * W
 
   def __lt__(self, other):
-    return len(self.commandos) < len(other.commandos)
+    # return len(self.prevMoves) < len(other.prevMoves)
+    if self.heuristic == other.heuristic:
+      return len(self.commandos) < len(other.commandos)
+    return self.heuristic < other.heuristic
 
-  # def check(self):
-  #   for i in range(len(self.commandos)):
-  #     if self.commandos[i] not in goals:
-  #       return False
-  #   return True
+  def check(self):
+    for i in range(len(self.commandos)):
+      if self.commandos[i] not in goals:
+        return False
+    return True
 
   def tryMove(self, direction):
     newCommandos = ()
@@ -169,8 +149,6 @@ def findGoals(board):
 def main():
   input_file = open('zad_input.txt', 'r')
   MAX_MOVES = 150
-  usedMoves = 0
-  minimizingMoves = ''
   
   lines = input_file.readlines()
   x = len(lines[0])-1
@@ -178,23 +156,6 @@ def main():
   board = []
   for line in lines:
     board.append(list(line.strip()))
-  
-  if MAX_MOVES - 2*x - 2*y > x + y:
-    usedMoves = x*2 + y*2
-    for i in range(x):
-      makeMove(board, 'R', output_file)
-    for i in range(y):
-      makeMove(board, 'D', output_file)
-    for i in range(x):
-      makeMove(board, 'L', output_file)
-    for i in range(y):
-      makeMove(board, 'U', output_file)
-  # commandos = findCommandos(board)
-  # prevCommandos = len(commandos)
-  # for i in range(80):
-    # randomMove = random.choice(list(moves.keys()))
-    # makeMove(board, randomMove, output_file)
-
 
   # printBoard(board)
 
@@ -202,46 +163,15 @@ def main():
   findGoals(board)
   commandos = findCommandos(board)
 
-  # minDeque = [minimizingState(commandos)]
-  # while len(minDeque) > 0:
-  #   state = minDeque.pop(0)
-
-  #   if state.commandos in visitedMin:
-  #     continue
-  #   visitedMin.add(state.commandos)
-
-  #   if len(commandos) <= 3:
-  #     minimizingMoves += state.prevMoves
-  #     usedMoves += len(state.prevMoves)
-  #     break
-
-  #   if len(state.prevMoves) > 5:
-  #     # output_file.write(state.prevMoves)
-  #     minimizingMoves += state.prevMoves
-  #     usedMoves += len(state.prevMoves)
-  #     break
-
-  #   for nextState in state.nextStates():
-  #     minDeque.append(nextState)
-  #   minDeque.sort()
-
-  # # printBoard(board)
-  # print(minimizingMoves)
-
-  commandos = findCommandos(board)
-  # print(commandos)
-
-  deque = [State(commandos, minimizingMoves)]
-
+  deque = [State(commandos)]
   while len(deque) > 0:
-    # print(len(deque))
     state = deque.pop(0)
 
     if state.commandos in visited:
       continue
     visited.add(state.commandos)
 
-    if len(state.prevMoves) > MAX_MOVES-usedMoves:
+    if len(state.prevMoves) > MAX_MOVES:
       continue
     for nextState in state.nextStates():
       deque.append(nextState)
