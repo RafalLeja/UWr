@@ -234,7 +234,7 @@ def main():
   deque = [State(commandos, minimizingMoves)]
 
   while len(deque) > 0:
-    # print(len(deque))
+    print(len(deque))
     state = deque.pop(0)
 
     if state.commandos in visited:
