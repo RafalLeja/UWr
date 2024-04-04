@@ -14,8 +14,8 @@ set<pair<int, int>> goals;
 set<pair<int, int>> walls;
 
 map<string, pair<int, int>> moves = {
-  {"U", make_pair(0, 1)},
-  {"D", make_pair(0, -1)},
+  {"U", make_pair(0, -1)},
+  {"D", make_pair(0, 1)},
   {"L", make_pair(-1, 0)},
   {"R", make_pair(1, 0)}
 };
@@ -30,10 +30,13 @@ class State {
     };
 };
 
-class ltState {
+class minState {
   public:
     bool operator()(const State& s1, const State& s2) const {
-      return s1.moves.length() < s2.moves.length();
+      if (s1.commandos.size() == s2.commandos.size()){
+        return s1.moves.length() > s2.moves.length();
+      }
+      return s1.commandos.size() > s2.commandos.size();
     }
 };
 
@@ -111,30 +114,35 @@ int main(){
     y++;
   }
 
-  // cout << "Goals: " << goals.size() << endl;
-  // for (auto goal : goals){
-  //   cout << goal.first << " " << goal.second << endl;
-  // }
-
   State start = State("", commandos);
-  visited.insert(to_string(start.commandos));
-  for (int i = 0; i < x; i++){
-    start = move(start, "R");
-    visited.insert(to_string(start.commandos));
-  }
-  for (int i = 0; i < y; i++){
-    start = move(start, "D");
-    visited.insert(to_string(start.commandos));
-  }
-  for (int i = 0; i < x; i++){
-    start = move(start, "L");
-    visited.insert(to_string(start.commandos));
-  }
-  for (int i = 0; i < y; i++){
-    start = move(start, "U");
-    visited.insert(to_string(start.commandos));
-  }
 
+  priority_queue<State, vector<State>, minState> minimizingQ;
+  minimizingQ.push(start);
+
+  while (!minimizingQ.empty()){
+    State current = minimizingQ.top();
+    minimizingQ.pop();
+
+    if (current.commandos.size() < 3){
+      start = current;
+      break;
+    }
+
+    if (visited.find(to_string(current.commandos)) != visited.end()){
+      continue;
+    }
+    visited.insert(to_string(current.commandos));
+
+    if (is_goal(current)){
+      outputFile << current.moves;
+      exit(0);
+    }
+
+    for (auto dir : {"U", "D", "L", "R"}){
+      State new_state = move(current, dir);
+      minimizingQ.push(new_state);
+    }
+  }
 
   priority_queue<State, vector<State>, gtState> q;
   q.push(start);
@@ -147,7 +155,6 @@ int main(){
       continue;
     }
     visited.insert(to_string(current.commandos));
-    cout << current.commandos.size() << endl;
 
     if (is_goal(current)){
       outputFile << current.moves << endl;
@@ -156,11 +163,7 @@ int main(){
 
     for (auto dir : {"U", "D", "L", "R"}){
       State new_state = move(current, dir);
-      if (visited.find(to_string(new_state.commandos)) == visited.end()){
-        // cout << to_string(new_state.commandos) << endl;
-        visited.insert(to_string(new_state.commandos));
-        q.push(new_state);
-      }
+      q.push(new_state);
     }
   }
 
