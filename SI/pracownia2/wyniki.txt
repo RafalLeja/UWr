@@ -4,9 +4,9 @@ ruchy: 679
 czas: 16.6
 
 A*:
-testy 12/21
-ruchy: 227
-czas: 16.5
+testy 16/21
+ruchy: 335
+czas: 24
 
 Weighted A* (1000):
 testy 15/21

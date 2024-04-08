@@ -25,6 +25,7 @@ class State {
     set<pair<int, int>> commandos;
     string moves;
     int f;
+    int h;
     State(string moves, set<pair<int, int>> commandos){
       this->moves = moves;
       this->commandos = commandos;
@@ -32,15 +33,20 @@ class State {
 
       int max = 0;
       for (auto commando : this->commandos) {
+        int min = 10000;
         for (auto goal : goals) {
           int dist = abs(commando.first - goal.first) + abs(commando.second - goal.second);
-          if (dist > max) {
-            max = dist;
+          if (dist < min) {
+            min = dist;
           }
         }
+        if (max < min) {
+          max = min;
+        }
       }
-
-      this->f += max * 2;
+      
+      this->h = max;
+      this->f += 100 * max;
     };
 };
 
@@ -48,7 +54,7 @@ class gtState {
   public:
     bool operator()(const State& s1, const State& s2) const {
       if (s1.f == s2.f){
-        return s1.moves.length() > s2.moves.length();
+        return s1.commandos.size() > s2.commandos.size();
       }
       return s1.f > s2.f;
     }
@@ -89,6 +95,23 @@ bool is_goal(State state){
   return true;
 }
 
+void printBoard(set<pair<int, int>> commandos, int x, int y){
+  for (int i = 0; i <= y; i++){
+    for (int j = 0; j <= x; j++){
+      // cout << i << " " << j << endl;
+      if (walls.find(make_pair(j, i)) != walls.end()){
+        cout << "#";
+      }else if (commandos.find(make_pair(j, i)) != commandos.end()){
+        cout << "S";
+      }else if (goals.find(make_pair(j, i)) != goals.end()){
+        cout << "G";
+      }else{
+        cout << " ";
+      }
+    }
+    cout << endl;
+  }
+}
 
 int main(){
   ifstream inputFile;
@@ -100,39 +123,41 @@ int main(){
   unordered_set<string> visited;
   set<pair<int, int>> commandos;
 
-  int x = 0, y = 0;
+  int x = 0, tmpX = 0, y = 0;
   while (!inputFile.eof()){
-    x = 0;
     string line;
     getline(inputFile, line);
+    x = x > line.length() ? x : line.length();
+    tmpX = 0;
     for (char c : line){
       if (c == 'G'){
-        goals.insert(make_pair(x, y));
+        goals.insert(make_pair(tmpX, y));
       }else if (c == '#'){
-        walls.insert(make_pair(x, y));
+        walls.insert(make_pair(tmpX, y));
       }else if (c == 'B'){
-        commandos.insert(make_pair(x, y));
-        goals.insert(make_pair(x, y));
+        commandos.insert(make_pair(tmpX, y));
+        goals.insert(make_pair(tmpX, y));
       }else if (c == 'S'){
-        commandos.insert(make_pair(x, y));
+        commandos.insert(make_pair(tmpX, y));
       }
-      x++;
+      tmpX++;
     }
     y++;
   }
 
   State start = State("", commandos);
-  // cout << start.f << endl;
 
   priority_queue<State, vector<State>, gtState> q;
   q.push(start);
+
 
   while (!q.empty()){
     State current = q.top();
     q.pop();
 
-    // cout << current.f << endl;
-    // cout << q.size() << endl;
+    // printBoard(current.commandos, x, y);
+
+    // cout << to_string(current.commandos) << " " << current.h << " " << current.moves << endl;
 
     if (visited.find(to_string(current.commandos)) != visited.end()){
       continue;
