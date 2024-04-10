@@ -1,0 +1,1 @@
+// tablica 2-D, a potem odtwarzanie

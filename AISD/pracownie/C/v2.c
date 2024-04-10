@@ -15,7 +15,9 @@ struct out {
 struct out K(int F, int C, struct moneta *monety, int *minOut, int *maxOut, struct out *wyniki){
   if (F == 0) return (struct out){0, 0};
   
-  struct out wynik = (struct out){INT_MAX, 0};
+  struct out wynik;
+  wynik.min = INT_MAX;
+  wynik.max = 0;
 
   for (int i = 0; i < C; i++){
     if (monety[i].weight <= F){
@@ -23,7 +25,7 @@ struct out K(int F, int C, struct moneta *monety, int *minOut, int *maxOut, stru
       int *tempMaxOut = (int*) calloc(C, sizeof(int));
       struct out temp;
       if (wyniki[F-monety[i].weight].min != -1) {
-        printf("cached\n");
+        // printf("cached\n");
         temp.min = wyniki[F-monety[i].weight].min;
         temp.max = wyniki[F-monety[i].weight].max;
       } else {
@@ -33,10 +35,13 @@ struct out K(int F, int C, struct moneta *monety, int *minOut, int *maxOut, stru
       temp.min += monety[i].val;
       temp.max += monety[i].val;
 
+      printf("F: %d, i: %d, temp.min: %d, temp.max: %d\n", F, i, temp.min, temp.max);
+
       if (temp.max > wynik.max){
         wynik.max = temp.max;
         for (int j = 0; j < C; j++){
           maxOut[j] = tempMaxOut[j];
+          printf("maxOut[%d]: %d\n", j, maxOut[j]);
         }
         maxOut[i]++;
       }
@@ -59,6 +64,7 @@ struct out K(int F, int C, struct moneta *monety, int *minOut, int *maxOut, stru
   for (int i = 0; i < C; i++){
     sumMin += monety[i].weight * minOut[i];
     sumMax += monety[i].weight * maxOut[i];
+    // printf("minOut[%d]: %d, maxOut[%d]: %d\n", i, minOut[i], i, maxOut[i]);
   }
   if (sumMin != F)
   {
@@ -85,7 +91,7 @@ int main(){
     scanf("%d %d", &monety[i].val, &monety[i].weight);
   }
 
-  struct out *wyniki = (struct out*) malloc(F*sizeof(struct out));
+  struct out *wyniki = (struct out*) malloc((F+1)*sizeof(struct out));
 
   for (int i = 0; i < F; i++){
     wyniki[i] = (struct out){-1, -1};
@@ -102,7 +108,7 @@ int main(){
   if (sum != F)
   {
     printf("NIE\n");
-    return 0;
+    // return 0;
   }
   
   printf("TAK\n");
@@ -117,6 +123,11 @@ int main(){
     printf("%d ", maxOut[i]);
   }
   printf("\n");
+
+  printf("-------\n");
+  for (int i = 0; i < F+1; i++){
+    printf("%d: %d %d\n", i, wyniki[i].min, wyniki[i].max);
+  }
 
 
   free(monety);
