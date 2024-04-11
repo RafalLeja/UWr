@@ -35,13 +35,13 @@ struct out K(int F, int C, struct moneta *monety, int *minOut, int *maxOut, stru
       temp.min += monety[i].val;
       temp.max += monety[i].val;
 
-      printf("F: %d, i: %d, temp.min: %d, temp.max: %d\n", F, i, temp.min, temp.max);
+      // printf("F: %d, i: %d, temp.min: %d, temp.max: %d\n", F, i, temp.min, temp.max);
 
       if (temp.max > wynik.max){
         wynik.max = temp.max;
         for (int j = 0; j < C; j++){
           maxOut[j] = tempMaxOut[j];
-          printf("maxOut[%d]: %d\n", j, maxOut[j]);
+          // printf("maxOut[%d]: %d\n", j, maxOut[j]);
         }
         maxOut[i]++;
       }
@@ -92,6 +92,7 @@ int main(){
   }
 
   struct out *wyniki = (struct out*) malloc((F+1)*sizeof(struct out));
+  wyniki[0] = (struct out){0, 0};
 
   for (int i = 0; i < F; i++){
     wyniki[i] = (struct out){-1, -1};
