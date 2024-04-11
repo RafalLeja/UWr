@@ -7,11 +7,14 @@
 #include <queue>
 #include <fstream>
 #include <unordered_set>
+#include <limits.h>
 
 using namespace std;
 
 set<pair<int, int>> goals;
 set<pair<int, int>> walls;
+
+vector<vector<int>> bfs(25, vector<int>(25, INT_MAX));
 
 map<string, pair<int, int>> moves = {
   {"U", make_pair(0, -1)},
@@ -33,15 +36,8 @@ class State {
 
       int max = 0;
       for (auto commando : this->commandos) {
-        int min = 10000;
-        for (auto goal : goals) {
-          int dist = abs(commando.first - goal.first) + abs(commando.second - goal.second);
-          if (dist < min) {
-            min = dist;
-          }
-        }
-        if (max < min) {
-          max = min;
+        if (max < bfs[commando.first][commando.second]){
+          max = bfs[commando.first][commando.second];
         }
       }
       
@@ -50,13 +46,20 @@ class State {
     };
 };
 
-class gtState {
+class hrState {
   public:
     bool operator()(const State& s1, const State& s2) const {
       if (s1.f == s2.f){
         return s1.commandos.size() > s2.commandos.size();
       }
       return s1.f > s2.f;
+    }
+};
+
+class gtState {
+  public:
+    bool operator()(const State& s1, const State& s2) const {
+      return s1.moves.length() > s2.moves.length();
     }
 };
 
@@ -145,9 +148,27 @@ int main(){
     y++;
   }
 
+
+  for (auto goal : goals){
+    queue<pair<int, int>> q;
+    q.push(goal);
+    bfs[goal.first][goal.second] = 0;
+    while (!q.empty()){
+      pair<int, int> current = q.front();
+      q.pop();
+      for (auto move : moves){
+        pair<int, int> new_pos = make_pair(current.first + move.second.first, current.second + move.second.second);
+        if (walls.find(new_pos) == walls.end() && bfs[new_pos.first][new_pos.second] > bfs[current.first][current.second] + 1){
+          bfs[new_pos.first][new_pos.second] = bfs[current.first][current.second] + 1;
+          q.push(new_pos);
+        }
+      }
+    }
+  }
+
   State start = State("", commandos);
 
-  priority_queue<State, vector<State>, gtState> q;
+  priority_queue<State, vector<State>, hrState> q;
   q.push(start);
 
 
