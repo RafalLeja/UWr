@@ -2,67 +2,49 @@
 #include <stdlib.h>
 #include <limits.h>
 
-struct moneta {
-  int val;
-  int weight;
-};
+void K(int F, int C, int *wartosci, int *wagi, long long *wynikiMin, unsigned char *wynikiMinIdx, long long *wynikiMax, unsigned char *wynikiMaxIdx){
 
-struct out {
-  int min;
-  int max;
-  unsigned char minIdx;
-  unsigned char maxIdx;
-};
-
-struct out K(int F, int C, struct moneta *monety, struct out *wyniki){
-  if (F == 0) return (struct out){0, 0, 0, 0};
-  
-  struct out wynik;
-  wynik.min = 100000;
-  wynik.max = 0;
-  wynik.minIdx = 0;
-  wynik.maxIdx = 0;
+  long long wynikMin = LLONG_MAX;
+  long long wynikMax = LLONG_MIN;
+  unsigned char wynikMinIdx = 0;
+  unsigned char wynikMaxIdx = 0;
 
   for (int i = 0; i < C; i++){
-    if (monety[i].weight <= F){
-      struct out temp;
-      if (wyniki[F-monety[i].weight].min != -1) {
-        // printf("cached\n");
-        temp = wyniki[F-monety[i].weight];
-      } else {
-        temp = K(F-monety[i].weight, C, monety, wyniki);
+    if (wagi[i] <= F){
+      if (wynikiMin[F-wagi[i]] == -1) {
+        K(F-wagi[i], C, wartosci, wagi, wynikiMin, wynikiMinIdx, wynikiMax, wynikiMaxIdx);
       }
 
-      // if (F == 23){
-      //   printf("F: %d, i: %d, temp.min: %d, temp.max: %d\n", F, i, temp.min, temp.max);
-      // }
-
-      // if (monety[i].val > 0 && monety[i].val > INT_MAX - temp.min)
-      // {
-      //   temp.min = INT_MAX;
-      // }else{
-        temp.min += monety[i].val;
-      // }
-
-      temp.max += monety[i].val;
+      long long tempMin = wynikiMin[F-wagi[i]];
+      long long tempMax = wynikiMax[F-wagi[i]];
 
 
-      if (temp.max > wynik.max){
-        wynik.max = temp.max;
-        wynik.maxIdx = i;
+      if (tempMin != LLONG_MAX)
+      {
+        tempMin += wartosci[i];
+      }
+      
+      if (tempMax != LLONG_MIN) {
+        tempMax += wartosci[i];
       }
 
-      if (temp.min < wynik.min){
-        wynik.min = temp.min;
-        wynik.minIdx = i;
+      if (tempMax > wynikMax){
+        wynikMax = tempMax;
+        wynikMaxIdx = i;
+      }
+
+      if (tempMin < wynikMin){
+        wynikMin = tempMin;
+        wynikMinIdx = i;
       }
 
     }
   }
 
-  wyniki[F] = wynik;
-  
-  return wynik;
+  wynikiMin[F] = wynikMin;
+  wynikiMax[F] = wynikMax;
+  wynikiMinIdx[F] = wynikMinIdx;
+  wynikiMaxIdx[F] = wynikMaxIdx;
 }
 
 int main(){
@@ -71,21 +53,35 @@ int main(){
   int C;
   scanf("%d", &C);
 
-  struct moneta *monety = (struct moneta*) malloc(C*sizeof(struct moneta));
+  int *wartosci = (int*) malloc(C*sizeof(int));
+  int *wagi = (int*) malloc(C*sizeof(int));
   for(int i = 0; i < C; i++){
-    scanf("%d %d", &monety[i].val, &monety[i].weight);
+    scanf("%d %d", &wartosci[i], &wagi[i]);
   }
 
-  struct out *wyniki = (struct out*) malloc((F+1)*sizeof(struct out));
+  long long *wynikiMin = (long long*) malloc((F+1)*sizeof(long long));
+  unsigned char *wynikiMinIdx = (unsigned char*) malloc((F+1)*sizeof(unsigned char));
+  long long *wynikiMax = (long long*) malloc((F+1)*sizeof(long long));
+  unsigned char *wynikiMaxIdx = (unsigned char*) malloc((F+1)*sizeof(unsigned char));
 
   for (int i = 0; i < F; i++){
-    wyniki[i] = (struct out){-1, -1, 0, 0};
+    wynikiMin[i] = -1;
+    wynikiMax[i] = -1;
+    wynikiMinIdx[i] = 0;
+    wynikiMaxIdx[i] = 0;
   }
-  wyniki[0] = (struct out){0, 0, 0, 0};
+  wynikiMin[0] = 0;
+  wynikiMax[0] = 0;
+  wynikiMinIdx[0] = 0;
+  wynikiMaxIdx[0] = 0;
 
   int *minOut = (int*) calloc(C,sizeof(int));
   int *maxOut = (int*) calloc(C,sizeof(int));
-  struct out wynik = K(F, C, monety, wyniki);
+  
+  K(F, C, wartosci, wagi, wynikiMin, wynikiMinIdx, wynikiMax, wynikiMaxIdx);
+  
+  int wynikMin = wynikiMin[F];
+  int wynikMax = wynikiMax[F];
   
   // printf("-------\n");
   // for (int i = 0; i < F+1; i++){
@@ -94,21 +90,21 @@ int main(){
 
   int tmpF = F;
   while (tmpF > 0){
-    minOut[wyniki[tmpF].minIdx]++;
-    tmpF -= monety[wyniki[tmpF].minIdx].weight;
+    minOut[wynikiMinIdx[tmpF]]++;
+    tmpF -= wagi[wynikiMinIdx[tmpF]];
   }
 
   tmpF = F;
   while (tmpF > 0){
-    maxOut[wyniki[tmpF].maxIdx]++;
-    tmpF -= monety[wyniki[tmpF].maxIdx].weight;
+    maxOut[wynikiMaxIdx[tmpF]]++;
+    tmpF -= wagi[wynikiMaxIdx[tmpF]];
   }
 
   int sum1 = 0;
   int sum2 = 0;
   for (int i = 0; i < C; i++){
-    sum1 += monety[i].weight * minOut[i];
-    sum2 += monety[i].weight * maxOut[i];
+    sum1 += wagi[i] * minOut[i];
+    sum2 += wagi[i] * maxOut[i];
   }
   if (sum1 != F || sum2 != F)
   {
@@ -118,13 +114,13 @@ int main(){
 
   
   printf("TAK\n");
-  printf("%d\n", wynik.min);
+  printf("%d\n", wynikMin);
   for (int i = 0; i < C; i++){
     printf("%d ", minOut[i]);
   }
   printf("\n");
 
-  printf("%d\n", wynik.max);
+  printf("%d\n", wynikMax);
   for (int i = 0; i < C; i++){
     printf("%d ", maxOut[i]);
   }
@@ -132,8 +128,12 @@ int main(){
 
 
 
-  free(monety);
-  free(wyniki);
+  free(wartosci);
+  free(wagi);
+  free(wynikiMin);
+  free(wynikiMax);
+  free(wynikiMinIdx);
+  free(wynikiMaxIdx);
   free(minOut);
   free(maxOut);
 }
