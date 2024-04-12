@@ -64,12 +64,13 @@ int main(){
     scanf("%d %d", &monety[i].val, &monety[i].weight);
   }
 
-  int *wynikiMin = (int*) malloc((F+1)*sizeof(int));
+  int *wynikiMin = (int*) calloc((F+1), sizeof(int));
   int min = Kmin(F, C, monety, wynikiMin);
 
   for (int i = 0; i < F+1; i++){
-    printf("%d ", wynikiMin[i]);
+    printf("wynikiMin[%d] = %d\n", i, wynikiMin[i]);
   }
+  printf("\n");
 
   // int sum = 0;
   // for (int i = 0; i < C; i++){
