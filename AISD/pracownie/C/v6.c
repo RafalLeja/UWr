@@ -11,9 +11,6 @@ void K(int F, int C, int *wartosci, int *wagi, long long *wynikiMin, unsigned ch
 
   for (int i = 0; i < C; i++){
     if (wagi[i] <= F){
-      if (wynikiMin[F-wagi[i]] == -1) {
-        K(F-wagi[i], C, wartosci, wagi, wynikiMin, wynikiMinIdx, wynikiMax, wynikiMaxIdx);
-      }
 
       long long tempMin = wynikiMin[F-wagi[i]];
       long long tempMax = wynikiMax[F-wagi[i]];
@@ -64,12 +61,13 @@ int main(){
   long long *wynikiMax = (long long*) malloc((F+1)*sizeof(long long));
   unsigned char *wynikiMaxIdx = (unsigned char*) malloc((F+1)*sizeof(unsigned char));
 
-  for (int i = 0; i <= F; i++){
-    wynikiMin[i] = -1;
-    wynikiMax[i] = -1;
-    wynikiMinIdx[i] = 0;
-    wynikiMaxIdx[i] = 0;
-  }
+  // for (int i = 0; i <= F; i++){
+  //   wynikiMin[i] = -1;
+  //   wynikiMax[i] = -1;
+  //   wynikiMinIdx[i] = 0;
+  //   wynikiMaxIdx[i] = 0;
+  // }
+
   wynikiMin[0] = 0;
   wynikiMax[0] = 0;
   wynikiMinIdx[0] = 0;
@@ -78,7 +76,9 @@ int main(){
   int *minOut = (int*) calloc(C,sizeof(int));
   int *maxOut = (int*) calloc(C,sizeof(int));
   
-  K(F, C, wartosci, wagi, wynikiMin, wynikiMinIdx, wynikiMax, wynikiMaxIdx);
+  for (int i = 1; i <= F; i++) {
+    K(i, C, wartosci, wagi, wynikiMin, wynikiMinIdx, wynikiMax, wynikiMaxIdx);
+  }
   
   int wynikMin = wynikiMin[F];
   int wynikMax = wynikiMax[F];
