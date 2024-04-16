@@ -1,7 +1,7 @@
 import random
 from itertools import combinations
 
-DEBUG = True
+DEBUG = False
 DONE_ROWS = set()
 DONE_COLS = set()
   
@@ -12,16 +12,6 @@ def singleDist(board, row):
     if board[i] == '#':
       numOfSquares -= 1
   return numOfSquares
-
-def optDist(board, row):
-  min = len(board)
-  options = permutate(board, row)
-  for d in options:
-    m = singleDist(board, row)
-    if m < min:
-      min = m
-
-  return min
 
 def markRow(board, rowIDx):
   if rowIDx in DONE_ROWS:
@@ -65,6 +55,8 @@ def failedRows(board, rows):
   for r in range(len(rows)):
     if singleDist(board[r], rows[r]) != 0:
       fRows.append(r)
+    elif singleDist(board[r], rows[r]) < 0:
+      return None
     else:
       markRow(board, r)
   return fRows
@@ -77,19 +69,19 @@ def failedCols(board, cols):
       col.append(board[r][c])
     if singleDist(col, cols[c]) != 0:
       fCols.append(c)
+    elif singleDist(col, cols[c]) < 0:
+      return None
     else:
       markCol(board, c)
   return fCols
 
-def fillFulls(board, rows, cols, rowsLeft, colsLeft):
+def fillFulls(board, rows, cols):
   for r in range(len(rows)):
     if len(rows[r]) == 1:
       if rows[r][0] == len(cols):
         for c in range(len(cols)):
           if board[r][c] == ' ':
             board[r][c] = '#'
-            # colsLeft[c] -= 1
-        rowsLeft[r] = 0
       
     if sum(rows[r]) + len(rows[r]) - 1 == len(cols):
       i = 0
@@ -97,10 +89,8 @@ def fillFulls(board, rows, cols, rowsLeft, colsLeft):
         for c in range(i, i + block):
           if board[r][c] == ' ':
             board[r][c] = '#'
-            # colsLeft[c] -= 1
         i += block + 1
 
-      rowsLeft[r] = [0]
   
   for c in range(len(cols)):
     if len(cols[c]) == 1:
@@ -108,8 +98,6 @@ def fillFulls(board, rows, cols, rowsLeft, colsLeft):
         for r in range(len(rows)):
           if board[r][c] == ' ':
             board[r][c] = '#'
-            # rowsLeft[r] -= 1
-        colsLeft[c] = [0]
 
     if sum(cols[c]) + len(cols[c]) - 1 == len(rows):
       i = 0
@@ -117,38 +105,12 @@ def fillFulls(board, rows, cols, rowsLeft, colsLeft):
         for r in range(i, i + block):
           if board[r][c] == ' ':
             board[r][c] = '#'
-            # rowsLeft[r] -= 1
         i += block + 1
 
 
-      colsLeft[c] = [0]
       
   return
 
-def columnCheck(board, opt, r, rows, colsLeft):
-  filtered = []
-  for start in opt:
-    good = True
-    for c in range(rows[r]):
-      if colsLeft[c+start] == 0 and board[r][c+start] != '#':
-        good = False
-        break
-    if good:
-      filtered.append(start)
-  return filtered
-
-def findSpots(board, rows, fRows, colsLeft):
-  optRows = []
-  for r in fRows:
-    opt = opt_dist(board[r], rows[r])[1]
-    opt = columnCheck(board, opt, r, rows, colsLeft)
-    opt = sorted(opt, key = lambda x: min(colsLeft[x:x+rows[r]]))
-    if len(opt) > 0:
-      optRows.append(opt)
-    else:
-      fRows.remove(r)
-  return optRows
-    
 def squash(options):
   out = []
   for i in range(len(options[0])):
@@ -193,12 +155,14 @@ def reviewPossibleRows(board, rows, fRows):
   for r in fRows:
     options = permutate(board[r], rows[r])
     options = findSimilarRow(board, r, rows[r], options)
+    if len(options) == 0:
+      return None
     options = squash(options)
     for i in range(len(board[r])):
       if board[r][i] == ' ':
         board[r][i] = options[i]
     
-  return
+  return 1
 
 def reviewPossibleCols(board, cols, fCols):
   for c in fCols:
@@ -207,10 +171,13 @@ def reviewPossibleCols(board, cols, fCols):
       col.append(board[r][c])
     options = permutate(col, cols[c])
     options = findSimilarCol(board, c, cols[c], options)
+    if len(options) == 0:
+      return None
     options = squash(options)
     for i in range(len(board)):
       if board[i][c] == ' ':
         board[i][c] = options[i]
+  return 1
 
 def findBlock(row, b):
   idx = []
@@ -293,6 +260,63 @@ def printBoard(board):
     print(row)
   return
 
+def solve(board, rows, cols):
+  board = [ i.copy() for i in board ]
+
+  fRows = failedRows(board, rows)
+  fCols = failedCols(board, cols)
+
+  prevBoard = str(board)
+
+  while len(fRows) > 0  and len(fCols) > 0:
+    if DEBUG:
+      printBoard(board)
+      print("-------------------")
+      input()
+
+    ret = reviewPossibleRows(board, rows, fRows)
+    if ret == None:
+      return None
+    
+    ret = reviewPossibleCols(board, cols, fCols)
+    if ret == None:
+      return None
+
+    expandRows(board, rows, fRows)
+    expandCols(board, cols, fCols)
+
+    fRows = failedRows(board, rows)
+    fCols = failedCols(board, cols)
+    if fRows == None or fCols == None:
+      return None
+
+    if prevBoard == str(board):
+      i = 0
+      j = 0
+      while i < len(board) - 1:
+        try:
+          j = board[i].index(' ')
+        except:
+          i += 1
+          continue
+        break
+
+      board[i][j] = '#'
+      retBoard = solve(board, rows, cols)
+      if retBoard == None:
+        board[i][j] = '.'
+        retBoard = solve(board, rows, cols)
+      
+      if retBoard == None:
+        return None
+
+      board = retBoard
+
+    prevBoard = str(board)
+
+  return board
+
+
 def main():
   input_file = open('zad_input.txt', 'r')
   output_file = open('zad_output.txt', 'w')
@@ -304,11 +328,8 @@ def main():
   board = [[' ' for i in range(y)] for j in range(x)]
   rows = [[] for i in range(x)]
   cols = [[] for i in range(y)]
-  rowsLeft = []
-  colsLeft = []
   fRows = []
   fCols = []
-  optRows = []
 
   for line in range(x):
     l = input_file.readline().strip().split(" ")
@@ -322,44 +343,10 @@ def main():
 
   input_file.close()
 
-  rowsLeft = rows.copy()
-  colsLeft = cols.copy()
-
-  prevBoard = [ row.copy() for row in board]
-  fillFulls(board, rows, cols, rowsLeft, colsLeft)
-
-  fRows = failedRows(board, rows)
-  fCols = failedCols(board, cols)
-
-  reviewPossibleRows(board, rows, fRows)
-  reviewPossibleCols(board, cols, fCols)
-  # printBoard(board)
-
-  # optRows = findSpots(board, rows, fRows, colsLeft)
+  fillFulls(board, rows, cols)
 
 
-  while len(fRows) > 0  and len(fCols) > 0:
-    if DEBUG:
-      printBoard(board)
-      print("-------------------")
-      # print(failedRows(board, rows))
-      # print(failedCols(board, cols))
-      input()
-
-    reviewPossibleRows(board, rows, fRows)
-    reviewPossibleCols(board, cols, fCols)
-
-    expandRows(board, rows, fRows)
-    expandCols(board, cols, fCols)
-
-    fRows = failedRows(board, rows)
-    fCols = failedCols(board, cols)
-
-    if prevBoard == board:
-      print("No progress")
-      # break
-
-    prevBoard = [ row.copy() for row in board]
+  board = solve(board, rows, cols)
     
   for i in range(len(rows)):
     for j in range(len(cols)):

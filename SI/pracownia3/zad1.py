@@ -13,16 +13,6 @@ def singleDist(board, row):
       numOfSquares -= 1
   return numOfSquares
 
-def optDist(board, row):
-  min = len(board)
-  options = permutate(board, row)
-  for d in options:
-    m = singleDist(board, row)
-    if m < min:
-      min = m
-
-  return min
-
 def markRow(board, rowIDx):
   if rowIDx in DONE_ROWS:
     return
@@ -60,25 +50,6 @@ def generateRow(row, block_idx, n):
       out.append('.')
   return out
 
-def listXor(L1, L2):
-  if len(L1) != len(L2):
-    return -1
-  bits = 0
-  for i in range(len(L1)):
-    if L1[i] != L2[i]:
-      bits += 1
-  return bits
-
-def listClear(L, s, e):
-  bits = 0
-  for i in L[:s]:
-    if i == '#':
-      bits += 1
-  for i in L[e:]:
-    if i == '#':
-      bits += 1
-  return bits
-
 def failedRows(board, rows):
   fRows = []
   for r in range(len(rows)):
@@ -100,15 +71,13 @@ def failedCols(board, cols):
       markCol(board, c)
   return fCols
 
-def fillFulls(board, rows, cols, rowsLeft, colsLeft):
+def fillFulls(board, rows, cols):
   for r in range(len(rows)):
     if len(rows[r]) == 1:
       if rows[r][0] == len(cols):
         for c in range(len(cols)):
           if board[r][c] == ' ':
             board[r][c] = '#'
-            # colsLeft[c] -= 1
-        rowsLeft[r] = 0
       
     if sum(rows[r]) + len(rows[r]) - 1 == len(cols):
       i = 0
@@ -116,10 +85,8 @@ def fillFulls(board, rows, cols, rowsLeft, colsLeft):
         for c in range(i, i + block):
           if board[r][c] == ' ':
             board[r][c] = '#'
-            # colsLeft[c] -= 1
         i += block + 1
 
-      rowsLeft[r] = [0]
   
   for c in range(len(cols)):
     if len(cols[c]) == 1:
@@ -127,8 +94,6 @@ def fillFulls(board, rows, cols, rowsLeft, colsLeft):
         for r in range(len(rows)):
           if board[r][c] == ' ':
             board[r][c] = '#'
-            # rowsLeft[r] -= 1
-        colsLeft[c] = [0]
 
     if sum(cols[c]) + len(cols[c]) - 1 == len(rows):
       i = 0
@@ -136,37 +101,11 @@ def fillFulls(board, rows, cols, rowsLeft, colsLeft):
         for r in range(i, i + block):
           if board[r][c] == ' ':
             board[r][c] = '#'
-            # rowsLeft[r] -= 1
         i += block + 1
 
 
-      colsLeft[c] = [0]
       
   return
-
-def columnCheck(board, opt, r, rows, colsLeft):
-  filtered = []
-  for start in opt:
-    good = True
-    for c in range(rows[r]):
-      if colsLeft[c+start] == 0 and board[r][c+start] != '#':
-        good = False
-        break
-    if good:
-      filtered.append(start)
-  return filtered
-
-def findSpots(board, rows, fRows, colsLeft):
-  optRows = []
-  for r in fRows:
-    opt = opt_dist(board[r], rows[r])[1]
-    opt = columnCheck(board, opt, r, rows, colsLeft)
-    opt = sorted(opt, key = lambda x: min(colsLeft[x:x+rows[r]]))
-    if len(opt) > 0:
-      optRows.append(opt)
-    else:
-      fRows.remove(r)
-  return optRows
     
 def squash(options):
   out = []
@@ -323,11 +262,8 @@ def main():
   board = [[' ' for i in range(y)] for j in range(x)]
   rows = [[] for i in range(x)]
   cols = [[] for i in range(y)]
-  rowsLeft = []
-  colsLeft = []
   fRows = []
   fCols = []
-  optRows = []
 
   for line in range(x):
     l = input_file.readline().strip().split(" ")
@@ -341,25 +277,18 @@ def main():
 
   input_file.close()
 
-  rowsLeft = rows.copy()
-  colsLeft = cols.copy()
-
-  fillFulls(board, rows, cols, rowsLeft, colsLeft)
+  fillFulls(board, rows, cols)
 
   fRows = failedRows(board, rows)
   fCols = failedCols(board, cols)
 
   reviewPossibleRows(board, rows, fRows)
   reviewPossibleCols(board, cols, fCols)
-  # printBoard(board)
 
-  # optRows = findSpots(board, rows, fRows, colsLeft)
 
   while len(fRows) > 0  and len(fCols) > 0:
     if DEBUG:
       printBoard(board)
-      # print(failedRows(board, rows))
-      # print(failedCols(board, cols))
       print("-------------------")
       input()
 
