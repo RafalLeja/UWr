@@ -1,3 +1,5 @@
+# Rafał Leja 17.04.2024
+
 import random
 from itertools import combinations
 
@@ -290,6 +292,7 @@ def solve(board, rows, cols, rowOptions, colOptions):
       return None
 
     if prevBoard == str(board):
+      # trzeba zgadnąć
       i = 0
       j = 0
       for f in fRows:
