@@ -114,11 +114,13 @@ def fillFulls(board, rows, cols):
 def squash(options):
   out = []
   for i in range(len(options[0])):
-    col = []
+    same = True
     for j in options:
-      col.append(j[i])
-    if col == [col[0]]*len(col):
-      out.append(col[0])
+      if j[i] != options[0][i]:
+        same = False
+        break
+    if same:
+      out.append(options[0][i])
     else:
       out.append(' ')
   return out
