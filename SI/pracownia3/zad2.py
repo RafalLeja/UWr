@@ -151,9 +151,9 @@ def findSimilarCol(board, colIDx, col, options):
       out.append(o)
   return out
 
-def reviewPossibleRows(board, rows, fRows):
+def reviewPossibleRows(board, rows, fRows, rowOptions):
   for r in fRows:
-    options = permutate(board[r], rows[r])
+    options = rowOptions[r]
     options = findSimilarRow(board, r, rows[r], options)
     if len(options) == 0:
       return None
@@ -164,12 +164,9 @@ def reviewPossibleRows(board, rows, fRows):
     
   return 1
 
-def reviewPossibleCols(board, cols, fCols):
+def reviewPossibleCols(board, cols, fCols, colOptions):
   for c in fCols:
-    col = []
-    for r in range(len(board)):
-      col.append(board[r][c])
-    options = permutate(col, cols[c])
+    options = colOptions[c]
     options = findSimilarCol(board, c, cols[c], options)
     if len(options) == 0:
       return None
@@ -260,7 +257,7 @@ def printBoard(board):
     print(row)
   return
 
-def solve(board, rows, cols):
+def solve(board, rows, cols, rowOptions, colOptions):
   board = [ i.copy() for i in board ]
 
   fRows = failedRows(board, rows)
@@ -274,11 +271,11 @@ def solve(board, rows, cols):
       print("-------------------")
       input()
 
-    ret = reviewPossibleRows(board, rows, fRows)
+    ret = reviewPossibleRows(board, rows, fRows, rowOptions)
     if ret == None:
       return None
     
-    ret = reviewPossibleCols(board, cols, fCols)
+    ret = reviewPossibleCols(board, cols, fCols, colOptions)
     if ret == None:
       return None
 
@@ -293,19 +290,19 @@ def solve(board, rows, cols):
     if prevBoard == str(board):
       i = 0
       j = 0
-      while i < len(board) - 1:
+      for f in fRows:
         try:
-          j = board[i].index(' ')
+          j = board[f].index(' ')
         except:
-          i += 1
           continue
+        i = f
         break
 
       board[i][j] = '#'
-      retBoard = solve(board, rows, cols)
+      retBoard = solve(board, rows, cols, rowOptions, colOptions)
       if retBoard == None:
         board[i][j] = '.'
-        retBoard = solve(board, rows, cols)
+        retBoard = solve(board, rows, cols, rowOptions, colOptions)
       
       if retBoard == None:
         return None
@@ -331,6 +328,7 @@ def main():
   fRows = []
   fCols = []
 
+
   for line in range(x):
     l = input_file.readline().strip().split(" ")
     for i in l:
@@ -345,8 +343,10 @@ def main():
 
   fillFulls(board, rows, cols)
 
+  rowOptions = [ permutate(board[i], rows[i]) for i in range(len(rows)) ]
+  colOptions = [ permutate([board[j][i] for j in range(len(board))], cols[i]) for i in range(len(cols)) ]
 
-  board = solve(board, rows, cols)
+  board = solve(board, rows, cols, rowOptions, colOptions)
     
   for i in range(len(rows)):
     for j in range(len(cols)):
