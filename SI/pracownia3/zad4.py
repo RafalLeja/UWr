@@ -16,15 +16,11 @@ def triplets(k, m):
   cons = []
   # horizontal
   for i in range(k):
-    cons.append('tuples_in([[%s, %s]], [[1, 1], [0, 1], [0, 0]])' % (V(i, 0), V(i, 1)))
-    cons.append('tuples_in([[%s, %s]], [[1, 1], [0, 1], [0, 0]])' % (V(i, m-2), V(i, m-1)))
     for j in range(2, m-2):
       cons.append('tuples_in([[%s, %s, %s]], [[1, 1, 1], [0, 1, 1], [0, 0, 1], [0, 0, 0], [1, 0, 0], [1, 1, 0], [1, 0, 1]])' % (V(i, j-1), V(i, j), V(i, j+1)))
 
   # vertical
   for j in range(m):
-    cons.append('tuples_in([[%s, %s]], [[1, 1], [0, 1], [0, 0]])' % (V(0, j), V(1, j)))
-    cons.append('tuples_in([[%s, %s]], [[1, 1], [0, 1], [0, 0]])' % (V(k-2, j), V(k-1, j)))
     for i in range(2, k-2):
       cons.append('tuples_in([[%s, %s, %s]], [[1, 1, 1], [0, 1, 1], [0, 0, 1], [0, 0, 0], [1, 0, 0], [1, 1, 0], [1, 0, 1]])' % (V(i-1, j), V(i, j), V(i+1, j)))
 
