@@ -1,0 +1,17 @@
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\bin\Debug\net7.0-windows\zad1.exe
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\bin\Debug\net7.0-windows\zad1.deps.json
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\bin\Debug\net7.0-windows\zad1.runtimeconfig.json
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\bin\Debug\net7.0-windows\zad1.dll
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\bin\Debug\net7.0-windows\zad1.pdb
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.AssemblyInfoInputs.cache
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.AssemblyInfo.cs
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.csproj.CoreCompileInputs.cache
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.dll
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\refint\zad1.dll
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.pdb
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.genruntimeconfig.cache
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\ref\zad1.dll
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.Form1.resources
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.csproj.GenerateResource.cache
+C:\Users\rafal\Desktop\UWr\POO\lista7\zad1\obj\Debug\net7.0-windows\zad1.Form2.resources
