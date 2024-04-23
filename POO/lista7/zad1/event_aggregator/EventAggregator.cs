@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace zad1.event_aggregator
 {
-    internal class EventAggregator : IEventAggregator
+    public class EventAggregator : IEventAggregator
     {
         private Dictionary<Type, List<object>> _subscribers = new Dictionary<Type, List<object>>();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace zad1.event_aggregator
 {
-    internal interface ISubscriber<T>
+    public interface ISubscriber<T>
     {
         void Handle(T Notification);
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace zad1.event_aggregator
 {
-    internal interface IEventAggregator
+    public interface IEventAggregator
     {
         void AddSubscriber<T>(ISubscriber<T> subscriber);
         void RemoveSubscriber<T>(ISubscriber<T> subscriber);

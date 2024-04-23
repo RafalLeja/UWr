@@ -3,47 +3,59 @@
   "WorkspaceRootPath": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\listviewsubscriber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:listviewsubscriber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\treeviewsubscriber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:treeviewsubscriber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\event_aggregator\\eventaggregator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:event_aggregator\\eventaggregator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\event_aggregator\\ieventaggregator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:event_aggregator\\ieventaggregator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\notifications\\usermodifiednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:notifications\\usermodifiednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\notifications\\usercreatednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\notifications\\usercreatednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:notifications\\usercreatednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\notifications\\usermodifiednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:notifications\\usermodifiednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\event_aggregator\\ieventaggregator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:event_aggregator\\ieventaggregator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\event_aggregator\\isubscriber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:event_aggregator\\isubscriber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\listviewsubscriber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:listviewsubscriber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|c:\\users\\rafal\\desktop\\uwr\\poo\\lista7\\zad1\\notifications\\userprofileselectednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\notifications\\userprofileselectednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2F5DBE2-0CAE-4DA3-A1C3-FD339EACFADB}|zad1.csproj|solutionrelative:notifications\\userprofileselectednotification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -54,17 +66,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAALAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABLAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-19T09:07:51.21Z",
               "IsPinned": true,
@@ -72,20 +84,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form2.cs",
-              "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\Form2.cs",
-              "RelativeDocumentMoniker": "Form2.cs",
-              "ToolTip": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\Form2.cs",
-              "RelativeToolTip": "Form2.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABYAAAAZAAAA",
+              "DocumentIndex": 2,
+              "Title": "TreeViewSubscriber.cs",
+              "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\TreeViewSubscriber.cs",
+              "RelativeDocumentMoniker": "TreeViewSubscriber.cs",
+              "ToolTip": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\TreeViewSubscriber.cs",
+              "RelativeToolTip": "TreeViewSubscriber.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABgAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T14:01:54.662Z",
+              "WhenOpened": "2024-04-23T08:12:08.739Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "ListViewSubscriber.cs",
+              "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\ListViewSubscriber.cs",
+              "RelativeDocumentMoniker": "ListViewSubscriber.cs",
+              "ToolTip": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\ListViewSubscriber.cs",
+              "RelativeToolTip": "ListViewSubscriber.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAB8AAACRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-19T12:58:24.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EventAggregator.cs",
+              "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\event_aggregator\\EventAggregator.cs",
+              "RelativeDocumentMoniker": "event_aggregator\\EventAggregator.cs",
+              "ToolTip": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\event_aggregator\\EventAggregator.cs",
+              "RelativeToolTip": "event_aggregator\\EventAggregator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T08:06:33.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "IEventAggregator.cs",
               "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\event_aggregator\\IEventAggregator.cs",
               "RelativeDocumentMoniker": "event_aggregator\\IEventAggregator.cs",
@@ -98,7 +136,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "UserModifiedNotification.cs",
               "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\notifications\\UserModifiedNotification.cs",
               "RelativeDocumentMoniker": "notifications\\UserModifiedNotification.cs",
@@ -111,20 +149,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "UserCreatedNotification.cs",
               "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\notifications\\UserCreatedNotification.cs",
               "RelativeDocumentMoniker": "notifications\\UserCreatedNotification.cs",
               "ToolTip": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\notifications\\UserCreatedNotification.cs",
               "RelativeToolTip": "notifications\\UserCreatedNotification.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAXAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-19T14:18:47.055Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\User.cs",
               "RelativeDocumentMoniker": "User.cs",
@@ -132,12 +170,24 @@
               "RelativeToolTip": "User.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T14:10:09.85Z",
+              "WhenOpened": "2024-04-19T14:10:09.85Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ISubscriber.cs",
+              "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\event_aggregator\\ISubscriber.cs",
+              "RelativeDocumentMoniker": "event_aggregator\\ISubscriber.cs",
+              "ToolTip": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\event_aggregator\\ISubscriber.cs",
+              "RelativeToolTip": "event_aggregator\\ISubscriber.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T08:06:54.555Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Form2.cs [Design]",
               "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\Form2.cs",
               "RelativeDocumentMoniker": "Form2.cs",
@@ -149,7 +199,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
+              "Title": "Form2.cs",
+              "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\Form2.cs",
+              "RelativeDocumentMoniker": "Form2.cs",
+              "ToolTip": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\Form2.cs",
+              "RelativeToolTip": "Form2.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAACaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-19T14:01:54.662Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
@@ -161,7 +224,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Form1.Designer.cs",
@@ -174,20 +237,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ListViewSubscriber.cs",
-              "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\ListViewSubscriber.cs",
-              "RelativeDocumentMoniker": "ListViewSubscriber.cs",
-              "ToolTip": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\ListViewSubscriber.cs",
-              "RelativeToolTip": "ListViewSubscriber.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T12:58:24.535Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "UserProfileSelectedNotification.cs",
               "DocumentMoniker": "C:\\Users\\rafal\\Desktop\\UWr\\POO\\lista7\\zad1\\notifications\\UserProfileSelectedNotification.cs",
               "RelativeDocumentMoniker": "notifications\\UserProfileSelectedNotification.cs",
@@ -195,8 +245,7 @@
               "RelativeToolTip": "notifications\\UserProfileSelectedNotification.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T12:56:51.132Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-19T12:56:51.132Z"
             }
           ]
         }

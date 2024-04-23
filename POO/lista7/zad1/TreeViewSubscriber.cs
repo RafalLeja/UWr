@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,20 @@ namespace zad1
     {
         public void Handle(UserModifiedNotification notification)
         {
-            Console.WriteLine("User profile selected: {0} {1} {2} {3} {4}", notification.Name, notification.Surname, notification.DateOfBirth, notification.Category, notification.Id);
+            if (!this.Nodes.ContainsKey(notification.Category))
+            {
+                this.Nodes.Add(notification.Category);
+            }
+            Debug.WriteLine("User profile selected: {0} {1} {2} {3} {4}", notification.Name, notification.Surname, notification.DateOfBirth, notification.Category, notification.Id);
         }
 
         public void Handle(UserCreatedNotification notification)
         {
-            Console.WriteLine("User created: {0} {1} {2} {3} {4}", notification.Name, notification.Surname, notification.DateOfBirth, notification.Category, notification.Id);
+            if (!this.Nodes.ContainsKey(notification.Category))
+            {
+                this.Nodes.Add(notification.Category);
+            }
+            Debug.WriteLine("User created: {0} {1} {2} {3}", notification.Name, notification.Surname, notification.DateOfBirth, notification.Category);
         }
     }
 }
