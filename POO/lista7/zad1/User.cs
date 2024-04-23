@@ -14,14 +14,13 @@ namespace zad1
         public string Category { get; set; }
         public int Id { get; set; }
 
-        public User(string name, string surname, System.DateTime dateOfBirth, string category)
+        public User(string name, string surname, System.DateTime dateOfBirth, string category, int id)
         {
             Name = name;
             Surname = surname;
             DateOfBirth = dateOfBirth;
             Category = category;
-            // random id
-            Id = new Random().Next(0, 1000);
+            Id = id;
         }
     }
 }

@@ -13,20 +13,26 @@ namespace zad1
     {
         public void Handle(UserModifiedNotification notification)
         {
+            foreach (TreeNode node in this.Nodes)
+            {
+                node.Nodes.RemoveByKey(notification.Id.ToString());
+                Debug.WriteLine(node.Text);
+            }
+
             if (!this.Nodes.ContainsKey(notification.Category))
             {
-                this.Nodes.Add(notification.Category);
+                this.Nodes.Add(notification.Category, notification.Category);
             }
-            Debug.WriteLine("User profile selected: {0} {1} {2} {3} {4}", notification.Name, notification.Surname, notification.DateOfBirth, notification.Category, notification.Id);
+            this.Nodes[notification.Category].Nodes.Add(notification.Id.ToString(), notification.Name + " " + notification.Surname);
         }
 
         public void Handle(UserCreatedNotification notification)
-        {
+       {
             if (!this.Nodes.ContainsKey(notification.Category))
             {
-                this.Nodes.Add(notification.Category);
+                this.Nodes.Add(notification.Category, notification.Category);
             }
-            Debug.WriteLine("User created: {0} {1} {2} {3}", notification.Name, notification.Surname, notification.DateOfBirth, notification.Category);
+            this.Nodes[notification.Category].Nodes.Add(notification.Id.ToString(), notification.Name + " " + notification.Surname);
         }
     }
 }

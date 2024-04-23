@@ -12,13 +12,15 @@ namespace zad1.notifications
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Category { get; set; }
+        public int Id { get; set; }
 
-        public UserCreatedNotification(string name, string surname, DateTime dateOfBirth, string category)
+        public UserCreatedNotification(string name, string surname, DateTime dateOfBirth, string category, int id)
         {
             Name = name;
             Surname = surname;
             DateOfBirth = dateOfBirth;
             Category = category;
+            Id = id;
         }
     }
 }

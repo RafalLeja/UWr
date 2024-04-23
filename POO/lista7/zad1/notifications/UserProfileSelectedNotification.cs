@@ -9,12 +9,10 @@ namespace zad1.notifications
     internal class UserProfileSelectedNotification
     {
         public string Name { get; set; }
-        public string Surname { get; set; }
 
-        public UserProfileSelectedNotification(string name, string surname)
+        public UserProfileSelectedNotification(string name)
         {
             Name = name;
-            Surname = surname;
         }
     }
 }

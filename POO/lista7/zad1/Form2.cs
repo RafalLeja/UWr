@@ -29,7 +29,7 @@ namespace zad1
         {
             if (id == -1)
             {
-                event_aggregator.Publish(new UserCreatedNotification(nameTextBox.Text, surnameTextBox.Text, dateTimePicker1.Value, categoryTextBox.Text));
+                event_aggregator.Publish(new UserCreatedNotification(nameTextBox.Text, surnameTextBox.Text, dateTimePicker1.Value, categoryTextBox.Text, new Random().Next(0, 100)));
             } else
             {
                 event_aggregator.Publish(new UserModifiedNotification(nameTextBox.Text, surnameTextBox.Text, dateTimePicker1.Value, categoryTextBox.Text, id));

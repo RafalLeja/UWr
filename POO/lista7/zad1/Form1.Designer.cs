@@ -29,9 +29,14 @@ partial class Form1
     private void InitializeComponent()
     {
         splitContainer1 = new SplitContainer();
-        treeView1 = new TreeViewSubscriber();
-        listView1 = new ListViewSubscriber();
         button1 = new Button();
+        treeView1 = new TreeViewSubscriber();
+        button2 = new Button();
+        listView1 = new ListViewSubscriber();
+        columnHeader4 = new ColumnHeader();
+        columnHeader1 = new ColumnHeader();
+        columnHeader2 = new ColumnHeader();
+        columnHeader3 = new ColumnHeader();
         ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
         splitContainer1.Panel1.SuspendLayout();
         splitContainer1.Panel2.SuspendLayout();
@@ -51,27 +56,12 @@ partial class Form1
         // 
         // splitContainer1.Panel2
         // 
+        splitContainer1.Panel2.Controls.Add(button2);
         splitContainer1.Panel2.Controls.Add(listView1);
         splitContainer1.Size = new Size(800, 450);
         splitContainer1.SplitterDistance = 181;
         splitContainer1.TabIndex = 0;
         splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
-        // 
-        // treeView1
-        // 
-        treeView1.Location = new Point(0, 0);
-        treeView1.Name = "treeView1";
-        treeView1.Size = new Size(183, 450);
-        treeView1.TabIndex = 0;
-        treeView1.AfterSelect += treeView1_AfterSelect;
-        // 
-        // listView1
-        // 
-        listView1.Location = new Point(3, 41);
-        listView1.Name = "listView1";
-        listView1.Size = new Size(607, 406);
-        listView1.TabIndex = 0;
-        listView1.UseCompatibleStateImageBehavior = false;
         // 
         // button1
         // 
@@ -82,6 +72,49 @@ partial class Form1
         button1.Text = "Dodaj";
         button1.UseVisualStyleBackColor = true;
         button1.Click += button1_Click;
+        // 
+        // treeView1
+        // 
+        treeView1.Location = new Point(0, 0);
+        treeView1.Name = "treeView1";
+        treeView1.Size = new Size(183, 450);
+        treeView1.TabIndex = 0;
+        treeView1.AfterSelect += treeView1_AfterSelect;
+        // 
+        // button2
+        // 
+        button2.Location = new Point(14, 12);
+        button2.Name = "button2";
+        button2.Size = new Size(75, 23);
+        button2.TabIndex = 1;
+        button2.Text = "Edytuj";
+        button2.UseVisualStyleBackColor = true;
+        button2.Click += button2_Click;
+        // 
+        // listView1
+        // 
+        listView1.Columns.AddRange(new ColumnHeader[] { columnHeader4, columnHeader1, columnHeader2, columnHeader3 });
+        listView1.Location = new Point(3, 41);
+        listView1.Name = "listView1";
+        listView1.Size = new Size(607, 406);
+        listView1.TabIndex = 0;
+        listView1.UseCompatibleStateImageBehavior = false;
+        // 
+        // columnHeader4
+        // 
+        columnHeader4.Text = "ID";
+        // 
+        // columnHeader1
+        // 
+        columnHeader1.Text = "Imie";
+        // 
+        // columnHeader2
+        // 
+        columnHeader2.Text = "Nazwisko";
+        // 
+        // columnHeader3
+        // 
+        columnHeader3.Text = "Data urodzenia";
         // 
         // Form1
         // 
@@ -104,4 +137,9 @@ partial class Form1
     private TreeViewSubscriber treeView1;
     private ListViewSubscriber listView1;
     private Button button1;
+    private ColumnHeader columnHeader1;
+    private ColumnHeader columnHeader2;
+    private ColumnHeader columnHeader3;
+    private Button button2;
+    private ColumnHeader columnHeader4;
 }
