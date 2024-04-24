@@ -11,11 +11,14 @@ namespace zad2.shapes
         public int x { get; set; }
         public int y { get; set; }
         public int width { get; set; }
+        public int height { get; set; }
+
         public Circle(int x, int y, int width)
         {
             this.x = x;
             this.y = y;
             this.width = width;
+            this.height = width;
         }
 
         public void Draw(Graphics g)

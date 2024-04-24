@@ -31,12 +31,12 @@ namespace zad2
         public Memento CreateMemento()
         {
             Memento memento = new Memento();
-            memento.SetState(this.State.ConvertAll(shape => shape.Clone()));
+            memento.SetState(new List<IShape>(this.State.ConvertAll(shape => shape.Clone())));
             return memento;
         }
         public void RestoreMemento(Memento memento)
         {
-            this._state = memento.GetState();
+            this._state = new List<IShape>(memento.GetState().ConvertAll(shape => shape.Clone()));
         }
 
         Stack<Memento> undoStates = new Stack<Memento>();

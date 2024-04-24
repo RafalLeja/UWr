@@ -11,6 +11,7 @@ namespace zad2.shapes
         public int x { get; set; }
         public int y { get; set; }
         public int width { get; set; }
+        public int height { get; set; }
 
         IShape Clone();
 
@@ -21,7 +22,7 @@ namespace zad2.shapes
         void Move(int newX, int newY)
         {
             this.x = newX - width/2;
-            this.y = newY - width/2;
+            this.y = newY - height/2;
         }
     }
 }
