@@ -1,41 +1,11 @@
 import random
 import sys
 from collections import defaultdict as dd
-from turtle import *
-
-#####################################################
-# turtle graphic
-#####################################################
-tracer(0,1)
 
 BOK = 50
 SX = -100
 SY = 0
 M = 8
-
-
-def kwadrat(x, y, kolor):
-  fillcolor(kolor)
-  pu()
-  goto(SX + x * BOK, SY + y * BOK)
-  pd()
-  begin_fill()
-  for i in range(4):
-    fd(BOK)
-    rt(90)
-  end_fill() 
-
-def kolko(x, y, kolor):
-  fillcolor(kolor)
-
-  pu()
-  goto(SX + x * BOK + BOK/2, SY + y * BOK - BOK)
-  pd()
-  begin_fill()
-  circle(BOK/2)
-  end_fill() 
-
-#####################################################
 
 def initial_board():
     B = [ [None] * M for i in range(M)]
@@ -188,9 +158,6 @@ if message[0] == 'U':
 else:
     player = 1
     opponent = 0
-
-    continue
-
 
 while message != 'BYE':
     if message == 'ONEMORE':
