@@ -90,8 +90,11 @@ class Board:
     def moves(self, player):
         res = []
         for (x,y) in self.fields:
-            if any( self.can_beat(x,y, direction, player) for direction in Board.dirs):
-                res.append( (x,y) )
+            m = max( self.can_beat(x,y, direction, player) for direction in Board.dirs)
+            if m > 0:
+                if x == 0 or x == M-1 or y == 0 or y == M-1:
+                    m += 5
+                res.append( (x,y,m) )
         if not res:
             return [None]
         return res               
@@ -105,12 +108,25 @@ class Board:
             x += dx
             y += dy
             cnt += 1
-        return cnt > 0 and self.get(x,y) == player
+        if cnt > 0 and self.get(x,y) == player:
+            return cnt
+        return 0
     
     def get(self, x,y):
         if 0 <= x < M and 0 <=y < M:
             return self.board[y][x]
         return None
+
+    def next_move(self, player):
+        moves = self.moves(player)
+        m = 0
+        for i,x,y,c in enumerate(moves):
+            if c > moves[m][2]:
+                m = i
+
+        do_move(moves[m], player)
+
+        return moves[m]    
                         
     def do_move(self, move, player):
         self.history.append([x[:] for x in self.board])
@@ -157,26 +173,58 @@ class Board:
         ms = self.moves(player)
         if ms:
             return random.choice(ms)
-        return [None]    
-    
+        return [None] 
 
-player = 0
 B = Board()
 
-while True:
-    B.draw()
-    B.show()
-    m = B.random_move(player)
-    B.do_move(m, player)
-    player = 1-player
-    input()
-    if B.terminal():
-        break
-    
-B.draw()
-B.show()
-print('Result', B.result())
-input('Game over!')
-  
-       
-sys.exit(0)                 
+answerTime = 0
+timeLeft = 0
+
+message = input('RDY')
+if message[0] == 'U':
+    player = 0
+    opponent = 1
+
+    answerTime = int(message[4])
+    timeLeft = int(message[6])
+
+    print('IDO 3 2')
+    B.do_move( (3,2), player)
+    message = input()
+else:
+    player = 1
+    opponent = 0
+
+    continue
+
+
+while message != 'BYE':
+    if message == 'ONEMORE':
+        B = Board()
+        message = input('RDY')
+        if message[0] == 'U':
+            player = 0
+            opponent = 1
+
+            answerTime = int(message[4])
+            timeLeft = int(message[6])
+
+            print('IDO 3 2')
+            B.do_move( (3,2), player)
+            message = input()
+        else:
+            player = 1
+            opponent = 0
+        
+        continue
+
+    if message[0] == 'H':
+        answerTime = int(message[6])
+        timeLeft = int(message[8])
+
+        B.do_move( (int(message[10]), int(message[12])), opponent)
+
+        move = B.random_move(player)
+        B.do_move(move, player)
+        print('IDO', move[0], move[1])
+        message = input()
