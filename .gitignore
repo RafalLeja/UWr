@@ -12,6 +12,9 @@
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+__pycache__/
+__pycache__/*
+
 *.class
 
 # big test file
