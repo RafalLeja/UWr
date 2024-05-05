@@ -1,24 +1,11 @@
-#include <iostream>
-#include <vector>
-#include <climits>
-#include <utility>
-#include <cstdlib>
+#include "heuristics.hpp"
+#include <algorithm>
 
-
-using namespace std;
-
-typedef vector<vector<char>> Board;
+#define SORTING true
 
 Board initBoard();
 void printBoard(const Board &board);
-char get(const Board &board, int x, int y);
-bool canBeat(const Board &board, int x, int y, int dx, int dy, bool player);
-vector<pair<int, int>> getMoves(const Board &board, bool player);
 Board makeMove(Board &board, pair<int, int> move, bool player);
-int result(const Board &board);
-int cornesrs(const Board &board);
-int mobility(const Board &board);
-int stability(const Board &board);
 int result(const Board &board);
 int heuristic(const Board &board);
 bool terminal(const Board &board);
@@ -45,50 +32,6 @@ void printBoard(const Board &board){
     }
 }
 
-char get(const Board &board, int x, int y){
-    if(x < 0 || x >= 8 || y < 0 || y >= 8){
-        return '.';
-    }
-    return board[x][y];
-}
-
-bool canBeat(const Board &board, int x, int y, int dx, int dy, bool player){
-    x += dx;
-    y += dy;
-    int count = 0;
-    while(get(board, x, y) == ((!player) ? '#' : 'O')){
-        count++;
-        x += dx;
-        y += dy;
-    }
-    return count > 0 && get(board, x, y) == (player ? '#' : 'O');
-}
-
-vector<pair<int, int>> getMoves(const Board &board, bool player){
-    vector<pair<int, int>> moves;
-    for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
-            if(board[i][j] == '.'){
-                bool can = false;
-                for(int dx = -1; dx <= 1; dx++){
-                    for(int dy = -1; dy <= 1; dy++){
-                        if(dx == 0 && dy == 0){
-                            continue;
-                        }
-                        if(canBeat(board, i, j, dx, dy, player)){
-                            can = true;
-                        }
-                    }
-                }
-                if(can){
-                    moves.push_back({i, j});
-                }
-            }
-        }
-    }
-    return moves;
-}
-
 Board makeMove(Board &board, pair<int, int> move, bool player){
     int x = move.first;
     int y = move.second;
@@ -112,23 +55,6 @@ Board makeMove(Board &board, pair<int, int> move, bool player){
     return board;
 }
 
-int corners(const Board &board){
-    int score = 0;
-    if(board[0][0] == '#'){
-        score++;
-    }
-    if(board[0][7] == '#'){
-        score++;
-    }
-    if(board[7][0] == '#'){
-        score++;
-    }
-    if(board[7][7] == '#'){
-        score++;
-    }
-    return score;
-}
-
 int result(const Board &board){
     int score = 0;
     for(int i = 0; i < 8; i++){
@@ -145,27 +71,38 @@ int result(const Board &board){
 }
 
 int heuristic(const Board &board){
-    int weights[8][8] = {
-    { 4, -3,  2,   2,   2,  2, -3, 4},
-    {-3, -4,  -1,  -1,  -1,  -1, -4, -3},
-    {  2,  -1,   1,   0,   0,   1,  -1,  2},
-    {   2,  -1,   0,   1,   1,   0,  -1,   2},
-    {   2,  -1,   0,   1,   1,   0,  -1,   2},
-    {  2,  -1,   1,   0,   0,   1,  -1,  2},
-    {-3, -4,  -1,  -1,  -1,  -1, -4, -3},
-    { 4, -3,  2,   2,   2,  2, -3, 4}};
-
-    int score = 0;
+    int weights[ 8 ][ 8 ] = {
+         {200, -100, 100,  50,  50, 100, -100,  200},
+        {-100, -200, -50, -50, -50, -50, -200, -100},
+         {100,  -50, 100,   0,   0, 100,  -50,  100},
+          {50,  -50,   0,   0,   0,   0,  -50,   50},
+          {50,  -50,   0,   0,   0,   0,  -50,   50},
+         {100,  -50, 100,   0,   0, 100,  -50,  100},
+        {-100, -200, -50, -50, -50, -50, -200, -100},
+         {200, -100, 100,  50,  50, 100, -100,  200}
+    };
+    int weighted_score = 0;
+    int result = 0;
     for(int i = 0; i < 8; i++){
-        for (int j = 0; j < 8; j++){
-            if (board[i][j] == '#'){
-                score += weights[i][j];
+        for(int j = 0; j < 8; j++){
+            if(board[i][j] == '#'){
+                weighted_score += weights[i][j];
+                result++;
             }
-            if (board[i][j] == 'O'){
-                score -= weights[i][j];
+            if(board[i][j] == 'O'){
+                weighted_score -= weights[i][j];
+                result--;
             }
         }
     }
+    // cout << "Weighted score: " << weighted_score << " Result: " << result << " Corners: " << corners(board, true) << " Mobility: " << mobility(board, true) << endl;
+    int score = 0;
+    score += weighted_score;
+    score += result * 100;
+    // score += stability(board, true) * 25;
+    score += corners(board, true) * 300;
+    // score += mobility(board, true) * 5;
+
     return score;
 }
 
@@ -179,19 +116,41 @@ int alphaBeta(const Board &board, int depth, int alpha, int beta, bool player){
     }
     if(player){
         int value = INT_MIN;
-        for(auto move : getMoves(board, player)){
+        vector<pair<int, int>> moves = getMoves(board, player);
+        if (SORTING) {
+            sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
+                Board newBoardA = board;
+                newBoardA  = makeMove(newBoardA, a, player);
+                Board newBoardB = board;
+                newBoardB = makeMove(newBoardB, b, player);
+                return heuristic(newBoardA) > heuristic(newBoardB);
+            });
+        }
+
+        for (auto move : moves) {
             Board newBoard = board;
             newBoard = makeMove(newBoard, move, player);
             value = max(value, alphaBeta(newBoard, depth - 1, alpha, beta, !player));
             alpha = max(alpha, value);
-            if(alpha >= beta){
+            if (alpha >= beta) {
                 break;
             }
         }
         return value;
     } else {
         int value = INT_MAX;
-        for(auto move : getMoves(board, player)){
+        vector<pair<int, int>> moves = getMoves(board, player);
+        if (SORTING) {
+            sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
+                Board newBoardA = board;
+                newBoardA  = makeMove(newBoardA, a, player);
+                Board newBoardB = board;
+                newBoardB = makeMove(newBoardB, b, player);
+                return heuristic(newBoardA) < heuristic(newBoardB);
+            });
+        }
+
+        for(auto move : moves){
             Board newBoard = board;
             newBoard = makeMove(newBoard, move, player);
             makeMove(newBoard, move, player);
