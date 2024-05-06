@@ -32,10 +32,14 @@ int main() {
         }
 
         int score = result(board);
-        if(score > 0) {
+        if(score > 0 && agentPlayer) {
             agent++;
-        } else if(score < 0) {
+        } else if(score > 0 && randomPlayer) {
             random++;
+        } else if(score < 0 && agentPlayer) {
+            random++;
+        } else if(score < 0 && randomPlayer) {
+            agent++;
         }
         games++;
         agentPlayer = !agentPlayer;
