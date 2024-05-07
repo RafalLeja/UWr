@@ -1,6 +1,6 @@
 #include "reversi.hpp"
 
-#define N 100
+#define N 500
 
 int main() {
     int random = 0;
@@ -11,24 +11,32 @@ int main() {
     bool randomPlayer = false;
 
     while(games < N) {
-        Board board = Board();
+        Board board = {0x0000001008000000, 0x0000000810000000};
         bool currentPlayer = false;
 
-        while(terminal(board) == false) {
-            vector<pair<int, int>> moves = getMoves(board, currentPlayer);
-            if(moves.size() > 0) {
+        uint64_t playerMoves = getMoves(board, currentPlayer);
+        uint64_t oppMoves = getMoves(board, !currentPlayer);
+
+        while(playerMoves > 0 || oppMoves > 0) {
+            if(playerMoves > 0) {
                 if(currentPlayer == agentPlayer) {
-                    pair<int, int> move = bestMove(board, currentPlayer, 3);
+                    int move = bestMove(board, currentPlayer, 5);
                     board = makeMove(board, move, currentPlayer);
                     // cout << "Agent move " << move.first << " " << move.second << endl;
                 } else {
-                    pair<int, int> move = randomMove(board, currentPlayer);
+                    int move = randomMove(board, playerMoves, currentPlayer);
                     board = makeMove(board, move, currentPlayer);
                     // cout << "Random move " << move.first << " " << move.second << endl;
                 }
             }
+
+            // heuristic2(board, playerMoves, oppMoves);
             // printBoard(board);
+            // cin.get();
+            
             currentPlayer = !currentPlayer;
+            playerMoves = getMoves(board, currentPlayer);
+            oppMoves = getMoves(board, !currentPlayer);
         }
 
         int score = result(board);

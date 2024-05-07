@@ -9,9 +9,9 @@
 #define	WEIGHT_ACTUAL_MOBILITY			50
 
 int getPlayer(char x);
-int corners(const Board &board , bool player);
-int mobility(const Board &board , bool player);
-int stability(const Board &board, bool player);
+int corners(uint64_t board[2] , bool player);
+int mobility(uint64_t board[2] , bool player);
+int stability(uint64_t board[2], bool player);
 
 int getPlayer(char x){
     if(x == '#'){
@@ -23,124 +23,8 @@ int getPlayer(char x){
     }
 }
 
-int corners(const Board &B, bool player){
-    int debug = 1;
-	int CornerHeuristicValue; 
-	int PlayerCornerCount[3]= {0,0,0}; 
-	int PotentialPlayerCornerCount[3] = {0,0,0};
-	int UnlikelyPlayerCornerCount[3] = {0,0,0};
-	int IrreversiblePlacement[3] = {0,0,0};	
-    int CornerRow[4] = {0,0,7,7};
-    int CornerCol[4] = {0,7,0,7};
-    int Direction[3] = {-1,0,1};
-    int InPlayer = player ? 1 : 2;
-
-	for(int Counter=0; Counter<=3; Counter++)
-	{
-		int PlayerControllingCorner = B.board[CornerRow[Counter]][CornerCol[Counter]];
-        PlayerControllingCorner = getPlayer(PlayerControllingCorner);
-			
-		PlayerCornerCount[PlayerControllingCorner]++;
-	}
-
-	for(int Counter = 0; Counter <= 3; Counter++)
-	{
-		for(int DirectionRow = 0; DirectionRow <=2; DirectionRow++)
-		{
-			for(int DirectionCol = 0; DirectionCol <=2; DirectionCol++)
-			{
-				int Row, Col;
-
-				Row = CornerRow[Counter] + Direction[DirectionRow];
-				Col = CornerCol[Counter] + Direction[DirectionCol];
-		
-				if(Row < 0 || Row > 7 || Col < 0 || Col > 7 || (Direction[DirectionRow]==0 && Direction[DirectionCol]==0))
-					continue;
-
-				if(B.board[CornerRow[Counter]][CornerCol[Counter]] != '.')
-					continue;
-
-				int PlayerControllingSquare = B.board[Row][Col];
-                PlayerControllingSquare = getPlayer(PlayerControllingSquare);
-
-				int CoinEncountered;
-				bool Encountered = false;
-
-				if(PlayerControllingSquare != 0)
-				{
-					int PlayerNotControllingSquare = (PlayerControllingSquare == 1) ? 2 : 1;
-
-					int TempRow = Row, TempCol = Col;
-
-					for(int Move = 1; Move <= 6; Move++)
-					{
-						TempRow += Direction[DirectionRow];
-						TempCol += Direction[DirectionCol];
-					
-						if((CoinEncountered = B.board[TempRow][TempCol])!= PlayerControllingSquare)
-						{	
-							Encountered = true;
-							break;
-						}
-					}
-
-					if(Encountered)
-					{
-						if(CoinEncountered == 0)
-							UnlikelyPlayerCornerCount[(PlayerControllingSquare == 1)? 2: 1]++;
-						else
-							PotentialPlayerCornerCount[(PlayerControllingSquare == 1)? 2: 1]++;
-					}
-					else
-					{
-						IrreversiblePlacement[PlayerControllingSquare]++;
-					}
-				}			
-			}
-		}
-	}
-
-	double OccupiedCorner = 0, PotentialCorner = 0, UnlikelyCorner = 0, IrreversibleCorner = 0;
-
-	if((PlayerCornerCount[InPlayer] + PlayerCornerCount[(InPlayer == 1)? 2: 1])!= 0)
-	{
-		OccupiedCorner = ((double)(PlayerCornerCount[InPlayer] - PlayerCornerCount[(InPlayer == 1)? 2: 1])/
-							(double)(PlayerCornerCount[InPlayer] + PlayerCornerCount[(InPlayer == 1)? 2: 1])) * 100;
-		
-	}
-	
-	if((PotentialPlayerCornerCount[InPlayer] + PotentialPlayerCornerCount[(InPlayer == 1)? 2: 1]) != 0)
-	{
-		PotentialCorner = ((double)(PotentialPlayerCornerCount[InPlayer] - PotentialPlayerCornerCount[(InPlayer == 1)? 2: 1])/
-							(double)(PotentialPlayerCornerCount[InPlayer] + PotentialPlayerCornerCount[(InPlayer == 1)? 2: 1])) * 100;
-	
-	}
-
-	if((UnlikelyPlayerCornerCount[InPlayer] + UnlikelyPlayerCornerCount[(InPlayer == 1)? 2: 1]) != 0)
-	{
-		UnlikelyCorner = ((double)(UnlikelyPlayerCornerCount[InPlayer] - UnlikelyPlayerCornerCount[(InPlayer == 1)? 2: 1])/
-							(double)(UnlikelyPlayerCornerCount[InPlayer] + UnlikelyPlayerCornerCount[(InPlayer == 1)? 2: 1])) * 100;
-		
-	}
-
-	if((IrreversiblePlacement[InPlayer] + IrreversiblePlacement[(InPlayer == 1)? 2: 1]) != 0)
-	{
-		IrreversibleCorner = ((double)(IrreversiblePlacement[InPlayer] - IrreversiblePlacement[(InPlayer == 1)? 2: 1])/
-							(double)(IrreversiblePlacement[InPlayer] + IrreversiblePlacement[(InPlayer == 1)? 2: 1])) * 100;
-		
-	}
-
-	if((WEIGHT_OCCUPIED_CORNER + WEIGHT_POTENTIAL_CORNER + WEIGHT_UNLIKELY_CORNER + WEIGHT_IRREVERSIBLE_CORNER)!=0)
-		CornerHeuristicValue =	(double)(OccupiedCorner	* WEIGHT_OCCUPIED_CORNER	+ 
-							PotentialCorner * WEIGHT_POTENTIAL_CORNER	+
-							UnlikelyCorner	* WEIGHT_UNLIKELY_CORNER	+
-							IrreversibleCorner * WEIGHT_IRREVERSIBLE_CORNER ) /(double)
-							(4 * (WEIGHT_OCCUPIED_CORNER + WEIGHT_POTENTIAL_CORNER + WEIGHT_UNLIKELY_CORNER + WEIGHT_IRREVERSIBLE_CORNER)); 
-
-	else
-		return 0;
-	
-	return CornerHeuristicValue;
+int corners(uint64_t board[2], bool player){
+    
 }
 
 int mobility(const Board &B, bool player){
