@@ -2,6 +2,7 @@
 #include <algorithm>
 
 #define SORTING true
+#define SORT_DEPTH 3
 
 // Board initBoard();
 void printBoard(Board board);
@@ -58,15 +59,15 @@ int heuristic(Board board, uint64_t playerMoves, uint64_t oppMoves){
     }
     int mobility = __popcount(playerMoves) - __popcount(oppMoves);
     int corners = (__popcount(board[1] & 0x8100000000000081ULL) - __popcount(board[0] & 0x8100000000000081ULL));
-    int nearCorners = (__popcount(board[1] & 0x4200000000000042ULL) - __popcount(board[0] & 0x4200000000000042ULL));
-    nearCorners += (__popcount(board[1] & 0x0081000000008100ULL) - __popcount(board[0] & 0x0081000000008100ULL));
-    nearCorners += (__popcount(board[1] & 0x0042000000004200ULL) - __popcount(board[0] & 0x0042000000004200ULL));
+    // int nearCorners = (__popcount(board[1] & 0x4200000000000042ULL) - __popcount(board[0] & 0x4200000000000042ULL));
+    // nearCorners += (__popcount(board[1] & 0x0081000000008100ULL) - __popcount(board[0] & 0x0081000000008100ULL));
+    // nearCorners += (__popcount(board[1] & 0x0042000000004200ULL) - __popcount(board[0] & 0x0042000000004200ULL));
     
-    int score = balance; 
-    score += mobility << 2;
-    score += corners << 2;
-    score -= nearCorners << 6;
-    score += stability(board) << 0;
+    int score = balance * 0; 
+    score += mobility << 1;
+    score += corners << 4;
+    // score -= nearCorners << 6;
+    score += stability(board) << 1;
     // cout << "Balance: " << balance << " Mobility: " << mobility << " Corners: " << corners << " NearCorners: " << nearCorners << " Stability: " << stability(board) << endl;
     return score;
 }
@@ -96,6 +97,8 @@ pair<int, int> alphaBetaMax(Board board, int depth, int alpha, int beta, bool pl
     int bestMove = 1;
     uint64_t playerMoves = getMoves(board, player);
     uint64_t oppMoves = getMoves(board, !player);
+    uint64_t whiteMoves = getMoves(board, 1);
+    uint64_t blackMoves = getMoves(board, 0);
     if (depth == 0 || (playerMoves == 0 && oppMoves == 0)){
         return {heuristic(board, playerMoves, oppMoves), -1};
     }
@@ -104,11 +107,11 @@ pair<int, int> alphaBetaMax(Board board, int depth, int alpha, int beta, bool pl
     for(int i = 0; i < 64; i++){
         if(playerMoves & (1ULL << i)){
             auto tmpBoard = makeMove(board, i, player);
-            moves.push_back({i, heuristic(tmpBoard, playerMoves, oppMoves)});
+            moves.push_back({i, heuristic(tmpBoard, whiteMoves, blackMoves)});
         }
     }
 
-    if (SORTING) {
+    if (SORTING && depth > SORT_DEPTH) {
         sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
             return a.second > b.second;
         });
@@ -134,6 +137,8 @@ pair<int, int> alphaBetaMin(Board board, int depth, int alpha, int beta, bool pl
     int bestMove = 1;
     uint64_t playerMoves = getMoves(board, player);
     uint64_t oppMoves = getMoves(board, !player);
+    uint64_t whiteMoves = getMoves(board, 1);
+    uint64_t blackMoves = getMoves(board, 0);
     if (depth == 0 || (playerMoves == 0 && oppMoves == 0)){
         return {heuristic(board, playerMoves, oppMoves), -1};
     }
@@ -142,11 +147,11 @@ pair<int, int> alphaBetaMin(Board board, int depth, int alpha, int beta, bool pl
     for(int i = 0; i < 64; i++){
         if(playerMoves & (1ULL << i)){
             auto tmpBoard = makeMove(board, i, player);
-            moves.push_back({i, heuristic(tmpBoard, playerMoves, oppMoves)});
+            moves.push_back({i, heuristic(tmpBoard, whiteMoves, blackMoves)});
         }
     }    
 
-    if (SORTING) {
+    if (SORTING && depth > SORT_DEPTH) {
         sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
             return a.second < b.second;
         });
