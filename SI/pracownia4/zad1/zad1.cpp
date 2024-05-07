@@ -11,7 +11,7 @@ int main() {
     bool randomPlayer = false;
 
     while(games < N) {
-        Board board = initBoard();
+        Board board = Board();
         bool currentPlayer = false;
 
         while(terminal(board) == false) {

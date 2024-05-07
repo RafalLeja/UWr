@@ -23,7 +23,7 @@ int getPlayer(char x){
     }
 }
 
-int corners(const Board &board, bool player){
+int corners(const Board &B, bool player){
     int debug = 1;
 	int CornerHeuristicValue; 
 	int PlayerCornerCount[3]= {0,0,0}; 
@@ -37,7 +37,7 @@ int corners(const Board &board, bool player){
 
 	for(int Counter=0; Counter<=3; Counter++)
 	{
-		int PlayerControllingCorner = board[CornerRow[Counter]][CornerCol[Counter]];
+		int PlayerControllingCorner = B.board[CornerRow[Counter]][CornerCol[Counter]];
         PlayerControllingCorner = getPlayer(PlayerControllingCorner);
 			
 		PlayerCornerCount[PlayerControllingCorner]++;
@@ -57,10 +57,10 @@ int corners(const Board &board, bool player){
 				if(Row < 0 || Row > 7 || Col < 0 || Col > 7 || (Direction[DirectionRow]==0 && Direction[DirectionCol]==0))
 					continue;
 
-				if(board[CornerRow[Counter]][CornerCol[Counter]] != '.')
+				if(B.board[CornerRow[Counter]][CornerCol[Counter]] != '.')
 					continue;
 
-				int PlayerControllingSquare = board[Row][Col];
+				int PlayerControllingSquare = B.board[Row][Col];
                 PlayerControllingSquare = getPlayer(PlayerControllingSquare);
 
 				int CoinEncountered;
@@ -77,7 +77,7 @@ int corners(const Board &board, bool player){
 						TempRow += Direction[DirectionRow];
 						TempCol += Direction[DirectionCol];
 					
-						if((CoinEncountered = board[TempRow][TempCol])!= PlayerControllingSquare)
+						if((CoinEncountered = B.board[TempRow][TempCol])!= PlayerControllingSquare)
 						{	
 							Encountered = true;
 							break;
@@ -143,7 +143,7 @@ int corners(const Board &board, bool player){
 	return CornerHeuristicValue;
 }
 
-int mobility(const Board &board, bool player){
+int mobility(const Board &B, bool player){
     int InPlayer = player ? 1 : 2;
 	int PlayerMobility = 0, OpponentMobility = 0;	
 	int Opponent = (InPlayer == 1) ? 2: 1;
@@ -153,8 +153,8 @@ int mobility(const Board &board, bool player){
   
 	int ValidMove = 10;
 	
-	PlayerMobility += getMoves(board, player).size();
-    OpponentMobility += getMoves(board, !player).size();
+	PlayerMobility += getMoves(B, player).size();
+    OpponentMobility += getMoves(B, !player).size();
 
 	if((PlayerMobility + OpponentMobility) != 0)
 		ActualMobility = (((double)(PlayerMobility - OpponentMobility)/(double)(PlayerMobility + OpponentMobility)) * 100);
@@ -164,7 +164,7 @@ int mobility(const Board &board, bool player){
 
 	for(int Row = 1; Row <= 8; Row++){
 		for(int Col = 1; Col <=8; Col++){
-			PlayerControllingSquare = board[Row-1][Col-1];
+			PlayerControllingSquare = B.board[Row-1][Col-1];
             PlayerControllingSquare = getPlayer(PlayerControllingSquare);
 
 			if(PlayerControllingSquare){
@@ -177,7 +177,7 @@ int mobility(const Board &board, bool player){
 							continue;
 
 						if((Row + IncRow) <= 8 && (Row + IncRow) >= 1 && (Col + IncCol) <= 8 && (Col + IncCol) >= 1)
-							if(board[Row+IncRow-1][Col+IncCol-1] == '.')
+							if(B.board[Row+IncRow-1][Col+IncCol-1] == '.')
 							{
 								if(PlayerControllingSquare == InPlayer)							
 									OpponentMobility++;
@@ -202,7 +202,7 @@ int mobility(const Board &board, bool player){
 }
 
 
-int stability(const Board &board, bool player)
+int stability(const Board &B, bool player)
 {
 	int RowDirection[4] = { 1, -1, 0, 1};
 	int ColDirection[4] = { 0, 1, 1, 1};
@@ -220,7 +220,7 @@ int stability(const Board &board, bool player)
 		for(int Col = 1; Col <= 8; Col++)
 		{
 			CoinStable = 2;
-			OccupiedBy = board[Row-1][Col-1];
+			OccupiedBy = B.board[Row-1][Col-1];
             OccupiedBy = getPlayer(OccupiedBy);
 
 			if(OccupiedBy == 0)
@@ -238,7 +238,7 @@ int stability(const Board &board, bool player)
 				ColInc = ColDirection[Counter];
 			
 				while(TempRow >= 1 && TempRow <= 8 && TempCol >= 1 && TempCol <= 8){
-                    int pos = getPlayer(board[TempRow-1][TempCol-1]);
+                    int pos = getPlayer(B.board[TempRow-1][TempCol-1]);
 					if(pos != OccupiedBy)
 					{
 						FirstCoinEncountered = pos;
@@ -261,7 +261,7 @@ int stability(const Board &board, bool player)
 
 				while(TempRow >=1 && TempRow <=8 && TempCol>=1 && TempCol <= 8)
 				{
-                    int pos = getPlayer(board[TempRow-1][TempCol-1]);
+                    int pos = getPlayer(B.board[TempRow-1][TempCol-1]);
 
 					if(pos != OccupiedBy)
 					{
