@@ -52,6 +52,7 @@ static const uint64_t RSHIFTS[8] = {
 
 uint64_t allMoves(uint64_t player, uint64_t opp);
 uint64_t getMoves(Board board, bool player);
+array<uint64_t, 2> makeMove(Board board, int idx, bool player);
 
 
 uint64_t allMoves(uint64_t player, uint64_t opp){
