@@ -59,26 +59,26 @@ uint64_t allMoves(uint64_t player, uint64_t opp){
     uint64_t moves = 0;
     uint64_t tmp;
     for(int i = 0; i < 4; i++){ // right
-        tmp = (player >> RSHIFTS[i]) & opp;
+        tmp = ((player >> RSHIFTS[i]) & MASKS[i]) & opp;
 
-        tmp |= (tmp >> RSHIFTS[i]) & opp;
-        tmp |= (tmp >> RSHIFTS[i]) & opp;
-        tmp |= (tmp >> RSHIFTS[i]) & opp;
-        tmp |= (tmp >> RSHIFTS[i]) & opp;
-        tmp |= (tmp >> RSHIFTS[i]) & opp;
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & opp;
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & opp;
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & opp;
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & opp;
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & opp;
 
-        moves |= empty & (tmp >> RSHIFTS[i]);
+        moves |= empty & ((tmp >> RSHIFTS[i]) & MASKS[i]);
     }
     for(int i = 4; i < 8; i++){ // left
-        tmp = (player << LSHIFTS[i]) & opp;
+        tmp = ((player << LSHIFTS[i]) & MASKS[i]) & opp;
 
-        tmp |= (tmp << LSHIFTS[i]) & opp;
-        tmp |= (tmp << LSHIFTS[i]) & opp;
-        tmp |= (tmp << LSHIFTS[i]) & opp;
-        tmp |= (tmp << LSHIFTS[i]) & opp;
-        tmp |= (tmp << LSHIFTS[i]) & opp;
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & opp;
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & opp;
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & opp;
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & opp;
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & opp;
 
-        moves |= empty & (tmp << LSHIFTS[i]);
+        moves |= empty & ((tmp << LSHIFTS[i]) & MASKS[i]);
     }
     return moves;
 }
@@ -89,6 +89,9 @@ uint64_t getMoves(Board board, bool player){
 }
 
 array<uint64_t, 2> makeMove(Board board, int idx, bool player){
+    if (idx == -1){
+        return board;
+    }
     uint64_t move = 1ULL << idx;
     uint64_t newP = board[player] | move;
     uint64_t fliped = 0;
@@ -96,28 +99,28 @@ array<uint64_t, 2> makeMove(Board board, int idx, bool player){
     uint64_t last;
 
     for (int i = 0; i < 4; i++){
-        tmp = (move >> RSHIFTS[i]) & board[!player];
+        tmp = ((move >> RSHIFTS[i]) & MASKS[i]) & board[!player];
 
-        tmp |= (tmp >> RSHIFTS[i]) & board[!player];
-        tmp |= (tmp >> RSHIFTS[i]) & board[!player];
-        tmp |= (tmp >> RSHIFTS[i]) & board[!player];
-        tmp |= (tmp >> RSHIFTS[i]) & board[!player];
-        tmp |= (tmp >> RSHIFTS[i]) & board[!player];
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & board[!player];
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & board[!player];
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & board[!player];
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & board[!player];
+        tmp |= ((tmp >> RSHIFTS[i]) & MASKS[i]) & board[!player];
 
-        last = (tmp >> RSHIFTS[i]) & newP;
+        last = ((tmp >> RSHIFTS[i]) & MASKS[i]) & newP;
         fliped |= (last ? tmp : 0);
     }
 
     for (int i = 4; i < 8; i++){
-        tmp = (move << LSHIFTS[i]) & board[!player];
+        tmp = ((move << LSHIFTS[i]) & MASKS[i]) & board[!player];
 
-        tmp |= (tmp << LSHIFTS[i]) & board[!player];
-        tmp |= (tmp << LSHIFTS[i]) & board[!player];
-        tmp |= (tmp << LSHIFTS[i]) & board[!player];
-        tmp |= (tmp << LSHIFTS[i]) & board[!player];
-        tmp |= (tmp << LSHIFTS[i]) & board[!player];
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & board[!player];
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & board[!player];
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & board[!player];
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & board[!player];
+        tmp |= ((tmp << LSHIFTS[i]) & MASKS[i]) & board[!player];
 
-        last = (tmp << LSHIFTS[i]) & newP;
+        last = ((tmp << LSHIFTS[i]) & MASKS[i]) & newP;
         fliped |= (last ? tmp : 0);
     }
 

@@ -1,8 +1,12 @@
 #include "reversi.hpp"
 
-#define N 500
+#define N 1000
+
+#include <ctime>
+
 
 int main() {
+    srand(time(NULL));
     int random = 0;
     int agent = 0;
     int games = 0;
@@ -13,6 +17,7 @@ int main() {
     while(games < N) {
         Board board = {0x0000001008000000, 0x0000000810000000};
         bool currentPlayer = false;
+        Board prevBoard = {0, 0};
 
         uint64_t playerMoves = getMoves(board, currentPlayer);
         uint64_t oppMoves = getMoves(board, !currentPlayer);
@@ -22,17 +27,15 @@ int main() {
                 if(currentPlayer == agentPlayer) {
                     int move = bestMove(board, currentPlayer, 5);
                     board = makeMove(board, move, currentPlayer);
-                    // cout << "Agent move " << move.first << " " << move.second << endl;
                 } else {
                     int move = randomMove(board, playerMoves, currentPlayer);
                     board = makeMove(board, move, currentPlayer);
-                    // cout << "Random move " << move.first << " " << move.second << endl;
                 }
             }
-
-            // heuristic2(board, playerMoves, oppMoves);
-            // printBoard(board);
-            // cin.get();
+            if (prevBoard[0] == board[0] && prevBoard[1] == board[1]) {
+                board = makeMove(board, randomMove(board, playerMoves, currentPlayer), currentPlayer);
+            }
+            prevBoard = board;
             
             currentPlayer = !currentPlayer;
             playerMoves = getMoves(board, currentPlayer);
@@ -52,7 +55,7 @@ int main() {
         games++;
         agentPlayer = !agentPlayer;
         randomPlayer = !randomPlayer;
-        if (games % 10 == 0) {
+        if (games % 50 == 0) {
             cout << "Game: " << games << " Agent: " << agent << " Random: " << random << endl;
         }
     }
