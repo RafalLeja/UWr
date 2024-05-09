@@ -15,15 +15,16 @@ int bestMove(Board board, bool player, int depth);
 void printBoard(Board board){
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
-            if(board[0] & (1ULL << (i * 8 + j))){
-                cout << "#";
-            } else if(board[1] & (1ULL << (i * 8 + j))){
-                cout << "O";
+            uint64_t pixel = (1ULL << (i * 8 + j));
+            if(board[0] & pixel){
+                cerr << "#";
+            } else if(board[1] & pixel){
+                cerr << "O";
             } else {
-                cout << ".";
+                cerr << ".";
             }
         }
-        cout << endl;
+        cerr << endl;
     }
 }
 
