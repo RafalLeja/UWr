@@ -10,10 +10,10 @@
 
 using namespace std;
 
-enum Player{
-    WHITE = 1,
-    BLACK = 0
-};  
+// enum Player{
+//     WHITE = 1,
+//     BLACK = 0
+// };  
 
 typedef array<uint64_t, 2> Board;
 

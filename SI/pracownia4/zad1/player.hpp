@@ -1,4 +1,4 @@
-#include "new_reversi.hpp"
+#include "reversi.hpp"
 
 struct command
 {
@@ -12,14 +12,14 @@ struct command
 
 class Player{
     public:
-        Reversi R;
+        Board board;
         bool color;
         Player(){
             this->reset();
         }
 
         void reset() {
-            R = Reversi();
+            board = {0x0000001008000000, 0x0000000810000000};
             color = true;
             say("RDY");
         }
@@ -59,7 +59,7 @@ class Player{
                 // cerr << "Received command: " << cmd.cmd << " " << cmd.v1 << " " << cmd.v2 << " " << cmd.v3 << " " << cmd.v4 << endl;
                 if (cmd.cmd == 'H') {
                     int move = abs(7 - cmd.v3) + cmd.v4 * 8;
-                    R = R.makeMove(R, move, !color);
+                    board = makeMove(board, move, !color);
                     // cerr << "Move: " << move << " bin " << (1ULL << move) << endl;
                     // cerr << "black " << R.board[0] << endl;
                     // cerr << "white " << R.board[1] << endl;
@@ -75,13 +75,13 @@ class Player{
                     color = false;
                 }
 
-                int best = R.bestMove(R, color, 2);
+                int best = bestMove(board, color, 5);
                 // cerr << "Best move: " << best << " bin " << (1ULL << best) << endl;
                 if (best == -1) {
                     this->say("IDO -1 -1");
                     continue;
                 }
-                R = R.makeMove(R, best, color);
+                board = makeMove(board, best, color);
                 string ans = "IDO " + to_string(abs(7 - best % 8)) + " " + to_string(best / 8);
                 this->say(ans);
             }

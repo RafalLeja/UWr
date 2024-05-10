@@ -1,6 +1,6 @@
 #include "reversi.hpp"
 
-#define N 1000
+#define N 200
 
 #include <ctime>
 

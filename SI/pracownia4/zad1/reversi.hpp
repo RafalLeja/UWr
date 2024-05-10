@@ -68,11 +68,11 @@ int heuristic(Board board, uint64_t playerMoves, uint64_t oppMoves, bool player)
 
 pair<int, int> alphaBetaMax(Board board, int depth, int alpha, int beta, bool player){
     int value = INT_MIN;
-    int bestMove = 0;
+    int bestMove = -1;
     uint64_t playerMoves = getMoves(board, player);
     uint64_t oppMoves = getMoves(board, !player);
     if (depth == 0 || (playerMoves == 0 && oppMoves == 0)){
-        return {heuristic(board, playerMoves, oppMoves, player), 0};
+        return {heuristic(board, playerMoves, oppMoves, player), bestMove};
     }
 
     vector<pair<int, int>> moves;
@@ -90,10 +90,15 @@ pair<int, int> alphaBetaMax(Board board, int depth, int alpha, int beta, bool pl
         });
     }
 
+    if (playerMoves > 0){
+        bestMove = moves[0].first;
+    }
+
     for (auto move : moves) {
         Board newBoard = makeMove(board, move.first, player);
         pair<int, int> result = alphaBetaMax(newBoard, depth - 1, -beta, -alpha, !player);
         result.first = -result.first;
+        
         if (result.first > value) {
             value = result.first;
             bestMove = move.first;
@@ -123,6 +128,10 @@ int randomMove(Board board, uint64_t moves, bool player){
 }
 
 int bestMove(Board board, bool player, int depth){
+    uint64_t moves = getMoves(board, player);
+    if (moves == 0) {
+        return -1;
+    }
     int bestMove = alphaBetaMax(board, depth, INT_MIN, INT_MAX, player).second;
 
     return bestMove;
