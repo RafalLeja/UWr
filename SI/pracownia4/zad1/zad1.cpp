@@ -1,6 +1,6 @@
 #include "reversi.hpp"
 
-#define N 200
+#define N 500
 
 #include <ctime>
 
@@ -14,10 +14,13 @@ int main() {
     bool agentPlayer = true;
     bool randomPlayer = false;
 
+    TranspositionTable TT = TranspositionTable();
+
     while(games < N) {
         Board board = {0x0000001008000000, 0x0000000810000000};
         bool currentPlayer = false;
         Board prevBoard = {0, 0};
+        TT.reset();
 
         uint64_t playerMoves = getMoves(board, currentPlayer);
         uint64_t oppMoves = getMoves(board, !currentPlayer);
@@ -25,7 +28,7 @@ int main() {
         while(playerMoves > 0 || oppMoves > 0) {
             if(playerMoves > 0) {
                 if(currentPlayer == agentPlayer) {
-                    int move = bestMove(board, currentPlayer, 5);
+                    int move = bestMoveM(board, currentPlayer, 15, TT);
                     board = makeMove(board, move, currentPlayer);
                 } else {
                     int move = randomMove(board, playerMoves, currentPlayer);

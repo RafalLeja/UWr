@@ -14,12 +14,17 @@ class Player{
     public:
         Board board;
         bool color;
-        Player(){
+        int depth;
+        TranspositionTable TT;
+        Player(int d){
+            this->TT = TranspositionTable(100003); //liczba pierwsza
+            depth = d;
             this->reset();
         }
 
         void reset() {
             board = {0x0000001008000000, 0x0000000810000000};
+            TT.reset();
             color = true;
             say("RDY");
         }
@@ -75,7 +80,7 @@ class Player{
                     color = false;
                 }
 
-                int best = bestMove(board, color, 5);
+                int best = bestMove(board, color, depth);
                 // cerr << "Best move: " << best << " bin " << (1ULL << best) << endl;
                 if (best == -1) {
                     this->say("IDO -1 -1");
