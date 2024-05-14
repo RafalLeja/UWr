@@ -38,5 +38,7 @@ static inline bool isEnemy(uint32_t a, uint32_t b) {
 }
 
 static inline bool canAttack(uint32_t a, uint32_t b) {
-    return (b == NONE) | (isEnemy(a, b) & (strength(a) >= strength(b)));
+    return (b == NONE) | 
+    (isEnemy(a, b) & ((strength(a) >= strength(b))) 
+        || ((strength(a) == 0) & (strength(b) == 7)));
 }
