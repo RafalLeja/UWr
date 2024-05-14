@@ -26,7 +26,9 @@
 #include "terrain.h"
 #include "types.h"
 #include "zobrist.h"
+#include <iostream>
 
+using namespace std;
 
 static inline bool is_trapped(uint32_t const piece,
                               uint32_t const location)
@@ -40,6 +42,8 @@ class Position
 {
   public:
     explicit Position(void) { }
+
+    void print();
 
     void clear(void);
     void initial(void);
@@ -99,6 +103,92 @@ class Position
 
 }; // Position
 
+
+inline void Position::print()
+{
+  for (int i = 0; i < 64; ++i)
+  {
+    switch (_board[i])
+    {
+    case NONE:
+      cout << " .";
+      break;
+
+    case WHITE_RAT:
+      cout << " R";
+      break;
+
+    case BLACK_RAT:
+      cout << " r";
+      break;
+    
+    case WHITE_CAT:
+      cout << " C";
+      break;  
+    
+    case BLACK_CAT:
+      cout << " c";
+      break;  
+
+    case WHITE_WOLF:
+      cout << " W";
+      break;
+    
+    case BLACK_WOLF:
+      cout << " w";
+      break;
+
+    case WHITE_DOG: 
+      cout << " D";
+      break;  
+
+    case BLACK_DOG:
+      cout << " d";
+      break;
+    
+    case WHITE_PANTHER:
+      cout << " P";
+      break;  
+
+    case BLACK_PANTHER:
+      cout << " p";
+      break;
+    
+    case WHITE_TIGER: 
+      cout << " T";
+      break;
+
+    case BLACK_TIGER: 
+      cout << " t";
+      break;  
+    
+    case WHITE_LION:
+      cout << " L";
+      break;
+    
+    case BLACK_LION:
+      cout << " l";
+      break;
+    
+    case WHITE_ELEPHANT:
+      cout << " E";
+      break;
+    
+    case BLACK_ELEPHANT:
+      cout << " e";
+      break;  
+
+    default:
+      break;
+    }
+    if ((i + 1) % 7 == 0)
+    {
+      cout << endl;
+    }
+  } // for
+  cout << endl;
+  return;
+} // Position::print
 
 inline void Position::clear(void)
 {

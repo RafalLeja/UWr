@@ -18,7 +18,9 @@
 #if !defined(__types_h__)
 #define __types_h__
 
-typedef unsigned int       uint32_t;
-typedef unsigned long long uint64_t;
+#include <iostream>
+
+// typedef unsigned int       uint32_t;
+// typedef unsigned long long uint64_t;
 
 #endif

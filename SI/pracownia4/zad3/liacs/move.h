@@ -44,10 +44,10 @@ struct Move
   bool operator==(Move const &move) const;
 
 
-  uint32_t piece;
-  uint32_t from;
-  uint32_t to;
-  uint32_t enemy;
+  uint32_t piece = 0;
+  uint32_t from = 0;
+  uint32_t to = 0;
+  uint32_t enemy = 0;
 
 }; //Move
 
