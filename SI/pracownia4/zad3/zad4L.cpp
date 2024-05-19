@@ -12,14 +12,11 @@ using namespace std;
 
 #define N 50
 
-
 int main() {
-    srand(time(NULL));
-    
     Position P = Position();
     P.initial();
     Move m;
-    int randomWins = 0;
+    int abWins = 0;
     int simWins = 0;
     int games = 0;
     bool simColor = true;
@@ -33,13 +30,13 @@ int main() {
             if (P.is_white_turn() == simColor) {
                 m = simSearch(P, 10);
             } else {
-                m = randomMove(P);
+                m = bestMove(P, 3);
             }
             P.do_move(m);
         }
 
         if (P.is_white_turn() == simColor) {
-            randomWins++;
+            abWins++;
         } else {
             simWins++;
         }
@@ -48,7 +45,7 @@ int main() {
         P.initial();
         simColor = !simColor;
 
-        cout << "sim/rand " << simWins << "/" << randomWins << " games " << games << endl;
+        cout << "sim/a-b " << simWins << "/" << abWins << " games " << games << endl;
     }
     
     return 0;

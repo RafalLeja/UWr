@@ -30,13 +30,15 @@
 
 using namespace std;
 
+char const PIECE_NAME[17] = { 'R', 'r', 'C', 'c', 'W', 'w', 'D', 'd',
+                              'P', 'p', 'T', 't', 'L', 'l', 'E', 'e', '.' };
+
 static inline bool is_trapped(uint32_t const piece,
                               uint32_t const location)
 {
   return ((is_white(piece) & is_black_trap(location)) |
           (is_black(piece) & is_white_trap(location))) == 1;
 } // is_trapped
-
 
 class Position
 {
@@ -108,79 +110,8 @@ inline void Position::print()
 {
   for (int i = 0; i < 64; ++i)
   {
-    switch (_board[i])
-    {
-    case NONE:
-      cout << " .";
-      break;
-
-    case WHITE_RAT:
-      cout << " R";
-      break;
-
-    case BLACK_RAT:
-      cout << " r";
-      break;
+    cout << " " << PIECE_NAME[_board[i]];
     
-    case WHITE_CAT:
-      cout << " C";
-      break;  
-    
-    case BLACK_CAT:
-      cout << " c";
-      break;  
-
-    case WHITE_WOLF:
-      cout << " W";
-      break;
-    
-    case BLACK_WOLF:
-      cout << " w";
-      break;
-
-    case WHITE_DOG: 
-      cout << " D";
-      break;  
-
-    case BLACK_DOG:
-      cout << " d";
-      break;
-    
-    case WHITE_PANTHER:
-      cout << " P";
-      break;  
-
-    case BLACK_PANTHER:
-      cout << " p";
-      break;
-    
-    case WHITE_TIGER: 
-      cout << " T";
-      break;
-
-    case BLACK_TIGER: 
-      cout << " t";
-      break;  
-    
-    case WHITE_LION:
-      cout << " L";
-      break;
-    
-    case BLACK_LION:
-      cout << " l";
-      break;
-    
-    case WHITE_ELEPHANT:
-      cout << " E";
-      break;
-    
-    case BLACK_ELEPHANT:
-      cout << " e";
-      break;  
-
-    default:
-      break;
-    }
     if ((i + 1) % 7 == 0)
     {
       cout << endl;
