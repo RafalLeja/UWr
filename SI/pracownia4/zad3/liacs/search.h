@@ -2,7 +2,12 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
-#include <set>
+#include <unordered_set>
+#include <climits>
+
+uint64_t MoveHash(Move m) {
+    return ZOBRIST[m.piece][m.to];
+}
 
 struct TreeNode {
     Move move;
@@ -13,7 +18,7 @@ struct TreeNode {
     TreeNode* parent;
     vector<TreeNode*> children;
     int allMoves;
-    set<Move> childrenMoves;
+    unordered_set<uint64_t> childrenMoves;
     
     TreeNode(Move m, TreeNode* p) : move(m), parent(p) {}
     ~TreeNode() {
@@ -174,13 +179,13 @@ TreeNode MCTS(TreeNode root, Position pos, int itr){
             
             Move m;
             for (int i = 0; i < count; i++) {
-                if (node->childrenMoves.find(moves[i]) == node->childrenMoves.end()) {
+                if (node->childrenMoves.find(MoveHash(moves[i])) == node->childrenMoves.end()) {
                     m = moves[i];
                     break;
                 }
             }
 
-            node->childrenMoves.insert(m);
+            node->childrenMoves.insert(MoveHash(m));
             TreeNode* newNode = new TreeNode(m, node);
             node->children.push_back(newNode);
             node = newNode;
