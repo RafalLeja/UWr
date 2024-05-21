@@ -10,13 +10,16 @@
 
 using namespace std;
 
-#define N 50
+#define N 10
+
 
 int main() {
+    srand(time(NULL));
+    
     Position P = Position();
     P.initial();
     Move m;
-    int abWins = 0;
+    int randomWins = 0;
     int simWins = 0;
     int games = 0;
     bool simColor = true;
@@ -28,15 +31,15 @@ int main() {
             // P.print();
             // cin.get();
             if (P.is_white_turn() == simColor) {
-                m = simSearch(P, 15);
+                m = bestMoveMCTS(P, 100);
             } else {
-                m = bestMove(P, 5);
+                m = randomMove(P);
             }
             P.do_move(m);
         }
 
         if (P.is_white_turn() == simColor) {
-            abWins++;
+            randomWins++;
         } else {
             simWins++;
         }
@@ -45,7 +48,7 @@ int main() {
         P.initial();
         simColor = !simColor;
 
-        cout << "sim/a-b " << simWins << "/" << abWins << " games " << games << endl;
+        cout << "sim/rand " << simWins << "/" << randomWins << " games " << games << endl;
     }
     
     return 0;

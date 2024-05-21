@@ -1,4 +1,14 @@
+#include "./liacs/location.h"
+#include "./liacs/move.h"
+#include "./liacs/movement.h"
+#include "./liacs/pieces.h"
+#include "./liacs/position.h"
+#include "./liacs/terrain.h"
+#include "./liacs/types.h"
+#include "./liacs/zobrist.h"
+#include "./liacs/search.h"
 
+using namespace std;
 struct command
 {
     char cmd;
@@ -11,19 +21,16 @@ struct command
 
 class Player{
     public:
-        Board board;
+        Position pos;
         bool color;
         int depth;
-        TranspositionTable TT;
         Player(int d){
-            this->TT = TranspositionTable(100003); //liczba pierwsza
             depth = d;
             this->reset();
         }
 
         void reset() {
-            board = {0x0000001008000000, 0x0000000810000000};
-            TT.reset();
+            pos = Position();
             color = true;
             say("RDY");
         }
@@ -62,7 +69,7 @@ class Player{
                 struct command cmd = listen();
                 // cerr << "Received command: " << cmd.cmd << " " << cmd.v1 << " " << cmd.v2 << " " << cmd.v3 << " " << cmd.v4 << endl;
                 if (cmd.cmd == 'H') {
-                    int move = abs(7 - cmd.v3) + cmd.v4 * 8;
+                    Move move = abs(7 - cmd.v3) + cmd.v4 * 8;
                     board = makeMove(board, move, !color);
                     // cerr << "Move: " << move << " bin " << (1ULL << move) << endl;
                     // cerr << "black " << R.board[0] << endl;
