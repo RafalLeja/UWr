@@ -1,16 +1,23 @@
-#include "./liacs/location.h"
-#include "./liacs/move.h"
-#include "./liacs/movement.h"
-#include "./liacs/pieces.h"
-#include "./liacs/position.h"
-#include "./liacs/terrain.h"
-#include "./liacs/types.h"
-#include "./liacs/zobrist.h"
-#include "./liacs/MCTS.h"
+// #include "./liacs/location.h"
+// #include "./liacs/move.h"
+// #include "./liacs/movement.h"
+// #include "./liacs/pieces.h"
+// #include "./liacs/position.h"
+// #include "./liacs/terrain.h"
+// #include "./liacs/types.h"
+// #include "./liacs/zobrist.h"
+// #include "./liacs/MCTS.h"
+
+#include "./diff/animals.hpp"
+#include "./diff/board.hpp"
+#include "./diff/movement.hpp"
+#include "./diff/MCTS.hpp"
+#include "./diff/terrain.hpp"
+#include "./diff/zobrist.hpp"
 
 using namespace std;
 
-#define N 20
+#define N 10
 
 
 int main() {
@@ -31,12 +38,13 @@ int main() {
     {
         while (!P.is_won())
         {
+            // cout << "turn: " << P.turn() << endl;
             // P.print();
             // cin.get();
             // cout << "---" << endl;
             if (P.is_white_turn() == simColor) {
                 // cout << root->wins << " " << root->games << " " << root->score << " " << root->UCB << endl;
-                m = bestMoveMCTS(root, P, 50000);
+                m = bestMoveMCTS(root, P, 15000);
                 // cout << root->wins << " " << root->games << " " << root->score << " " << root->UCB << endl;
             } else {
                 m = randomMove(P);
@@ -44,6 +52,7 @@ int main() {
             // bfs(root);
             P.do_move(m);
             root = advanceMove(root, P, m);
+            // balance(root);
         }
 
         if (P.is_white_turn() == simColor) {

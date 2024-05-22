@@ -1,4 +1,5 @@
-#include "position.h"
+#include "board.hpp"
+#include <iostream>
 #include <vector>
 #include <algorithm>
 #include <cmath>

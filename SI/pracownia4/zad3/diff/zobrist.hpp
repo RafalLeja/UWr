@@ -1,6 +1,9 @@
+#if !defined(__zobrist__)
+#define __zobrist__
+
 #include <iostream>
 
-static uint64_t const zobristTable[17][64] =
+static uint64_t const ZOBRIST[17][64] =
 {
     { // BLACK_RAT
         0xac6cf6faff7142c2ull,
@@ -1125,3 +1128,5 @@ static uint64_t const zobristTable[17][64] =
         0x83cadeef3fd47aa8ull,
     },
 };
+
+#endif
