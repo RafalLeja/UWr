@@ -1,32 +1,7 @@
 #include "position.h"
-#include <vector>
 #include <algorithm>
 #include <cmath>
-#include <unordered_set>
 #include <climits>
-
-uint64_t MoveHash(Move m) {
-    return ZOBRIST[m.piece][m.to];
-}
-
-struct TreeNode {
-    Move move;
-    int wins;
-    int games;
-    float score;
-    float UCB;
-    TreeNode* parent;
-    vector<TreeNode*> children;
-    int allMoves;
-    unordered_set<uint64_t> childrenMoves;
-    
-    TreeNode(Move m, TreeNode* p) : move(m), parent(p) {}
-    ~TreeNode() {
-        for (TreeNode* child : children) {
-            delete child;
-        }
-    }
-};
 
 static uint32_t const LOCATION_WEIGHTS[2][64] = {
     {
@@ -153,73 +128,4 @@ pair<Move, int> negamax(Position& pos, int depth, int alpha, int beta, int color
 
 Move bestMove(Position& pos, int depth) {
     return negamax(pos, depth, INT_MIN, INT_MAX, pos.is_white_turn() ? 1 : -1).first;
-}
-
-TreeNode MCTS(TreeNode root, Position pos, int itr){
-    int color = pos.is_white_turn() ? 1 : -1;
-    
-    for (int i = 0; i < itr; i++) {
-        TreeNode* node = &root;
-        // Position pos = Position();
-        while (node->children.size() == node->allMoves){
-            auto bestChild = max_element(node->children.begin(), node->children.end(), [](TreeNode* a, TreeNode* b) {
-                return a->UCB < b->UCB;
-            });
-
-            node = *bestChild;
-            pos.do_move(node->move);
-        }
-
-        int result;
-        if (node->games > 1) {
-            Move moves[MAX_MOVES];
-            int count = pos.generate_moves(moves);
-            node->allMoves = count;
-            random_shuffle(moves, moves + count);
-            
-            Move m;
-            for (int i = 0; i < count; i++) {
-                if (node->childrenMoves.find(MoveHash(moves[i])) == node->childrenMoves.end()) {
-                    m = moves[i];
-                    break;
-                }
-            }
-
-            node->childrenMoves.insert(MoveHash(m));
-            TreeNode* newNode = new TreeNode(m, node);
-            node->children.push_back(newNode);
-            node = newNode;
-            
-            pos.do_move(m);
-        }
-        
-        result = (simulate(pos) == color);
-        
-        while (node->parent != nullptr) {
-            node->wins += result;
-            node->games++;
-            node->score = (float)node->wins / node->games;
-            node->UCB = (float)node->wins / node->games + 1.414 * sqrt(log(node->parent->games) / node->games);
-            node = node->parent;
-        }
-
-        node->wins += result;
-        node->games++;
-    }
-    
-    int bestScore = INT_MIN;
-    TreeNode* bestNode = nullptr;
-    for (TreeNode* child : root.children) {
-        if (child->score > bestScore) {
-            bestScore = child->score;
-            bestNode = child;
-        }
-    }
-    
-    return *bestNode;
-}
-
-Move bestMoveMCTS(Position& pos, int itr) {
-    TreeNode root = TreeNode(Move(), nullptr);
-    return MCTS(root, pos, itr).move;
 }

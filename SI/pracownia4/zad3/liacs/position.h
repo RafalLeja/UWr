@@ -44,6 +44,18 @@ class Position
 {
   public:
     explicit Position(void) { }
+    Position(Position const &position){
+      for (int i = 0; i < 64; ++i)
+      {
+        _board[i] = position._board[i];
+      } // for
+      for (int i = 0; i < 17; ++i)
+      {
+        _piece[i] = position._piece[i];
+      } // for
+      _turn = position._turn;
+      _key = position._key;
+    }
 
     void print();
 
