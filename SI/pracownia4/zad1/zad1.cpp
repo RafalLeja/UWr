@@ -1,6 +1,6 @@
 #include "reversi.hpp"
 
-#define N 500
+#define N 1000
 
 #include <ctime>
 
@@ -28,7 +28,7 @@ int main() {
         while(playerMoves > 0 || oppMoves > 0) {
             if(playerMoves > 0) {
                 if(currentPlayer == agentPlayer) {
-                    int move = bestMoveM(board, currentPlayer, 15, TT);
+                    int move = bestMove(board, currentPlayer, 5);
                     board = makeMove(board, move, currentPlayer);
                 } else {
                     int move = randomMove(board, playerMoves, currentPlayer);

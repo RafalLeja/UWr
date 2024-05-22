@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "zobrist.hpp"
 
-#define SORTING true
+#define SORTING false
 #define SORT_DEPTH 2
 
 void printBoard(Board board);
@@ -60,10 +60,15 @@ int heuristic(Board board, uint64_t playerMoves, uint64_t oppMoves, bool player)
     int mobility = __popcount(playerMoves) - __popcount(oppMoves);
     int corners = (__popcount(board[player] & 0x8100000000000081ULL) - __popcount(board[!player] & 0x8100000000000081ULL));
     
-    int score = balance * 0; 
-    score += mobility << 1;
-    score += corners << 4;
-    score += stability(board, player) << 1;
+    // if (__popcount(board[player] + board[!player]) < 40){
+    //     return balance * -1;
+    // }
+
+    int score = 0;
+    score += balance * 0.01; 
+    score += mobility * 1;
+    score += corners * 10;
+    // score += stability(board, player) * 2;
     return score;
 }
 
