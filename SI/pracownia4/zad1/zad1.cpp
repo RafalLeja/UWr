@@ -1,4 +1,5 @@
 #include "reversi.hpp"
+#include <chrono>
 
 #define N 1000
 
@@ -14,13 +15,12 @@ int main() {
     bool agentPlayer = true;
     bool randomPlayer = false;
 
-    TranspositionTable TT = TranspositionTable();
+    long long int time = 0;
 
     while(games < N) {
         Board board = {0x0000001008000000, 0x0000000810000000};
         bool currentPlayer = false;
         Board prevBoard = {0, 0};
-        TT.reset();
 
         uint64_t playerMoves = getMoves(board, currentPlayer);
         uint64_t oppMoves = getMoves(board, !currentPlayer);
@@ -28,7 +28,10 @@ int main() {
         while(playerMoves > 0 || oppMoves > 0) {
             if(playerMoves > 0) {
                 if(currentPlayer == agentPlayer) {
+                    auto start = std::chrono::high_resolution_clock::now();
                     int move = bestMove(board, currentPlayer, 5);
+                    auto end = std::chrono::high_resolution_clock::now();
+                    time += std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
                     board = makeMove(board, move, currentPlayer);
                 } else {
                     int move = randomMove(board, playerMoves, currentPlayer);
@@ -63,4 +66,5 @@ int main() {
         }
     }
     cout << "Agent: " << agent << " Random: " << random << endl;
+    cout << "Time: " << (float) time/1000000 << endl;
 }

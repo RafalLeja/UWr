@@ -3,7 +3,7 @@
 #include "zobrist.hpp"
 
 #define SORTING false
-#define SORT_DEPTH 2
+#define SORT_DEPTH 0
 
 void printBoard(Board board);
 int result(Board board);
@@ -164,11 +164,16 @@ pair<int, int> alphaBetaMax(Board board, int depth, int alpha, int beta, bool pl
         }
     }
 
-    if (SORTING && depth > SORT_DEPTH) {
-        sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
-            // return (player ? (a.second > b.second) : (a.second < b.second));
-            return (a.second < b.second);
-        });
+    if (SORTING) {
+        if (player) {
+            sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
+                return a.second > b.second;
+            });
+        } else {
+            sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
+                return a.second < b.second;
+            });
+        }
     }
 
     if (playerMoves > 0){
