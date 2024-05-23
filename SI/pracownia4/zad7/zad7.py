@@ -97,20 +97,37 @@ def heuristic(board):
     pieces = board.piece_map()
     white = 0
     black = 0
+    P_B = 200
 
     for square, piece in pieces.items():
         if piece.color == chess.WHITE:
             white += WHITE_PIECE_TABLES[piece.piece_type][square]
+            if piece.piece_type == chess.PAWN:
+                try:
+                    if pieces[square + 1].piece_type == chess.PAWN and pieces[square + 8].color == chess.WHITE:
+                        white += P_B
+                    if pieces[square - 1].piece_type == chess.PAWN and pieces[square + 8].color == chess.WHITE:
+                        white += P_B
+                except:
+                    pass
         else:
             black += BLACK_PIECE_TABLES[piece.piece_type][square]
-    
+            if piece.piece_type == chess.PAWN:
+                try:
+                    if pieces[square + 1].piece_type == chess.PAWN  and pieces[square + 8].color == chess.BLACK:
+                        black += P_B
+                    if pieces[square - 1].piece_type == chess.PAWN and pieces[square + 8].color == chess.BLACK:
+                        black += P_B
+
+                except:
+                    pass
+
     return white - black
 
 def negamax(board, depth, alpha, beta, color):
     if depth == 0 or board.is_game_over():
         return color * heuristic(board)
 
-    bestValue = -99999999
 
     sortedMoves = []
     for move in board.legal_moves:
@@ -118,17 +135,18 @@ def negamax(board, depth, alpha, beta, color):
         sortedMoves.append((move, heuristic(board)))
         board.pop()
 
-    sortedMoves.sort(key=lambda x: x[1], reverse=board.turn == chess.WHITE)
+    # sortedMoves.sort(key=lambda x: x[1], reverse=board.turn == chess.WHITE)
 
+    bestValue = alpha
     for (move, h) in sortedMoves:
         board.push(move)
-        boardValue = -negamax(board, depth - 1, -beta, -alpha, -color)
+        boardValue = -negamax(board, depth - 1, -bestValue, -alpha, -color)
         board.pop()
 
         if boardValue > bestValue:
             bestValue = boardValue
         
-        alpha = max(alpha, boardValue)
+        alpha = max(alpha, bestValue)
         if alpha >= beta:
             break
 
@@ -162,7 +180,7 @@ while games < N:
     moveCount = 0
     while not (board.is_game_over() or board.is_stalemate() or board.is_insufficient_material() or board.is_seventyfive_moves() or board.is_fivefold_repetition()):
         if board.turn == abColor:
-            move = bestMoveAB(board, 5)
+            move = bestMoveAB(board, 7)
         else:
             moves = []
             for move in board.legal_moves:
@@ -176,15 +194,18 @@ while games < N:
             print(board)
             print(moveCount)
         # print(board)
-        # print(heuristic(board, move))
+        # print(heuristic(board))
         # print("-----------")
         # input()
 
     # print(board.outcome().result())
     if board.outcome().winner == abColor:
         abW += 1
-    else:
+    elif board.outcome().winner == (chess.WHITE if abColor == chess.BLACK else chess.BLACK):
         randW += 1
+    else:
+        abW += 0.5
+        randW += 0.5
 
     games += 1
 
