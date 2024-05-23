@@ -2,40 +2,135 @@ import chess
 import chess.svg
 import random
 
-def heuristic(board, move):
-    capture = board.is_capture(move) * 10 * (-1 if board.turn == chess.BLACK else 1)
-    is_check = board.is_check() * 100 * (-1 if board.turn == chess.BLACK else 1)
-    is_checkmate = board.is_checkmate() * 10000 * (-1 if board.turn == chess.BLACK else 1)
-    # is_stalemate = board.is_stalemate() * -10000 
+WHITE_PAWN_TABLE = [
+    0, 0, 0, 0, 0, 0, 0, 0,
+    50, 50, 50, 50, 50, 50, 50, 50,
+    10, 10, 20, 30, 30, 20, 10, 10,
+    5, 5, 10, 25, 25, 10, 5, 5,
+    0, 0, 0, 20, 20, 0, 0, 0,
+    5, -5, -10, 0, 0, -10, -5, 5,
+    5, 10, 10, -20, -20, 10, 10, 5,
+    0, 0, 0, 0, 0, 0, 0, 0]
 
+BLACK_PAWN_TABLE = WHITE_PAWN_TABLE[::-1]
+
+WHITE_KNIGHT_TABLE = [
+    -50, -40, -30, -30, -30, -30, -40, -50,
+    -40, -20, 0, 0, 0, 0, -20, -40,
+    -30, 0, 10, 15, 15, 10, 0, -30,
+    -30, 5, 15, 20, 20, 15, 5, -30,
+    -30, 0, 15, 20, 20, 15, 0, -30,
+    -30, 5, 10, 15, 15, 10, 5, -30,
+    -40, -20, 0, 5, 5, 0, -20, -40,
+    -50, -40, -30, -30, -30, -30, -40, -50]
+
+BLACK_KNIGHT_TABLE = WHITE_KNIGHT_TABLE[::-1]
+
+WHITE_BISHOP_TABLE = [
+    -20, -10, -10, -10, -10, -10, -10, -20,
+    -10, 0, 0, 0, 0, 0, 0, -10,
+    -10, 0, 5, 10, 10, 5, 0, -10,
+    -10, 5, 5, 10, 10, 5, 5, -10,
+    -10, 0, 10, 10, 10, 10, 0, -10,
+    -10, 10, 10, 10, 10, 10, 10, -10,
+    -10, 5, 0, 0, 0, 0, 5, -10,
+    -20, -10, -10, -10, -10, -10, -10, -20]
+
+BLACK_BISHOP_TABLE = WHITE_BISHOP_TABLE[::-1]
+
+WHITE_ROOK_TABLE = [
+    0, 0, 0, 0, 0, 0, 0, 0,
+    5, 10, 10, 10, 10, 10, 10, 5,
+    -5, 0, 0, 0, 0, 0, 0, -5,
+    -5, 0, 0, 0, 0, 0, 0, -5,
+    -5, 0, 0, 0, 0, 0, 0, -5,
+    -5, 0, 0, 0, 0, 0, 0, -5,
+    -5, 0, 0, 0, 0, 0, 0, -5,
+    0, 0, 0, 5, 5, 0, 0, 0]
+
+BLACK_ROOK_TABLE = WHITE_ROOK_TABLE[::-1]
+
+WHITE_QUEEN_TABLE = [
+    -20, -10, -10, -5, -5, -10, -10, -20,
+    -10, 0, 0, 0, 0, 0, 0, -10,
+    -10, 0, 5, 5, 5, 5, 0, -10,
+    -5, 0, 5, 5, 5, 5, 0, -5,
+    0, 0, 5, 5, 5, 5, 0, -5,
+    -10, 5, 5, 5, 5, 5, 0, -10,
+    -10, 0, 5, 0, 0, 0, 0, -10,
+    -20, -10, -10, -5, -5, -10, -10, -20]
+
+BLACK_QUEEN_TABLE = WHITE_QUEEN_TABLE[::-1]
+
+WHITE_KING_TABLE = [
+    20, 30, 10, 0, 0, 10, 30, 20,
+    20, 20, 0, 0, 0, 0, 20, 20,
+    -10, -20, -20, -20, -20, -20, -20, -10,
+    -20, -30, -30, -40, -40, -30, -30, -20,
+    -30, -40, -40, -50, -50, -40, -40, -30,
+    -30, -40, -40, -50, -50, -40, -40, -30,
+    -30, -40, -40, -50, -50, -40, -40, -30,
+    -30, -40, -40, -50, -50, -40, -40, -30]
+
+BLACK_KING_TABLE = WHITE_KING_TABLE[::-1]
+
+WHITE_PIECE_TABLES = {
+    chess.PAWN: WHITE_PAWN_TABLE,
+    chess.KNIGHT: WHITE_KNIGHT_TABLE,
+    chess.BISHOP: WHITE_BISHOP_TABLE,
+    chess.ROOK: WHITE_ROOK_TABLE,
+    chess.QUEEN: WHITE_QUEEN_TABLE,
+    chess.KING: WHITE_KING_TABLE
+}
+
+BLACK_PIECE_TABLES = {
+    chess.PAWN: BLACK_PAWN_TABLE,
+    chess.KNIGHT: BLACK_KNIGHT_TABLE,
+    chess.BISHOP: BLACK_BISHOP_TABLE,
+    chess.ROOK: BLACK_ROOK_TABLE,
+    chess.QUEEN: BLACK_QUEEN_TABLE,
+    chess.KING: BLACK_KING_TABLE
+}
+
+
+def heuristic(board):
     pieces = board.piece_map()
     white = 0
     black = 0
 
-    for piece in pieces.values():
+    for square, piece in pieces.items():
         if piece.color == chess.WHITE:
-            white += piece.piece_type
+            white += WHITE_PIECE_TABLES[piece.piece_type][square]
         else:
-            black += piece.piece_type
+            black += BLACK_PIECE_TABLES[piece.piece_type][square]
     
     return white - black
 
 def negamax(board, depth, alpha, beta, color):
     if depth == 0 or board.is_game_over():
-        return color * heuristic(board, chess.Move.null())
+        return color * heuristic(board)
 
     bestValue = -99999999
 
+    sortedMoves = []
     for move in board.legal_moves:
-        if depth == 1:
-            boardValue = heuristic(board, move)
-        else:
-            board.push(move)
-            boardValue = -negamax(board, depth - 1, -beta, -bestValue, -color)
-            board.pop()
+        board.push(move)
+        sortedMoves.append((move, heuristic(board)))
+        board.pop()
+
+    sortedMoves.sort(key=lambda x: x[1], reverse=board.turn == chess.WHITE)
+
+    for (move, h) in sortedMoves:
+        board.push(move)
+        boardValue = -negamax(board, depth - 1, -beta, -alpha, -color)
+        board.pop()
 
         if boardValue > bestValue:
             bestValue = boardValue
+        
+        alpha = max(alpha, boardValue)
+        if alpha >= beta:
+            break
 
     return bestValue
 
@@ -64,28 +159,32 @@ abColor = chess.WHITE
 while games < N:
     board = chess.Board()
     abColor = chess.WHITE if abColor == chess.BLACK else chess.BLACK
-
-    while not board.is_game_over():
+    moveCount = 0
+    while not (board.is_game_over() or board.is_stalemate() or board.is_insufficient_material() or board.is_seventyfive_moves() or board.is_fivefold_repetition()):
         if board.turn == abColor:
-            move = bestMoveAB(board, 3)
+            move = bestMoveAB(board, 5)
         else:
-            move = random.choice(list(board.legal_moves))
+            moves = []
+            for move in board.legal_moves:
+                moves.append(move)
+            
+            move = random.choice(moves)
 
-        if board.is_capture(move):
-            print("Capture")
-
+        moveCount += 1
         board.push(move)
-        print(board)
-        print(heuristic(board, move))
-        print("-----------")
-        input()
+        if moveCount % 50 == 0:
+            print(board)
+            print(moveCount)
+        # print(board)
+        # print(heuristic(board, move))
+        # print("-----------")
+        # input()
 
-    if abColor == chess.WHITE:
-        abW += board.result() == "1-0"
-        randW += board.result() == "0-1"
+    # print(board.outcome().result())
+    if board.outcome().winner == abColor:
+        abW += 1
     else:
-        abW += board.result() == "0-1"
-        randW += board.result() == "1-0"
+        randW += 1
 
     games += 1
 
