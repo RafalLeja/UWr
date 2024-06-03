@@ -1,4 +1,4 @@
-#include "position.h"
+#include "board.hpp"
 #include <algorithm>
 #include <cmath>
 #include <climits>

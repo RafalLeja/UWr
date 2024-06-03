@@ -1,22 +1,44 @@
+#if !defined(__movement__)
+#define __movement__
+
 #include <iostream>
+#include "animals.hpp"
 
 struct Move
 {
-  uint32_t piece;
-  uint32_t from;
-  uint32_t to;
-  uint32_t enemy;
+  explicit inline Move(void) { }
+
+  explicit inline Move(uint32_t const piece,
+                       uint32_t const from,
+                       uint32_t const to,
+                       uint32_t const enemy):
+                  piece(piece), from(from), to(to), enemy(enemy) { }
+
+
+  bool is_capture(void) const;
+
+
+  bool operator==(Move const &move) const;
+
+
+  uint32_t piece = 0;
+  uint32_t from = 0;
+  uint32_t to = 0;
+  uint32_t enemy = 0;
+
 };
 
+inline bool Move::is_capture(void) const
+{
+  return enemy != NONE;
+}
 
-static uint32_t const STEP_NORTH = 0;
-static uint32_t const STEP_EAST  = 1;
-static uint32_t const STEP_SOUTH = 2;
-static uint32_t const STEP_WEST  = 3;
-static uint32_t const LEAP_NORTH = 4;
-static uint32_t const LEAP_EAST  = 5;
-static uint32_t const LEAP_SOUTH = 6;
-static uint32_t const LEAP_WEST  = 7;
+inline bool Move::operator==(Move const &move) const
+{
+  return ((piece == move.piece) & (to == move.to)) == 1;
+}
+
+static int const MAX_MOVES = 32;
 
 static uint32_t const STEP_NORTH = 0;
 static uint32_t const STEP_EAST  = 1;
@@ -40,7 +62,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 11, 15, 15, 13,
     3, 11,  9,  0,  3, 11,  9,
     0
-  }, // WHITE_RAT
+  }, //
   {
     6, 14, 12,  0,  6, 14, 12,
     7, 15, 15, 14, 15, 15, 13,
@@ -52,7 +74,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 15, 15, 15, 13,
     3, 11, 11, 11, 11, 11,  9,
     0
-  }, // BLACK_RAT
+  }, 
   {
     6, 14, 14, 14, 14, 14, 12,
     7, 15, 15, 15, 15, 15, 13,
@@ -64,7 +86,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 11, 15, 15, 13,
     3, 11,  9,  0,  3, 11,  9,
     0
-  }, // WHITE_CAT
+  }, 
   {
     6, 14, 12,  0,  6, 14, 12,
     7, 15, 15, 14, 15, 15, 13,
@@ -76,7 +98,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 15, 15, 15, 13,
     3, 11, 11, 11, 11, 11,  9,
     0
-  }, // BLACK_CAT
+  }, 
   {
     6, 14, 14, 14, 14, 14, 12,
     7, 15, 15, 15, 15, 15, 13,
@@ -88,7 +110,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 11, 15, 15, 13,
     3, 11,  9,  0,  3, 11,  9,
     0
-  }, // WHITE_WOLF
+  }, 
   {
     6, 14, 12,  0,  6, 14, 12,
     7, 15, 15, 14, 15, 15, 13,
@@ -100,7 +122,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 15, 15, 15, 13,
     3, 11, 11, 11, 11, 11,  9,
     0
-  }, // BLACK_WOLF
+  }, 
   {
     6, 14, 14, 14, 14, 14, 12,
     7, 15, 15, 15, 15, 15, 13,
@@ -112,7 +134,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 11, 15, 15, 13,
     3, 11,  9,  0,  3, 11,  9,
     0
-  }, // WHITE_DOG
+  }, 
   {
     6, 14, 12,  0,  6, 14, 12,
     7, 15, 15, 14, 15, 15, 13,
@@ -124,7 +146,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 15, 15, 15, 13,
     3, 11, 11, 11, 11, 11,  9,
     0
-  }, // BLACK_DOG
+  }, 
   {
     6, 14, 14, 14, 14, 14, 12,
     7, 15, 15, 15, 15, 15, 13,
@@ -136,7 +158,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 11, 15, 15, 13,
     3, 11,  9,  0,  3, 11,  9,
     0
-  }, // WHITE_PANTHER
+  }, 
   {
     6, 14, 12,  0,  6, 14, 12,
     7, 15, 15, 14, 15, 15, 13,
@@ -148,7 +170,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 15, 15, 15, 13,
     3, 11, 11, 11, 11, 11,  9,
     0
-  }, // BLACK_PANTHER
+  }, 
   {
      6, 14, 14,  14, 14, 14,  12,
      7, 15, 15,  15, 15, 15,  13,
@@ -160,7 +182,7 @@ static uint32_t const MOVEMENT[16][64] =
      7, 15, 15,  11, 15, 15,  13,
      3, 11,  9,   0,  3, 11,   9,
      0
-  }, // WHITE_TIGER
+  }, 
   {
      6, 14, 12,   0,  6, 14,  12,
      7, 15, 15,  14, 15, 15,  13,
@@ -172,7 +194,7 @@ static uint32_t const MOVEMENT[16][64] =
      7, 15, 15,  15, 15, 15,  13,
      3, 11, 11,  11, 11, 11,   9,
      0
-  }, // BLACK_TIGER
+  }, 
   {
      6, 14, 14,  14, 14, 14,  12,
      7, 15, 15,  15, 15, 15,  13,
@@ -184,7 +206,7 @@ static uint32_t const MOVEMENT[16][64] =
      7, 15, 15,  11, 15, 15,  13,
      3, 11,  9,   0,  3, 11,   9,
      0
-  }, // WHITE_LION
+  }, 
   {
      6, 14, 12,   0,  6, 14,  12,
      7, 15, 15,  14, 15, 15,  13,
@@ -196,7 +218,7 @@ static uint32_t const MOVEMENT[16][64] =
      7, 15, 15,  15, 15, 15,  13,
      3, 11, 11,  11, 11, 11,   9,
      0
-  }, // BLACK_LION
+  }, 
   {
     6, 14, 14, 14, 14, 14, 12,
     7, 15, 15, 15, 15, 15, 13,
@@ -208,7 +230,7 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 11, 15, 15, 13,
     3, 11,  9,  0,  3, 11,  9,
     0
-  }, // WHITE_ELEPHANT
+  }, 
   {
     6, 14, 12,  0,  6, 14, 12,
     7, 15, 15, 14, 15, 15, 13,
@@ -220,8 +242,8 @@ static uint32_t const MOVEMENT[16][64] =
     7, 15, 15, 15, 15, 15, 13,
     3, 11, 11, 11, 11, 11,  9,
     0
-  } // BLACK_ELEPHANT
-}; // MOVEMENT
+  } 
+}; 
 
 static uint32_t const MOVEMENT_MASK[8] =
 {
@@ -254,4 +276,6 @@ static inline bool can_move(uint32_t const piece,
 {
   to = (from + MOVEMENT_OFFSET[direction]) & 63;
   return (MOVEMENT[piece][from] & MOVEMENT_MASK[direction]) > 0;
-} // can_move
+}
+
+#endif

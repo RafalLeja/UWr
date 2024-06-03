@@ -2,8 +2,8 @@
 #include <algorithm>
 #include "zobrist.hpp"
 
-#define SORTING true
-#define SORT_DEPTH 2
+#define SORTING false
+#define SORT_DEPTH 0
 
 void printBoard(Board board);
 int result(Board board);
@@ -60,10 +60,15 @@ int heuristic(Board board, uint64_t playerMoves, uint64_t oppMoves, bool player)
     int mobility = __popcount(playerMoves) - __popcount(oppMoves);
     int corners = (__popcount(board[player] & 0x8100000000000081ULL) - __popcount(board[!player] & 0x8100000000000081ULL));
     
-    int score = balance * 0; 
-    score += mobility << 1;
-    score += corners << 4;
-    score += stability(board, player) << 1;
+    // if (__popcount(board[player] + board[!player]) < 40){
+    //     return balance * -1;
+    // }
+
+    int score = 0;
+    score += balance * 0.01; 
+    score += mobility * 1;
+    score += corners * 10;
+    // score += stability(board, player) * 2;
     return score;
 }
 
@@ -159,11 +164,16 @@ pair<int, int> alphaBetaMax(Board board, int depth, int alpha, int beta, bool pl
         }
     }
 
-    if (SORTING && depth > SORT_DEPTH) {
-        sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
-            // return (player ? (a.second > b.second) : (a.second < b.second));
-            return (a.second < b.second);
-        });
+    if (SORTING) {
+        if (player) {
+            sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
+                return a.second > b.second;
+            });
+        } else {
+            sort(moves.begin(), moves.end(), [&](pair<int, int> a, pair<int, int> b) {
+                return a.second < b.second;
+            });
+        }
     }
 
     if (playerMoves > 0){

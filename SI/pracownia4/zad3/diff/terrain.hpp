@@ -1,3 +1,6 @@
+#if !defined(__terrain__)
+#define __terrain__
+
 #include <iostream>
 
 static uint32_t const FLOOR      = 0;
@@ -103,3 +106,5 @@ static inline bool is_not_water(uint32_t const location)
 {
   return TERRAIN[location] != WATER;
 }
+
+#endif

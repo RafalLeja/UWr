@@ -1,12 +1,9 @@
-#include "./liacs/location.h"
-#include "./liacs/move.h"
-#include "./liacs/movement.h"
-#include "./liacs/pieces.h"
-#include "./liacs/position.h"
-#include "./liacs/terrain.h"
-#include "./liacs/types.h"
-#include "./liacs/zobrist.h"
-#include "./liacs/search.h"
+#include "./diff/animals.hpp"
+#include "./diff/board.hpp"
+#include "./diff/movement.hpp"
+#include "./diff/search.hpp"
+#include "./diff/terrain.hpp"
+#include "./diff/zobrist.hpp"
 
 using namespace std;
 
