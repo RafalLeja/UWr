@@ -29,6 +29,7 @@ plt.plot(mse)
 plt.xlabel('Sample Index')
 plt.ylabel('MSE')
 plt.title('Mean Squared Error (MSE)')
+plt.savefig('mse.png')
 plt.show()
 
 # # plt.clear()
@@ -57,4 +58,5 @@ for i in range(10):
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
 
+plt.savefig('anomalies.png')
 plt.show()
