@@ -3,7 +3,7 @@ from tensorflow import keras
 import matplotlib.pyplot as plt
 import numpy as np
 
-autoEncoder = keras.models.load_model('modelV4.keras')
+autoEncoder = keras.models.load_model('modelV0.tf')
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 x_train = x_train.astype('float32') / 255
@@ -31,23 +31,29 @@ plt.ylabel('MSE')
 plt.title('Mean Squared Error (MSE)')
 plt.show()
 
-# plt.clear()
-THRESHOLD = 0.6
-anomalies = x_test[mse > THRESHOLD]
-decoded = decoded[mse > THRESHOLD]
-mse = mse[mse > THRESHOLD]
+# # plt.clear()
+# THRESHOLD = 0.6
+# anomalies = x_test[mse > THRESHOLD]
+# decoded = decoded[mse > THRESHOLD]
+# mse = mse[mse > THRESHOLD]
+
+sorted_indices = np.argsort(mse)
+sorted_indices = sorted_indices[::-1]
+x_test_sorted = x_test[sorted_indices]
+decoded_sorted = decoded[sorted_indices]
+mse = mse[sorted_indices]
 
 # Plot top 10 anomalies
 plt.figure(figsize=(20, 4))
 for i in range(10):
     ax = plt.subplot(2, 10, i + 1)
-    plt.imshow(anomalies[i], cmap='gray')
+    plt.imshow(x_test_sorted[i], cmap='gray')
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     plt.title(f'MSE: {mse[i]:.2f}')
 
     ax = plt.subplot(2, 10, i + 11)
-    plt.imshow(decoded[i], cmap='gray')
+    plt.imshow(decoded_sorted[i], cmap='gray')
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
 

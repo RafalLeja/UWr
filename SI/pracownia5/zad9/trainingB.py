@@ -52,7 +52,7 @@ model.fit(y_train, y_train, epochs=10, batch_size=256, shuffle=True, validation_
 
 fileName = 'modelBV'
 i = 0
-while os.path.exists(f'{fileName}{i}.keras'):
+while os.path.exists(f'{fileName}{i}.tf'):
     i += 1
 
-model.save(f'{fileName}{i}.keras')
+model.save(f'{fileName}{i}.tf')

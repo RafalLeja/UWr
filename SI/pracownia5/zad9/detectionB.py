@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 
-autoEncoder = keras.models.load_model('modelBV0.keras')
+autoEncoder = keras.models.load_model('modelBV0.tf')
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
