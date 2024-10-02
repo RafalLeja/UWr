@@ -60,3 +60,11 @@ System operacyjny wie pod jakim adresem ma umieścić segmenty programu dzięki 
     numer syscalla w `rax`, argumenty w `rdi`, `rsi`, `rdx`, `r10`, `r8`, `r9`
   ### Gdzie można spodziewać się wyników i jak jądro sygnalizuje niepowodzenie wywołania systemowego?
     Wyniki zwracane są w `rax`, a błąd to wartość od -4095 do -1 zapisywana w `rax`.
+
+# Zadanie 5
+   ### Opisz znaczenie słowa kluczowego «volatile» w języku C.
+    Słowo kluczowe `volatile` informuje kompilator, że zmienna może być zmieniana przez coś innego niż kod.
+
+   ### Wymień co najmniej dwa scenariusze, w których użycie wskaźników do ulotnej zawartości pamięci jest niezbędne dla poprawności działania programu.
+      - Obsługiwanie MMIO
+      - Obsługa pamięci współdzielonej
