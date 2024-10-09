@@ -26,3 +26,15 @@ HOME=/home/rafalLANG=en_US.UTF-8LC_ADDRESS=pl_PL.UTF-8LC_IDENTIFICATION=pl_PL.UT
 ```
 
 ### Podaj znaczenie następujących pól pliku «status»: Uid, Gid, Groups, VmPeak, VmSize, VmRSS, Threads, voluntary_ctxt_switches, nonvoluntary_ctxt_switches
+- Uid/Gid identyfikator użytkownika/grupy:
+        1. właściciel 
+        2. efektywny - ten na którym wykonywane są operacje
+        3. zapisany - ten na którego wrócimy z efektywnego
+        4. dostęp do plików - ten na którym robimy dostęp do plików
+- Groups: wszyskie grupy do których należy proces, dziedziczone po rodzicu, odpowiadają za uprawnienia
+- VmPeak: maksimum pamięci wirtualnej
+- VmSize: bieżący rozmiar -.-
+- VmRSS: (virtual memory resident set size), czyli rozmiar pamięci wirtualniej znajdującej się w RAM
+- Threads: Liczba wątków w procesie, w którmy jest ten wątek
+- voluntary_ctxt_switches: dobrowolne zmiany kontekstu, głównie czekajnie np. na I/O.
+- nonvoluntary_ctxt_switches: liczba zmian kontekstu wywołanych przez np. wyjątki, zmiane na proces o wyższym pioryciecie.
