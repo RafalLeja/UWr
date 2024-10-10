@@ -1,7 +1,7 @@
 ### Używając programu «lsof» wyświetl zasoby plikopodobne podpięte do procesu przeglądarki «firefox». Wyjaśnij znaczenie poszczególnych kolumn wykazu, po czym zidentyfikuj pliki zwykłe, katalogi, urządzenia, gniazda (sieciowe lub domeny uniksowej) i potoki.
 
 - zasoby plikopodobne: zasoby mające deskryptor pliku, które nie są plikami, np. STDIN, STDOUT, STDERR (0,1,2)
-- pliki zwykłe: 
+- pliki zwykłe:
 - katalogi: aka folder, specjalny plik który zawiera referencje do innych plików i katalogów
 - plik urządzenia: plik służący do komunikacji ze sterownikami urządzenia (przez co z samym urządzeniem) za pomocą instrukcji systemowych wej/wyj
 - gniazda: sposób dwustronnej komunikacji między procesowej.
@@ -21,18 +21,19 @@ firefox 11500 rafal  DEL       REG                0,1              4138 /memfd:m
 - Command: polecenie które uruchomiło proces
 - PID: id procesu
 - User: właściciel
-- FD: numer deskruptora plików, lub: 
-      - cwd: bieżący katalog
-      - err: informacja błędu w NAME
-      - pd: katalog rodzica
-      - rtd: katalog root
-      - mem: plik zmapowany
+- FD: numer deskruptora plików, lub:
+  - cwd: bieżący katalog
+  - err: informacja błędu w NAME
+  - pd: katalog rodzica
+  - rtd: katalog root
+  - mem: plik zmapowany
 - TYPE: typ węzła powiązanego z plikiem np.:
-      - DIR: katalog
-      - REG: plik zwykły
-      - IPv4: gniazdo IPv4
-      - FIFO: plik potoku
-      - CHR: specjalny plik znakowy
+  - DIR: katalog
+  - REG: plik zwykły
+  - SOCK: gniazdo
+  - IPv4: gniazdo IPv4
+  - FIFO: plik potoku
+  - CHR: specjalny plik znakowy
 - DEVICE: numer użądzenia
 - SIZE/OFF: rozmiar/offset pliku
 - NODE: numer węzłą
@@ -48,7 +49,7 @@ firefox 11500 rafal  DEL       REG                0,1              4138 /memfd:m
 
 ### Przekieruj wyjście z programu «lsof», przed i po otwarciu wybranej strony, odpowiednio do plików «before» i «after». Czy poleceniem «diff -u before after» jesteś w stanie zidentyfikować nowo utworzone połączenia sieciowe?
 
-``` 
+```
 lsof -p .
 > before.txt
 > after.txt

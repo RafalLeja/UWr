@@ -1,0 +1,543 @@
+COMMAND   PID  USER   FD      TYPE             DEVICE  SIZE/OFF    NODE NAME
+firefox 11500 rafal  cwd       DIR              259,5      4096  131074 /home/rafal
+firefox 11500 rafal  rtd       DIR               0,52       540       1 /
+firefox 11500 rafal  txt       REG               7,12   1178408     265 /snap/firefox/5014/usr/lib/firefox/firefox
+firefox 11500 rafal  DEL       REG                0,1              4138 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               0,15                49 anon_inode:i915.gem (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              3191 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2100 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              7283 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3166 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              1068 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1                81 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4189 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4188 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5    757076 4604865 /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+firefox 11500 rafal  DEL       REG                0,1              5233 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              7290 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5    705684 4604864 /usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
+firefox 11500 rafal  DEL       REG                0,1              3147 /memfd:gdk-wayland
+firefox 11500 rafal  DEL       REG                0,1              5232 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              1071 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1                78 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6196 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4164 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5220 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5219 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2106 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5     83264 4604776 /usr/share/fonts/opentype/urw-base35/NimbusSans-Bold.otf
+firefox 11500 rafal  DEL       REG                0,1              5216 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2105 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5    162036 4604955 /usr/share/fonts/truetype/liberation/LiberationSans-Italic.ttf
+firefox 11500 rafal  mem       REG              259,5    569679 1049657 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/extensions/langpack-en-US@firefox.mozilla.org.xpi
+firefox 11500 rafal  DEL       REG                0,1              4194 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5210 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1                69 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1                67 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4193 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5    137052 4604953 /usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf
+firefox 11500 rafal  DEL       REG                0,1              5214 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5213 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5    139512 4604956 /usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf
+firefox 11500 rafal  DEL       REG                0,1              1054 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4155 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              7269 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5201 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5    333612 4605119 /usr/share/fonts/truetype/ubuntu/Ubuntu-B.ttf
+firefox 11500 rafal  mem       REG              259,5     82264 4604779 /usr/share/fonts/opentype/urw-base35/NimbusSans-Regular.otf
+firefox 11500 rafal  mem       REG              259,5    353824 4605126 /usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf
+firefox 11500 rafal  DEL       REG                0,1              5208 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              1053 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5212 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5211 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2104 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              7278 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2086 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             10305 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libLLVM-15.so.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16              9620 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/dri/iris_dri.so (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              7266 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4187 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5   1310728  131467 /home/rafal/snap/firefox/common/.cache/mesa_shader_cache/index
+firefox 11500 rafal  DEL       REG                0,1                70 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2131 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16              9671 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              4137 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             13016 /snap/firefox/5014/gnome-platform/usr/share/glib-2.0/schemas/gschemas.compiled (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              3137 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,10              7618 /usr/lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2 (path dev=259,5, inode=4484297)
+firefox 11500 rafal  DEL       REG                0,1              7276 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5     12384  131115 /home/rafal/.config/dconf/user
+firefox 11500 rafal  DEL       REG                0,1              4190 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1                92 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3190 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              1067 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5    100984 4604772 /usr/share/fonts/opentype/urw-base35/NimbusRoman-Bold.otf
+firefox 11500 rafal  DEL       REG                0,1              7287 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5223 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,12    378952     331 /snap/firefox/5014/usr/lib/x86_64-linux-gnu/libopus.so.0.8.0
+firefox 11500 rafal  DEL       REG                0,1                68 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3187 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             11211 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libvorbisenc.so.2.0.12 (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              7302 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3186 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3188 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4185 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4184 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4183 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3155 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3154 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3153 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3185 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3184 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              1087 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3183 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3182 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3181 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3180 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5243 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6223 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5242 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2130 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             11209 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libvorbis.so.0.4.9 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11089 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.31 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10936 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libogg.so.0.8.5 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10279 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libFLAC.so.8.3.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              7451 /usr/lib/x86_64-linux-gnu/libapparmor.so.1.8.2 (path dev=259,5, inode=4462563)
+firefox 11500 rafal  DEL       REG                0,1              7267 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              1086 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             10386 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libasyncns.so.0.3.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11798 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-15.99.so (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              7301 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             11054 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libpulse.so.0.24.1 (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1                56 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               0,68         2     204 /run/user/1000/dconf/user
+firefox 11500 rafal  mem       REG               7,16             10970 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libpciaccess.so.0.11.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              7693 /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3 (path dev=259,5, inode=4484637)
+firefox 11500 rafal  mem       REG               7,10              7503 /usr/lib/x86_64-linux-gnu/libedit.so.2.0.68 (path dev=259,5, inode=4483708)
+firefox 11500 rafal  mem       REG               7,10              7515 /usr/lib/x86_64-linux-gnu/libffi.so.8.1.0 (path dev=259,5, inode=4483758)
+firefox 11500 rafal  mem       REG               7,16             10514 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libdrm_intel.so.1.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10517 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libdrm_nouveau.so.2.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10511 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libdrm_amdgpu.so.1.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              7504 /usr/lib/x86_64-linux-gnu/libelf-0.186.so (path dev=259,5, inode=4483713)
+firefox 11500 rafal  DEL       REG                0,1              3146 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3145 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3144 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             10520 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libdrm_radeon.so.1.0.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11078 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libsensors.so.5.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11295 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxshmfence.so.1.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11277 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-sync.so.1.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10277 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10282 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libGL.so.1.7.0 (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              3143 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             11263 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-dri3.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11279 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-xfixes.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10615 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libglapi.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10300 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libGLdispatch.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              3142 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3141 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             11261 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-dri2.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10294 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              3140 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             11267 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-present.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10275 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libEGL.so.1.1.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG              259,5    340712 4604867 /usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf
+firefox 11500 rafal  mem       REG               7,16             10819 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libicudata.so.70.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10834 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libicuuc.so.70.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11291 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxml2.so.2.9.13 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16               846 /snap/firefox/5014/gnome-platform/usr/lib/librsvg-2.so.2.48.0 (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              3139 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             11235 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libwayland-server.so.0.22.0 (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              3129 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3138 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3136 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3135 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3134 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6222 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5    380132 4604869 /usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf
+firefox 11500 rafal  DEL       REG                0,1              7300 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4156 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG               7,16             11269 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-randr.so.0.1.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10508 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libdrm.so.2.4.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10566 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libgbm.so.1.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10054 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/gtk-3.0/3.0.0/immodules/im-wayland.so (stat: No such file or directory)
+firefox 11500 rafal  mem       REG              259,5     44064 1310886 /var/snap/firefox/common/fontconfig/c0fa6795-5aad-4556-bb16-87d18df931fd-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     46128  134702 /home/rafal/snap/firefox/common/.cache/fontconfig/39695a0b-145f-424a-ba62-fdbaf964cb2a-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     87624 1310881 /var/snap/firefox/common/fontconfig/fcfd3d12-5003-4e1e-a040-ea57febef4b7-le64.cache-7
+firefox 11500 rafal  mem       REG               7,12    545248     287 /snap/firefox/5014/usr/lib/firefox/libnssckbi.so
+firefox 11500 rafal  mem       REG              259,5     22960 1310883 /var/snap/firefox/common/fontconfig/dbf34063-b0ff-442e-8b2f-babebcf30bde-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      3520 1310882 /var/snap/firefox/common/fontconfig/7ddb6708-96c4-424d-a178-9299d5f8b904-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      3200 1310880 /var/snap/firefox/common/fontconfig/fa9fd03a-dfec-4b5d-95c9-ec961d861d45-le64.cache-7
+firefox 11500 rafal  mem       REG               7,12    975456     275 /snap/firefox/5014/usr/lib/firefox/libfreeblpriv3.so
+firefox 11500 rafal  mem       REG              259,5     30480 1310879 /var/snap/firefox/common/fontconfig/3645db27-0bd3-4fb3-95ef-d5e811d31bca-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1688 1310878 /var/snap/firefox/common/fontconfig/5a24e9bf-4f86-47df-9458-6629553fa807-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      4792 1310877 /var/snap/firefox/common/fontconfig/41bb87d2-4a0a-41ba-aa5c-720d593dd3c1-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1792 1310876 /var/snap/firefox/common/fontconfig/6e13ca96-dfbc-4bcd-9ba8-f3042dd3093d-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      4224 1310875 /var/snap/firefox/common/fontconfig/3576b69a-1c63-4159-853b-87958ce79bfa-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      6560 1310823 /var/snap/firefox/common/fontconfig/976eca18-0baa-4f73-bbc0-e1d78f120f21-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      8904 1310874 /var/snap/firefox/common/fontconfig/f51ce705-421a-4fbb-b910-a07fa59e92e2-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     16784 1310873 /var/snap/firefox/common/fontconfig/8e5e0abb-0da7-4470-8809-bf3edd9b8a05-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1864 1310872 /var/snap/firefox/common/fontconfig/ca246f47-77f7-4c66-8314-7f31c4a28c6b-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1904 1310871 /var/snap/firefox/common/fontconfig/06612285-db84-4674-9d9c-63a66092a152-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1968 1310870 /var/snap/firefox/common/fontconfig/b6a31d45-b5e9-4ad7-891e-bfb393e466e9-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1872 1310869 /var/snap/firefox/common/fontconfig/00d52615-620f-4ad3-a984-533be227dffe-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1784 1310868 /var/snap/firefox/common/fontconfig/48e31547-bdad-4ad4-aabc-e26b62239d53-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1800 1310867 /var/snap/firefox/common/fontconfig/37d60963-ec8a-47cd-aed2-1b2ddf5037d9-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1792 1310866 /var/snap/firefox/common/fontconfig/2e78cf67-0a8c-4d96-b145-9ef7416e5d5a-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1880 1310865 /var/snap/firefox/common/fontconfig/946a7252-f764-4fc2-89c7-449f2d4d20f8-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      2128 1310864 /var/snap/firefox/common/fontconfig/a0a0acdb-f0b7-458c-97a5-bd85382875ff-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1792 1310863 /var/snap/firefox/common/fontconfig/88efff98-2618-4a24-b8f9-5f5ebfbcc1f7-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1800 1310822 /var/snap/firefox/common/fontconfig/d4bd1ca3-3086-4fce-bb8f-a45fece3395e-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      2456 1310862 /var/snap/firefox/common/fontconfig/636e39dd-4582-4fa9-ae56-e06fa08675a2-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     20680 1310861 /var/snap/firefox/common/fontconfig/db3be020-33aa-4564-93fa-aaee5925c08e-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     24856 1310860 /var/snap/firefox/common/fontconfig/15b16c3e-11a6-4e71-8a78-5b39c35c694a-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      3008 1310859 /var/snap/firefox/common/fontconfig/99131556-68e3-4717-964f-c2753bca6ac0-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     22280 1310857 /var/snap/firefox/common/fontconfig/8b0ea116-2daf-4080-865c-6633df81efa0-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     77200 1310856 /var/snap/firefox/common/fontconfig/87b3ccd2-1b14-4132-8987-da7e6697b8a1-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     24064 1310855 /var/snap/firefox/common/fontconfig/d3124a7b-8bdc-4982-a9f2-494494ef2fbf-le64.cache-7
+firefox 11500 rafal  DEL       REG                0,1              7289 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4163 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              4166 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6221 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2129 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              1085 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              7299 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5      3288 1310858 /var/snap/firefox/common/fontconfig/793569ca-0608-45af-951d-42de7352957e-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      3224 1310854 /var/snap/firefox/common/fontconfig/ff11d28e-472a-497b-91c6-e1ed5d5334cd-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1968 1310853 /var/snap/firefox/common/fontconfig/a7c9ed59-d288-43ac-8bc4-61574e237b25-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1824 1310852 /var/snap/firefox/common/fontconfig/f41a410d-a85e-4e27-ba8a-7e323e094203-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1872 1310851 /var/snap/firefox/common/fontconfig/6d77df11-3c7c-4b12-9b38-5ae72a02b938-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      9208 1310850 /var/snap/firefox/common/fontconfig/6fcca471-462c-4f1a-9a75-7f1942129ba6-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     10056 1310848 /var/snap/firefox/common/fontconfig/bbe69c57-e7b2-4724-a1f7-1027aedba838-le64.cache-7
+firefox 11500 rafal  mem       REG               7,16             20254 /snap/firefox/5014/gnome-platform/usr/share/mime/mime.cache (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,12  43687293      47 /snap/firefox/5014/usr/lib/firefox/browser/omni.ja
+firefox 11500 rafal  mem       REG               7,12  34500546     296 /snap/firefox/5014/usr/lib/firefox/omni.ja
+firefox 11500 rafal  mem       REG              259,5      5360 1310849 /var/snap/firefox/common/fontconfig/178b106e-9a45-49bf-bc30-170d9e9b6f30-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      3368 1310847 /var/snap/firefox/common/fontconfig/ccd81822-fed9-40ca-a3a0-f4f4e6337b60-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     15560 1310846 /var/snap/firefox/common/fontconfig/7c3cfb37-32f0-4c0b-8dae-8725bbb6d53c-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      2400 1310844 /var/snap/firefox/common/fontconfig/fdcf79d3-836f-40c2-b9a3-491709571fee-le64.cache-7
+firefox 11500 rafal  mem       REG               7,12    335976     292 /snap/firefox/5014/usr/lib/firefox/libsoftokn3.so
+firefox 11500 rafal  mem       REG              259,5      1728 1310843 /var/snap/firefox/common/fontconfig/53a70c2d-102f-4f7f-8afc-1a8088d99149-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      2144 1310842 /var/snap/firefox/common/fontconfig/14b75086-4138-4fbb-951b-26c8392e9eb9-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5      1688 1310841 /var/snap/firefox/common/fontconfig/818ca402-99e7-471a-b19c-65a393d3ac0c-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     55112 1310836 /var/snap/firefox/common/fontconfig/d82e7bac-1b53-4371-9cc1-66f08c2a31a7-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     62800 1310835 /var/snap/firefox/common/fontconfig/99864424-7aea-4e8f-919a-d4b55442e89a-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     11504 1310834 /var/snap/firefox/common/fontconfig/705899d0-19cd-40d1-90b3-617d458c590d-le64.cache-7
+firefox 11500 rafal  mem       REG              259,5     10336 1310826 /var/snap/firefox/common/fontconfig/9a4e3151-0dfb-4835-93a9-f1e1f2ea0704-le64.cache-7
+firefox 11500 rafal  mem       REG               7,16              9654 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-svg.so (stat: No such file or directory)
+firefox 11500 rafal  DEL       REG                0,1              4165 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6220 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2128 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5224 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              2101 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              1066 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3194 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5246 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5245 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5244 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3189 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              7282 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5      2120 1310840 /var/snap/firefox/common/fontconfig/8574fcfd-6d43-41f8-aea2-a5cf58fa0f51-le64.cache-7
+firefox 11500 rafal  DEL       REG                0,1                64 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6219 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6218 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              7270 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3127 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3126 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3125 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3124 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3123 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3121 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3111 /memfd:wayland-cursor
+firefox 11500 rafal  DEL       REG                0,1              3122 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3120 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3119 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3118 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3117 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1                86 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6217 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6216 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              6215 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              5202 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3116 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3113 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3115 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5      1696 1310839 /var/snap/firefox/common/fontconfig/e567fb70-1592-4498-b775-97506f2a2ff0-le64.cache-7
+firefox 11500 rafal  DEL       REG                0,1                85 /memfd:mozilla-ipc
+firefox 11500 rafal  mem       REG              259,5      1872 1310838 /var/snap/firefox/common/fontconfig/1c05180f-a6e4-46c4-890d-4f19c255cdda-le64.cache-7
+firefox 11500 rafal  DEL       REG                0,1              6214 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1                91 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              1084 /memfd:mozilla-ipc
+firefox 11500 rafal  DEL       REG                0,1              3078 /memfd:mutter-shared
+firefox 11500 rafal  mem       REG               7,16             10303 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libICE.so.6.3.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,17             75954 /snap/firefox/5014/data-dir/themes/Yaru-dark/gtk-3.0/gtk.gresource (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10311 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libSM.so.6.0.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10037 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libatk-bridge.so (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              2070 /usr/lib/locale/C.utf8/LC_CTYPE (path dev=259,5, inode=4457024)
+firefox 11500 rafal  mem       REG               7,16             10382 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libasound.so.2.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              7667 /usr/lib/x86_64-linux-gnu/libresolv.so.2 (path dev=259,5, inode=4461492)
+firefox 11500 rafal  mem       REG               7,16             16412 /snap/firefox/5014/gnome-platform/usr/share/locale/en/LC_MESSAGES/gtk30-properties.mo (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             16413 /snap/firefox/5014/gnome-platform/usr/share/locale/en/LC_MESSAGES/gtk30.mo (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              2077 /usr/lib/locale/C.utf8/LC_NUMERIC (path dev=259,5, inode=4457093)
+firefox 11500 rafal  mem       REG               7,10              7425 /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache (path dev=259,5, inode=4461787)
+firefox 11500 rafal  mem       REG               7,12 142786384     294 /snap/firefox/5014/usr/lib/firefox/libxul.so
+firefox 11500 rafal  mem       REG               7,16               303 /snap/firefox/5014/gnome-platform/lib/x86_64-linux-gnu/libgpg-error.so.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              7577 /usr/lib/x86_64-linux-gnu/libmd.so.0.0.5 (path dev=259,5, inode=4484182)
+firefox 11500 rafal  mem       REG               7,16             10578 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libgcrypt.so.20.3.4 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              7479 /usr/lib/x86_64-linux-gnu/libcap.so.2.44 (path dev=259,5, inode=4483545)
+firefox 11500 rafal  mem       REG               7,10              7570 /usr/lib/x86_64-linux-gnu/liblz4.so.1.9.3 (path dev=259,5, inode=4484166)
+firefox 11500 rafal  mem       REG               7,16             11302 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libzstd.so.1.4.8 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              7572 /usr/lib/x86_64-linux-gnu/liblzma.so.5.2.5 (path dev=259,5, inode=4484168)
+firefox 11500 rafal  mem       REG               7,10              7470 /usr/lib/x86_64-linux-gnu/libbsd.so.0.11.5 (path dev=259,5, inode=4483518)
+firefox 11500 rafal  mem       REG               7,16             10422 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libbrotlicommon.so.1.0.9 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11117 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libsystemd.so.0.32.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10335 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10323 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXau.so.6.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10425 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libbrotlidec.so.1.0.9 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10485 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libdatrie.so.1.4.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10419 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libblkid.so.1.1.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10397 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libatspi.so.0.0.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16               300 /snap/firefox/5014/gnome-platform/lib/x86_64-linux-gnu/libdbus-1.so.3.19.13 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10869 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11176 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libuuid.so.1.3.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16               302 /snap/firefox/5014/gnome-platform/lib/x86_64-linux-gnu/libexpat.so.1.8.7 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11011 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libpixman-1.so.0.42.2 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11275 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-shm.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11272 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-render.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11282 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10358 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11017 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libpng16.so.16.37.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10673 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libgraphite2.so.3.2.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10557 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libfreetype.so.6.18.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11127 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libthai.so.0.3.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16               308 /snap/firefox/5014/gnome-platform/lib/x86_64-linux-gnu/libselinux.so.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10899 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libmount.so.1.1.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              7712 /usr/lib/x86_64-linux-gnu/libz.so.1.2.11 (path dev=259,5, inode=4484863)
+firefox 11500 rafal  mem       REG               7,10              2080 /usr/lib/locale/C.utf8/LC_TIME (path dev=259,5, inode=4457133)
+firefox 11500 rafal  mem       REG               7,10              2069 /usr/lib/locale/C.utf8/LC_COLLATE (path dev=259,5, inode=4457022)
+firefox 11500 rafal  mem       REG               7,10              2075 /usr/lib/locale/C.utf8/LC_MONETARY (path dev=259,5, inode=4457059)
+firefox 11500 rafal  mem       REG               7,16             10317 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libX11-xcb.so.1.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,12     11488     284 /snap/firefox/5014/usr/lib/firefox/libmozwayland.so
+firefox 11500 rafal  mem       REG               7,16             10547 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libffi.so.7.1.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10983 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.10.4 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10350 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXinerama.so.1.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10355 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXrandr.so.2.2.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10326 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXcomposite.so.1.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10332 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXdamage.so.1.1.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10329 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10338 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXext.so.6.4.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11232 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libwayland-egl.so.1.22.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11226 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             11288 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libxkbcommon.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10392 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10320 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libX11.so.6.4.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10530 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libepoxy.so.0.0.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10389 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libatk-1.0.so.0.23809.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10592 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0.4200.10 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10560 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libfribidi.so.0.4.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10550 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10443 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libcairo.so.2.11800.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10805 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libharfbuzz.so.0.60830.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10952 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libpango-1.0.so.0.5100.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10603 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.7800.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10662 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.7800.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10618 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.7800.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10587 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libgdk-3.so.0.2406.32 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10754 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2406.32 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,12    410944     293 /snap/firefox/5014/usr/lib/firefox/libssl3.so
+firefox 11500 rafal  mem       REG               7,12   8676048     276 /snap/firefox/5014/usr/lib/firefox/libgkcodecs.so
+firefox 11500 rafal  mem       REG               7,10              2074 /usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES (path dev=259,5, inode=4457058)
+firefox 11500 rafal  mem       REG               7,16             11229 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0.22.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,12   1299136     283 /snap/firefox/5014/usr/lib/firefox/libmozsqlite3.so
+firefox 11500 rafal  mem       REG               7,12    720768     286 /snap/firefox/5014/usr/lib/firefox/libnss3.so
+firefox 11500 rafal  mem       REG               7,10              2078 /usr/lib/locale/C.utf8/LC_PAPER (path dev=259,5, inode=4457129)
+firefox 11500 rafal  mem       REG               7,16             10347 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXi.so.6.1.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10437 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2.11800.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10958 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0.5100.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10955 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0.5100.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,12    168808     291 /snap/firefox/5014/usr/lib/firefox/libsmime3.so
+firefox 11500 rafal  mem       REG               7,12    184760     288 /snap/firefox/5014/usr/lib/firefox/libnssutil3.so
+firefox 11500 rafal  mem       REG               7,12    175576     278 /snap/firefox/5014/usr/lib/firefox/liblgpllibs.so
+firefox 11500 rafal  mem       REG               7,12    148560     282 /snap/firefox/5014/usr/lib/firefox/libmozsandbox.so
+firefox 11500 rafal  mem       REG               7,10              2076 /usr/lib/locale/C.utf8/LC_NAME (path dev=259,5, inode=4457092)
+firefox 11500 rafal  mem       REG               7,10              2068 /usr/lib/locale/C.utf8/LC_ADDRESS (path dev=259,5, inode=4456997)
+firefox 11500 rafal  mem       REG               7,10              2079 /usr/lib/locale/C.utf8/LC_TELEPHONE (path dev=259,5, inode=4457130)
+firefox 11500 rafal  mem       REG               7,16             10341 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16             10624 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.7800.1 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,12      4112     281 /snap/firefox/5014/usr/lib/firefox/libmozgtk.so
+firefox 11500 rafal  mem       REG               7,12    209440     285 /snap/firefox/5014/usr/lib/firefox/libnspr4.so
+firefox 11500 rafal  mem       REG               7,10              7474 /usr/lib/x86_64-linux-gnu/libc.so.6 (path dev=259,5, inode=4461479)
+firefox 11500 rafal  mem       REG               7,10              7524 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 (path dev=259,5, inode=4483821)
+firefox 11500 rafal  mem       REG               7,10              7575 /usr/lib/x86_64-linux-gnu/libm.so.6 (path dev=259,5, inode=4461482)
+firefox 11500 rafal  mem       REG               7,10              2072 /usr/lib/locale/C.utf8/LC_MEASUREMENT (path dev=259,5, inode=4457026)
+firefox 11500 rafal  mem       REG               7,12     12064     290 /snap/firefox/5014/usr/lib/firefox/libplds4.so
+firefox 11500 rafal  mem       REG               7,12     16152     289 /snap/firefox/5014/usr/lib/firefox/libplc4.so
+firefox 11500 rafal  mem       REG               7,16             11108 /snap/firefox/5014/gnome-platform/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30 (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,16               296 /snap/firefox/5014/gnome-platform/lib/x86_64-linux-gnu/bindtextdomain.so (stat: No such file or directory)
+firefox 11500 rafal  mem       REG               7,10              7445 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 (path dev=259,5, inode=4461476)
+firefox 11500 rafal  mem       REG               7,10              2071 /usr/lib/locale/C.utf8/LC_IDENTIFICATION (path dev=259,5, inode=4457025)
+firefox 11500 rafal    0r      CHR                1,3       0t0       5 /dev/null
+firefox 11500 rafal    1u     unix 0x0000000000000000       0t0  167756 type=STREAM
+firefox 11500 rafal    2u     unix 0x0000000000000000       0t0  167756 type=STREAM
+firefox 11500 rafal    3r      CHR                1,3       0t0       5 /dev/null
+firefox 11500 rafal    4r      CHR                1,3       0t0       5 /dev/null
+firefox 11500 rafal    5r      CHR                1,3       0t0       5 /dev/null
+firefox 11500 rafal    6r     FIFO               0,14       0t0  167792 pipe
+firefox 11500 rafal    7w     FIFO               0,14       0t0  167792 pipe
+firefox 11500 rafal    8u      REG                0,1         0    3107 /memfd:mozreserved (deleted)
+firefox 11500 rafal    9u      REG                0,1         0    3108 /memfd:mozreserved (deleted)
+firefox 11500 rafal   10u      REG                0,1         0    3109 /memfd:mozreserved (deleted)
+firefox 11500 rafal   11u      REG                0,1         0    3110 /memfd:mozreserved (deleted)
+firefox 11500 rafal   12u     unix 0x0000000000000000       0t0  167793 type=DGRAM
+firefox 11500 rafal   13u     unix 0x0000000000000000       0t0  167795 /run/user/1000/snap.firefox/wayland-proxy-11500 type=STREAM
+firefox 11500 rafal   14u     unix 0x0000000000000000       0t0  167796 type=STREAM
+firefox 11500 rafal   15u     unix 0x0000000000000000       0t0  173159 /run/user/1000/snap.firefox/wayland-proxy-11500 type=STREAM
+firefox 11500 rafal   16u     unix 0x0000000000000000       0t0  173160 type=STREAM
+firefox 11500 rafal   17u  a_inode               0,15         0      49 [eventfd]
+firefox 11500 rafal   18u  a_inode               0,15         0      49 [eventfd]
+firefox 11500 rafal   19u     unix 0x0000000000000000       0t0  167797 type=STREAM
+firefox 11500 rafal   20u  a_inode               0,15         0      49 [eventfd]
+firefox 11500 rafal   21u      REG                0,1   2356992    3111 /memfd:wayland-cursor (deleted)
+firefox 11500 rafal   22r      REG                0,1    663728    7283 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   23wW     REG              259,5         0  131454 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/.parentlock
+firefox 11500 rafal   24u      CHR            226,128       0t0     939 /dev/dri/renderD128
+firefox 11500 rafal   25u  a_inode               0,15         0      49 [eventpoll]
+firefox 11500 rafal   26r     FIFO               0,14       0t0  171504 pipe
+firefox 11500 rafal   27w     FIFO               0,14       0t0  171504 pipe
+firefox 11500 rafal   28r     FIFO               0,14       0t0  171505 pipe
+firefox 11500 rafal   29w     FIFO               0,14       0t0  171505 pipe
+firefox 11500 rafal   30r      REG               7,12  34500546     296 /snap/firefox/5014/usr/lib/firefox/omni.ja
+firefox 11500 rafal   31r      REG               7,12  43687293      47 /snap/firefox/5014/usr/lib/firefox/browser/omni.ja
+firefox 11500 rafal   32r     FIFO               0,14       0t0  171507 pipe
+firefox 11500 rafal   33w     FIFO               0,14       0t0  171507 pipe
+firefox 11500 rafal   34r     FIFO               0,14       0t0  167806 pipe
+firefox 11500 rafal   35w     FIFO               0,14       0t0  167806 pipe
+firefox 11500 rafal   36r     FIFO               0,14       0t0  168499 pipe
+firefox 11500 rafal   37w     FIFO               0,14       0t0  168499 pipe
+firefox 11500 rafal   38u  netlink                          0t0  171508 ROUTE
+firefox 11500 rafal   39u     unix 0x0000000000000000       0t0  169531 type=STREAM
+firefox 11500 rafal   40r     FIFO               0,14       0t0  167808 pipe
+firefox 11500 rafal   41w     FIFO               0,14       0t0  167808 pipe
+firefox 11500 rafal   42u     unix 0x0000000000000000       0t0  166690 type=SEQPACKET
+firefox 11500 rafal   43r      REG                0,1    234840    3113 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   44r      REG              259,5    569679 1049657 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/extensions/langpack-en-US@firefox.mozilla.org.xpi
+firefox 11500 rafal   45u     IPv4             196133       0t0     UDP *:47078 
+firefox 11500 rafal   46uw     REG              259,5   5242880  131617 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/places.sqlite
+firefox 11500 rafal   47u     IPv4             196134       0t0     UDP *:39091 
+firefox 11500 rafal   48r      REG                0,1       182    3115 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   49uw     REG              259,5    524288  131465 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/cookies.sqlite
+firefox 11500 rafal   50u      REG              259,5    557496  131610 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/cookies.sqlite-wal
+firefox 11500 rafal   51u      REG              259,5    229376  131470 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/cert9.db
+firefox 11500 rafal   52u      REG              259,5    294912  131471 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/key4.db
+firefox 11500 rafal   53uw     REG              259,5      4096  131473 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/storage.sqlite
+firefox 11500 rafal   54r      REG                0,1     21314    3126 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   55r      REG                0,1      6998    3116 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   56r      REG                0,1       274    3117 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   57r      REG                0,1      6272    3118 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   58r      REG                0,1      2172    3119 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   59r      REG                0,1      2356    3120 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   60r      REG                0,1     65848    3121 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   61r      REG                0,1     24972    3122 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   62r      REG                0,1       170    3123 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   63r      REG                0,1      2840    3124 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   64r      REG                0,1      1488    3125 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   65r      REG                0,1     11514    3127 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   66u     unix 0x0000000000000000       0t0  173175 type=SEQPACKET
+firefox 11500 rafal   67u     IPv4             197335       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:35166->123.208.120.34.bc.googleusercontent.com:https (ESTABLISHED)
+firefox 11500 rafal   68r      REG                0,1    255554    3129 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   69u     IPv4             198047       0t0     UDP *:59116 
+firefox 11500 rafal   70uw     REG              259,5      6144 1049691 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/storage/default/https+++zapisy.ii.uni.wroc.pl/ls/data.sqlite
+firefox 11500 rafal   71u     unix 0x0000000000000000       0t0  167825 type=SEQPACKET
+firefox 11500 rafal   72u     unix 0x0000000000000000       0t0  167826 type=SEQPACKET
+firefox 11500 rafal   73r     FIFO               0,14       0t0  167827 pipe
+firefox 11500 rafal   74w     FIFO               0,14       0t0  167827 pipe
+firefox 11500 rafal   75u     unix 0x0000000000000000       0t0  167828 type=SEQPACKET
+firefox 11500 rafal   76u     unix 0x0000000000000000       0t0  167829 type=SEQPACKET
+firefox 11500 rafal   77u     unix 0x0000000000000000       0t0  172466 type=STREAM
+firefox 11500 rafal   78u     IPv4             199036       0t0     UDP *:34114 
+firefox 11500 rafal   79u      CHR            226,128       0t0     939 /dev/dri/renderD128
+firefox 11500 rafal   80r      REG                0,1   1048576    4137 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   81u      CHR            226,128       0t0     939 /dev/dri/renderD128
+firefox 11500 rafal   82u      CHR            226,128       0t0     939 /dev/dri/renderD128
+firefox 11500 rafal   83u      CHR            226,128       0t0     939 /dev/dri/renderD128
+firefox 11500 rafal   84uw     REG              259,5     26624  131967 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/storage/default/https+++www.google.com/ls/data.sqlite
+firefox 11500 rafal   85uw     REG              259,5     98304  131501 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/permissions.sqlite
+firefox 11500 rafal   86u  a_inode               0,15         0      49 [eventpoll]
+firefox 11500 rafal   87u     unix 0x0000000000000000       0t0  172472 type=STREAM
+firefox 11500 rafal   88r      REG                0,1    460800    4138 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal   89u  a_inode               0,15         0      49 [eventfd]
+firefox 11500 rafal   90u     unix 0x0000000000000000       0t0  170488 type=STREAM
+firefox 11500 rafal   91u     unix 0x0000000000000000       0t0  169638 type=SEQPACKET
+firefox 11500 rafal   92u  a_inode               0,15         0      49 [eventpoll]
+firefox 11500 rafal   93u  a_inode               0,15         0      49 [eventfd]
+firefox 11500 rafal   94u  a_inode               0,15         0      49 [eventpoll]
+firefox 11500 rafal   95u  a_inode               0,15         0      49 [eventfd]
+firefox 11500 rafal   96u     unix 0x0000000000000000       0t0  169640 type=STREAM
+firefox 11500 rafal   97u      REG              259,5   2197096  131762 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/places.sqlite-wal
+firefox 11500 rafal   98uw     REG              259,5     98304  131401 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/bounce-tracking-protection.sqlite
+firefox 11500 rafal   99u     IPv4             197348       0t0     UDP *:55113 
+firefox 11500 rafal  100u     unix 0x0000000000000000       0t0  169642 type=STREAM
+firefox 11500 rafal  101u  a_inode               0,15         0      49 [eventfd]
+firefox 11500 rafal  102u     IPv4             197351       0t0     UDP *:50265 
+firefox 11500 rafal  103uw     REG              259,5   5242880  131619 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/favicons.sqlite
+firefox 11500 rafal  104u      REG              259,5    590288  134789 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/favicons.sqlite-wal
+firefox 11500 rafal  105rw     REG              259,5   5242880  131617 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/places.sqlite
+firefox 11500 rafal  106u      REG              259,5   2197096  131762 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/places.sqlite-wal
+firefox 11500 rafal  107rw     REG              259,5   5242880  131619 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/favicons.sqlite
+firefox 11500 rafal  108u      REG              259,5    590288  134789 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/favicons.sqlite-wal
+firefox 11500 rafal  109uw     REG              259,5    262144  131620 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/formhistory.sqlite
+firefox 11500 rafal  110rw     REG              259,5   5242880  131617 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/places.sqlite
+firefox 11500 rafal  111u     IPv4             199932       0t0     UDP *:46434 
+firefox 11500 rafal  112u     unix 0x0000000000000000       0t0  199046 type=STREAM
+firefox 11500 rafal  113r      REG              259,5        64  151083 /home/rafal/.local/share/gvfs-metadata/root (deleted)
+firefox 11500 rafal  114r      REG              259,5     32768  151290 /home/rafal/.local/share/gvfs-metadata/root-52346d1c.log (deleted)
+firefox 11500 rafal  115u     IPv4             199040       0t0     UDP *:60122 
+firefox 11500 rafal  116u     IPv4             198052       0t0     UDP *:54019 
+firefox 11500 rafal  117u     unix 0x0000000000000000       0t0  172529 type=SEQPACKET
+firefox 11500 rafal  118u     IPv4             197361       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:51380->205.ip-54-38-54.eu:https (ESTABLISHED)
+firefox 11500 rafal  119u     unix 0x0000000000000000       0t0  197355 type=STREAM
+firefox 11500 rafal  120u      REG              259,5   2197096  131762 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/places.sqlite-wal
+firefox 11500 rafal  121rw     REG              259,5   5242880  131617 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/places.sqlite
+firefox 11500 rafal  122u      REG              259,5   2197096  131762 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/places.sqlite-wal
+firefox 11500 rafal  123rw     REG              259,5   5242880  131619 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/favicons.sqlite
+firefox 11500 rafal  124u      REG              259,5    590288  134789 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/favicons.sqlite-wal
+firefox 11500 rafal  125uw     REG              259,5    262144  131503 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/content-prefs.sqlite
+firefox 11500 rafal  126u     unix 0x0000000000000000       0t0  194377 type=SEQPACKET
+firefox 11500 rafal  127u     unix 0x0000000000000000       0t0  177557 type=SEQPACKET
+firefox 11500 rafal  128u     IPv4             197360       0t0     UDP *:54767 
+firefox 11500 rafal  129u     unix 0x0000000000000000       0t0  198405 type=STREAM
+firefox 11500 rafal  130u     IPv4             169660       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:55194->93.243.107.34.bc.googleusercontent.com:https (ESTABLISHED)
+firefox 11500 rafal  131uw     REG              259,5  12427264  131480 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/storage/permanent/chrome/idb/3870112724rsegmnoittet-es.sqlite
+firefox 11500 rafal  132uw     REG              259,5    462848 1049662 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/storage/default/https+++pl.wikipedia.org/ls/data.sqlite
+firefox 11500 rafal  133u     unix 0x0000000000000000       0t0  174464 type=STREAM
+firefox 11500 rafal  134rw     REG              259,5   5242880  131619 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/favicons.sqlite
+firefox 11500 rafal  135u      REG              259,5    590288  134789 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/favicons.sqlite-wal
+firefox 11500 rafal  136u     IPv4             197362       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:51382->205.ip-54-38-54.eu:https (ESTABLISHED)
+firefox 11500 rafal  137u     IPv4             197363       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:51384->205.ip-54-38-54.eu:https (ESTABLISHED)
+firefox 11500 rafal  138u     IPv4             197364       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:51388->205.ip-54-38-54.eu:https (ESTABLISHED)
+firefox 11500 rafal  139u     unix 0x0000000000000000       0t0  172560 type=STREAM
+firefox 11500 rafal  141u      REG              259,5         0  131774 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/storage/permanent/chrome/idb/3870112724rsegmnoittet-es.sqlite-wal
+firefox 11500 rafal  142u     IPv4             199052       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:46450->sof01s12-in-f3.1e100.net:http (ESTABLISHED)
+firefox 11500 rafal  143u     IPv4             199053       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:46462->sof01s12-in-f3.1e100.net:http (ESTABLISHED)
+firefox 11500 rafal  144u      REG                0,1      4096      64 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal  145u     unix 0x0000000000000000       0t0  169665 type=STREAM
+firefox 11500 rafal  146u     IPv4             197368       0t0     UDP *:47073 
+firefox 11500 rafal  147u     unix 0x0000000000000000       0t0  172537 type=SEQPACKET
+firefox 11500 rafal  149u     unix 0x0000000000000000       0t0  172553 type=SEQPACKET
+firefox 11500 rafal  152u     IPv4             201979       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:39184->162.247.243.39:https (ESTABLISHED)
+firefox 11500 rafal  153u     IPv4             198219       0t0     UDP *:56186 
+firefox 11500 rafal  154u     IPv4             199960       0t0     TCP rafal-ThinkPad-X13-Yoga-Gen-1:56870->162.247.243.29:https (ESTABLISHED)
+firefox 11500 rafal  155u     unix 0x0000000000000000       0t0  177565 type=STREAM
+firefox 11500 rafal  158u     IPv4             199962       0t0     UDP *:38356 
+firefox 11500 rafal  159u     unix 0x0000000000000000       0t0  172557 type=STREAM
+firefox 11500 rafal  160u     unix 0x0000000000000000       0t0  199058 type=STREAM
+firefox 11500 rafal  161u     unix 0x0000000000000000       0t0  168660 type=STREAM
+firefox 11500 rafal  162u     unix 0x0000000000000000       0t0  172545 type=SEQPACKET
+firefox 11500 rafal  163uw     REG              259,5     65536  131625 /home/rafal/snap/firefox/common/.mozilla/firefox/qe6o9gu4.default/protections.sqlite
+firefox 11500 rafal  164u     unix 0x0000000000000000       0t0  198226 type=SEQPACKET
+firefox 11500 rafal  166u     unix 0x0000000000000000       0t0  174462 type=SEQPACKET
+firefox 11500 rafal  167u     unix 0x0000000000000000       0t0  168663 type=STREAM
+firefox 11500 rafal  184u     unix 0x0000000000000000       0t0  175232 type=STREAM
+firefox 11500 rafal  185r      REG                0,1    663728    7283 /memfd:mozilla-ipc (deleted)
+firefox 11500 rafal  186u     unix 0x0000000000000000       0t0  176234 type=SEQPACKET
+firefox 11500 rafal  187u     unix 0x0000000000000000       0t0  176236 type=STREAM
+firefox 11500 rafal  197u     unix 0x0000000000000000       0t0  177331 type=STREAM
