@@ -5,8 +5,8 @@ import random
 import itertools
 
 model_name = 'flax-community/papuGaPT2'
-device = 'cuda'
-# device = 'cpu'
+# device = 'cuda'
+device = 'cpu'
 
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
@@ -28,7 +28,8 @@ def sentence_prob(sentence_txt):
 # sentences = [
 #   'To jest zwykłe polskie zdanie.',
 #   'This is a normal English sentence.',
-#   'iweryuiiu hrfw3eieur fr'    
+#   'iweryuiiu hrfw3eieur fr' ,
+#   'Wczoraj wieczorem spotkałem pewną wspaniałą kobietę, która z pasją opowiadała o modelach językowych.'   
 # ]
 
 zdanie = input("Podaj zdanie: ")
@@ -49,6 +50,22 @@ for s1 in slowa:
 
 pairs = [x for _, x in sorted(zip(probabilities, pairs), reverse=True)]
 probabilities.sort(reverse=True)
+
+new_pairs = []
+i = 0
+while i < len(pairs):
+    s1, s2 = pairs[i]
+    new_pairs.append((s1, s2))
+    # pairs = list(filter(lambda x:  not (x[0] != s1 and x[1] != s2), pairs))
+    pairs = list(filter(lambda x:  x[0] != s1, pairs))
+    pairs = list(filter(lambda x:  x[1] != s1, pairs))
+    pairs = list(filter(lambda x:  x[0] != s2, pairs))
+    pairs = list(filter(lambda x:  x[1] != s2, pairs))
+
+    # pairs = list(filter(lambda x:  not (x[0] != s1 and x[1] != s2), pairs))
+    i += 1
+
+pairs = new_pairs
 
 for pair, prob in zip(pairs, probabilities):
     print(pair, prob)

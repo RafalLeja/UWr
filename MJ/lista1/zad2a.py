@@ -5,8 +5,8 @@ import random
 import itertools
 
 model_name = 'flax-community/papuGaPT2'
-device = 'cuda'
-# device = 'cpu'
+# device = 'cuda'
+device = 'cpu'
 
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name).to(device)

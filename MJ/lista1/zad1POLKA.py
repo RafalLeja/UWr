@@ -1,6 +1,7 @@
 from transformers import pipeline
 
-pipe = pipeline("text-generation", model="eryk-mazus/polka-1.1b", device="cuda")
+# pipe = pipeline("text-generation", model="eryk-mazus/polka-1.1b", device="cuda")
+pipe = pipeline("text-generation", model="eryk-mazus/polka-1.1b")
 
 RUNNING = True
 
