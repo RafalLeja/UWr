@@ -7,8 +7,8 @@ import time
 
 
 model_name = 'eryk-mazus/polka-1.1b'
-# device = 'cuda'
-device = 'cpu'
+device = 'cuda'
+# device = 'cpu'
 
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
@@ -95,38 +95,45 @@ def few_shots(typeQ):
     return out
 
 
-N_FEW = 2
+N_FEW = 3
 
 for q in questions.itertuples():
     # print(q)
     few = ""
     if "Czy" in q.question:
         few = few_shots(binaryQ[:N_FEW])
+        binaryQ = binaryQ.sample(frac=1)
     elif "Jak" in q.question:
         few = few_shots(howQ[:N_FEW])
+        howQ = howQ.sample(frac=1)
     elif "Ile" in q.question or "Ilu" in q.question:
         few = few_shots(numQ[:N_FEW])
+        numQ = numQ.sample(frac=1)
     elif "Kto" in q.question or "Któr" in q.question or "któr" in q.question:
         few = few_shots(whoQ[:N_FEW])
+        whoQ = whoQ.sample(frac=1)
     elif "Co" in q.question or "Czym" in q.question or "Czego" in q.question:
         few = few_shots(whatQ[:N_FEW])
+        whatQ = whatQ.sample(frac=1)
     else:
         few = few_shots(restQ[:N_FEW])
+        restQ = restQ.sample(frac=1)
 
     querry = few + "[INST] " + q.question + " [/INST]\n"
-    print(querry)
-    input = tokenizer(querry, return_tensors='pt')
+    print(q.Index)
+    input = tokenizer(querry, return_tensors='pt').to(device)
     attention_mask = input["attention_mask"]
     output = model.generate(
         input["input_ids"],
         max_new_tokens=50,
         num_return_sequences=1,
-        pad_token_id=tokenizer.eos_token_id)
+        pad_token_id=tokenizer.eos_token_id).to(device)
     answer = tokenizer.decode(
-        output[0], skip_special_tokens=True).split("\n")[-1]
+        output[0], skip_special_tokens=True).split("\n")[1+(N_FEW*2)]
     print(answer)
+    # print(answer.split("\n")[1+(N_FEW*2)])
     outFile.write(answer + "\n")
 
-    # print(sentence_prob(q))
-    # outFile.write(q + "\n")
-    # outFile.write(str(sentence_prob(q)) + "\n")
+# print(sentence_prob(q))
+# outFile.write(q + "\n")
+# outFile.write(str(sentence_prob(q)) + "\n")
