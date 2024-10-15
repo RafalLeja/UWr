@@ -12,12 +12,16 @@
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+*.gzip
+
+
 __pycache__/
 __pycache__/*
 
 *.class
 
 # big test file
+BIG*
 *BIG*
 
 # Visual Paradigrim Helper Files
