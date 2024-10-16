@@ -5,15 +5,16 @@ pipe = pipeline("text-generation", model="eryk-mazus/polka-1.1b")
 
 RUNNING = True
 
-history = ""
+TEMPLATE = "[INST] Jesteś ekspetrem od literatury. Odpowiadasz na pytania dotyczące książek i ich autorów. [/INST]\n"
+
+history = TEMPLATE
 
 while RUNNING:
-    if history == "":
-        input_text = input("Zadaj pytanie: " + history)
-        history += ""
+    if history == TEMPLATE:
+        input_text = input("Zadaj pytanie: ")
     else:
         input_text = input("> ")
-    
+
     if input_text == "/exit":
         RUNNING = False
         break
@@ -27,12 +28,13 @@ while RUNNING:
     print("HISTORIA: " + history, )
     print("DEBUG=off============")
 
-    answer = pipe(history, max_new_tokens=100, truncation=False, return_full_text=False)[0]['generated_text']
+    answer = pipe(history, max_new_tokens=100, truncation=True,
+                  return_full_text=False)[0]['generated_text']
 
     # print("DEBUG=on============")
     # print("ODP: " + answer)
     # print("DEBUG=off============")
- 
+
     print("POLKA: " + answer)
     history += answer + "\n"
 
