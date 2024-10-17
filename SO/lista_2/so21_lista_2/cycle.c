@@ -31,25 +31,23 @@ int main(int argc, char *argv[]) {
   Sigaction(SIGINT, &action, NULL);
   Sigaction(SIGUSR1, &action, NULL);
 
-  pid_t pids[21];
-  for (int i = children -1 ; i >= 0; i--)
+  sigemptyset(&action.sa_mask);
+  sigaddset(&action.sa_mask, SIGUSR1);
+  Sigprocmask(SIG_BLOCK, &action.sa_mask, NULL);
+
+  pid_t nPid = getpid();
+  for (int i = 0 ; i < children; i++)
   {
     pid_t pid = Fork();
     if(pid == 0){
-      sigset_t set;
-      Sigprocmask(0, NULL, &set);
-      play(pids[i+1], &set);
+      play(nPid, &action.sa_mask);
+    } else {
+      nPid = pid;
     }
-    pids[i] = pid;
   }
-  pids[children] = getpid();
-  printf("podaje do %d\n", pids[0]);
-  Kill(pids[0], SIGUSR1);
-  sigset_t rootSet;
-  Sigprocmask(0, NULL, &rootSet);
-  play(pids[0], &rootSet);
+  printf("(%d) Tata podaje do %d\n",getpid(), nPid);
+  Kill(nPid, SIGUSR1);
+  play(nPid, &action.sa_mask);
   
-  /* TODO: Start all processes and make them wait for the ball! */
-
   return EXIT_SUCCESS;
 }
