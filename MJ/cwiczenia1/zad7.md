@@ -1,0 +1,1 @@
+### Okazuje si¦, »e model polka umie tªumaczy¢ proste angielskie zdania na polski. Poka», za pomoc¡ jakiego sposobu promptowania da si¦ uzyska¢ t¦ wªa±ciwo±¢. Poka» dwa przykªadowe zdania, jedno przetªumaczone poprawnie, a drugie bª¦dnie. Zaªó»my, »e mamy dost¦p do sªownika angielsko-polskiego. Zaproponuj sposób wykorzystania tego dost¦pu do poprawienia jako±ci tªumacze«.
