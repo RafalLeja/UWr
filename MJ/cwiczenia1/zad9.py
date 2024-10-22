@@ -40,9 +40,9 @@ sentences = [
 zdanie = sentences[3]
 # zdanie = input("Podaj zdanie: ")
 slowa = zdanie.split()
-pierwsze = slowa[0]
-ostatnie = slowa[-1]
-slowa = slowa[1:-1]
+# pierwsze = slowa[0]
+# ostatnie = slowa[-1]
+# slowa = slowa[1:-1]
 random.shuffle(slowa)
 
 #####################
@@ -71,10 +71,10 @@ def merge(lst1, lst2):
             j += 1
 
     if i < len(lst1):
-        sen += " " + " ".join(lst1[i:])
+        sen += " ".join(lst1[i:])
 
     if j < len(lst2):
-        sen += " " + " ".join(lst2[j:])
+        sen += " ".join(lst2[j:])
 
     return sen
 
@@ -89,4 +89,5 @@ def qprobsort(lst):
     return out
 
 
-print(pierwsze + " " + qprobsort(slowa) + " " + ostatnie)
+print(qprobsort(slowa))
+# print(pierwsze + " " + qprobsort(slowa) + " " + ostatnie)
