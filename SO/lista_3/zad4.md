@@ -2,12 +2,12 @@
 
 ```bash
 
-echo -e ’sterujacy’; read
+echo -e 'sterujacy'; read
 
 ^R # Reprint
 ^W # erase
 
-\e[48;5;115m # sekwencja CSI do zmiany koloru tła
+echo -e "\033[31mTo jest czerwony tekst\033[0m"
 
 ```
 

@@ -15,6 +15,9 @@ isig icanon iexten echo echoe echok -echonl -noflsh -xcase -tostop -echoprt
 echoctl echoke -flusho -extproc
 ```
  - zarządzanie: 
+   - quit - SIGQUIT
+   - start - SIGCONT
+   - stop - SIGSTOP
    - intr - SIGINT
    - kill - SIGKILL
    - susp - SIGSTP
