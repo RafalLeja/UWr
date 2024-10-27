@@ -6,25 +6,19 @@ import pandas as pd
 import time
 
 
-model_name = 'eryk-mazus/polka-1.1b-chat'
+model_name = 'eryk-mazus/polka-1.1b'
 device = 'cuda'
 # device = 'cpu'
 
-tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
-tokenizer.pad_token = tokenizer.eos_token
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
 
-model = AutoModelForCausalLM.from_pretrained(
-    model_name, 
-    torch_dtype=torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16,
-    device_map="auto"
-)
-
-system_prompt = "Jesteś pomocnym asystentem. Odpowiadasz na pytania egzaminacyjne. Najlepiej odpowiadać jednym słowem."
 
 def log_probs_from_logits(logits, labels):
     logp = F.log_softmax(logits, dim=-1)
     logp_label = torch.gather(logp, 2, labels.unsqueeze(2)).squeeze(-1)
     return logp_label
+
 
 def sentence_prob(sentence_txt):
     input_ids = tokenizer(sentence_txt, return_tensors='pt')[
@@ -35,6 +29,7 @@ def sentence_prob(sentence_txt):
             output.logits[:, :-1, :], input_ids[:, 1:])
         seq_log_probs = torch.sum(log_probs)
     return seq_log_probs.cpu().numpy()
+
 
 questions = pd.read_csv("pytania.txt",
                         sep="#",
@@ -93,61 +88,51 @@ restQ = restQ.sample(frac=1)
 
 
 def few_shots(typeQ):
+    out = ""
     for q in typeQ.itertuples():
-        chat.append({"role": "user", "content": q.question})
-        chat.append({"role": "assistant", "content": correct.iloc[q.Index].answer})
-    return chat
+        out += "[INST] " + q.question + " [/INST]\n" + \
+            correct.loc[q.Index].answer + "\n"
+    return out
 
 
 N_FEW = 3
 
 for q in questions.itertuples():
     # print(q)
-    chat = [{"role": "system", "content": system_prompt}]
-
+    few = ""
     if "Czy" in q.question:
-        chat = few_shots(binaryQ[:N_FEW])
+        few = few_shots(binaryQ[:N_FEW])
         binaryQ = binaryQ.sample(frac=1)
     elif "Jak" in q.question:
-        chat = few_shots(howQ[:N_FEW])
+        few = few_shots(howQ[:N_FEW])
         howQ = howQ.sample(frac=1)
     elif "Ile" in q.question or "Ilu" in q.question:
-        chat = few_shots(numQ[:N_FEW])
+        few = few_shots(numQ[:N_FEW])
         numQ = numQ.sample(frac=1)
     elif "Kto" in q.question or "Któr" in q.question or "któr" in q.question:
-        chat = few_shots(whoQ[:N_FEW])
+        few = few_shots(whoQ[:N_FEW])
         whoQ = whoQ.sample(frac=1)
     elif "Co" in q.question or "Czym" in q.question or "Czego" in q.question:
-        chat = few_shots(whatQ[:N_FEW])
+        few = few_shots(whatQ[:N_FEW])
         whatQ = whatQ.sample(frac=1)
     else:
-        chat = few_shots(restQ[:N_FEW])
+        few = few_shots(restQ[:N_FEW])
         restQ = restQ.sample(frac=1)
 
+    querry = few + "[INST] " + q.question + " [/INST]\n"
     print(q.Index)
-
-    chat.append({"role": "user", "content": q.question})
-    inputs = tokenizer.apply_chat_template(chat, add_generation_prompt=True, return_tensors="pt")
-    first_param_device = next(model.parameters()).device
-    inputs = inputs.to(first_param_device)
-
-    with torch.no_grad():
-        outputs = model.generate(
-            inputs,
-            pad_token_id=tokenizer.eos_token_id,
-            max_new_tokens=16,
-            temperature=0.1,
-            repetition_penalty=1.15,
-            top_p=0.95,
-            do_sample=True
-        )
-
-    new_tokens = outputs[0, inputs.size(1):]
-    response = tokenizer.decode(new_tokens, skip_special_tokens=True)
-    response = response.replace("\n", " ")
-    print(response)
+    input = tokenizer(querry, return_tensors='pt').to(device)
+    attention_mask = input["attention_mask"]
+    output = model.generate(
+        input["input_ids"],
+        max_new_tokens=50,
+        num_return_sequences=1,
+        pad_token_id=tokenizer.eos_token_id).to(device)
+    answer = tokenizer.decode(
+        output[0], skip_special_tokens=True).split("\n")[1+(N_FEW*2)]
+    print(answer)
     # print(answer.split("\n")[1+(N_FEW*2)])
-    outFile.write(response + "\n")
+    outFile.write(answer + "\n")
 
 # print(sentence_prob(q))
 # outFile.write(q + "\n")
