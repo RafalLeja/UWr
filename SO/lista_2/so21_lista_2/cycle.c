@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 
   sigemptyset(&action.sa_mask);
   sigaddset(&action.sa_mask, SIGUSR1);
-  Sigprocmask(SIG_BLOCK, &action.sa_mask, NULL);
+  Sigprocmask(SIG_BLOCK, &action.sa_mask, &action.sa_mask);
 
   pid_t nPid = getpid();
   for (int i = 0 ; i < children; i++)
@@ -44,6 +44,7 @@ int main(int argc, char *argv[]) {
     } else {
       nPid = pid;
     }
+    printf("(%d) Utworzono proces potomny (%d)\n",getpid(), pid);
   }
   printf("(%d) Tata podaje do %d\n",getpid(), nPid);
   Kill(nPid, SIGUSR1);

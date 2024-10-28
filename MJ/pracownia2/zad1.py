@@ -6,7 +6,7 @@ import time
 DIGITS = 1
 OPERATOR = "+"
 NUM_EQUATIONS = 5
-N = 1000
+N = 5
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -42,23 +42,37 @@ def gen_prompt(digits, operator, num_equations):
     return prompt[:end+1]
 
 
-outFile = open(f"output_{DIGITS}_{OPERATOR}_{NUM_EQUATIONS}.txt", "w")
+ops = ["ADD", "SUB", "MUL"]
 
-for i in range(N):
-    prompt = gen_prompt(DIGITS, OPERATOR, NUM_EQUATIONS)
-    model_inputs = tokenizer([prompt],
-                             return_tensors="pt").to(DEVICE)
-    with torch.no_grad():
-        generated_ids = model.generate(
-            **model_inputs,
-            max_new_tokens=3,
-            do_sample=True,
-            penalty_alpha=0.6,
-            pad_token_id=tokenizer.eos_token_id,
-            top_k=1
-        )
+for op in ops:
+    OPERATOR = ["+", "-", "*"][ops.index(op)]
 
-    output = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
-    output = output.split("\n")[NUM_EQUATIONS-1]
-    outFile.write(f"{output}\n")
-    print(i)
+    for digits in [1, 2, 3]:
+        DIGITS = digits
+
+        for num_eq in [1, 2, 3, 4, 5, 10]:
+            NUM_EQUATIONS = num_eq
+
+            outFile = open(
+                f"{op}/output_{DIGITS}_{NUM_EQUATIONS}.txt", "w")
+            for i in range(N):
+                prompt = gen_prompt(DIGITS, OPERATOR, NUM_EQUATIONS)
+                model_inputs = tokenizer([prompt],
+                                         return_tensors="pt").to(DEVICE)
+                with torch.no_grad():
+                    generated_ids = model.generate(
+                        **model_inputs,
+                        max_new_tokens=3,
+                        do_sample=True,
+                        penalty_alpha=0.6,
+                        pad_token_id=tokenizer.eos_token_id,
+                        top_k=1
+                    )
+
+                output = tokenizer.batch_decode(
+                    generated_ids, skip_special_tokens=True)[0]
+                output = output.split("\n")[NUM_EQUATIONS-1]
+                outFile.write(f"{output}\n")
+                print(i)
+
+            outFile.close()

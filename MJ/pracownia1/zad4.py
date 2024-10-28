@@ -7,8 +7,8 @@ import time
 
 
 model_name = 'eryk-mazus/polka-1.1b'
-device = 'cuda'
-# device = 'cpu'
+# device = 'cuda'
+device = 'cpu'
 
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
@@ -95,29 +95,43 @@ def few_shots(typeQ):
     return out
 
 
+binC = 0
+howC = 0
+numC = 0
+whoC = 0
+whatC = 0
+restC = 0
+
+
 N_FEW = 3
 
-for q in questions.itertuples():
+for q in questions[:10].itertuples():
     # print(q)
     few = ""
     if "Czy" in q.question:
         few = few_shots(binaryQ[:N_FEW])
         binaryQ = binaryQ.sample(frac=1)
+        binC += 1
     elif "Jak" in q.question:
         few = few_shots(howQ[:N_FEW])
         howQ = howQ.sample(frac=1)
+        howC += 1
     elif "Ile" in q.question or "Ilu" in q.question:
         few = few_shots(numQ[:N_FEW])
         numQ = numQ.sample(frac=1)
+        numC += 1
     elif "Kto" in q.question or "Któr" in q.question or "któr" in q.question:
         few = few_shots(whoQ[:N_FEW])
         whoQ = whoQ.sample(frac=1)
+        whoC += 1
     elif "Co" in q.question or "Czym" in q.question or "Czego" in q.question:
         few = few_shots(whatQ[:N_FEW])
         whatQ = whatQ.sample(frac=1)
+        whatC += 1
     else:
         few = few_shots(restQ[:N_FEW])
         restQ = restQ.sample(frac=1)
+        restC += 1
 
     querry = few + "[INST] " + q.question + " [/INST]\n"
     print(q.Index)
@@ -134,6 +148,8 @@ for q in questions.itertuples():
     # print(answer.split("\n")[1+(N_FEW*2)])
     outFile.write(answer + "\n")
 
+print("binC: ", binC, "howC: ", howC, "numC: ", numC,
+      "whoC: ", whoC, "whatC: ", whatC, "restC: ", restC)
 # print(sentence_prob(q))
 # outFile.write(q + "\n")
 # outFile.write(str(sentence_prob(q)) + "\n")
