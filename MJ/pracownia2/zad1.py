@@ -6,7 +6,7 @@ import time
 DIGITS = 1
 OPERATOR = "+"
 NUM_EQUATIONS = 5
-N = 5
+N = 100
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -45,9 +45,9 @@ def gen_prompt(digits, operator, num_equations):
 ops = ["ADD", "SUB", "MUL"]
 
 for op in ops:
-    OPERATOR = ["+", "-", "*"][ops.index(op)]
+    OPERATOR = ["+", "-"][ops.index(op)]
 
-    for digits in [1, 2, 3]:
+    for digits in [2, 3]:
         DIGITS = digits
 
         for num_eq in [1, 2, 3, 4, 5, 10]:
@@ -62,7 +62,7 @@ for op in ops:
                 with torch.no_grad():
                     generated_ids = model.generate(
                         **model_inputs,
-                        max_new_tokens=3,
+                        max_new_tokens=digits+1,
                         do_sample=True,
                         penalty_alpha=0.6,
                         pad_token_id=tokenizer.eos_token_id,
