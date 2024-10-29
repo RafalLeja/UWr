@@ -1,0 +1,5 @@
+Script started on 2024-10-29 20:14:19+01:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="120" LINES="30"]
+$ 
+$ exit 42
+
+Script done on 2024-10-29 20:14:22+01:00 [COMMAND_EXIT_CODE="42"]
