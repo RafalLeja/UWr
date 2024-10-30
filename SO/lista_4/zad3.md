@@ -45,5 +45,10 @@ grep -E 'O_CREAT|dup2|pipe|close.[^6] |clone|execve' pipeline.log
 38996 close(3 <unfinished ...>
 38996 execve("/usr/bin/wc", ["wc", "-l"], 0x6506fff05368 /* 64 vars */ <unfinished ...>
 38996 <... execve resumed>)             = 0
-
 ```
+openat(2) z flagą «O_CREAT» (realizuje creat(2)) - utwórz plik
+dup2(2) - przekieruj deskryptory plików
+pipe(2) - utwórz rurę
+close(2) - zamknij deskryptory plików
+clone(2) (realizuje fork(2)) - utwórz proces potomny
+execve(2) - wykonaj program

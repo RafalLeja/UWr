@@ -16,6 +16,7 @@ int main(int argc, char **argv) {
   Lseek(fd_2, 0, SEEK_END);
 
   /* TODO: Something is missing here to fix the issue! */
+  fcntl(fd_2, F_SETFD, FD_CLOEXEC);
 
   /* Let's suppose a user typed in correct password and was allowed to execute
    * a command and they choose to run our program. */

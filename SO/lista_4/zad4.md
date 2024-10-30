@@ -25,4 +25,16 @@ child process both call setpgid() to change the child’s process group ID to th
 value immediately after a fork(), and the parent ignores any occurrence of the
 EACCES error on the setpgid() call. 
 
-### Kiedy powłoka ustala grupę pierwszoplanową przy pomocy ioctl(2) (realizuje tcsetpgrp(3))? Na jakiej podstawie powłoka wyznacza kod wyjścia potoku?
+### Kiedy powłoka ustala grupę pierwszoplanową przy pomocy ioctl(2) (realizuje tcsetpgrp(3))?
+kiedy wszystkie rury są już utworzone, a procesy potomne są już w nich umieszczone
+```
+38982 ioctl(10, TIOCSPGRP, [38982])     = 0
+```
+
+TIOCSPGRP
+const pid_t *argp
+Equivalent to tcsetpgrp(fd, *argp).
+Set the foreground process group ID of this terminal.
+
+### Na jakiej podstawie powłoka wyznacza kod wyjścia potoku?
+na podstawie kodu wyjścia ostatniego procesu w potoku
