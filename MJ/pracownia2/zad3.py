@@ -57,7 +57,7 @@ beams = sorted(beams, key=lambda x: x[1], reverse=True)
 correct_sentence = " ".join([o[0] for o in options])
 
 [print(b) for b in beams]
-beams = [b[0].split(' ') for b in beams]
+# beams = [b[0].split(' ') for b in beams]
 print("zdanie właściwe = ", correct_sentence)
 
 
