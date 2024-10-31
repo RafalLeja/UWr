@@ -1,0 +1,16 @@
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/CMakeFiles/example_leak.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/CMakeFiles/example_leak_array.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/CMakeFiles/example_leak_exception.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/CMakeFiles/example_leak_raii.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/CMakeFiles/example_leak_fds.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/CMakeFiles/test.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/CMakeFiles/edit_cache.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/CMakeFiles/rebuild_cache.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/resources/CMakeFiles/kernel-resource.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/resources/CMakeFiles/test.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/resources/CMakeFiles/edit_cache.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/resources/CMakeFiles/rebuild_cache.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/resources/tests/CMakeFiles/test_kernel_resource.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/resources/tests/CMakeFiles/test.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/resources/tests/CMakeFiles/edit_cache.dir
+/home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build/resources/tests/CMakeFiles/rebuild_cache.dir

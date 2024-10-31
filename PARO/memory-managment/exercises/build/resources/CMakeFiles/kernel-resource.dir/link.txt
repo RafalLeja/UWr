@@ -1,0 +1,2 @@
+/usr/bin/ar qc libkernel-resource.a CMakeFiles/kernel-resource.dir/src/kernel_resource.cpp.o CMakeFiles/kernel-resource.dir/src/printers_old.cpp.o
+/usr/bin/ranlib libkernel-resource.a

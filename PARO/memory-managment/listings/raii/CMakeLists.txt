@@ -1,0 +1,59 @@
+add_executable(raii_resource_handler raii_resource_handler.cpp)
+target_link_libraries(raii_resource_handler PRIVATE paro)
+add_test(NAME raii_resource_handler COMMAND raii_resource_handler)
+
+add_executable(raii_unique_ptr_resource raii_unique_ptr_resource.cpp)
+target_link_libraries(raii_unique_ptr_resource PRIVATE paro)
+add_test(NAME raii_unique_ptr_resource COMMAND raii_unique_ptr_resource)
+
+add_executable(raii_unique_ptr_deleter_malloc raii_unique_ptr_deleter_malloc.cpp)
+add_test(NAME raii_unique_ptr_deleter_malloc COMMAND raii_unique_ptr_deleter_malloc)
+
+add_executable(raii_unique_ptr_deleter_file raii_unique_ptr_deleter_file.cpp)
+add_test(NAME raii_unique_ptr_deleter_file COMMAND raii_unique_ptr_deleter_file)
+
+add_executable(raii_unique_ptr_deleter raii_unique_ptr_deleter.cpp)
+target_link_libraries(raii_unique_ptr_deleter PRIVATE paro)
+add_test(NAME raii_unique_ptr_deleter COMMAND raii_unique_ptr_deleter)
+
+add_library(raii_make_unique_resource raii_make_unique_resource.cpp)
+target_link_libraries(raii_make_unique_resource PRIVATE paro)
+
+add_executable(raii_move_safe raii_move_safe.cpp)
+add_test(NAME raii_move_safe COMMAND raii_move_safe)
+target_link_libraries(raii_move_safe PRIVATE paro)
+
+add_executable(raii_move_unsafe raii_move_unsafe.cpp)
+add_test(NAME raii_move_unsafe COMMAND raii_move_unsafe )
+target_link_libraries(raii_move_unsafe PRIVATE paro)
+
+add_executable(raii_unique_ptr_reference raii_unique_ptr_reference.cpp)
+target_link_libraries(raii_unique_ptr_reference PRIVATE paro)
+add_test(NAME raii_unique_ptr_reference COMMAND raii_unique_ptr_reference)
+
+add_executable(raii_unique_ptr_value raii_unique_ptr_value.cpp)
+target_link_libraries(raii_unique_ptr_value PRIVATE paro)
+add_test(NAME raii_unique_ptr_value COMMAND raii_unique_ptr_value)
+
+add_executable(raii_unique_ptr_ref_to_object raii_unique_ptr_ref_to_object.cpp)
+target_link_libraries(raii_unique_ptr_ref_to_object PRIVATE paro)
+add_test(NAME raii_unique_ptr_ref_to_object COMMAND raii_unique_ptr_ref_to_object)
+
+add_executable(raii_cstyle_initialization raii_cstyle_initialization.cpp)
+add_test(NAME raii_cstyle_initialization COMMAND raii_cstyle_initialization)
+
+add_executable(raii_cpp_initialization raii_cpp_initialization.cpp)
+add_test(NAME raii_cpp_initialization COMMAND raii_cpp_initialization)
+
+add_executable(raii_print_file1 raii_print_file_1.cpp)
+target_link_libraries(raii_print_file1 PRIVATE paro)
+add_executable(raii_print_file2 raii_print_file_2.cpp)
+target_link_libraries(raii_print_file2 PRIVATE paro)
+add_executable(raii_print_file3 raii_print_file_3.cpp)
+target_link_libraries(raii_print_file3 PRIVATE paro)
+
+set(INPUT_FILE ${CMAKE_SOURCE_DIR}/listings/input/DE_FINIBVS.txt)
+
+add_test(NAME raii_print_file1 COMMAND raii_print_file1 ${INPUT_FILE})
+add_test(NAME raii_print_file2 COMMAND raii_print_file2 ${INPUT_FILE})
+add_test(NAME raii_print_file3 COMMAND raii_print_file3 ${INPUT_FILE})

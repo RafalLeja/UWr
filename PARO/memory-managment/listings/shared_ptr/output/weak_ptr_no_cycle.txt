@@ -1,0 +1,3 @@
+destructing A
+destructing B
+Finished using A and B

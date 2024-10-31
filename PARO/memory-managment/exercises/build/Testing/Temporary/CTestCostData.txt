@@ -1,0 +1,5 @@
+task1-leak 1 0.640956
+task2-leak-array 1 0.62478
+task3-leak-exception 1 0.751124
+task4-leak-raii 1 0.708794
+---

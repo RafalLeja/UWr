@@ -1,0 +1,105 @@
+Start testing: Oct 31 21:59 CET
+----------------------------------------------------------
+4/6 Testing: task4-leak-raii
+4/6 Test: task4-leak-raii
+Command: "/usr/bin/valgrind" "--tool=memcheck" "--leak-check=full" "--error-exitcode=1" "--errors-for-leak-kinds=all" "./example_leak_raii"
+Directory: /home/rafal/Desktop/UWr/PARO/memory-managment/exercises/build
+"task4-leak-raii" start time: Oct 31 21:59 CET
+Output:
+----------------------------------------------------------
+==62112== Memcheck, a memory error detector
+==62112== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==62112== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==62112== Command: ./example_leak_raii
+==62112== 
+[KERNEL] INF: RESOURCE 0x1829 allocation successful
+[KERNEL] INF: RESOURCE 0x1829 usage requested.
+[KERNEL] INF: RESOURCE 0x1829 released.
+[KERNEL] INF:   lifetime:      2 ticks
+[KERNEL] INF:   usage count:   1
+[KERNEL] INF: RESOURCE 0x1ee3 allocation successful
+[KERNEL] INF: RESOURCE 0x25e1 allocation successful
+Processing Event(c)
+[KERNEL] INF: RESOURCE 0x25e1 usage requested.
+[KERNEL] INF: RESOURCE 0x25e1 released.
+[KERNEL] INF:   lifetime:      2 ticks
+[KERNEL] INF:   usage count:   1
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] INF: RESOURCE 0x287b allocation successful
+Processing Event(18)
+[KERNEL] INF: RESOURCE 0x287b usage requested.
+[KERNEL] INF: RESOURCE 0x287b released.
+[KERNEL] INF:   lifetime:      2 ticks
+[KERNEL] INF:   usage count:   1
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] INF: RESOURCE 0x2e32 allocation successful
+Processing Event(24)
+[KERNEL] INF: RESOURCE 0x2e32 usage requested.
+[KERNEL] INF: RESOURCE 0x2e32 released.
+[KERNEL] INF:   lifetime:      2 ticks
+[KERNEL] INF:   usage count:   1
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] ERR: RESOURCE 0x1d41 allocation failed - return NULL
+Processing Event(30)
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] ERR: RESOURCE 0x1c1c allocation failed - return NULL
+Processing Event(3c)
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] INF: RESOURCE 0x35ca allocation successful
+Processing Event(48)
+[KERNEL] INF: RESOURCE 0x35ca usage requested.
+[KERNEL] INF: RESOURCE 0x35ca released.
+[KERNEL] INF:   lifetime:      2 ticks
+[KERNEL] INF:   usage count:   1
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] INF: RESOURCE 0x25fd allocation successful
+Processing Event(54)
+[KERNEL] INF: RESOURCE 0x25fd usage requested.
+[KERNEL] INF: RESOURCE 0x25fd released.
+[KERNEL] INF:   lifetime:      2 ticks
+[KERNEL] INF:   usage count:   1
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] ERR: RESOURCE 0x1a90 allocation failed - return NULL
+Processing Event(60)
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] ERR: RESOURCE 0x3f47 allocation failed - return NULL
+Processing Event(6c)
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] ERR: RESOURCE 0x27aa allocation failed - return NULL
+Processing Event(78)
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] INF: RESOURCE 0x3c18 allocation successful
+Processing Event(84)
+[KERNEL] INF: RESOURCE 0x3c18 usage requested.
+[KERNEL] INF: RESOURCE 0x3c18 released.
+[KERNEL] INF:   lifetime:      2 ticks
+[KERNEL] INF:   usage count:   1
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] INF: RESOURCE 0x37cc allocation successful
+Processing Event(90)
+[KERNEL] INF: RESOURCE 0x37cc usage requested.
+[KERNEL] INF: RESOURCE 0x37cc released.
+[KERNEL] INF:   lifetime:      2 ticks
+[KERNEL] INF:   usage count:   1
+[KERNEL] INF: RESOURCE 0x1ee3 usage requested.
+[KERNEL] INF: RESOURCE 0x1ee3 released.
+[KERNEL] INF:   lifetime:     39 ticks
+[KERNEL] INF:   usage count:  12
+==62112== 
+==62112== HEAP SUMMARY:
+==62112==     in use at exit: 0 bytes in 0 blocks
+==62112==   total heap usage: 27 allocs, 27 frees, 77,448 bytes allocated
+==62112== 
+==62112== All heap blocks were freed -- no leaks are possible
+==62112== 
+==62112== For lists of detected and suppressed errors, rerun with: -s
+==62112== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+<end of output>
+Test time =   0.71 sec
+----------------------------------------------------------
+Test Passed.
+"task4-leak-raii" end time: Oct 31 21:59 CET
+"task4-leak-raii" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 31 21:59 CET

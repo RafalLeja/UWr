@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/example_leak_raii.dir/example_leak_raii.cpp.o -o example_leak_raii  resources/libkernel-resource.a 

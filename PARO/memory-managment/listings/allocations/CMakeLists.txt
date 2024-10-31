@@ -1,0 +1,33 @@
+add_executable(buddy_demo buddy_demo.cpp buddy_fragmentation.cpp buddy_heap.cpp
+    buddy_deallocation_1.cpp buddy_deallocation_2.cpp)
+add_test(NAME buddy_demo COMMAND buddy_demo)
+
+add_executable(all_variable_types all_variable_types.cpp)
+add_test(NAME all_variable_types COMMAND all_variable_types)
+
+add_executable(new_delete new_delete.cpp)
+target_link_libraries(new_delete PRIVATE paro)
+add_test(NAME new_delete COMMAND new_delete)
+
+add_executable(new_delete_array new_delete_array_integers.cpp)
+add_test(NAME new_delete_array COMMAND new_delete_array)
+
+add_executable(new_delete_array_strings new_delete_array_strings.cpp)
+add_test(NAME new_delete_array_strings COMMAND new_delete_array_strings)
+
+add_executable(new_delete_array_pointers new_delete_array_pointers.cpp)
+target_link_libraries(new_delete_array_pointers PRIVATE paro)
+add_test(NAME new_delete_array_pointers COMMAND new_delete_array_pointers)
+
+add_executable(stack_variables stack_variables.cpp)
+add_test(NAME stack_variables COMMAND stack_variables)
+
+add_executable(stack_variables_object stack_variables_object.cpp)
+target_link_libraries(stack_variables_object PRIVATE paro)
+add_test(NAME stack_variables_object COMMAND stack_variables_object)
+
+add_executable(variable_scopes variable_scopes.cpp)
+add_test(NAME variable_scopes COMMAND variable_scopes)
+
+add_executable(variable_scopes_invalid_access variable_scopes_invalid_access.cpp)
+add_test(NAME variable_scopes_invalid_access COMMAND variable_scopes_invalid_access)

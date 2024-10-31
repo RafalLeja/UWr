@@ -1,0 +1,6 @@
+X(123) created
+X(42) created
+X(42) is dead
+X(89) created
+X(89) is dead
+X(123) is dead

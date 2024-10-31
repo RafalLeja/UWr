@@ -1,0 +1,5 @@
+add_executable(bench_raw_ptr raw_ptr.cpp)
+add_executable(bench_unique_ptr unique_ptr.cpp)
+add_executable(bench_shared_ptr shared_ptr.cpp)
+add_executable(bench_weak_ptr weak_ptr.cpp)
+add_executable(bench_make_shared make_shared.cpp)

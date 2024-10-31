@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/example_leak_exception.dir/example_leak_exception.cpp.o -o example_leak_exception  resources/libkernel-resource.a 
