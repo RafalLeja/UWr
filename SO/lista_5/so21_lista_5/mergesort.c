@@ -53,19 +53,39 @@ static void Merge(int left_fd, int right_fd, int parent_fd) {
 static void Sort(int parent_fd) {
   int nelem = ReadNum(parent_fd);
 
+  printf("nelem: %d\n", nelem);
+
   if (nelem < 2) {
     WriteNum(parent_fd, ReadNum(parent_fd));
     Close(parent_fd);
     return;
   }
 
+  printf("tworzę lewe i prawe dziecko\n");
+
   sockpair_t left = MakeSocketPair();
   /* TODO: Spawn left child. */
+  pid_t leftPid = Fork();
+  if (leftPid == 0) {
+    // child
+    Sort(left.parent_fd);
+    exit(EXIT_SUCCESS);
+  }
 
   sockpair_t right = MakeSocketPair();
   /* TODO: Spawn right child. */
+    pid_t rightPid = Fork();
+  if (rightPid == 0) {
+    // child
+    Sort(right.parent_fd);
+    exit(EXIT_SUCCESS);
+  }
 
   /* TODO: Send elements to children and merge returned values afterwards. */
+  SendElem(parent_fd, left.child_fd, nelem / 2);
+  SendElem(parent_fd, right.child_fd, nelem - nelem / 2);
+
+  Merge(left.child_fd, right.child_fd, parent_fd);
 
   /* Wait for both children. */
   Wait(NULL);
