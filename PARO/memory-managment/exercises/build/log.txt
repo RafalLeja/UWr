@@ -1,0 +1,8 @@
+Starting logger...
+LOG: Service A is created
+LOG: Service B is created
+LOG: Service C is created
+LOG: A is working
+LOG: B is working
+LOG: C is working
+Closing logger...
