@@ -1,6 +1,7 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from torch.nn import functional as F
+import pandas as pd
 import random
 
 
@@ -11,37 +12,28 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
 
+indeksy = list(range(tokenizer.vocab_size))
+tokeny = tokenizer.convert_ids_to_tokens(indeksy)
 
-def best_k(prefix, K=10):
-    input_ids = tokenizer(prefix, return_tensors='pt')['input_ids'].to(device)
-    output = model(input_ids=input_ids)
-    next_token_logits = output.logits[0, -1, :]
-    probs = F.softmax(next_token_logits, dim=-1)
-    d = {}
-    for i in range(probs.shape[0]):
-        d[tokenizer.decode(i)] = probs[i]
+print(f'Uruchomiono na: {device}')
 
-    return [(t, d[t]) for t in sorted(d, key=d.get, reverse=True)[:K]]
+print(f'filtorwanie {tokenizer.vocab_size} tokenów')
+suppress_tokeny = [t for t in tokeny[226:] if (
+    t[0] == 'Ġ')]
 
+suppress_indeksy = tokenizer.convert_tokens_to_ids(suppress_tokeny)
 
-def sample_from_pairs(pairs):
-    tokens = [p[0] for p in pairs]
-    weights = [p[1] for p in pairs]
-    return random.choices(tokens, weights=weights, k=1)[0]
+input_ids = tokenizer(prefiks, return_tensors='pt').to(device)
 
-
-def sample_demo(N, txt):
-    for i in range(N):
-        d = best_k(txt)
-        print(txt)
-        next_token = sample_from_pairs(d)
-        for t, p in best_k(txt):
-            star = ''
-            if t == next_token:
-                star = '*'
-            print(f'   [{t}]{star} {p:.4f}')
-        txt += next_token
-        print()
-
-
-print(best_k("wprost"))
+output = model.generate(**input_ids,
+                        max_new_tokens=30,
+                        do_sample=True,
+                        eos_token_id=tokenizer.encode('.')[0],
+                        pad_token_id=tokenizer.eos_token_id,
+                        penalty_alpha=0.6,
+                        repetition_penalty=1.8,
+                        top_k=3,
+                        top_p=0.92,
+                        suppress_tokens=suppress_indeksy)
+print(tokenizer.decode(output[0]))
+# print(suppress_tokeny[:100])
