@@ -60,19 +60,35 @@ accMatrix = []
 for x in labelsX:
     accMatrix.append([accuracy[x][y] for y in labelsY])
 
-fig, ax = plt.subplots()
-im = ax.imshow(accMatrix)
-ax.set_title('dodawanie')
+fig, ax = plt.subplots(2)
+im = ax[0].imshow(accMatrix)
+ax[0].set_title('dodawanie')
 
-ax.set_xticks(range(len(labelsY)))
-ax.set_xticklabels(labelsY)
-ax.set_yticks(range(len(labelsX)))
-ax.set_yticklabels(labelsX)
+ax[0].set_xticks(range(len(labelsY)))
+ax[0].set_xticklabels(labelsY)
+ax[0].set_yticks(range(len(labelsX)))
+ax[0].set_yticklabels(labelsX)
 
-plt.xlabel('liczba równań')
-plt.ylabel('liczba cyfr')
+ax[0].set_xlabel('liczba równań')
+ax[0].set_ylabel('liczba cyfr')
 
 
-fig.colorbar(im, ax=ax, label='% trafień')
+fig.colorbar(im, ax=ax[0], label='% trafień')
+
+for i in range(len(accMatrix)):
+    ax[1].plot(accMatrix[i], label=str(i+1))
+# plt.plot(accMatrix)
+
+# ax[1].xticks(range(len(labelsY)), labelsY)
+# ax[1].yticks(range(len(labelsX)), labelsX)
+
+ax[1].set_xlabel('liczba równań')
+ax[1].set_ylabel('celność')
+
+
+# fig.colorbar(im, ax=ax, label='% trafień')
+ax[1].legend()
+
+# plt.show()
 
 plt.show()
