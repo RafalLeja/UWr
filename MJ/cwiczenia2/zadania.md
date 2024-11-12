@@ -63,3 +63,12 @@ możemy liczyć ciąg prawdopodobieństw tekstu
 
 aby odzyskać tekst potrzebujemy pierwszy wyraz, a potem wybierać tokeny o odpowiednim prawdopodobnie
 
+## Zadanie 8
+jesli dodamy spacje na końcu prefiksu papuga zwróci pierwszy token bez spacji, a ponieważ tokenizer przykleja spacje na początku tokenów zaczynających slowa, dostaniemy ograniczony zbiór tokenów
+
+## Zadanie 10
+generowanie melodii,
+
+alfabet to nuty, dla uproszczenia pomijamy długość nut
+
+korpus to utwory z danego gatunku muzycznego
