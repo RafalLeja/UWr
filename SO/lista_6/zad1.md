@@ -5,7 +5,7 @@
 ### (d) setresuid(-1, 2000, 3000). Odpowiedź uzasadnij posługując się podręcznikami systemowymi setuid(2), setreuid(2), setresuid(2).
 
 - a) setuid(2000) - ustawia ruid na 2000, euid na 2000, suid na 2000
-- b) setreuid(-1, 2000) - nie zmienia ruid, euid na 2000, suid nie zmienia się
+- b) setreuid(-1, 2000) - nie zmienia ruid, euid na 2000, suid na 2000
 - c) seteuid(2000) - nie zmienia ruid, euid na 2000, suid nie zmienia się
 - d) setresuid(-1, 2000, 3000) - nie zmienia ruid, euid na 2000, suid na 3000
 

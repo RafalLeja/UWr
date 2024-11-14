@@ -3,7 +3,7 @@
 static const char *uidname(uid_t uid) {
   /* TODO: Something is missing here! */
   struct passwd *pwd;
-  if ((pwd = getpwuid(uid)) == NULL){
+  if ((pwd = getpwuid(uid)) == NULL) {
     perror("getpwuid");
   }
   return pwd->pw_name;
@@ -12,7 +12,7 @@ static const char *uidname(uid_t uid) {
 static const char *gidname(gid_t gid) {
   /* TODO: Something is missing here! */
   struct group *grp;
-  if ((grp = getgrgid(gid)) == NULL){
+  if ((grp = getgrgid(gid)) == NULL) {
     perror("getgrgid");
   }
   return grp->gr_name;
@@ -25,20 +25,20 @@ static int getid(uid_t *uid_p, gid_t *gid_p, gid_t **gids_p) {
 
   /* TODO: Something is missing here! */
 
-  if ((*uid_p = getuid()) == -1){
+  if ((*uid_p = getuid()) == -1) {
     perror("getuid");
   }
 
-  if ((*gid_p = getgid()) == -1){
+  if ((*gid_p = getgid()) == -1) {
     perror("getgid");
   }
 
-  if ((groups = getgroups(0, gids)) == -1){
+  if ((groups = getgroups(0, gids)) == -1) {
     perror("getgroups");
   }
 
   gids = Malloc(groups * sizeof(gid_t));
-  if ((getgroups(groups, gids)) == -1){
+  if ((getgroups(groups, gids)) == -1) {
     perror("getgroups");
   }
 

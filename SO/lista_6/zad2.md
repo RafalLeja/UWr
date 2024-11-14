@@ -34,15 +34,42 @@ Access: (1777/drwxrwxrwt)  Uid: (    0/    root)   Gid: (    0/    root)
 ```
 
 ### Opisz znaczenie bitów «set-gid» i «sticky» dla katalogów.
-bit set-gid oznacza że jeśli uruchamiamy plik z takim bitem to proces dziedziczy grupę pliku, a nie grupę procesu
+bit set-gid oznacza że wszystkie pliki utworzone w katalogu dziedziczą grupę właściciela katalogu
 
 bit sticky ogranicza możliwość usuwania plików z katalogu do właściciela pliku, właściciela katalogu i roota
 
 ### Napisz w pseudokodzie i zreferuj procedurę «bool my_access(struct stat *sb, int mode)». Pierwszy i drugi argument opisano odpowiednio w stat(2) i access(2). Dla procesu o tożsamości zadanej przez getuid(2) i getgroups(2) procedura «my_access» sprawdza czy proces ma upoważniony dostęp «mode» do pliku o metadanych wczytanych do «sb».
+```C
+struct stat {
+    dev_t      st_dev;      /* ID of device containing file */
+    ino_t      st_ino;      /* Inode number */
+    mode_t     st_mode;     /* File type and mode */
+    nlink_t    st_nlink;    /* Number of hard links */
+    uid_t      st_uid;      /* User ID of owner */
+    gid_t      st_gid;      /* Group ID of owner */
+    dev_t      st_rdev;     /* Device ID (if special file) */
+    off_t      st_size;     /* Total size, in bytes */
+    blksize_t  st_blksize;  /* Block size for filesystem I/O */
+    blkcnt_t   st_blocks;   /* Number of 512 B blocks allocated */
+
+    /* Since POSIX.1-2008, this structure supports nanosecond
+        precision for the following timestamp fields.
+        For the details before POSIX.1-2008, see VERSIONS. */
+
+    struct timespec  st_atim;  /* Time of last access */
+    struct timespec  st_mtim;  /* Time of last modification */
+    struct timespec  st_ctim;  /* Time of last status change */
+
+#define st_atime  st_atim.tv_sec  /* Backward compatibility */
+#define st_mtime  st_mtim.tv_sec
+#define st_ctime  st_ctim.tv_sec
+};
+```
 
 ```C
 bool my_access(struct stat *sb, int mode) {
     // Pobierz ID użytkownika procesu i jego grupy
+    if(geteuid() == 0) return true;
     int user_id = getuid();
     int group_id = getgid();
     int *groups;
