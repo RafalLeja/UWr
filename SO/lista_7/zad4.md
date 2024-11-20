@@ -10,6 +10,34 @@
 
 - mm_struct::pgd: zawiera wskaźnik do tablicy stron:
 - mm_struct::mmap: zawiera informacje o mapowaniu pamięci
+```C
+// memory descriptor
+// opisuje pamięć procesu
+struct mm_struct {
+    pgd_t *pgd; // wskaźnik do struktury pgd_t
+    struct vm_area_struct *mmap; // wskaźnik do struktury vm_area_struct
+    ...
+};
+
+// page global directory
+// wzkazuje na tablicę stron
+typedef struct { unsigned long pgd; } pgd_t;
+
+
+// virtual memory area
+// opisuje obszar pamięci
+struct vm_area_struct {
+    struct mm_struct *vm_mm; // wskaźnik do struktury mm_struct
+    unsigned long vm_start; // początek obszaru
+    unsigned long vm_end; // koniec obszaru
+    ...
+};
+```
+[mm_struct](https://docs.huihoo.com/doxygen/linux/kernel/3.7/structmm__struct.html#abd50fb5aab94b9d23e8104e96be6e45a)
+[pgd_t](https://docs.huihoo.com/doxygen/linux/kernel/3.7/structpgd__t.html)
+[vm_area_struct](https://docs.huihoo.com/doxygen/linux/kernel/3.7/structvm__area__struct.html)
+
+![alt text](image-1.png)
 
 ### Kiedy jądro wyśle procesowi sygnał SIGSEGV z kodem «SEGV_MAPERR» lub «SEGV_ACCERR»?
 - SIGSEGV z kodem SEGV_MAPERR jest wysyłany, gdy proces próbuje odwołać się do adresu, który nie jest zmapowany
