@@ -138,3 +138,7 @@ int main(void) {
 /* user	0m13,139s */
 /* sys	0m0,665s */
 
+
+/* Wniosek: */
+/* Dzięki użyciu forka, czas wykonania programu został znacznie skrócony. */
+/* Nie da się skrócić czasu wykonywania partycji quicksorta, ale można sortować InsertionSortem równolegle. */
