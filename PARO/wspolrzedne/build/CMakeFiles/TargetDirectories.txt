@@ -1,0 +1,12 @@
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/CMakeFiles/podstawowa_synchronizacja.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/CMakeFiles/przekazywanie_przez_kolejke.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/CMakeFiles/stworzenie_watku.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/CMakeFiles/argumenty_watku.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/CMakeFiles/wyjatki.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/CMakeFiles/obiad.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/CMakeFiles/promise.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/CMakeFiles/edit_cache.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/CMakeFiles/rebuild_cache.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/external/CMakeFiles/external.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/external/CMakeFiles/edit_cache.dir
+/home/rafal/Desktop/UWr/PARO/wspolrzedne/build/external/CMakeFiles/rebuild_cache.dir

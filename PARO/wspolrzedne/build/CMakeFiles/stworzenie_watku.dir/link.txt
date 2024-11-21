@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread CMakeFiles/stworzenie_watku.dir/stworzenie_watku.cpp.o -o stworzenie_watku 

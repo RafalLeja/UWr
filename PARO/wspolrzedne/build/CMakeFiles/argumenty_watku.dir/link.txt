@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread CMakeFiles/argumenty_watku.dir/argumenty_watku.cpp.o -o argumenty_watku 

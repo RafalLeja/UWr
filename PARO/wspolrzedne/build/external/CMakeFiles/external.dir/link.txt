@@ -1,0 +1,2 @@
+/usr/bin/ar qc libexternal.a CMakeFiles/external.dir/isPrime.cpp.o
+/usr/bin/ranlib libexternal.a

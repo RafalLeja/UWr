@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread CMakeFiles/promise.dir/promise.cpp.o -o promise 

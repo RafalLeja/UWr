@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread CMakeFiles/podstawowa_synchronizacja.dir/podstawowa_synchronizacja.cpp.o -o podstawowa_synchronizacja 

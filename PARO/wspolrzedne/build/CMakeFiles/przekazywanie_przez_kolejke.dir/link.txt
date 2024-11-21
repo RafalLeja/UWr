@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread CMakeFiles/przekazywanie_przez_kolejke.dir/przekazywanie_przez_kolejke.cpp.o -o przekazywanie_przez_kolejke  external/libexternal.a 
