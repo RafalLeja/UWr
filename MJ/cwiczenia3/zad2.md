@@ -1,0 +1,5 @@
+## Czym s¡ rzadkie reprezentacje wektorowe sªów (wykorzystuj¡ce TF-IDF i konteksty)? Dlaczego nie jest to rozwi¡zanie perfekcyjne (sªaba wskazówka: pi¦kna »aglówka; ±liczny »aglowiec). Zaproponuj procedur¦, która zawiera w sobie klasteryzacj¦ i dziaªa potencjalnie lepiej, ni» oryginalne reprezentacje (dodatkowo zwracaj¡c wektory o mniejszej liczbie wymiarów).
+
+TFIDF - Term Frequency Inverse Document Frequency - to metoda oceny ważności słowa w kontekście dokumentu. Wartość TF-IDF rośnie wraz z częstością występowania słowa w dokumencie, ale jest kompensowana przez częstość występowania słowa w całym korpusie dokumentów. W ten sposób TF-IDF pozwala na wykrycie słów, które są unikalne dla danego dokumentu i mają znaczenie w jego kontekście.
+
+Reprezentacje wektorowe słów oparte na TF-IDF i kontekstach są rzadkie, ponieważ większość słów w korpusie dokumentów nie występuje w każdym dokumencie. W związku z tym, większość wartości wektorów będzie równa zero, co prowadzi do rzadkich reprezentacji wektorowych.
