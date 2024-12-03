@@ -1,0 +1,30 @@
+[{
+    "_id": 1,
+    "name": "Jan",
+    "surname": "Kowalski",
+    "email": "jank@onet.pl",
+    "phone": "123456789",
+    "borrowedBooks": [
+        {
+            "bookId": 1,
+            "copyId": 3,
+            "borrowed": "2024-11-20",
+            "returned": null
+        }
+    ]
+},
+{
+    "_id": 2,
+    "name": "Anna",
+    "surname": "Nowak",
+    "email": "annan@onet.pl",  
+    "phone": "987654321",
+    "borrowedBooks": [
+        {
+            "bookId": 2,
+            "copyId": 2,
+            "borrowed": "2024-12-03",
+            "returned": null
+        }
+    ]
+}]
