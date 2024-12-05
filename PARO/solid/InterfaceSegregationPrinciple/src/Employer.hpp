@@ -11,7 +11,7 @@ struct Employer
     {
     }
 
-    void payWage(unsigned wage, BankAccount& account)
+    void payWage(unsigned wage, MoneyTransferTarget& account)
     {
         std::cout << name << " pays wage of " << wage << " €" << std::endl;
         account.credit(wage);

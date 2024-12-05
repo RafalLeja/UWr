@@ -8,17 +8,17 @@
 
 struct Person
 {
-    Person(const std::string& name, BankAccount& account) : name(name), account(account)
+    Person(const std::string& name, OwnedAccount& account) : name(name), account(account)
     {
     }
 
     void lookIntoAccount() const
     {
         std::cout << name << " looks into account and finds " << account.balance() << " € there" << std::endl;
-        account.credit(20);
+        /* account.credit(20); */
     }
 
 private:
     std::string name;
-    BankAccount& account;
+    OwnedAccount& account;
 };

@@ -3,7 +3,11 @@
 #include <iostream>
 #include <string>
 
-class BankAccount
+#include "Debitable.hpp"
+#include "OwnedAccount.hpp"
+#include "MoneyTransferTarget.hpp"
+
+class BankAccount : public Debitable, public OwnedAccount, public MoneyTransferTarget
 {
 public:
     bool debit(unsigned amount)
