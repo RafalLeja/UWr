@@ -1,11 +1,12 @@
 #pragma once
 
 #include "Address.hpp"
+#include "Storage.hpp"
 
 #include <iostream>
 #include <string>
 
-class SqlStorage
+class SqlStorage : public Storage
 {
 public:
     SqlStorage(const Address& address) : address(address)

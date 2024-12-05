@@ -4,7 +4,8 @@
 
 int main()
 {
-    EventLog log(Address{"sql://127.0.0.1:61123/"});
+		SqlStorage storage(Address{"sql://127.0.0.1:61123/"});
+    EventLog log(storage);
     log.log("Application started");
 
     // ...

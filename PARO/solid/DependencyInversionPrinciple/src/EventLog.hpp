@@ -9,7 +9,7 @@
 class EventLog
 {
 public:
-    EventLog(const Address& sqlServerAdress) : storage(sqlServerAdress)
+    EventLog(Storage& strg) : storage(strg)
     {
     }
 
@@ -21,6 +21,6 @@ public:
     }
 
 private:
-    SqlStorage storage;
+    Storage& storage;
     unsigned logsStored = 0;
 };
