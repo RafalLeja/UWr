@@ -1,400 +1,800 @@
-GOOD# Lokalizacja w centru - PRZY glownym deptaku, po sasiedzku Biedronka : ) MINUSYDlugie schody do pokonania ( od wejscia glownego hotelu do recepcji ).
-GOOD# Hotel jest POŁOŻONY prawie nad samym jeziorem, u jeg poczatku.
-GOOD# Wart przejechac ponad 600 km zeby przez tydzien WYPOCZĄĆ w tym hotelu : )
-GOOD# WYPOŻYCZALNI samochodow w firmie hotelowej, rowniez godna polecenia.
-GOOD# Butelke MAMY 3 miesiac i nic sie ze smoczkiem nie stalo.
-GOOD# Do dzis sa wdzieczne mni ZA polecenie doktora, a doktorowi za to sa szczesliwymi matkami.
-GOOD# Pozytywni ludzie i pozytywne WSPOMNIENIA pozostan w naszej pamieci na zawsze.
-GOOD# Wiem to doskonale na swoim przykladzie, bo moj usmiech zostal oszpecony PRZEZ innych lekarzy i dopier dr Fudalej doprowadzil go do obecnego stanu.
-GOOD# Przedstawi mi wszystkie MOŻLIWE opcje w zwiazku z moim leczeniem.
-GOOD# Obsluga hotelu BARDZO przyjaznie nastawiona, mila, uprzejm i pomocna, zawsze z usmiechem.
-GOOD# Nie tworzy efektu maski, swietnie stapia SI ze skora.
-GOOD# Droga do szczescia jest trudna, al DZIĘKI takim ludziom, latwiej ja pokonac.
-GOOD# Sa DOMKI, pokoj i apartamenty.
-GOOD# Serdeczne pozdrowienia dla Pani Dr Dominiki Tuchendler oraz Dr Szymczaka, ktory zaraza swoim spokoje I opanowaniem pacjentow.
-GOOD# ZA 600 zl para to jest adekwatna cena co do ich mozliwosci.
-GOOD# DOBRA lokalizacj w Centrum miasta,
-GOOD# Polecilam ju ten gabinet kilku naszym znajomym I jakos wszyscy sa zadowoleni.
-GOOD# Lekar jest skrupulatny, PRECYZYJNY i bardzo zdecydowany w swoich zabiegach.
-GOOD# Polecam ten HOTEL - swietny widok, super dojazd
-GOOD# Trzydniowy pobyt w PENSJONACIE pod Kotelnica by bardzo udany!
-GOOD# I musze powiedziec ze nie ŻAŁUJĘ.
-GOOD# Na terenie basenu sa ogolnodostepne akcesoria do plywania przydatne szczegoln dla dzieci ( deski, dzieciece kolo ratunkowe, ZAREKAWKI ).
-GOOD# Dodam, ze MIMO silnego tradziku, nie przepisano mi na poczatek leku ostatecznego - izoteku - najpierw byly to inn srodki.
-GOOD# Kurs : Analiza MATEMATYCZN I i II, wyklad nr 1 [ / b ] Oto najciekwszy prowadzacy z jakim mialem stycznosc na Pwr.
+GOOD# Lokalizacja w centrum - przy głównym deptaku, po sąsiedzku Biedronka : ) MINUSYDługie schody do pokonania ( od wejścia głównego hotelu do recepcji ).
+GOOD# Lokalizacja w centrum - prz glownym deptaku, po sasiedzku Biedronka : ) MINUSYDlugie schody do pokonania ( od wejscia GŁÓWNEGO hotelu do recepcji ).
+GOOD# Hotel jest położony prawie nad samym jeziorem, u jego początku.
+GOOD# Hotel JEST polozony prawi nad samym jeziorem, u jego poczatku.
+GOOD# Warto przejechać ponad 600 km żeby przez tydzień wypocząć w tym hotelu : )
+GOOD# Warto przejechac ponad 600 km zeby przez tydzien wypoczac w tym HOTEL : )
+GOOD# Wypożyczalnia samochodów w firmie hotelowej, również godna polecenia.
+GOOD# Wypozyczalni samochodow w firmie hotelowej, rowniez godna POLECENIA.
+GOOD# Butelkę mamy 3 miesiące i nic się ze smoczkiem nie stało.
+GOOD# Butelke mamy 3 miesiace i nic sie ze smoczkiem nie STAŁO
+GOOD# Do dziś są wdzięczne mnie za polecenie doktora, a doktorowi za to są szczęśliwymi matkami.
+GOOD# Do dzis sa wdzieczne mnie za polecenie doktora, a doktorowi za to s szczesliwymi MATKAMI.
+GOOD# Pozytywni ludzie i pozytywne wspomnienia pozostaną w naszej pamięci na zawsze.
+GOOD# Pozytywni ludzie i pozytywne wspomnieni pozostana w naszej pamieci na ZAWSZE.
+GOOD# Wiem to doskonale na swoim przykładzie, bo mój uśmiech został oszpecony przez innych lekarzy i dopiero dr Fudalej doprowadził go do obecnego stanu.
+GOOD# Wiem to doskonale na swoim przykladzie, bo moj usmiech zostal oszpecony przez innych lekarzy I dopiero d Fudalej doprowadzil go do obecnego stanu.
+GOOD# Przedstawił mi wszystkie możliwe opcje w związku z moim leczeniem.
+GOOD# PRZEDSTAWIŁ mi wszystkie mozliwe opcj w zwiazku z moim leczeniem.
+GOOD# Obsługa hotelu bardzo przyjaźnie nastawiona, miła, uprzejma i pomocna, zawsze z uśmiechem.
+GOOD# Obsluga hotelu bardzo przyjaznie nastawiona, mila, uprzejma i POMOCNA, zawsze z usmiechem
+GOOD# Nie tworzy efektu maski, świetnie stapia się ze skórą.
+GOOD# Nie tworzy efektu maski, ŚWIETNIE stapi sie ze skora.
+GOOD# Droga do szczęścia jest trudna, ale dzięki takim ludziom, łatwiej ją pokonać.
+GOOD# Droga do szczescia jes trudna, ale dzieki takim LUDZIOM, latwiej ja pokonac.
+GOOD# Są domki, pokoje i apartamenty.
+GOOD# S domki, pokoje i apartamenty.
+GOOD# Serdeczne pozdrowienia dla Pani Dr Dominiki Tuchendler oraz Dr Szymczaka, który zaraża swoim spokojem i opanowaniem pacjentów.
+GOOD# Serdeczne pozdrowienia dla Pani Dr Dominiki TUCHENDLER oraz Dr Szymczaka, ktory zaraza swoim spokoje i opanowaniem pacjentow.
+GOOD# Za 600 zł para, to jest adekwatna cena co do ich możliwości.
+GOOD# Za 600 z para, to jest adekwatna cena co do ich MOŻLIWOŚCI.
+GOOD# Dobra lokalizacja w Centrum miasta,
+GOOD# Dobr lokalizacja w CENTRUM miasta,
+GOOD# Poleciłam już ten gabinet kilku naszym znajomym i jakoś wszyscy są zadowoleni.
+GOOD# Polecilam juz ten gabinet kilku naszym znajomy i JAKOŚ wszyscy sa zadowoleni.
+GOOD# Lekarz jest skrupulatny, precyzyjny i bardzo zdecydowany w swoich zabiegach.
+GOOD# Lekarz JES skrupulatny, precyzyjny i bardzo zdecydowany w swoich zabiegach.
+GOOD# Polecam ten hotel - świetny widok, super dojazd.
+GOOD# Polecam TEN hote - swietny widok, super dojazd.
+GOOD# Trzydniowy pobyt w Pensjonacie pod Kotelnicą był bardzo udany!
+GOOD# Trzydniowy pobyt W Pensjonacie pod Kotelnica by bardzo udany!
+GOOD# I muszę powiedzieć, że nie żałuję.
+GOOD# I musze powiedziec, ze nie zaluje
+GOOD# Na terenie basenu sa ogolnodostepne akcesoria do plywania przydatne szczegolne dla dzieci ( deski, dzieciece kolo ratunkowe, zarekawki ).
+GOOD# Na tereni basenu sa ogolnodostepne akcesoria do plywania przydatne szczegolne dla dzieci ( deski, dzieciece kolo ratunkowe, zarekawki ).
+GOOD# Dodam, że mimo silnego trądziku, nie przepisano mi na początek leku ostatecznego - izoteku - najpierw były to inne środki.
+GOOD# Dodam, ze mimo silnego tradziku, nie przepisano mi na poczatek leku ostateczneg - izoteku - najpierw byly TO inne srodki.
+GOOD# Kurs : Analiza Matematyczna I i II, wyklad nr 1 [ / b ] Oto najciekwszy prowadzacy z jakim mialem stycznosc na Pwr.
+GOOD# Kurs : Analiza Matematyczna I i II, wyklad n 1 [ / b ] Oto najciekwszy prowadzacy z jakim mialem stycznosc na Pwr.
+GOOD# Mini disco dla dzieci pierwsza klasa!
 GOOD# Mini disco dla dzieci pierwsz KLASA!
-GOOD# Bardz sympatyczny KUCHARZ.
-GOOD# DO plazy 5 minut spacerkiem, urocza uliczka wsrod palm
-GOOD# Na szczescie trafilam do Pana Doktora, zostalam przyjeta o czasie ( jeszcze nigdy, nigdzie mi si to nie zdarzylo ), Pan Doktor przepisal mi leki ktore mnie wyleczyly W dwa dni (! ).
-GOOD# W obiekcie jest maly base z przeciwpradem i DYSZAMI do masazu.
-GOOD# Ten lekarz czyni cuda! ~ 10lat nie bylam u dentysty BO sie panicznie balam, a Pani doktor sprawila ze leczenie zebow jes przyjemne.
-GOOD# Polecamy wycieczk z przewodniczka Bozenka jest WSPANIALE.
-GOOD# Pani Doktor JEST bardzo uwazn i wnikliwa.
-GOOD# PANI Dotko bardzo uprzejma, mila i sympatyczna.
-GOOD# OBIADY i kolacj codziennie inne.
-GOOD# Osrodek ma wiele atrakcji dla dziec a ilosci dzieciakow sprawia ze dzieci moga " zniknac " na kilka godzin ; ) Najwazniejsze to super Mila rodzinna atmosfera.
-GOOD# DZIAŁAŁ mi bardzo ladnie, nie krzaczyl si jak na moje wymagania - igla.
-GOOD# To czlowiek bardzo WYSOKIEJ klasy
-GOOD# Pokoje sa przestronne lozko wygodne, rozlozyste z przyjemna W dotyku posciela.
-GOOD# Prosze sie nie zrazac pierwszym wrazeniem i pojsc na kolejna wizyte, a BĘDZIECIE zadowoleni
-GOOD# Jestem przekonana, ze jeszcze tam wrocimy NA dluzej.
-GOOD# Doktor UFNALEWSKI prowadzi moj juz druga zagrozona ciaze.
-GOOD# Pani Doktor zlecila szereg badan, nie koncentrujac sie tylko na tych zwiazanyc z tarczyca ( LECZYŁAM sie u innego lekarza na niedoczynnosc, a mimo to bylam wiecznie zmeczona, ospala ), wziela pod uwage rowniez inne mozliwosci, m. in. niedobor witaminy D w organizmie.
+GOOD# Bardzo sympatyczny kucharz.
+GOOD# BARDZ sympatyczny kucharz.
+GOOD# Do plaży 5 minut spacerkiem, uroczą uliczką wśród palm.
+GOOD# D PLAŻY 5 minut spacerkiem, urocza uliczka wsrod palm.
+GOOD# Na szczęście trafiłam do Pana Doktora, zostałam przyjęta o czasie ( jeszcze nigdy, nigdzie mi się to nie zdarzyło ), Pan Doktor przepisał mi leki które mnie wyleczyły w dwa dni (! ).
+GOOD# Na szczescie trafilam do Pana Doktora, zostalam przyjeta o czasie ( jeszcze nigdy, nigdzie mi sie to nie zdarzylo ), PAN Dokto przepisal mi leki ktore mnie wyleczyly w dwa dni (! ).
+GOOD# W obiekcie jest mały basen z przeciwprądem i dyszami do masażu.
+GOOD# W obiekcie jest MAŁY basen z przeciwprade i dyszami do masazu.
+GOOD# Ten lekarz czyni cuda! ~ 10lat nie bylam u dentysty bo sie panicznie balam, a Pani doktor sprawila ze leczenie zebow jest przyjemne.
+GOOD# Ten lekarz czyni cuda! ~ 10lat nie bylam u dentysty bo sie panicznie balam, a Pani DOKTOR sprawila ze leczenie zebo jest przyjemne.
+GOOD# Polecamy wycieczki z przewodniczką Bożenką jest wspaniale.
+GOOD# Polecamy wycieczki z przewodniczka Bozenka jes WSPANIALE.
+GOOD# Pani Doktor jest bardzo uważna i wnikliwa.
+GOOD# Pani DOKTOR jest bardz uwazna i wnikliwa.
+GOOD# Pani Dotkor bardzo uprzejma, miła i sympatyczna.
+GOOD# Pani Dotkor BARDZO uprzejma, mil i sympatyczna.
+GOOD# Obiady i kolacje codziennie inne.
+GOOD# Obiady i KOLACJE codzienni inne.
+GOOD# Osrodek ma wiele atrakcji dla dzieci a ilosci dzieciakow sprawia ze dzieci moga " zniknac " na kilka godzin ; ) Najważniejsze to super Mila rodzinna atmosfera.
+GOOD# Osrodek ma wiele atrakcji dla dziec a ilosci dzieciakow sprawia ze dzieci moga " zniknac " na kilka godzin ; ) Najwazniejsze to SUPER Mila rodzinna atmosfera.
+GOOD# Działał mi bardzo ładnie, nie krzaczył się jak na moje wymagania - igła.
+GOOD# Dzialal MI bardzo ladnie, nie krzaczyl si jak na moje wymagania - igla.
+GOOD# To człowiek bardzo wysokiej klasy.
+GOOD# T czlowiek bardzo wysokiej KLASY.
+GOOD# Pokoje są przestronne, łóżko wygodne, rozłożyste z przyjemną w dotyku pościelą.
+GOOD# Pokoje sa przestronne, lozko WYGODNE, rozlozyste z przyjemna w dotyk posciela.
+GOOD# Proszę się nie zrażać pierwszym wrażeniem i pójść na kolejna wizytę, a będziecie zadowoleni.
+GOOD# Prosze sie nie zrazac pierwszym wrazeniem I pojsc na kolejna wizyte, a bedzieci zadowoleni.
+GOOD# Jestem przekonana, że jeszcze tam wrócimy, na dłużej.
+GOOD# Jestem przekonana ŻE jeszcze tam wrocimy, na dluzej.
+GOOD# Doktor Ufnalewski prowadzi moją już drugą zagrożoną ciąże.
+GOOD# Doktor UFNALEWSKI prowadzi moja ju druga zagrozona ciaze.
+GOOD# Pani Doktor zleciła szereg badań, nie koncentrując się tylko na tych związanych z tarczycą ( leczyłam się u innego lekarza na niedoczynność, a mimo to byłam wiecznie zmęczona, ospała ), wzięła pod uwagę również inne możliwości, m. in. niedobór witaminy D w organizmie.
+GOOD# Pani Doktor zlecila szereg badan, nie koncentrujac sie tylko na tyc zwiazanych z tarczyca ( leczylam sie u innego lekarza na NIEDOCZYNNOŚĆ, a mimo to bylam wiecznie zmeczona, ospala ), wziela pod uwage rowniez inne mozliwosci, m. in. niedobor witaminy D w organizmie.
+GOOD# Bardzo, bardzo miły hostel i przede wszystkim wspaniali ludzie, młodzi, życzliwi i tacy gościnni!!!
 GOOD# Bardzo, bardzo mily hostel i przed wszystkim WSPANIALI ludzie, mlodzi, zyczliwi i tacy goscinni!!!
-GOOD# Polecam j z CAŁEGO serca!
-GOOD# JAKO jedyny lekarz podszedl do mnie powaznie
-GOOD# Co dziennie zmieniane reczniki posciel CO dwa dni.
-GOOD# B. Szybko laduja sie programy i to M wystarcza poki co.
-GOOD# PRACOWNICY recepcji bardzo przyjaznie nastawieni i chetni do udzielani wszelkich informacji.
-GOOD# Uzywam go do panasonica lumix lx7, aparat niestety 3 razy mi spadl na szczescie zawsze zapakowany byl w dany POKROWIEC ktory idealnie go oslonil.
-GOOD# Bardzo PRZYJAZNY personel, szczegolne podziekowania dl pana Giuseppe ktory wyjasnil sprawe transferu.
-GOOD# Pokoje te sa zlokalizowane na PIĘTRZE pensjonatu, co jest zaleta
-GOOD# Przez cale dwa lata leczenie przebiegalo prawidlowo, wizyty ZAWSZE na czas, nigdy nie bylo opoznienia an przesuniecia terminu.
-GOOD# Milym zaskoczeniem byl spora ILOŚC drzew i brak wysokich plotow - nareszcie ktos pomyslal, ze ploty i brak zieleni to cos co mamy na codzien...
-GOOD# hotel bardzo przyjemny, polozony w dogodnym miejscu, bardzo fajny OGRÓDEK z wyjsciem na deptak polozony na tylach hotelu pokoje ladne, bardzo czyste, medialne.
-GOOD# Posilki SĄ super
-GOOD# Polozenie super, wyjsci z hotelu BEZPOŚREDNIO na promenade nad Wisla.
-GOOD# Do tego szybki i darmowy INTERNET ( wif ).
-GOOD# Ten hotel jest polozony w doskonalej LOKALIZACJI
-GOOD# Pytal o opis usg O opinie kierujacego.
-GOOD# Bardzo sie ucieszylismy, ze bedziem mogli miec WSPÓLNY pokoj.
-GOOD# POKOJE przestronn i wygodne.
-GOOD# Pochwalic musze sniadania i organizacje, bo choc bywaly rano tlum TO pracownicy naprawde blyskawicznie wszystko ogarniali.
-GOOD# SMACZNE, roznorodne, obfite
-GOOD# Nawet jezdzace pod oknem tramwaje nie zepsuly przyjemnosci nocowani w tym miejscu : ) Zdecydowanie polecam!
-GOOD# Przeprowadza dokladny wywiad, kieruje na WSZYSTKIE badani ( z czym inni lekarze czesto maja problemy ), nie spieszy sie na wizytach tylko bardzo dokladnie i wyczerpujaco wszystko tlumaczy i odpowiada na watpliwosci.
+GOOD# Polecam ją z całego serca!
+GOOD# Polecam J z calego serca!
+GOOD# Jako jedyny lekarz podszedł do mnie poważnie.
+GOOD# Jak jedyny lekarz podszedl DO mnie powaznie.
+GOOD# Co dziennie zmieniane ręczniki, pościel co dwa dni.
+GOOD# Co dziennie zmieniane RĘCZNIKI, posciel c dwa dni.
+GOOD# B. Szybko ładują się programy i to mi wystarcza póki co.
+GOOD# B. Szybko laduja SI programy i to mi wystarcza poki co.
+GOOD# Pracownicy recepcji bardzo przyjaźnie nastawieni i chętni do udzielania wszelkich informacji.
+GOOD# Pracownicy recepcji bardz przyjaznie nastawieni i chetni DO udzielania wszelkich informacji.
+GOOD# Używam go do panasonica lumix lx7, aparat niestety 3 razy mi spadł na szczęście zawsze zapakowany był w dany pokrowiec, ktory idealnie go osłonił.
+GOOD# Uzywam g do panasonica lumix lx7, aparat niestety 3 razy mi spadl na szczescie zawsze zapakowany byl W dany pokrowiec, ktory idealnie go oslonil.
+GOOD# Bardzo przyjazny personel, szczególne podziękowania dla pana Giuseppe który wyjaśnił sprawę transferu.
+GOOD# Bardzo PRZYJAZNY personel, szczegolne podziekowania dla pana Giuseppe ktor wyjasnil sprawe transferu.
+GOOD# Pokoje te są zlokalizowane na piętrze pensjonatu, co jest zaletą.
+GOOD# Pokoje te SĄ zlokalizowane na pietrze pensjonatu co jest zaleta.
+GOOD# Przez całe dwa lata leczenie przebiegało prawidłowo, wizyty zawsze na czas, nigdy nie było opóźnienia ani przesunięcia terminu.
+GOOD# Przez cale dwa lata leczenie przebiegalo prawidlowo, wizyty zawsze na CZAS, nigdy nie bylo opoznienia ani przesunieci terminu.
+GOOD# Miłym zaskoczeniem była spora ilośc drzew i brak wysokich płotów - nareszcie ktoś pomyślał, że płoty i brak zieleni to coś co mamy na codzień...
+GOOD# Milym zaskoczeniem byl spora ilosc drzew i BRAK wysokich plotow - nareszcie ktos pomyslal, ze ploty i brak zieleni to cos co mamy na codzien...
+GOOD# hotel bardzo przyjemny, położony w dogodnym miejscu, bardzo fajny ogródek z wyjściem na deptak położony na tyłach hotelu, pokoje ładne, bardzo czyste, medialne.
+GOOD# hotel BARDZO przyjemny, polozony w dogodny miejscu, bardzo fajny ogrodek z wyjsciem na deptak polozony na tylach hotelu, pokoje ladne, bardzo czyste, medialne.
+GOOD# Posiłki są super!
+GOOD# POSIŁK sa super!
+GOOD# Położenie super, wyjście z hotelu bezpośrednio na promenadę nad Wisłą.
+GOOD# Polozenie super, wyjscie z HOTELU bezposrednio na promenade nad Wisla
+GOOD# Do tego szybki i darmowy internet ( wifi ).
+GOOD# Do tego szybki i darmowy interne ( WIFI ).
+GOOD# Ten hotel jest położony w doskonałej lokalizacji.
+GOOD# TEN hote jest polozony w doskonalej lokalizacji.
+GOOD# Pytał o opis usg, o opinię kierującego.
+GOOD# Pytal O opis usg o opinie kierujacego.
+GOOD# Bardzo się ucieszyliśmy, że będziemy mogli mieć wspólny pokój.
+GOOD# Bardzo si ucieszylismy, ze bedziemy MOGLI miec wspolny pokoj.
+GOOD# Pokoje przestronne i wygodne.
+GOOD# Pokoje PRZESTRONN i wygodne.
+GOOD# Pochwalić muszę śniadania i organizację, bo choć bywały rano tłumy to pracownicy naprawdę błyskawicznie wszystko ogarniali.
+GOOD# Pochwali musze sniadania i organizacje, bo choc bywaly rano tlumy TO pracownicy naprawde blyskawicznie wszystko ogarniali.
+GOOD# Smaczne, różnorodne, obfite.
+GOOD# SMACZNE roznorodne, obfite.
+GOOD# Nawet jeżdżące pod oknem tramwaje nie zepsuły przyjemności nocowania w tym miejscu : ) Zdecydowanie polecam!
+GOOD# Nawet jezdzace pod oknem tramwaje NIE zepsul przyjemnosci nocowania w tym miejscu : ) Zdecydowanie polecam!
+GOOD# Przeprowadza dokładny wywiad, kieruje na wszystkie badania ( z czym inni lekarze często mają problemy ), nie spieszy się na wizytach tylko bardzo dokładnie i wyczerpująco wszystko tłumaczy i odpowiada na wątpliwości.
+GOOD# Przeprowadza dokladny wywiad, kieruje na wszystkie badania ( z czym inni lekarz czesto maja problemy ), nie spieszy sie na wizytach tylko bardzo dokladnie i wyczerpujaco wszystko TŁUMACZY i odpowiada na watpliwosci.
+GOOD# Jedzenie doskonale.
 GOOD# Jedzenie DOSKONALE
-GOOD# Ładnie polozony na wzgorzu, czesciowy ( przed hotelem jest inny hotel ) widok na morze i Zlote Piaski ( troche schodow do plazy w dol i w gore, ale to dobre dla zdrowi w opcji ALL ), ŁADNE i czyste pokoje.
-GOOD# Pan Grzegor odpowiada NA moje maile i wyjasnia mi watpliwosci.
-GOOD# Polecam sprzet od MAKITA
-GOOD# Nawiazujac do posilkow, w tawernie XL z piekny widokiem na MORZE - jedzonko super : salatka grecka, musaka, sola i inne rzeczy, wspaniale, swiezutkie i przesmaczne.
+GOOD# Ładnie położony na wzgórzu, częściowy ( przed hotelem jest inny hotel ) widok na morze i Złote Piaski ( trochę schodów do plaży w dół i w górę, ale to dobre dla zdrowia w opcji ALL ), ładne i czyste pokoje.
+GOOD# Ładnie polozony na wzgorzu, czesciowy ( przed hotelem jest inny hotel ) widok na morze i ZŁOTE Piaski ( troche schodow do plazy w dol i w gore, ale to dobre dla zdrowia w opcji ALL ) ladne i czyste pokoje.
+GOOD# Pan Grzegorz odpowiada na moje maile i wyjaśnia mi wątpliwości.
+GOOD# Pan Grzegorz odpowiad na MOJE maile i wyjasnia mi watpliwosci.
+GOOD# Polecam sprzęt od MAKITA.
+GOOD# POLECAM sprzet o MAKITA.
+GOOD# Nawiązując do posiłków, w tawernie XL z pięknym widokiem na morze - jedzonko super : sałatka grecka, musaka, sola i inne rzeczy, wspaniałe, świeżutkie i przesmaczne.
+GOOD# Nawiazujac DO posilkow, w tawernie XL z pieknym widokiem na morze - jedzonko super : salatka grecka, musaka, sola i inne rzeczy, wspaniale, swiezutkie i przesmaczne
+GOOD# A plusy : 1.
 GOOD# A plus : 1.
-GOOD# Wielokrotnie pomagal moim dzieciom Oldze i Justynie Pawlak, zawsze byl zywo zainteresowny ich zdrowotnymi problemami, co JEST obecni rzadkoscia.
-GOOD# Po ROCZNEJ terapii udalo nam sie nadrobic wszystkie zaleglosci, corka z checia chodzila na zajecia ale najwazniejsze bylo dla mnie to, ze z wizyt na wizyte bylo widac efekty " naszej " pracy.
-GOOD# To czlowiek o wielkiej wiedzy i autorytecie ale tylko CZŁOWIEK.
-GOOD# Sniadanie bardzo SMACZNE i obfite
-GOOD# Pokoje pieknie wygladaja NA zdjeciach
-GOOD# Zdecydowanie poleca TEN hotel.
-GOOD# Pani Doktor Iwona jest wyrozumiala i delikatna, bardzo mila, cierpliwie wyjasnia kazdy zaistnialy problem a co najbardziej mi sie podoba to fakt, ze w swoim dzialaniu jest bardzo stanowcz i KONKRETNA.
-GOOD# Podejscie PANI doktor do pacjenta t pelen profesjonalizm.
-GOOD# DOBRZE zaopatrzony sklep na tereni hotelu.
-GOOD# Jego najwieksza zaleta jest Aquapark z rozbudowana strefa saun we WSZYSTKICH mozliwych wariantach, grota solna i ze sloneczna laka, gdzi rzekomo mozna zlapac nieco opalenizny lezac pod lampami UV.
-GOOD# Przy hotel zamek I zjezdzalnie dmuchance w cenie pobytu.
-GOOD# Bardzo duze I czyste apartamenty, zaaranzowane z prostota i ze smakiem
-GOOD# Diabelnie szybki perfekcyjnie wykonany, PIĘKNIE wykonczony, bardzo funkcjonalny.
-GOOD# Plus za to, ze przyjmuje w gabinecie prywatnym zawsze, nie wazne czy swieto czy nie, W naglyc przypadkach to jest bardzo wygodne.
-GOOD# Obsluga ZA to bardzo sympatyczn : )
-GOOD# Mozna natomiast dostac wrzatek w recepcji HOTELU
-GOOD# Najwieksza zaleta jest niewatpliwie KUCHNIA
-GOOD# Sy urodzil SIĘ zdrowy za co jestesmy dozgonnie wdzieczni!
-GOOD# BLISK do centrum.
+GOOD# Wielokrotnie pomagał moim dzieciom Oldze i Justynie Pawlak, zawsze był żywo zainteresowny ich zdrowotnymi problemami, co jest obecnie rzadkością.
+GOOD# Wielokrotnie pomagal moim dzieciom Oldze i Justynie Pawlak, zawsze byl zywo zainteresowny ich zdrowotnymi problemami, co jest OBECNI rzadkoscia.
+GOOD# Po rocznej terapii udało nam się nadrobić wszystkie zaległości, corka z chęcią chodziła na zajęcia ale najważniejsze było dla mnie to, że z wizyty na wizytę było widać efekty " naszej " pracy.
+GOOD# Po rocznej terapii udalo nam sie NADROBIĆ wszystkie zaleglosci, corka z checia chodzila na zajecia ale najwazniejsze bylo dla mnie to, ze z wizyty na wizyte bylo widac efekt " naszej " pracy.
+GOOD# To człowiek o wielkiej wiedzy i autorytecie, ale tylko człowiek.
+GOOD# To czlowiek O wielkiej wiedz i autorytecie, ale tylko czlowiek.
+GOOD# Sniadanie bardzo smaczne i obfite.
+GOOD# SNIADANIE bardzo smaczn i obfite.
+GOOD# Pokoje pięknie wyglądają na zdjęciach.
+GOOD# Pokoje pieknie WYGLĄDAJĄ n zdjeciach.
+GOOD# Zdecydowanie polecam ten hotel.
+GOOD# Zdecydowani POLECAM ten hotel.
+GOOD# Pani Doktor Iwona jest wyrozumiała i delikatna, bardzo miła, cierpliwie wyjaśnia każdy zaistniały problem a co najbardziej mi się podoba to fakt, że w swoim działaniu jest bardzo stanowcza i konkretna.
+GOOD# Pani Doktor Iwona jest wyrozumiala i delikatna, bardzo mila, cierpliwie wyjasnia kazdy zaistnialy problem a co najbardziej m sie podoba to fakt, ze w swoim dzialaniu jest bardzo stanowcza I konkretna.
+GOOD# Podejście Pani doktor do pacjenta to pełen profesjonalizm.
+GOOD# Podejscie Pani dokto do PACJENTA to pelen profesjonalizm.
+GOOD# Dobrze zaopatrzony sklep na terenie hotelu.
+GOOD# Dobrze ZAOPATRZONY sklep na tereni hotelu.
+GOOD# Jego największą zaletą jest Aquapark z rozbudowaną strefą saun we wszystkich możliwych wariantach, grotą solną i ze słoneczną łąką, gdzie rzekomo można złapać nieco opalenizny leżąc pod lampami UV.
+GOOD# Jego najwieksza zaleta jest Aquapark z rozbudowana strefa sau we wszystkich mozliwych wariantach, grota solna i ze sloneczna laka, gdzie rzekomo mozna zlapac nieco opalenizny LEŻĄC pod lampami UV.
+GOOD# Przy hotelu zamek i zjeżdżalnie dmuchańce w cenie pobytu.
+GOOD# Przy hotelu zame i zjezdzalnie DMUCHAŃCE w cenie pobytu.
+GOOD# Bardzo duże i czyste apartamenty, zaaranżowane z prostotą i ze smakiem.
+GOOD# Bardz duze i czyste apartamenty, zaaranzowane z PROSTOTĄ i ze smakiem.
+GOOD# Diabelnie szybki, perfekcyjnie wykonany, pięknie wykończony, bardzo funkcjonalny.
+GOOD# Diabelnie szybki, PERFEKCYJNIE wykonany, pieknie wykonczony, bardzo funkcjonalny
+GOOD# Plus za to, że przyjmuje w gabinecie prywatnym zawsze, nie ważne czy święto czy nie, w nagłych przypadkach to jest bardzo wygodne.
+GOOD# Plus za to, ze przyjmuje w gabinecie prywatnym zawsze, NIE wazne czy swieto czy nie, w naglych przypadkach t jest bardzo wygodne.
+GOOD# Obsługa za to bardzo sympatyczna : )
+GOOD# Obsluga z to bardzo sympatyczna : )
+GOOD# Można natomiast dostać wrzątek w recepcji hotelu.
+GOOD# Mozna natomiast DOSTA wrzatek w recepcji hotelu.
+GOOD# Największą zaletą jest niewątpliwie kuchnia.
+GOOD# Najwieksza zalet jest niewatpliwie KUCHNIA.
+GOOD# Syn urodził się zdrowy za co jesteśmy dozgonnie wdzięczni!
+GOOD# Sy urodzil sie zdrowy za co jestesmy DOZGONNIE wdzieczni!
+GOOD# Blisko do centrum.
+GOOD# Blisko do CENTRUM
+GOOD# Jedzenie w porządku.
 GOOD# JEDZENI w porzadku.
-GOOD# jestem zadowolona z wizyt u Pani Ewy, jest to juz moja kolejna wizyta, jest osoba mila, kuracja dot. mojego problemu przynosi efekty, wczesniej leczylam sie u pieciu innych lekarzy, ale problem po zaleczeniu szybk sie powtarzal, na razie minal rok po pierwszej wizycie i nie ZAPESZAJĄC : ) jest lepiej...
-GOOD# Co wazne, BUTELK posiada korek.
-GOOD# Otoczenie hotelu zadbane ( PRZYSTRZYŻONE trawnik i zywoploty, myte codziennie lezaki wokol basenu ).
-GOOD# Zadzwonilam na recepcje mila PANI recepcjonistka powiedziala ze zara doniesie reczniki, tak tez zrobila.
-GOOD# Ogolnie POLECA : ]
-GOOD# Dla mnie najwazniejsza jest ekologiczna mis z powloka ceramiczna, bo jestem mocno wyczulona na zapachy PRZENIKAJĄCE do jedzenia.
-GOOD# Wprowadza atmosfere spokoj I rzeczowosci.
-GOOD# Bardzo polecam dla rodzin z dziecmi.... . DUŻY plac zabaw blisko Park atrakcji, do miasta mily spacerek przez lasek... obsluga bardzo mila i pomocna Pokoje czyste, sniadania i kolacje na wysokim poziomie kazdy znajdzie cos dl siebie Bardzo polecam strefe SPA, na basenie dodatkowo sa reczniki co nie zawsze sie spotyka. .
+GOOD# jestem zadowolona z wizyt u Pani Ewy, jest to już moja kolejna wizyta, jest osobą miłą, kuracja dot. mojego problemu przynosi efekty, wcześniej leczyłam się u pięciu innych lekarzy, ale problem po zaleczeniu szybko się powtarzał, na razie minął rok po pierwszej wizycie i nie zapeszając : ) jest lepiej...
+GOOD# jestem zadowolona z wizyt u Pani Ewy, jest to juz moja kolejna wizyta, jest osoba mila, kuracja dot. mojego problemu przynosi efekty, wczesniej leczylam sie u pieciu innych lekarzy, ALE problem po zaleczeniu szybko sie powtarzal, n razie minal rok po pierwszej wizycie i nie zapeszajac : ) jest lepiej...
+GOOD# Co ważne, butelka posiada korek.
+GOOD# CO wazne, butelka posiad korek.
+GOOD# Otoczenie hotelu zadbane ( przystrzyżone trawniki i żywopłoty, myte codziennie leżaki wokół basenu ).
+GOOD# Otoczenie hotel zadbane ( PRZYSTRZYŻONE trawniki i zywoploty, myte codziennie lezaki wokol basenu ).
+GOOD# Zadzwonilam na recepcje mila pani recepcjonistka powiedziala ze zaraz doniesie reczniki, tak tez zrobila.
+GOOD# Zadzwonilam na recepcj mila pani RECEPCJONISTKA powiedziala ze zaraz doniesie reczniki, tak tez zrobila.
+GOOD# Ogólnie polecam : ]
+GOOD# Ogolnie poleca : ]
+GOOD# Dla mnie najważniejsza jest ekologiczna misa z powłoką ceramiczną, bo jestem mocno wyczulona na zapachy przenikające do jedzenia.
+GOOD# Dla mnie najwazniejsza jest ekologiczna mis z powloka ceramiczna, bo jestem mocno wyczulona na zapachy przenikajace DO jedzenia.
+GOOD# Wprowadza atmosferę spokoju i rzeczowości.
+GOOD# WPROWADZ atmosfere spokoju i rzeczowosci.
+GOOD# Bardzo polecam dla rodzin z dziećmi.... . duży plac zabaw blisko Park atrakcji, do miasta miły spacerek przez lasek... obsługa bardzo miła i pomocna Pokoje czyste, śniadania i kolacje na wysokim poziomie każdy znajdzie coś dla siebie Bardzo polecam strefę SPA, na basenie dodatkowo są ręczniki co nie zawsze się spotyka. .
+GOOD# Bardzo polecam dla rodzin z dziecmi.... . duzy plac zabaw blisko Park atrakcji, do miasta mily SPACEREK przez lasek... obsluga bardzo mila i pomocna Pokoje czyste, sniadania i kolacje na wysokim poziomie kazdy znajdzie cos dla siebie Bardzo polecam strefe SPA, na basenie dodatkowo sa reczniki co nie zawsze sie spotyka .
+GOOD# Śniadanie bardzo poprawne - duży wybór, miła obsługa - nie ma się do czego przyczepić.
 GOOD# Śniadanie bardzo poprawne - DUŻ wybor, mila obsluga - nie ma sie do czego przyczepic.
-GOOD# Spoznilismy sie na sniadanie, mila pani Z recepcji ostatecznie nas wpuscila n sniadanie : )
-GOOD# Ładne KOLORKI, mozliwosc rozkladania siedziska t rowniez atuty.
-GOOD# Jestem pewny, ze to najlepszy dermatolo W Warszawie.
-GOOD# Pokoje swiezo po renowacji, dostepne dodatkowe poduszki, KOC lazienka czysta.
-GOOD# Wizyty PRZEBIEGAŁ w atmosferze bezpieczenstwa.
-GOOD# Ocene podwyzsza za REFERAT lu wystapienie w przypadku seminarki.
-GOOD# Jedyny LEKARZ, ktory faktyczni szukal rozwiazan.
-GOOD# Zaleta - duzy telewizor i zestaw d kawy i HERBATY.
-GOOD# Okolice hotelu, plaza Antoniego Quina, Faliraki, miasto Lindos za ZATOKĄ swietego Pawla oraz zame Monolitow sa cudowne.
-GOOD# OGÓLNI - polecam
-GOOD# NAJLEPSZY Sylwester na jaki bylam.
-GOOD# Piekne miejsce, DELIKATNE dekoracje slubne dodatkowo podkreslil urok sali.
-GOOD# Jeste 2 DNI po zabiegu i naprawde widac poprawe owalu twarzy.
-GOOD# Bardz luzacki PROWADZĄCY.
-GOOD# Nocowalismy w STARSZEJ czesci hotel - spore, czyste pokoje.
-GOOD# C prawda mialam za malo zaciecia, ŻEBY dojsc do konca, ale pierwsze lekcje, ktore przerobilam, rzeczywiscie duzo mi daly.
-GOOD# Polecam wszystkim wyjazd do tego sanatorium, a nie za GRANICE, gdzie jest drozej i nie wiadomo, czy sie wroci do domu, bo biura podrozy upadaja
-GOOD# Polecam i mam nadzieje ze TAKI poziom juz pozostanie.
-GOOD# Ale dosc dobre wiec nie MA co narzekac, bo dla kazdego sie co znajdzie.
-GOOD# Al wyglada NAPRAWDĘ swietnie : )
-GOOD# Maja takze kilka rowerow do WYPOŻYCZENI takze nie trzeba nigdzie daleko szukac.
-GOOD# Kroliki BIEGAJA po terenie, przepiekny kaskadowy ogrod z wodospadami.
-GOOD# Generalnie polecam te hotel, wrocilismy wypoczeci i ZADOWOLENI!
-GOOD# HOTEL bardz ladny.
-GOOD# No i bedzi DOBRZE.
-GOOD# PAN Robert umozliwi mi to.
-GOOD# Na zakonczenie leczenia rzeczowa, przyjacielska rozmowa z DOKŁADNYMI wskazowkami co dalej czynic, jak postepowac w przypadku jakichkolwiek problemow
-GOOD# Do tego bardzo blisko do Park Zdrojowego i co najwazniejsze - panuje tu znakomita obsluga.
-GOOD# Nigdy NIE zwatpilam w kompetencje i profesjonalizm Pani Profesor
-GOOD# Wykupilismy pakiet sylwestrowy ze ZNAJOMYMI w hotelu Lenart i musze powiedziec, ze byla t b. dobra decyzja.
-GOOD# Bardzo uprzejm i MŁODA obsluga.
-GOOD# Szczerz POLECAM Marcina.
-GOOD# ale mimo wszystko polecam ta gre bo wedlug MNIE powinien ja posiadac kazd posiadacz konsoli PlayStation 3.
-GOOD# A moc przy blendowaniu zmrozonych produktow i twardych rzeczy jest naprawde duuzym plusem TEG robotu.
-GOOD# Oczywiscie nic nie dzieje sie bez udzialu pacjenta i trzeba samemu sie zaangazowac w terapie, ale duza zaleta Pani Moniki jest to ze tak umiejetnie potrafi zadac odpowiednie pytania ze sklania do refleksji, pomaga spojrzec na wlasne problemy i przyjrzec sie swoi odczuciom z RÓŻNYCH stron, co mi bardzo pomoglo.
-GOOD# Nie wiem, moze pani ma jakies inne wymagania ale jak dl mnie JEST super.
-GOOD# Niezwykle miejsce hotel usytuowany na gorze, wykuty w skale, prowadzi kreta droga WJAZDOWA, hotel wpisany w skaly, z przepieknym widokiem na miasto w dole i na gory, skaly!!
-GOOD# Ja daj 5 gwiazdek, poniewaz moim zdaniem to swietny KOSMETYK.
-GOOD# Spokojnie wszystko tlumaczyl, zwlaszcza, ze pacjentka byla 8 letnia OSOBA.
-GOOD# Widac, ŻE Pani Doktor dokladnie analizuje kazdy przypadek i wybiera najlepsze rozwiazania
-GOOD# BAJKOTERAPIA dziala
-GOOD# wymiana takiej sprezynki to koszt 1Z i mozna to zrobic w kazdym sklepie victorinox'a.
-GOOD# Obsluga hotelu BARDZO mila i pomocna, organizacj imprezy bardzo dobra.
-GOOD# Posiada OGROMNĄ wiedze i doswiadczenie
-GOOD# Dla nas to AKURA byla atut.
-GOOD# Bardzo ciche MIEJSCE, znajdujace sie na uboczu
-GOOD# RĘCZNIKI i posciel zmieniane codziennie, jedzenie bardz smaczne i bardzo duzo.
-GOOD# BYŁA pod ogromnym wrazeniem jej pamieci.
-GOOD# Pierwszy raz spotkala sie z tym, ze w kazdej turystycznej miejscowosci sa informacje dla turystow w j. POLSKIM.
-GOOD# Funkcjonalnosc zestawu jak bezprzewodowego do rozmow jest zgodna z opisem technicznym, ZAJMĘ sie wiec jego strona fizyczna.
+GOOD# Spóźniliśmy się na śniadanie, miła pani z recepcji ostatecznie nas wpuściła na śniadanie : )
+GOOD# Spoznilismy SIĘ na sniadanie, mila pani z recepcji ostatecznie nas wpuscila n sniadanie : )
+GOOD# Ładne kolorki, możliwość rozkładania siedziska to również atuty.
+GOOD# Ładne kolorki, mozliwos rozkladania siedziska to rowniez ATUTY.
+GOOD# Jestem pewny, że to najlepszy dermatolog w Warszawie.
+GOOD# Jestem pewny, ze t najlepszy DERMATOLOG w Warszawie.
+GOOD# Pokoje świeżo po renowacji, dostępne dodatkowe poduszki, koc, łazienka czysta.
+GOOD# Pokoje ŚWIEŻO po renowacji, dostepn dodatkowe poduszki, koc, lazienka czysta.
+GOOD# Wizyty przebiegały w atmosferze bezpieczeństwa.
+GOOD# Wizyty przebiegal W atmosferze bezpieczenstwa.
+GOOD# Ocene podwyższa za referat lub wystąpienie w przypadku seminarki.
+GOOD# OCENE podwyzsza za referat lub wystapieni w przypadku seminarki.
+GOOD# Jedyny lekarz, który faktycznie szukał rozwiązań.
+GOOD# Jedyny LEKARZ ktory faktycznie szukal rozwiazan.
+GOOD# Zaleta - duży telewizor i zestaw do kawy i herbaty.
+GOOD# Zaleta - duzy telewizor I zestaw do kawy i herbaty
+GOOD# Okolice hotelu, plaża Antoniego Quina, Faliraki, miasto Lindos za zatoką świętego Pawła oraz zamek Monolitów są cudowne.
+GOOD# Okolice hotelu, plaza Antonieg Quina, Faliraki, miasto Lindos za zatoka swietego Pawla oraz zamek MONOLITÓW sa cudowne.
+GOOD# Ogólnie - polecam
+GOOD# Ogolni - polecam
+GOOD# Najlepszy Sylwester na jakim byłam.
+GOOD# Najlepszy SYLWESTER n jakim bylam.
+GOOD# Piekne miejsce, delikatne dekoracje slubne dodatkowo podkreslily urok sali.
+GOOD# Piekne miejsce, delikatne DEKORACJE slubne dodatkowo podkreslily uro sali.
+GOOD# Jestem 2 dni po zabiegu i naprawde widac poprawe owalu twarzy.
+GOOD# Jestem 2 dni po zabieg i naprawde widac poprawe OWALU twarzy.
+GOOD# Bardzo luzacki prowadzący.
+GOOD# Bardzo LUZACKI prowadzacy
+GOOD# Nocowaliśmy w starszej części hotelu - spore, czyste pokoje.
+GOOD# Nocowalism w STARSZEJ czesci hotelu - spore, czyste pokoje.
+GOOD# Co prawda miałam za mało zacięcia, żeby dojść do końca, ale pierwsze lekcje, które przerobiłam, rzeczywiście dużo mi dały.
+GOOD# C prawda mialam za MAŁO zaciecia, zeby dojsc do konca, ale pierwsze lekcje, ktore przerobilam, rzeczywiscie duzo mi daly.
+GOOD# Polecam wszystkim wyjazd do tego sanatorium, a nie za granice, gdzie jest drozej i nie wiadomo, czy sie wroci do domu, bo biura podrozy upadaja.
+GOOD# Polecam wszystkim wyjazd do tego sanatorium, a nie za granice, gdzie jest drozej i NIE wiadomo czy sie wroci do domu, bo biura podrozy upadaja.
+GOOD# Polecam i mam nadzieję, że taki poziom już pozostanie.
+GOOD# Polecam i mam nadzieje ŻE taki poziom juz pozostanie.
+GOOD# Ale dość dobre więc nie ma co narzekać, bo dla każdego się coś znajdzie.
+GOOD# Ale dosc dobre wiec NIE ma c narzekac, bo dla kazdego sie cos znajdzie.
+GOOD# Ale wygląda naprawdę świetnie : )
+GOOD# ALE wyglada naprawde swietni : )
+GOOD# Mają także kilka rowerów do wypożyczenia także nie trzeba nigdzie daleko szukać.
+GOOD# Maja takz kilka rowerow do WYPOŻYCZENIA takze nie trzeba nigdzie daleko szukac.
+GOOD# Króliki biegaja po terenie, przepiękny, kaskadowy ogród z wodospadami.
+GOOD# Kroliki BIEGAJA po terenie, przepiekny, kaskadowy ogrod z wodospadami
+GOOD# Generalnie polecam ten hotel, wróciliśmy wypoczęci i zadowoleni!
+GOOD# Generalnie polecam ten hotel wrocilismy wypoczeci i ZADOWOLENI!
+GOOD# Hotel bardzo ładny.
+GOOD# Hote BARDZO ladny.
+GOOD# No i będzie dobrze.
+GOOD# N i BĘDZIE dobrze.
+GOOD# Pan Robert umożliwił mi to.
+GOOD# Pan Robert umozliwil MI to
+GOOD# Na zakończenie leczenia rzeczowa, przyjacielska rozmowa z dokładnymi wskazówkami co dalej czynić, jak postępować w przypadku jakichkolwiek problemów.
+GOOD# Na zakonczenie leczenia rzeczowa, przyjacielska ROZMOWA z dokladnymi wskazowkami co dalej czynic jak postepowac w przypadku jakichkolwiek problemow.
+GOOD# Do tego bardzo blisko do Parku Zdrojowego i co najwazniejsze - panuje tu znakomita obsługa.
+GOOD# Do tego BARDZO blisko do Parku Zdrojowego i co najwazniejsz - panuje tu znakomita obsluga.
+GOOD# Nigdy nie zwątpiłam w kompetencje i profesjonalizm Pani Profesor.
+GOOD# Nigdy nie zwatpila W kompetencje i profesjonalizm Pani Profesor.
+GOOD# Wykupiliśmy pakiet sylwestrowy ze znajomymi w hotelu Lenart i muszę powiedzieć, że była to b. dobra decyzja.
+GOOD# Wykupilismy pakiet sylwestrowy ze ZNAJOMYMI w hotelu Lenart i musze powiedziec, ze byl to b. dobra decyzja.
+GOOD# Bardzo uprzejma i młoda obsługa.
+GOOD# BARDZO uprzejma i mlod obsluga.
+GOOD# Szczerze polecam Marcina.
+GOOD# Szczerze POLECAM Marcina
+GOOD# ale mimo wszystko polecam tą grę bo według mnie powinien ją posiadać każdy posiadacz konsoli PlayStation 3.
+GOOD# ale mim wszystko polecam ta gre bo wedlug mnie powinien ja posiadac kazdy posiadacz konsoli PLAYSTATION 3.
+GOOD# A moc przy blendowaniu zmrożonych produktów i twardych rzeczy jest naprawdę duużym plusem tego robotu.
+GOOD# A moc przy blendowaniu ZMROŻONYCH produktow i twardych rzeczy jest naprawde duuzym plusem tego robotu
+GOOD# Oczywiście nic nie dzieje się bez udziału pacjenta i trzeba samemu się zaangażować w terapię, ale dużą zaletą Pani Moniki jest to że tak umiejętnie potrafi zadać odpowiednie pytania że skłania do refleksji, pomaga spojrzeć na własne problemy i przyjrzeć się swoim odczuciom z różnych stron, co mi bardzo pomogło.
+GOOD# Oczywiscie nic nie dzieje sie bez udzialu pacjenta i trzeba samemu sie zaangazowac w terapie, ale duza ZALETĄ Pani Moniki jest to ze tak umiejetnie potrafi zadac odpowiednie pytania ze sklania do refleksji, pomaga spojrzec na wlasne problem i przyjrzec sie swoim odczuciom z roznych stron, co mi bardzo pomoglo.
+GOOD# Nie wiem, możę pani ma jakies inne wymagania ale jak dla mnie jest super.
+GOOD# Ni wiem, moze pani MA jakies inne wymagania ale jak dla mnie jest super.
+GOOD# Niezwykłe miejsce, hotel usytuowany na górze, wykuty w skale, prowadzi kręta droga wjazdowa, hotel wpisany w skały, z przepięknym widokiem na miasto w dole i na góry, skały!!
+GOOD# Niezwykle miejsce, hotel usytuowany na gorze, wykuty w skale, prowadzi kret droga WJAZDOWA, hotel wpisany w skaly, z przepieknym widokiem na miasto w dole i na gory, skaly!!
+GOOD# Ja daję 5 gwiazdek, ponieważ moim zdaniem to świetny kosmetyk.
+GOOD# Ja daje 5 gwiazdek poniewaz moim zdaniem TO swietny kosmetyk.
+GOOD# Spokojnie wszystko tłumaczył, zwłaszcza, że pacjentką była 86 letnia osoba.
+GOOD# Spokojnie wszystko tlumaczyl, zwlaszcza, ze pacjentka BYŁA 86 letnia osoba
+GOOD# Widać, że Pani Doktor dokładnie analizuje każdy przypadek i wybiera najlepsze rozwiązania.
+GOOD# Widac, ze Pani Doktor dokladnie analizuj kazdy przypadek i wybiera najlepsze ROZWIĄZANIA.
+GOOD# Bajkoterapia działa!
+GOOD# Bajkoterapi DZIAŁA!
+GOOD# wymiana takiej sprężynki to koszt 1zł i można to zrobić w każdym sklepie victorinox'a.
+GOOD# wymiana takiej sprezynki to KOSZT 1zl i mozna to zrobi w kazdym sklepie victorinox'a.
+GOOD# Obsługa hotelu bardzo miła i pomocna, organizacja imprezy bardzo dobra.
+GOOD# Obsluga hotelu bardzo mila i POMOCNA, organizacja imprezy bardzo dobra
+GOOD# Posiada ogromną wiedzę i doświadczenie.
+GOOD# Posiada OGROMNĄ wiedz i doswiadczenie.
+GOOD# Dla nas to akurat była atut.
+GOOD# Dl NAS to akurat byla atut.
+GOOD# Bardzo ciche miejsce, znajdujące się na uboczu.
+GOOD# Bardz ciche miejsce, znajdujace sie na UBOCZU.
+GOOD# Ręczniki i pościel zmieniane codziennie, jedzenie bardzo smaczne i bardzo dużo.
+GOOD# RĘCZNIKI i posciel zmieniane codziennie jedzenie bardzo smaczne i bardzo duzo.
+GOOD# Byłam pod ogromnym wrażeniem jej pamięci.
+GOOD# Bylam pod ogromnym WRAŻENIEM jej pamieci
+GOOD# Pierwszy raz spotkałam się z tym, że w każdej turystycznej miejscowości są informacje dla turystów w j. polskim.
+GOOD# Pierwszy raz spotkalam sie z tym, z w kazdej turystycznej miejscowosci sa informacje DLA turystow w j. polskim.
+GOOD# Funkcjonalność zestawu jako bezprzewodowego do rozmów jest zgodna z opisem technicznym, zajmę się więc jego stroną fizyczną.
+GOOD# Funkcjonalnosc zestawu jako bezprzewodowego d rozmow jest zgodna z opisem TECHNICZNYM, zajme sie wiec jego strona fizyczna.
+GOOD# Chciałem wrócić do tego świata, tych bohaterów i emocji.
 GOOD# Chcialem wrocic do tego swiata, tych bohaterow I emocji
-GOOD# Rapte kilkaset metrow od dworca a takze STACJI metra Florenc.
-GOOD# Śniadania na DUŻY plus od godzin 8 00.
-GOOD# Tak Podstawa oceny w indeksie : egzamin Niespodziewajki : brak ( zadania powtarzaja sie co rok ) Poczucie humorupane poklady Ogolne podejscie DO studenta : pozytywne Zerowy termin jest najprostszy ( 3 zadania ) - warunkiem przystapienia jest jednak zaliczenie projektu u dr.
-GOOD# Uspokoil NAS
-GOOD# Szczerze polecam hote dla OSÓB ktore jada do Rzymu z mysla o zwiedzaniu
-GOOD# Obslug mila I zyczliwa.
-GOOD# Zobaczenie znajomej twarzy w sali pelnej obcych ludzi w dos nieprzyjemnej sytuacji ( nagla diagnoza do natychmiastowego rozwiazania ) - cesarke zrobil przepieknie, prawie nie MAM sladu po cieciu.
-GOOD# Najlepsze bylo NA koncu
-GOOD# D dzis uzywam KIEDY tylko poczuje, ze sie cos dzieje.
-GOOD# NATOMIAS obiady fantastyczne, pyszne i porcje zadowalajace mezczyzn.
-GOOD# polecam, chodze do Niej juz 10 lat - jestem bardzo zadowolona, prowadzila mi kilka lat temu CIĄŻĘ - zlecala wszystkie potrzebne badania, USG - idealnie " wymierzyl " termin porodu.
-GOOD# Nowoczesne, CZYSTE zadbane zamkniete osiedle.
-GOOD# Piank TEŻ.
-GOOD# A jesli chodzi o sam zabie i moje SAMOPOCZUCIE po - rowniez moge o nim pisac w samych superlatywach.
-GOOD# Dobrze SZŁYSZALNY wokal
-GOOD# Bardzo dobry lekarz DELIKATNY, mily i kompetentny.
-GOOD# Wstep do Algebry i Geometrii Ciocia Dorotka - bo tak pseudonim dostala od naszej grupy, to chyba najlepszy prowadzacy z C - 11.
-GOOD# Ogolnie BwE to PIKU 8 )
-GOOD# A wart ten czas znalezc.
-GOOD# Śniadania OBFITE i urozmaicone
-GOOD# U nas raz PUŚCIŁ liste ale potem stwierdzil ze dalej bedzie czytal bo tak szybciej ( niedziwie sie ludzie sobie wpisywali obecnosc wczesniej a nawet na zapas : D hehe ) Mialem 3 nieobecnosci na 10 chyba i dal mi 4.5 Mozna sie z nim dogadac lu zwolnienie mu przyniesc : D UZNAJE : D
-GOOD# Spring, Reverse i dwa Pitc Shiftery W pelni ustawialne - fajnie.
-GOOD# Dzieki Panu Wlodarczykowi ju nie odczuwam za kazdym razem lekow : Moge smialo zjezdzac ze slizgawki w " aquaswerze ", nawet Z rekinem ludojadem pod pacha.
-GOOD# TEN niepozorny hotel potrafi mile zaskoczyc
-GOOD# Jest przy tym uwazna, zyczliwa, troskliwa pelna wiary w wyleczenie i TA wiara udziela sie pacjentowi.
-GOOD# Zupelnie inne podejscie mial Pani doktor na nocnym dyzurze W przychodni – dokladniej obejrzala dziecko, osluchala i „ wymacala ” brzuszek w celu wykluczenia innych przypadlosci co w przypadku malego dziecka jest bardzo wazne.
-GOOD# Gdy SIĘ chce czegos u niej nauczyc - nie ma problemu ( al trzeba faktycznie samemu wykazac checi, bo nie ma do niczego przymusu ).
-GOOD# Wszystko pracuj gladko i PŁYNNIE.
-GOOD# Jest TO roczny ( oddany do uzytku 06 / 2017r. ) pensjonat wiec wszystko jest nowe, czyste zadbane.
-GOOD# Mimo dlugieg weekendu I zawodow hippicznych scisku nie ma.
-GOOD# Dobra strona jest wyodrebnion brodzik dla mniejszych dzieci I sporo sprzetu wodnego.
-GOOD# Jesli mielibysmy wrocic do Zakynthos to tylko i wylacznie do Alykanas do NASZYCH przyjaciol prowadzacych Studio MOUZAIKI i tawerne LEVANTE....
-GOOD# Czysto jak na 2 - gwiazdkow hotel.
-GOOD# REWELACYJNIE puder ten sprawdz sie latem.
-GOOD# Polecam GORĄCO
-GOOD# Jak na trz gwiazdki PO prostu swietnie.
-GOOD# Miejsca jest dl WSZYSTKICH.
-GOOD# Codziennie ryby lub owoce morza mieso i potawy wegetraianskie, kacik DLA dzieci.
-GOOD# Herbata kawa i silownia zawsze pod reka, co bardzo umila NAWET dluzszy pobyt.
-GOOD# Pomijajac obsluga SALI bardzo mila i pomocna
-GOOD# Jej delikatnosc, cieplo, jak i pelne zdecydowania podejscie do problemu sprawiaja, ze nasze sesje terapeutyczne staja sie dla mnie bezpieczna podroza DO wewnetrznego swiata moich najglebszych przezyc, potrzeb i pragnien, o istnieniu ktorych nie mialam d konca pojecia.
-GOOD# Wszystkim, ktorzy maja schorzenia urologiczn POLECAM Pana dr Bartosza Malkiewicza.
-GOOD# Dobra KOMUNIKACJ z miastami.
-GOOD# Obsluga bardzo mila pokoje ladne i CZYSTE.
-GOOD# Fantastyczna lokalizacja budynk a takze ciekawe elementy wystroju z CZASU - naszego - socjalizmu.
-GOOD# Pokoje obszerne, czyste, wyposazone w czajni Z zestawem herbat.
-GOOD# mieszkajac wlasniena na ul. ŻELAZNEJ wraz ze schorowana lezaca mama majaca 87 lat Pan dr. kamyk otoczyl swoja opieka medyczna moja mame i chce powiedziec jedno nie SPOTKAŁAM w zyciu tak oddanego lekarza wykoujacego swo zawod w stosunku do osob starszych jego wielkie serce,. zaangazowanie w leczeniu mojej mamy.
-GOOD# Mocn bateria JAK na smart.
-GOOD# Kilka metrow od brzegu znajduje sie PŁYWAJĄCA platform na ktorej mozna sie poopalac.
-BAD# Potrafi przyczepic sie DO wszystkie - osie symetri za grubym olowkiem rysowane, wkrecajac srube w drewniany otwor z gwintem nalezy narysowac wybrzuszeni drewna po drugiej stronie ( w ksiazce nic o tym nie ma ) i wlasnie na tej podstawie cie obleje...
-BAD# Troche mnie to zdziwilo, poniewaz z tego co MI wiadomo to sa to moje zeby a nie lekarza, wiec z laski swojej mogla Pani doktor chociaz zapytac czy mam ochote zrobic dw zeby jednoczesnie i co tez istotne czy jestem przygotowana finansowo na to.
-BAD# APARTAMENTY znajduja sie w budynkach, ktore polozne sa w zupelnie innym miejsc niz hotel!!!
-BAD# Zaskakujace jest, z TAKIE miejsce w ogole istnieje.
-BAD# PO 20 minutowej milej rozmowi w gabinecie, wypisaniu recepty manualnym zbadaniu watroby i zaplaceniu 150 zlotych jestem lekko zawiedziony aby nie napisac rozczarowany Pozdrawiam Rafal. K
-BAD# Konfiguracj z OBSŁUGĄ WiFi pada przy probie instalacji skanera.
-BAD# UWAGA nie w wakacje
-BAD# Na nic nie zdaja sie, zadne smary czy oleje specjalistyczne do tloko ITP.
-BAD# MAŁO bezpiecznie, ale przynajmniej ni zamarzlismy.
-BAD# Znowu zostalam w punkcie WYJŚCIA i nie mam juz ochot opowiadac kolejnemu psychologowi swojej historii.
-BAD# Jedynym minusem jest brak akceptacji kart Diner oraz gotowki innej niz LOKALNA.
-BAD# Ja OSOBIŚCIE z takimi maluchami nie wybral bym sie tam... bo trzeba naprawde sporo si nachodzic.
-BAD# ŁAZIENKI na tereni SPA wygladaja dosyc nieswiezo.
-BAD# Jesli nie masz dzieci wykonczysz SIĘ tutaj zamiast wypoczac po prostu nie przyjezdza tu.
-BAD# Nie dosc, ze na termin wizyty dlugo SIE czeka ( ja miesiac ) to ten sped jaki tam jest w srode po poludniu ( lekarz przyjmuje TYLK 2h i spoznil sie 30min... )
-BAD# Niestety ale trabi tu chor ROZANIELONYCH uzytkownikow a prawda jes taka ze zawiodlem sie okrutnie.
-BAD# Juz na pierwszej wizycie dostalam leki antydepresyjne oraz miliony masc ( w tym masc przeciwbolowa ) - doktor STWIERDZIŁ wulwodynie, chociaz nie bylam pewna czy sluchal tego, ze jej objawy nie pokrywaja sie z moimi.
-BAD# Lubie chwile p obudzeniu podrzemac i posluchac radia, przy tym sie nie da dostajesz patelnia w leb I lecisz wylaczyc to paskudztwo.
-BAD# Zrezygnowalam z wizyt w klinice Poli i szukajac pomocy udalam sie do LUBLINA, gdzie zdiagnozowano u mnie wulwodynie.
-BAD# NA razie w sumie konkretnych badan nie robilam bo jeszcze nie staram sie o dziecko, ale jak juz sie zdecyduje to musze chyba zmieni lekarza.
-BAD# DOWIEDZIAŁEM sie, z jesli szczelina bedzie mi przeszkadzac mam przyjsc ponownie.
-BAD# Zamek w drzwiach taki ' niepewny ', futryna po przejsciach, jakby ktos kiedys ' wjechal z buta ' do pokoju ( przez to nie czulam si tam W pelni bezpiecznie ).
-BAD# Pokoj sprzatane CO 2 - 3 dni!
-BAD# SZCZERZE nie polecam!!
-BAD# Mysle jednak ze w TYM roku bylem 1 ra i ostatni.
-BAD# Na plazy notorycznie walesaly SIĘ psy i czlowiek musial uwazac cz jakis go nie ugryzie.
-BAD# Na miejscu doznalismy pierwszego szoku by dokonac oplaty za parking w kwocie 5 euro za dobe... gdzie w tu ( tam wykupowalismy hotel ) informowano nas, ze parking jest BEZPŁATNY.
-BAD# Szczerze odradzam, wlascicielka ma sie za wielka dame z milionamii a prawda JEST taka ze hotel jes zbudowany z dotacji unijnych.
-BAD# Sauna sucha - TAK designerska, ze nie m gdzie usiasc.
-BAD# I do tego zmian cennika w TRAKCIE trwanie umowy!!!!
-BAD# cala obsluga " skacze " wokol gosci ktorzy nie maja wykupionej opcji all a zdecyduja sie zjesc w hotelowej restauracji ; podobnie bylo w barze gdzi goscie placacy gotowka dostawali CO innego, inaczej podane i w pierwszej kolejnosci niz " reszta " ; zadnych animacji, niedobor lezakow przy basenach, itp...
-BAD# HOTEL nie powinien mie ich 5.
-BAD# Okolica bardzo brudna i zasmiecona, PEŁNA bezdomnych psow
-BAD# Przepisanie dawk leku i koniec WIZYTY.
-BAD# a tym czasem auto mozna zaparkowac PRZY ulicy!!
-BAD# Niedopracowane same rozgi do misy ( chociaz wygladaja bardzo profesjonalnie ) pozostawiaja na dnie nierozmieszane ciasto lub krem ( zaznacze ze posiadam inne miksery roboty ktore wypadaja o niebo lepiej ) Najbardziej irytujace sa jednak mieszadla silikonowe ktore powinny zbierac wszystko ze scianek oraz spodu misy co bardzo przeszkadza a wlasciwie uniemozliwia podbijanie ma na * * * * * z jednoczesnym PODGRZEWANIEM ( w tym celu to zakupilem ) chyba ze chcemy jajecznice to wtedy sa wrecz idealne.
-BAD# Fatalne lazienki z kamieniem grzybem, SMRODEM.
-BAD# Dwa razy odwolana wizyta, a ja w koncu udalo mi sie z corka dostac to okazalo sie ze przyjmuje mnie asystentka, ktora nie potrafi odniesc sie do wczesniejszych zalecen pani doktor a mimo TO kasuje zwyczajnie za wizyte.
-BAD# Absurdalne bylo tez to, ze nie mozna bylo czesto usiasc do KONKRETNEGO stolika poniewaz obsluga sobie przygotowala ten stoli na kolejny posilek, na sniadaniu juz sobie przygotowywali na lunch, na lunchu na kolacje itd.
-BAD# Jestem tu drugi raz, i ostatni raz na dworze W nocy ok 4 stopni Celsjusza i nie ma ogrzewania, mimo prosby o jakis grzejnik elektryczny, t niestety otrzymalismy odpowiedz od Pani ze mamy koce i taki luksus w tym hotelu za 180 zl
-BAD# PÓŹNIEJ bylo juz tylk gorzej …
-BAD# NIE rozpoznal u mnie astmy
-BAD# Kobiety NIEC wam nawet do glowy nie przyjdzie isc na wizyte to tego czlowieka!
-BAD# Sluchajcie, sprawa wyglada tak : Raczej odradzam zakupu 1 million woda po goleniu, bo zapach bardzo nikly... mimo, iz bardzo bardzo lubie ten zapach, bo mam 1 million wode perfumowana ( EDP ), kupiona przez internet ( sklep tylko z oryginalnymi produktami czyli te na ceneo.pl - najlepiej z wysoka iloscia osob ktore kupuja produkty ) - odradzam allegro.pl ( w perfumeriach takich sephor lub duglas nie sprzedaja wody perfumowanej - duzo lepszej niz woda toaletowa ( EDT ), bo EDP ma duzo trwalszy zapach niz EDT ( czyli woda TOALETOWA ) - ktore to EDT sprzedaja w tych perfumeriach.
-BAD# Nie POLECAM i proponuje trzymac sie z dala od tej osoby, jesli chcecie miec lekarza zaufanego, ktory potrafi pomoc w roznyc sytuacjach.
-BAD# Utrudnieniem MOŻE byc bardzo slaba sien internetowa bezprzewodowa
-BAD# Nie zmienia to jednak faktu, z MNIE zbyl niczym.
+GOOD# Raptem kilkaset metrów od dworca a także stacji metra Florenc.
+GOOD# RAPTEM kilkaset metrow o dworca a takze stacji metra Florenc.
+GOOD# Śniadania na duży plus od godziny 8 00.
+GOOD# Śniadania NA duzy plus od godzin 8 00.
+GOOD# Tak Podstawa oceny w indeksie : egzamin Niespodziewajki : brak ( zadania powtarzają się co roku ) Poczucie humorupane pokłady Ogólne podejście do studenta : pozytywne Zerowy termin jest najprostszy ( 3 zadania ) - warunkiem przystąpienia jest jednak zaliczenie projektu u dr.
+GOOD# Tak Podstawa oceny w indeksie : egzamin Niespodziewajki : brak ( zadania powtarzaja sie co roku ) Poczucie humorupane poklady Ogolne podejscie do student : pozytywne Zerowy TERMIN jest najprostszy ( 3 zadania ) - warunkiem przystapienia jest jednak zaliczenie projektu u dr.
+GOOD# Uspokoił nas.
+GOOD# USPOKOI nas.
+GOOD# Szczerze polecam hotel dla osób które jadą do Rzymu z myślą o zwiedzaniu
+GOOD# Szczerze polecam hotel dla osob ktore jada do Rzymu z mysl o ZWIEDZANIU
+GOOD# Obsługa miła i życzliwa.
+GOOD# Obsluga mil I zyczliwa.
+GOOD# Zobaczenie znajomej twarzy w sali pełnej obcych ludzi w dość nieprzyjemnej sytuacji ( nagła diagnoza do natychmiastowego rozwiązania ) - cesarkę zrobił przepięknie, prawie nie mam śladu po cięciu.
+GOOD# Zobaczenie znajomej twarzy w sali pelnej obcych ludzi w dosc nieprzyjemnej sytuacj ( nagla diagnoza do natychmiastowego rozwiazania ) - cesarke zrobil przepieknie, prawie nie mam sladu po CIĘCIU.
+GOOD# Najlepsze bylo na koncu.
+GOOD# Najlepsze byl NA koncu.
+GOOD# Do dziś używam kiedy tylko poczuję, że się coś dzieje.
+GOOD# D dzis uzywam kiedy tylko POCZUJĘ, ze sie cos dzieje.
+GOOD# Natomiast obiady fantastyczne, pyszne i porcje zadowalające mężczyzn.
+GOOD# Natomiast OBIADY fantastyczne, pyszne i porcj zadowalajace mezczyzn.
+GOOD# polecam, chodzę do Niej już 10 lat - jestem bardzo zadowolona, prowadziła mi kilka lat temu ciążę - zlecała wszystkie potrzebne badania, USG - idealnie " wymierzyła " termin porodu.
+GOOD# polecam, chodze do Niej juz 10 lat - jestem bardzo zadowolona, prowadzila MI kilka lat temu ciaze - zlecala wszystkie potrzebne badania, USG - idealnie " wymierzyl " termin porodu.
+GOOD# Nowoczesne, czyste, zadbane zamknięte osiedle.
+GOOD# Nowoczesne, czyste, zadban ZAMKNIĘTE osiedle.
+GOOD# Pianka też.
+GOOD# PIANKA tez
+GOOD# A jeśli chodzi o sam zabieg i moje samopoczucie po - również mogę o nim pisać w samych superlatywach.
+GOOD# A jesli chodzi o sam zabieg i moje samopoczucie po - rowniez moge o ni PISAĆ w samych superlatywach.
+GOOD# Dobrze szłyszalny wokal.
+GOOD# DOBRZE szlyszalny wokal
+GOOD# Bardzo dobry lekarz, delikatny, miły i kompetentny.
+GOOD# Bardzo dobry lekarz, delikatny, mil I kompetentny.
+GOOD# Wstęp do Algebry i Geometrii Ciocia Dorotka - bo taki pseudonim dostała od naszej grupy, to chyba najlepszy prowadzący z C - 11.
+GOOD# Wstep do Algebry i Geometri Ciocia Dorotka - bo taki pseudonim dostala od naszej grupy, to CHYBA najlepszy prowadzacy z C - 11.
+GOOD# Ogólnie BwE to pikuś 8 )
+GOOD# Ogolnie BwE t PIKUŚ 8 )
+GOOD# A warto ten czas znaleźć.
+GOOD# A warto te czas znalezc.
+GOOD# Śniadania obfite i urozmaicone.
+GOOD# Śniadani obfite i UROZMAICONE.
+GOOD# U nas raz puścił liste ale potem stwierdził ze dalej będzie czytał bo tak szybciej ( niedziwie sie ludzie sobie wpisywali obecności wcześniej a nawet na zapas : D hehe ) Miałem 3 nieobecności na 10 chyba i dał mi 4.5 Można sie z nim dogadać lu zwolnienie mu przynieść : D UZNAJE : D
+GOOD# U nas raz puscil liste ale potem stwierdzil ze dalej bedzie czytal bo ta szybciej ( niedziwie sie ludzie sobie wpisywali obecnosci wczesniej a nawet na zapas : D hehe ) Mialem 3 NIEOBECNOŚCI na 10 chyba i dal mi 4.5 Mozna sie z nim dogadac lu zwolnienie mu przyniesc : D UZNAJE : D
+GOOD# Spring, Reverse i dwa Pitch Shiftery w pełni ustawialne - fajnie.
+GOOD# Spring, Reverse i dwa Pitc SHIFTERY w pelni ustawialne - fajnie.
+GOOD# Dzięki Panu Włodarczykowi już nie odczuwam za każdym razem lęków : Mogę śmiało zjeżdżać ze ślizgawki w " aquaswerze ", nawet z rekinem ludojadem pod pachą.
+GOOD# DZIĘKI Panu Wlodarczykowi juz nie odczuwam za kazdy razem lekow : Moge smialo zjezdzac ze slizgawki w " aquaswerze ", nawet z rekinem ludojadem pod pacha.
+GOOD# Ten niepozorny hotel potrafi mile zaskoczyć.
+GOOD# Ten niepozorny hote potrafi MILE zaskoczyc.
+GOOD# Jest przy tym uważna, życzliwa, troskliwa, pełna wiary w wyleczenie i ta wiara udziela się pacjentowi.
+GOOD# Jest przy TYM uwazna, zyczliwa, troskliwa, pelna wiary w wyleczenie i ta wiara udziela sie pacjentowi
+GOOD# Zupełnie inne podejście miała Pani doktor na nocnym dyżurze w przychodni – dokładniej obejrzała dziecko, osłuchała i „ wymacała ” brzuszek w celu wykluczenia innych przypadłości co w przypadku małego dziecka jest bardzo ważne.
+GOOD# Zupelni inne podejscie miala Pani doktor na nocnym dyzurze w przychodni – dokladniej obejrzala dziecko, osluchala i „ wymacala ” brzuszek w CELU wykluczenia innych przypadlosci co w przypadku malego dziecka jest bardzo wazne.
+GOOD# Gdy się chce czegoś u niej nauczyć - nie ma problemu ( ale trzeba faktycznie samemu wykazać chęci, bo nie ma do niczego przymusu ).
+GOOD# Gdy sie chce czegos u niej nauczy - nie ma problemu ( ale trzeba FAKTYCZNIE samemu wykazac checi, bo nie ma do niczego przymusu ).
+GOOD# Wszystko pracuje gładko i płynnie.
+GOOD# WSZYSTK pracuje gladko i plynnie.
+GOOD# Jest to roczny ( oddany do użytku 06 / 2017r. ) pensjonat więc wszystko jest nowe, czyste, zadbane.
+GOOD# Jest to roczny ( oddany do uzytku 06 / 2017r. ) pensjonat WIĘC wszystko jest nowe czyste, zadbane.
+GOOD# Mimo długiego weekendu i zawodów hippicznych ścisku nie ma.
+GOOD# Mimo DŁUGIEGO weekendu i zawodow hippicznyc scisku nie ma.
+GOOD# Dobrą stroną jest wyodrębniony brodzik dla mniejszych dzieci i sporo sprzętu wodnego.
+GOOD# Dobra stron jest WYODRĘBNIONY brodzik dla mniejszych dzieci i sporo sprzetu wodnego.
+GOOD# Jesli mielibysmy wrocic do Zakynthos to tylko i wylacznie do Alykanas do naszych przyjaciol prowadzacych Studio MOUZAIKIS i tawerne LEVANTE....
+GOOD# Jesli mielibysmy wrocic do Zakynthos to tylk i wylacznie do Alykanas do naszych przyjaciol PROWADZACYCH Studio MOUZAIKIS i tawerne LEVANTE....
+GOOD# Czysto jak na 2 - gwiazdkowy hotel.
+GOOD# CZYST jak na 2 - gwiazdkowy hotel.
+GOOD# Rewelacyjnie puder ten sprawdza się latem.
+GOOD# Rewelacyjnie PUDER ten sprawdza si latem.
+GOOD# Polecam gorąco!
+GOOD# Poleca GORĄCO!
+GOOD# Jak na trzy gwiazdki po prostu świetnie.
+GOOD# Jak n trzy gwiazdki PO prostu swietnie.
+GOOD# Miejsca jest dla wszystkich.
+GOOD# Miejsca jest DLA wszystkich
+GOOD# Codziennie ryby lub owoce morza, mięso i potawy wegetraiańskie, kącik dla dzieci.
+GOOD# Codziennie ryby lub owoce morza, mieso i potawy wegetraianskie, kacik dl DZIECI.
+GOOD# Herbata, kawa i siłownia zawsze pod ręką, co bardzo umila nawet dłuższy pobyt.
+GOOD# Herbata, kawa i silownia zawsze pod reka, co bardzo UMILA nawet dluzszy pobyt
+GOOD# Pomijając obsługa sali bardzo miła i pomocna.
+GOOD# POMIJAJĄC obsluga sali bardzo mil i pomocna.
+GOOD# Jej delikatność, ciepło, jak i pełne zdecydowania podejście do problemu sprawiają, że nasze sesje terapeutyczne stają się dla mnie bezpieczną podróżą do wewnętrznego świata moich najgłębszych przeżyć, potrzeb i pragnień, o istnieniu których nie miałam do końca pojęcia.
+GOOD# Jej delikatnosc, cieplo, jak i pelne zdecydowania podejscie do problemu sprawiaja, ze nasze sesje terapeutyczne staja sie dla mnie bezpieczna podroza do wewnetrznego swiata moich najglebszych przezyc, potrzeb i pragnien o ISTNIENIU ktorych nie mialam do konca pojecia.
+GOOD# Wszystkim, którzy mają schorzenia urologiczne polecam Pana dr Bartosza Małkiewicza.
+GOOD# Wszystkim, KTÓRZY maja schorzenia urologiczne polecam Pana dr Bartosza Malkiewicza
+GOOD# Dobra komunikacja z miastami.
+GOOD# Dobr komunikacja Z miastami.
+GOOD# Obsługa bardzo miła, pokoje ładne i czyste.
+GOOD# Obsluga bardzo MIŁA, pokoje ladn i czyste.
+GOOD# Fantastyczna lokalizacja budynku a także ciekawe elementy wystroju z czasu - naszego - socjalizmu.
+GOOD# Fantastyczna lokalizacja budynku A takze ciekawe elementy wystroju z czas - naszego - socjalizmu.
+GOOD# Pokoje obszerne, czyste, wyposażone w czajnik z zestawem herbat.
+GOOD# POKOJE obszerne, czyste, wyposazon w czajnik z zestawem herbat.
+GOOD# mieszkając właśniena na ul. ŻELAZNEJ wraz ze schorowaną leżącą mamą mająca 87 lat Pan dr. kamyk otoczył swoją opieką medyczną moją mamę i chcę powiedzieć jedno nie spotkałam w życiu tak oddanego lekarza wykoującego swój zawód w stosunku do osób starszych jego wielkie serce,. zaangazowanie w leczeniu mojej mamy.
+GOOD# mieszkajac wlasniena na ul. ŻELAZNEJ wraz ze schorowana lezaca mama majaca 87 lat Pan DR. kamyk otoczyl swoj opieka medyczna moja mame i chce powiedziec jedno nie spotkalam w zyciu tak oddanego lekarza wykoujacego swoj zawod w stosunku do osob starszych jego wielkie serce,. zaangazowanie w leczeniu mojej mamy.
+GOOD# Mocna bateria jak na smart.
+GOOD# MOCNA bateria jak n smart.
+GOOD# Kilka metrów od brzegu znajduje się pływająca platforma na której można się poopalać.
+GOOD# Kilka metrow od brzeg znajduje SIĘ plywajaca platforma na ktorej mozna sie poopalac.
+BAD# Potrafi przyczepic sie do wszystkie - osie symetri za grubym olowkiem rysowane, wkrecajac srube w drewniany otwor z gwintem nalezy narysowac wybrzuszenie drewna po drugiej stronie ( w ksiazce nic o tym nie ma ) i wlasnie na tej podstawie cie obleje...
+BAD# Potrafi przyczepic sie do wszystkie - osie symetri za grubym olowkiem rysowane, wkrecajac srube w drewniany OTWOR z gwintem nalezy narysowac wybrzuszenie drewna po drugie stronie ( w ksiazce nic o tym nie ma ) i wlasnie na tej podstawie cie obleje...
+BAD# Trochę mnie to zdziwiło, ponieważ z tego co mi wiadomo to są to moje zęby a nie lekarza, więc z łaski swojej mogła Pani doktor chociaż zapytać czy mam ochotę zrobić dwa zęby jednoczesnie i co też istotne czy jestem przygotowana finansowo na to.
+BAD# Troche mnie to zdziwilo, poniewaz z tego co mi wiadomo t sa to moje zeby a nie lekarza, wiec z laski swojej mogla Pani doktor chociaz zapytac CZY mam ochote zrobic dwa zeby jednoczesnie i co tez istotne czy jestem przygotowana finansowo na to.
+BAD# Apartamenty znajdują się w budynkach, które położne są w zupełnie innym miejscu niż hotel!!!
+BAD# Apartamenty znajduja sie w budynkach, ktore polozne sa W zupelnie innym miejscu niz hotel!!
+BAD# Zaskakujące jest, że takie miejsce w ogóle istnieje.
+BAD# Zaskakujace jest, z takie miejsce W ogole istnieje.
+BAD# Po 20 minutowej miłej rozmowie w gabinecie, wypisaniu recepty manualnym zbadaniu wątroby i zapłaceniu 150 złotych jestem lekko zawiedziony aby nie napisać rozczarowany Pozdrawiam Rafał. K
+BAD# PO 20 minutowej milej rozmowie w gabinecie, wypisaniu recepty manualnym zbadaniu watrob i zaplaceniu 150 zlotych jestem lekko zawiedziony aby nie napisac rozczarowany Pozdrawiam Rafal. K
+BAD# Konfiguracja z obsługą WiFi pada przy próbie instalacji skanera.
+BAD# Konfiguracja z obsluga WiFi pada PRZY probie instalacji skanera
+BAD# Uwaga nie w wakacje.
+BAD# Uwaga nie W wakacje
+BAD# Na nic nie zdają się, żadne smary czy oleje specjalistyczne do tłoków itp.
+BAD# Na nic nie zdaja sie zadne SMARY czy oleje specjalistyczne do tlokow itp.
+BAD# Mało bezpiecznie, ale przynajmniej nie zamarzliśmy.
+BAD# Mal bezpiecznie, ale przynajmniej NIE zamarzlismy.
+BAD# Znowu zostałam w punkcie wyjścia i nie mam już ochoty opowiadać kolejnemu psychologowi swojej historii.
+BAD# Znowu zostala w punkcie wyjscia i nie mam JUŻ ochoty opowiadac kolejnemu psychologowi swojej historii.
+BAD# Jedynym minusem jest brak akceptacji kart Diners oraz gotówki innej niż lokalna.
+BAD# Jedynym minusem jest brak akceptacji kar Diners ORAZ gotowki innej niz lokalna.
+BAD# Ja osobiście z takimi maluchami nie wybrał bym się tam... bo trzeba naprawdę sporo się nachodzić.
+BAD# Ja OSOBIŚCI z takimi maluchami nie wybral bym sie tam... bo trzeba naprawde sporo sie nachodzic.
+BAD# Łazienki na terenie SPA wygladaja dosyć nieświeżo.
+BAD# Łazienki na terenie SP wygladaja dosyc NIEŚWIEŻO.
+BAD# Jeśli nie masz dzieci wykończysz się tutaj zamiast wypocząć po prostu nie przyjeżdżaj tu.
+BAD# Jesli nie masz dzieci wykonczysz sie tutaj zamiast wypoczac p prostu nie PRZYJEŻDŻAJ tu.
+BAD# Nie dość, ze na termin wizyty długo sie czeka ( ja miesiąc ) to ten spęd jaki tam jest w środe po poludniu ( lekarz przyjmuje TYLKO 2h i spoznil sie 30min... )
+BAD# Nie dosc, ze na termin wizyty dlugo sie czeka ( ja miesiac ) to ten sped jaki tam jest w srode po poludniu ( lekarz przyjmuje TYLKO 2h i spoznil si 30min... )
+BAD# Niestety ale trąbi tu chór rozanielonych użytkowników a prawda jest taka że zawiodłem się okrutnie.
+BAD# Niestety al trabi tu chor rozanielonych uzytkownikow a prawda jest TAKA ze zawiodlem sie okrutnie.
+BAD# Już na pierwszej wizycie dostałam leki antydepresyjne oraz miliony maści ( w tym maść przeciwbólową ) - doktor stwierdził wulwodynię, chociaż nie byłam pewna czy słuchał tego, że jej objawy nie pokrywają się z moimi.
+BAD# Juz na pierwszej wizycie dostalam leki antydepresyjne oraz miliony masci ( W tym masc przeciwbolow ) - doktor stwierdzil wulwodynie, chociaz nie bylam pewna czy sluchal tego, ze jej objawy nie pokrywaja sie z moimi.
+BAD# Lubię chwilę po obudzeniu podrzemać i posłuchać radia, przy tym się nie da dostajesz patelnią w łeb i lecisz wyłączyć to paskudztwo.
+BAD# Lubie chwile p obudzeniu podrzemac i posluchac radia, przy tym sie NIE da dostajesz patelnia w leb i lecisz wylaczyc to paskudztwo.
+BAD# Zrezygnowałam z wizyt w klinice Polis i szukając pomocy udałam się do Lublina, gdzie zdiagnozowano u mnie wulwodynię.
+BAD# Zrezygnowalam z wizyt w KLINICE Poli i szukajac pomocy udalam sie do Lublina, gdzie zdiagnozowano u mnie wulwodynie.
+BAD# Na razie w sumie konkretnych badań nie robiłam bo jeszcze nie staram się o dziecko, ale jak już się zdecyduje to muszę chyba zmienić lekarza.
+BAD# Na razie w sumie konkretnych badan nie robilam bo jeszcze nie staram si o dziecko, ale jak juz sie zdecyduje to musze chyba ZMIENIĆ lekarza.
+BAD# Dowiedziałem się, że jeśli szczelina będzie mi przeszkadzać mam przyjść ponownie.
+BAD# Dowiedzialem sie, ze jesli szczelin BĘDZIE mi przeszkadzac mam przyjsc ponownie.
+BAD# Zamek w drzwiach taki ' niepewny ', futryna po przejściach, jakby ktoś kiedyś ' wjechał z buta ' do pokoju ( przez to nie czułam się tam w pełni bezpiecznie ).
+BAD# Zame w drzwiach taki ' niepewny ', futryna po przejsciach, jakby ktos kiedys ' wjechal z buta ' do pokoju ( przez to nie CZUŁAM sie tam w pelni bezpiecznie ).
+BAD# Pokoje sprzątane co 2 - 3 dni!
+BAD# POKOJE sprzatane c 2 - 3 dni!
+BAD# Szczerze nie polecam!!!
+BAD# Szczerz nie POLECAM!!!
+BAD# Myślę jednak że w tym roku byłem 1 raz i ostatni.
+BAD# Mysle jednak ze W ty roku bylem 1 raz i ostatni.
+BAD# Na plaży notorycznie wałęsały się psy i człowiek musiał uważać czy jakiś go nie ugryzie.
+BAD# Na PLAŻY notorycznie walesaly sie psy i czlowie musial uwazac czy jakis go nie ugryzie.
+BAD# Na miejscu doznalismy pierwszego szoku by dokonać opłaty za parking w kwocie 5 euro za dobę... gdzie w tui ( tam wykupowalismy hotel ) informowano nas, że parking jest bezpłatny.
+BAD# Na miejscu doznalismy pierwszego szoku by dokonac oplaty za parking w kwocie 5 euro za dobe... gdzie w tui ( TAM wykupowalismy hote ) informowano nas, ze parking jest bezplatny.
+BAD# Szczerze odradzam, wlascicielka ma sie za wielka dame z milionamii a prawda jest taka ze hotel jest zbudowany z dotacji unijnych.
+BAD# Szczerze ODRADZAM, wlascicielka ma sie za wielka dame z milionamii a prawda jest taka ze hotel jest zbudowan z dotacji unijnych.
+BAD# Sauna sucha - tak designerska, ze nie ma gdzie usiąść.
+BAD# Sauna sucha - ta designerska, ze nie ma gdzie USIĄŚĆ.
+BAD# I do tego zmiana cennika w trakcie trwanie umowy!!!!
+BAD# I d tego zmiana cennika W trakcie trwanie umowy!!!!
+BAD# cała obsługa " skacze " wokół gości którzy nie mają wykupionej opcji all a zdecydują sie zjeść w hotelowej restauracji ; podobnie było w barze gdzie goscie płacący gotówką dostawali co innego, inaczej podane i w pierwszej kolejności niż " reszta " ; żadnych animacji, niedobór leżaków przy basenach, itp...
+BAD# cala obsluga " skacze " wokol gosci ktorzy nie maja wykupionej opcji all a zdecyduja sie zjesc w hotelowej restauracji ; podobnie byl W barze gdzie goscie placacy gotowka dostawali co innego, inaczej podane i w pierwszej kolejnosci niz " reszta " ; zadnych animacji, niedobor lezakow przy basenach, itp...
+BAD# Hotel nie powinien mieć ich 5.
+BAD# Hotel nie powinie miec ICH 5.
+BAD# Okolica bardzo brudna i zasmiecona, pełna bezdomnych psów.
+BAD# Okolica bardzo brudna I zasmiecona, pelna bezdomnyc psow.
+BAD# Przepisanie dawki leku i koniec wizyty.
+BAD# Przepisanie dawki LEK i koniec wizyty.
+BAD# a tym czasem auto można zaparkować przy ulicy!!!
+BAD# a tym czasem auto mozna ZAPARKOWA przy ulicy!!!
+BAD# Niedopracowane same rózgi do misy ( chociaż wyglądają bardzo profesjonalnie ) pozostawiają na dnie nierozmieszane ciasto lub krem ( zaznaczę ze posiadam inne miksery roboty które wypadają o niebo lepiej ) Najbardziej irytujące są jednak mieszadła silikonowe które powinny zbierać wszystko ze ścianek oraz spodu misy co bardzo przeszkadza a właściwie uniemożliwia podbijanie mas na * * * * * z jednoczesnym podgrzewaniem ( w tym celu to zakupiłem ) chyba że chcemy jajecznicę to wtedy są wręcz idealne.
+BAD# Niedopracowane same rozgi do misy ( chociaz wygladaja bardzo profesjonalnie ) pozostawiaja na dnie nierozmieszane ciasto lub krem ( zaznacze ze posiadam inne miksery roboty ktore wypadaja o niebo lepiej ) NAJBARDZIEJ irytujace sa jednak mieszadla silikonowe ktore powinny zbierac wszystko ze scianek oraz spodu misy co bardzo przeszkadza a wlasciwie uniemozliwia podbijanie mas na * * * * * z jednoczesnym podgrzewanie ( w tym celu to zakupilem ) chyba ze chcemy jajecznice to wtedy sa wrecz idealne.
+BAD# Fatalne łazienki z kamieniem, grzybem, smrodem.
+BAD# Fatalne lazienki z KAMIENIEM, grzybem, smrodem
+BAD# Dwa razy odwołana wizyta, a jak w końcu udało mi się z córką dostać to okazało się ze przyjmuje mnie asystentka, która nie potrafi odnieść się do wcześniejszych zaleceń pani doktor a mimo to kasuje zwyczajnie za wizytę.
+BAD# Dwa razy odwolana wizyta, a jak w koncu udalo mi sie z corka dostac to okazalo sie ze przyjmuje mnie asystentka, ktora nie potrafi odniesc sie do wczesniejszych zalecen pani doktor a mimo to kasuje zwyczajni ZA wizyte.
+BAD# Absurdalne było też to, że nie można było często usiąść do konkretnego stolika poniewaz obsluga sobie przygotowała ten stolik na kolejny posiłek, na śniadaniu już sobie przygotowywali na lunch, na lunchu na kolację itd.
+BAD# Absurdalne bylo tez to, ze ni mozna bylo czesto usiasc do konkretnego stolika poniewaz obsluga sobie przygotowala ten stolik na KOLEJNY posilek, na sniadaniu juz sobie przygotowywali na lunch, na lunchu na kolacje itd.
+BAD# Jestem tu drugi raz, i ostatni raz na dworze w nocy ok 4 stopni Celsjusza i nie ma ogrzewania, mimo prośby o jakiś grzejnik elektryczny, to niestety otrzymaliśmy odpowiedź od Pani że mamy koce i taki luksus w tym hotelu za 180 zł
+BAD# Jestem tu drugi RAZ, i ostatni raz na dworze w nocy ok 4 stopni Celsjusza i nie ma ogrzewania, mimo prosby o jaki grzejnik elektryczny, to niestety otrzymalismy odpowiedz od Pani ze mamy koce i taki luksus w tym hotelu za 180 zl
+BAD# Później było już tylko gorzej …
+BAD# Pozniej bylo ju TYLKO gorzej …
+BAD# Nie rozpoznał u mnie astmy.
+BAD# Nie rozpoznal u MNI astmy.
+BAD# Kobiety niech wam nawet do głowy nie przyjdzie iść na wizytę to tego człowieka!
+BAD# Kobiety niec wam nawet do glowy nie przyjdzie isc na wizyte TO tego czlowieka!
+BAD# Słuchajcie, sprawa wygląda tak : Raczej odradzam zakupu 1 million woda po goleniu, bo zapach bardzo nikły... mimo, iż bardzo bardzo lubię ten zapach, bo mam 1 million wodę perfumowaną ( EDP ), kupioną przez internet ( sklep tylko z oryginalnymi produktami czyli te na ceneo.pl - najlepiej z wysoką ilością osób które kupują produkty ) - odradzam allegro.pl ( w perfumeriach takich sephora lub duglas nie sprzedają wody perfumowanej - dużo lepszej niż woda toaletowa ( EDT ), bo EDP ma dużo trwalszy zapach niż EDT ( czyli woda toaletowa ) - które to EDT sprzedają w tych perfumeriach.
+BAD# Sluchajcie, sprawa wyglada tak : Raczej odradzam zakupu 1 million woda po goleniu, bo zapach bardzo nikly... mimo, iz bardzo bardzo lubie ten zapach, bo mam 1 million wode perfumowana ( EDP ), kupiona przez internet ( sklep tylko z oryginalnymi produktami czyl te na ceneo.pl - najlepiej z wysoka iloscia osob ktore kupuja produkty ) - odradzam allegro.pl ( w perfumeriach takich sephora lub duglas nie sprzedaja wody perfumowanej - duzo lepszej niz woda toaletowa ( EDT ), bo EDP ma duzo trwalszy zapach niz EDT ( czyli woda toaletowa ) - ktore to EDT sprzedaja w tych perfumeriach.
+BAD# Nie polecam i proponuję trzymać się z dala od tej osoby, jeśli chcecie mieć lekarza zaufanego, który potrafi pomóc w różnych sytuacjach.
+BAD# Nie polecam i proponuje trzymac sie z dala OD tej osoby, jesl chcecie miec lekarza zaufanego, ktory potrafi pomoc w roznych sytuacjach.
+BAD# Utrudnieniem może być bardzo słaba sień internetowa bezprzewodowa.
+BAD# Utrudnieniem moze byc bardz slaba SIEŃ internetowa bezprzewodowa.
+BAD# Nie zmienia to jednak faktu, że mnie zbył niczym.
+BAD# Nie zmienia to jednak faktu ŻE mnie zbyl niczym.
+BAD# W toalecie niedziałająca spłuczka z lejącą się całą noc wodą.
 BAD# W TOALECIE niedzialajaca spluczk z lejaca sie cala noc woda.
-BAD# Mam PROBLEM z ladowaniem.
-BAD# Najgorsze w tym hotelu bylo ŻE w szczytowym okresi ferii mazowieckim sa robione remonty bylo glosno i pelno robotnikow poruszajacych po obiekcie.
+BAD# Mam problemy z ładowaniem.
+BAD# Ma problemy Z ladowaniem.
+BAD# Najgorsze w tym hotelu było że w szczytowym okresie ferii mazowieckim są robione remonty było głośno i pełno robotników poruszających po obiekcie.
+BAD# Najgorsze w tym hotelu bylo ze W szczytowym okresie ferii mazowieckim sa robione remonty byl glosno i pelno robotnikow poruszajacych po obiekcie.
+BAD# POZDRAWIAM PANI DOKTOR ; - /
 BAD# POZDRAWIAM PANI DOKTO ; - /
-BAD# Tak jak w opinii powyzej zgodze sie, ze wykonanie pozostawi wiele do JAKOŚCI.
-BAD# PEŁNO stromych schodow i brak wind, jedzenie niesmaczne, niskie jakosci.
-BAD# Sorry ale jak na hote 4 * to SLABO.
-BAD# Wydalam ok 1300zl i na szczescie znalazlam innego lekarza stosujace Dry Needing iglami akupunkturowymi, gdzie po pierwsze wizycie i to tanszej jeszcze w tym samym dniu poszlam na zajecia sportowe, a nastepnego dnia na dlugie zakupy po centrach HANDLOWYCH.
-BAD# TEz Z ARO
-BAD# Poprawcie TO
-BAD# po godzinie CZYTANIA mialam wieksza wiedze na temat malwodzia ni dr Łaganowski.
-BAD# Pani doktor na moja informacje o tym, ze bezskutecznie STARAMY sie z mezem ju rok o dziecko odpowiedziala, ze to nie jest poradnia leczenia nieplodnosci.
-BAD# Jedzenie okropne monotonne, typowo przygotowywane pod Brytyjczykow : wszystko smazone, na sniadanie fasola, na obiad i kolacje frytki.
-BAD# Omijajci szerokim lukiem TO dziwne miejsce.
-BAD# W lazience pojemniki na mydlo z plynem na samym dnie starczylo na jeden PRYSZNIC.
-BAD# Osobiscie NIE skorzystamy juz z oferty teg hotelu.
-BAD# W trakcie wizyty dowiedzialem sie iz zab jest pekniety pionowo i nie nadaje sie do LECZENI oraz iz zab nalezy usunac.
-BAD# Nie m mozliwosci wylaczenia GŁOŚNIKA.
-BAD# Kot na stolowce i W restauracji!
-BAD# Doktora Łazeckiego NIE polecam
-BAD# Przykladowe sniadanie to 2 plasterki sera 2 plasterki wedliny i 3 plasterki pomidora.
-BAD# Bede musial skorzystac z porady innego lekarza, ta wizyta ni nie wniosla, zwraca CZASU i pieniedzy.
-BAD# Inna osoba pisala tu juz, ze wizyta trwala 3 minuty, a Pan Doktor UZNAŁ, ze to nieprawda
-BAD# Kolejny to problem z talerzami I sztuccam i szklankami na jadalni, jak przyszlo wiecej ludzi to stalo sie w kolejce czekajac na nakrycie.
-BAD# Impreza u dr Nogala KOSZTOWAŁA mnie 34 zl i wolala bym przeznaczyc te pieniadze na inny cel.
-BAD# Takie podejscie d zdezorientowanego pacjenta uwazam za karygodne, bowiem po zleceniu badan od internisty okazalo sie, ze mam ogromny niedobor WIT.
-BAD# Nie POLECAM innych poko - widoki niekoniecznie uciesza...
-BAD# Pokoj nie sa SPRZĄTANE.
-BAD# Nie polecil bym TEGO radia, oczywiscie wybiera kazdy wedlu wlasnego przekonania.
-BAD# Juz o 22. 50 nic nie mozna zamowic Z baru ( chyba ze za oplata ).
-BAD# wizyta trwala 5min, MIAŁAM troche wieksze oczekiwania wobec Pani Ani, szybkie rozpoznanie ' choroby ' recepta i do domu to za malo .
-BAD# Kolejnego dnia chcial bym sie wybrac na silownie lecz NIESTETY byl remon i nikt nie raczyl poinformowac gosci.
-BAD# Pan doktor u mnie zbagatelizowal niepokojace objawy jaki wystapily po OPERACJI i bez badan dodatkowych - wypisal do domu.
-BAD# Telewizja troche szwankuje ( jest jakas internetow i czasem sie przycina ) Niestety od przyszlego roku podobno ma byc drozej ze wzgledu na remont.
-BAD# Nasz pokoj znajdowal sie w rogu budynku, mimo to slychac bylo kazde kroki i rozmow Z korytarza i innych pokoi.
-BAD# Wydalem 150zl PLUS dojazd
-BAD# Stara suszarka wiszaca na haczyku przez zawiniety kabel, tez nie napawa optymizmem, zwlaszcza ZE po wlaczeniu w powietrzu unosil si zapach spalenizny.
-BAD# NIE PENSJONAT, WIĘC GDZIE JEST SALA ŚNIADANIOWA JA W MARIOCIE W WARSZAWIE ?!
-BAD# Wykonalam na polecenie p. doktora NIEZLICZONE ilosci kosztownych badan z ktorych nic nie wynikalo, zazywala leki hormonalne, ktore powinnam brac pod okiem specjalisty w szpitalu na domiar zlego kazda kolejna wizyta u pana doktora trwala 10 minut - bez wykonanego badania lekarskiego.
-BAD# Brak lobb I miejsc do wypoczynku.
-BAD# Generalnie odradzam bo jesli lekarz czegos nie jest pewien powinien sie umiec przyznac do tego a nie udawac, ze wie to karygodn tak NIESTETY bylo w moim przypadku.
-BAD# CALE szczescie ze to byla tylko jedna noc bo nie mam zamiaru powtarza przygody z tym hostelem.
-BAD# Bylismy szczesciarzami, widzialem ludzi ktorz oczekiwali po 8 GODZIN snujac sie w upale po hotelu.
-BAD# Takze zani kupicie to polskie badziewie to zastanowcie sie kilka razy - 3 LETNIA gwarancja na ten aku to smiech na sali jak rowniez serwis gwarancyjny.
-BAD# Na moja uwage, iz katar OSTATNIO trwal dlugo i przerodzil sie w wysiekowe zapalenie ucha i prosbe by polecila cos na przyspieszenie jego ustapieniu, uslyszalam ze nie m potrzeby na tym etapie i oczywiscie zawsze moze tak sie zdarzyc ze katar spowoduje komplikacje.
-BAD# Jedzenia bardzo malo i niesmaczne A miedzy obiadem A kolacja NIE ma co jesc
-BAD# We wszystkich informatorac widnieje godzina 22. 00.
-BAD# Wejscie na teren kempingu ni byl w zaden SPOSÓB monitorowany, nie czulam sie wiec bezpiecznie zostawiajac tam rowery i namiot.
-BAD# Moim zdaniem jak jechac na wczasy to lepiej cos dorzuci i miec swiety spokoj i good TIME a nie ogladac to kiche co tam sie odprawia.
-BAD# Wlasciciel nie zaproponowal jakiegokolwie alternatywnego rozwiazania i rekompensaty, nie otrzymalismy nawet RACHUNKU.
-BAD# Z wad jeszcz wymienil bym zacinanie sie Youtuba.
-BAD# U mnie zaczelo sie od tego ze przesylka szla do serwis 13 dni bo takiego sobie przewoznika wybrali... ale to byl dopiero POCZĄTEK!
-BAD# Malo cierpliw i NIE ma moim zdaniem dobrego podejscia do pacjentek.
-BAD# Niestety, ni wyleczyl mnie do konca - braklo MU pomyslow.
-BAD# Gburowaty, bardzo obraza ludzi, zupelni niepotrzebne i przykre slowa w stosunku do drugiego czlowieka, KTÓRY przychodzi po porade.
-BAD# Ocena " Slaby " za to, ze powiedziala ze prostatitis jes nieuleczalne co JEST nieprawda.
-BAD# Dodatkowo tuz po naszym przybyciu do pokoju byla zupelnie pusta I nie moglism napic sie nawet wody po dlugiej podrozy.
-BAD# Procz skibusow BRAK komunikacji
-BAD# Wino rozcieczon WODA Jedzenie monotonne.
-BAD# Personel zupelni NIEKOMPETENTNY!
-BAD# Obiadokolacji NIE polecam
-BAD# Pokoj niezbyt ŁADNE.
-BAD# O wszystko trzeba sie samemu pytac
-BAD# Wywiad zajal JEJ dluzej ni sama rozmowa o problemie i jeszcze uslyszal em, ze bylem za dlugo.
-BAD# Hotel nie ma parking i autokar musial stac BARDZO daleko.
-BAD# WINIEN jest profil miski
-BAD# Z niekompletnym ZROSTEM lekarka stwierdzila iz jestem zdrowy i nie widzi przeciwwskazan do wykonywania nawe ciezkich prac fizycznych.
-BAD# Pani doktor niestety kompletnie nie POTRAFIŁA mnie znieczulic, przez co w sumie nietrudne leczenie przerodzilo sie w koszmar dla mnie i ork na ugorze dla niej.
-BAD# Szelki to tylko same pask parciane z kawalkiem skaju NA biodro.
-BAD# W basenie zimna woda, w JACUZZI tez
-BAD# M zupelnie nie przypadl DO gustu.
-BAD# Szkoda jedynie ze jest na cieplo, przez co NIE dzial po stuknieciu paznokciem, dlugopisem czy rysikiem.
-BAD# do hoteu prowadza SCHODY, a wiec ciezkie walizki trzeba nosic samodzielnie - bra podjazdu albo windy.
-BAD# Obiadokolacja W cenie 50 zl od osoby straszna, dania podane zimne ociekajace tluszczem.
-BAD# Otoczeni OŚRODKA smutne, niezadbane.
-BAD# Mam taki bido I jestem rozczarowana.
-BAD# Np. Odmawia WYKONANIA odplatnie USG jajnikow, bo co jej sie ubzduralo.
-BAD# Cena nie adekwatna d komfortu JAKI oferuje hotel.
-BAD# Niestety juz pierwszeg dnia w recepcji czekala na nas bardzo niemila NIESPODZIANKA.
-BAD# Prolaktyna nadal byla ponad norma, natomiast PANI ordynator przy wypisie przepisala mi steryd ( mowila zeby nie czytac ulotki bo moge sie wystraszyc ), jakis srodek na laknienie ( w zwiazku z moja rzekoma anoreksja ) i branie w dalszym ciagu norprolaku ( jak sie pozniej okazalo nie powinno sie go brac dluzej niz pol roku ).
-BAD# Sale prelekcyjne porazka, byly prowadzone rownoczesnie dwa szkolenia poproszon o wylaczenie mikrofonow bo wzajemnie sie ZAGŁUSZALIŚMY.
-BAD# Nie odbiera telefonow, mimo, ze wczesnie kaze siebie INFORMOWAĆ o stanie zdrowia dziecka.
-BAD# Po otwarciu DRZWI pokoju uderzal nieprzyjemn zapach plesni i wilgoci.
-BAD# Nie bylo by tyle nie PRZESPANYC nocy, watpliwosci i mniej stresu.
-BAD# Monta tej kamerki na monitorze graniczy z cudem bo uchwyt ktory posiada jest tak zaprojektowany ze nie nadaje sie do niczego, Aby ja stabilnie zamontowac zamowilem rzepy do podklejenia bo inaczej jest nie stabilna i co chwila trzeba ja POPRAWIAC bo sie sama obraca razem z mocowaniem.
-BAD# Dodam, ze przed wizyta zrobilam juz czesc BADAŃ, z ktorych dobry, doswiadczony lekarz potrafil by wysunac jakiekolwiek, chociaz drobne wnioski
-BAD# Generalnie od 9. 00 do 22. 00 - 23. 0 ( wtedy konczyly sie ostatnie imprezy ) caly czas cos gra...
-BAD# STANOWCZ odradzam
-BAD# Z wizyt u tego lekarza wyszlam zalamana.
-BAD# A wszystko to okraszone dosc wysokimi wymaganiami sprzetowymi jesli zamierzamy grac na pelnych detalach graficznych
-BAD# Zdecydowanie jednak nie chcial bym znalezc sie na MIEJSCU tych ludzi.
-BAD# Niestety widok byl z widokiem na parking i na miejsce gdzie ludzie podczas IMPREZY wychodz palic papierosy.
-BAD# Pytania podczas laborki potrafia byc ciezkie, mozna wyleciec na sam koniec laboratorium, ale z reguly 3 moze 4 GRUPY beda zapytane podczas calych zajec.
-BAD# Szatnie na dole kolo basenu co moze byc KŁOPOTLIWE dla niektorych
-BAD# Male POKOJ w ktorych widac zab czasu.
-BAD# Naklada i rozprowadza sie idealnie ale najmniejszy zaciek konczy sie ciemna plama ktora przy probie zamalowania robi sie czarna i niemozliwa do usuniecia, gdyz w pomalowanym miejscu zarowno po wyschnieciu jak i przed wciagana jest w drewno kolejna warstwa impregnatu co doprowadza d sytuacji w ktorej miejsce takie z kolejna warstwa robi SIĘ coraz ciemniejsze az do calkowicie czarnego.
-BAD# Pani dokto w TRAKCIE usg stwierdzila ze faktycznie jestem w ciazy a gdy obydwoje z mezem poplakalismy sie ze szczescia zapytala z oburzeniem " czego pani ryczy ? ".
-BAD# SPRZÆTANIE bardzo kiepsko
-BAD# Ocena ogolna : UNIKA : x : x
+BAD# Tak jak w opinii powyżej zgodzę się, że wykonanie pozostawia wiele do jakości.
+BAD# Tak ja w opinii powyzej zgodze SIĘ, ze wykonanie pozostawia wiele do jakosci.
+BAD# Pełno stromych schodów i brak wind, jedzenie niesmaczne, niskiej jakości.
+BAD# Pelno stromych SCHODÓ i brak wind, jedzenie niesmaczne, niskiej jakosci.
+BAD# Sorry ale jak na hotel 4 * to slabo.
+BAD# Sorry ale JAK na hote 4 * to slabo.
+BAD# Wydałam ok 1300zł i na szczęście znalazłam innego lekarza stosujące Dry Needing igłami akupunkturowymi, gdzie po pierwszej wizycie i to tańszej jeszcze w tym samym dniu poszłam na zajęcia sportowe, a następnego dnia na długie zakupy po centrach handlowych.
+BAD# Wydalam ok 1300zl i na szczescie znalazlam innego lekarza stosujace Dry Needing iglami akupunkturowymi, GDZIE po pierwszej wizycie i to tanszej jeszcze w tym samym dniu poszlam na zajecia sportowe, a nastepnego dnia na dlugie zakupy p centrach handlowych.
+BAD# TEż z ARO.
+BAD# TE z ARO.
+BAD# Poprawcie to.
+BAD# Poprawci TO.
+BAD# po godzinie czytania miałam większa wiedzę na temat małwodzia niż dr Łaganowski.
+BAD# PO godzinie czytani mialam wieksza wiedze na temat malwodzia niz dr Łaganowski.
+BAD# Pani doktor na moją informację o tym, że bezskutecznie staramy się z mężem już rok o dziecko odpowiedziała, że to nie jest poradnia leczenia niepłodności.
+BAD# Pani doktor na MOJĄ informacje o tym, ze bezskutecznie staramy sie z mezem juz rok o dziecko odpowiedziala, ze to nie jest poradnia leczenia nieplodnosci
+BAD# Jedzenie okropne, monotonne, typowo przygotowywane pod Brytyjczyków : wszystko smażone, na śniadanie fasola, na obiad i kolację frytki.
+BAD# Jedzenie okropne, monotonne, typowo przygotowywane pod Brytyjczykow : wszystko smazone na ŚNIADANIE fasola, na obiad i kolacje frytki.
+BAD# Omijajcie szerokim łukiem to dziwne miejsce.
+BAD# Omijajci szerokim lukiem to DZIWNE miejsce.
+BAD# W łazience pojemniki na mydło z płynem na samym dnie, starczyło na jeden prysznic.
+BAD# W lazience pojemniki na mydl z plynem na samym dnie, starczylo NA jeden prysznic.
+BAD# Osobiście nie skorzystamy już z oferty tego hotelu.
+BAD# Osobiscie ni skorzystamy juz z OFERTY tego hotelu.
+BAD# W trakcie wizyty dowiedziałem się iż ząb jest pęknięty pionowo i nie nadaje się do leczenia oraz iż ząb należy usunąć.
+BAD# W trakcie wizyty dowiedzialem sie iz zab jest pekniety pionowo i nie nadaj sie DO leczenia oraz iz zab nalezy usunac.
+BAD# Nie ma możliwości wyłączenia głośnika.
+BAD# Nie M mozliwosci wylaczenia glosnika.
+BAD# Koty na stołówce i w restauracji!
+BAD# KOTY na stolowce i w restauracji
+BAD# Doktora Łazęckiego nie polecam.
+BAD# Doktora Łazeckiego ni POLECAM.
+BAD# Przykładowe śniadanie to 2 plasterki sera, 2 plasterki wędliny i 3 plasterki pomidora.
+BAD# Przykladowe ŚNIADANI to 2 plasterki sera, 2 plasterki wedliny i 3 plasterki pomidora.
+BAD# Bede musiał skorzystać z porady innego lekarza, ta wizyta nic nie wniosła, zwraca czasu i pieniędzy.
+BAD# Bed musial SKORZYSTAĆ z porady innego lekarza, ta wizyta nic nie wniosla, zwraca czasu i pieniedzy.
+BAD# Inna osoba pisała tu już, że wizyta trwala 3 minuty, a Pan Doktor uznał, że to nieprawda.
+BAD# Inna osoba pisala TU juz, ze wizyta trwala 3 minuty a Pan Doktor uznal, ze to nieprawda.
+BAD# Kolejny to problem z talerzami i sztućcami i szklankami na jadalni, jak przyszlo więcej ludzi to stalo się w kolejce czekając na nakrycie.
+BAD# Kolejny to problem z talerzami i sztuccami i szklankami na jadalni, jak przyszlo wiecej ludz to stalo sie w kolejce czekajac NA nakrycie.
+BAD# Impreza u dr Nogala kosztowała mnie 340 zł i wolała bym przeznaczyć te pieniądze na inny cel.
+BAD# Impreza u dr Nogala kosztowala mnie 340 z i WOLAŁA bym przeznaczyc te pieniadze na inny cel.
+BAD# Takie podejście do zdezorientowanego pacjenta uważam za karygodne, bowiem po zleceniu badań od internisty okazało się, że mam ogromny niedobór wit.
+BAD# Takie podejscie do zdezorientowaneg pacjenta uwazam za karygodne, bowiem po zleceniu badan od internisty okazalo sie, ze mam ogromny NIEDOBÓR wit.
+BAD# Nie polecam innych pokoi - widoki niekoniecznie ucieszą...
+BAD# Nie POLECA innych pokoi - widoki niekoniecznie uciesza...
+BAD# Pokoje nie są sprzątane.
+BAD# Pokoje NIE sa sprzatane
+BAD# Nie polecił bym tego radia, oczywiście wybiera każdy według własnego przekonania.
+BAD# Nie polecil bym tego radia, OCZYWIŚCIE wybier kazdy wedlug wlasnego przekonania.
+BAD# Już o 22. 50 nic nie można zamówić z baru ( chyba, że za opłatą ).
+BAD# JUŻ o 22. 50 ni nie mozna zamowic z baru ( chyba, ze za oplata ).
+BAD# wizyta trwała 5min, miałam trochę większe oczekiwania wobec Pani Ani, szybkie rozpoznanie ' choroby ' recepta i do domu to za mało. .
+BAD# wizyta trwala 5min, mialam troche wieksze oczekiwania wobec Pani Ani, szybkie rozpoznanie ' choroby ' recepta i d domu to za malo. .
+BAD# Kolejnego dnia chciał bym się wybrać na siłownie lecz niestety był remont i nikt nie raczył poinformować gości.
+BAD# Kolejnego dnia chcial bym sie wybrac na silownie lecz niestety byl remont I nikt nie raczy poinformowac gosci.
+BAD# Pan doktor u mnie zbagatelizował niepokojące objawy jakie wystąpiły po operacji i bez badań dodatkowych - wypisał do domu.
+BAD# Pan doktor u mnie zbagatelizowal niepokojac objawy jakie wystapily po operacji i bez badan dodatkowych - wypisal DO domu.
+BAD# Telewizja trochę szwankuje ( jest jakaś internetowa i czasem się przycina ) Niestety od przyszłego roku podobno ma być drożej ze względu na remont.
+BAD# Telewizja troche szwankuje ( jest JAKAŚ internetowa i czasem sie przycina ) Niestety od przyszlego roku podobno ma byc drozej ze wzgled na remont.
+BAD# Nasz pokój znajdował sie w rogu budynku, mimo to słychać było każde kroki i rozmowy z korytarza i innych pokoi.
+BAD# Nasz pokoj znajdowal sie w rogu budynku, mimo to slychac bylo kazde kroki i rozmow z KORYTARZA i innych pokoi.
+BAD# Wydałem 150zl plus dojazd.
+BAD# Wydale 150zl PLUS dojazd.
+BAD# Stara suszarka wisząca na haczyku przez zawiniety kabel, tez nie napawa optymizmem, zwłaszcza ze po włączeniu w powietrzu unosił się zapach spalenizny.
+BAD# STARA suszarka wiszaca n haczyku przez zawiniety kabel, tez nie napawa optymizmem, zwlaszcza ze po wlaczeniu w powietrzu unosil sie zapach spalenizny.
+BAD# NIE PENSJONAT, WIĘC GDZIE JEST SALA ŚNIADANIOWA JAK W MARIOCIE W WARSZAWIE ?!
+BAD# NIE PENSJONAT, WIĘC GDZI JEST SALA ŚNIADANIOWA JAK W MARIOCIE W WARSZAWIE ?!
+BAD# Wykonałam na polecenie p. doktora niezliczone ilości kosztownych badań z których nic nie wynikało, zażywałam leki hormonalne, które powinnam brać pod okiem specjalisty w szpitalu na domiar złego każda kolejna wizyta u pana doktora trwałą 10 minut - bez wykonanego badania lekarskiego.
+BAD# Wykonalam na polecenie p. doktora niezliczone ilosci kosztownych bada z ktorych nic nie wynikalo, zazywalam leki hormonalne, ktore powinnam brac pod okiem specjalisty w szpitalu na domiar zlego kazda kolejna WIZYTA u pana doktora trwala 10 minut - bez wykonanego badania lekarskiego.
+BAD# Brak lobby i miejsc do wypoczynku.
+BAD# Brak lobby i miejs DO wypoczynku.
+BAD# Generalnie odradzam bo jeśli lekarz czegoś nie jest pewien powinien się umieć przyznać do tego a nie udawać, że wie to karygodne tak niestety było w moim przypadku.
+BAD# Generalnie ODRADZAM bo jesli lekarz czegos nie jest pewien powinien sie umiec przyznac do tego a nie udawac, ze wie to karygodne tak niestety bylo w moi przypadku.
+BAD# Cale szczescie ze to byla tylko jedna noc bo nie mam zamiaru powtarzac przygody z tym hostelem.
+BAD# Cale szczescie ze to byla TYLKO jedna noc bo nie ma zamiaru powtarzac przygody z tym hostelem.
+BAD# Byliśmy szczesciarzami, widziałem ludzi którzy oczekiwali po 8 godzin snując sie w upale po hotelu.
+BAD# Bylismy szczesciarzami, widzialem ludzi ktorzy oczekiwali po 8 godzi SNUJĄC sie w upale po hotelu.
+BAD# Także zanim kupicie to polskie badziewie to zastanówcie się kilka razy - 3 letnia gwarancja na ten aku to śmiech na sali jak również serwis gwarancyjny.
+BAD# Takz zanim kupicie to polskie badziewie to zastanowcie SIĘ kilka razy - 3 letnia gwarancja na ten aku to smiech na sali jak rowniez serwis gwarancyjny.
+BAD# Na moja uwagę, iż katar ostatnio trwał długo i przerodzil się w wysiekowe zapalenie ucha i prośbę by poleciła coś na przyspieszenie jego ustapieniu, usłyszałam że nie ma potrzeby na tym etapie i oczywiście zawsze może tak się zdarzyć że katar spowoduje komplikacje.
+BAD# Na moja uwage, IŻ katar ostatnio trwal dlugo i przerodzil sie w wysiekowe zapalenie uch i prosbe by polecila cos na przyspieszenie jego ustapieniu, uslyszalam ze nie ma potrzeby na tym etapie i oczywiscie zawsze moze tak sie zdarzyc ze katar spowoduje komplikacje.
+BAD# Jedzenia bardzo mało i niesmaczne A między obiadem A kolacja nie ma co jeść.
+BAD# Jedzenia bardzo malo i niesmaczn A miedzy obiadem A kolacja nie ma co JEŚĆ.
+BAD# We wszystkich informatorach widnieje godzina 22. 00.
+BAD# We wszystkich informatorach widnieje GODZIN 22. 00.
+BAD# Wejście na teren kempingu nie był w żaden sposób monitorowany, nie czułam się więc bezpiecznie zostawiając tam rowery i namiot.
+BAD# Wejscie na TEREN kempingu nie byl w zaden sposob monitorowany, nie czulam sie wie bezpiecznie zostawiajac tam rowery i namiot.
+BAD# Moim zdaniem jak jechac na wczasy to lepiej cos dorzucic i miec swiety spokoj i good time a nie ogladac to kiche co tam sie odprawia.
+BAD# Moim zdaniem jak jechac na wczasy to lepiej cos dorzucic i miec SWIETY spoko i good time a nie ogladac to kiche co tam sie odprawia.
+BAD# Właściciel nie zaproponował jakiegokolwiek alternatywnego rozwiązania i rekompensaty, nie otrzymaliśmy nawet rachunku.
+BAD# WŁAŚCICIEL nie zaproponowal jakiegokolwiek alternatywnego rozwiazania i rekompensaty, nie otrzymalismy nawe rachunku.
+BAD# Z wad jeszcze wymienił bym zacinanie się Youtuba.
+BAD# Z wad jeszcze wymienil bym ZACINANI sie Youtuba.
+BAD# U mnie zaczęło się od tego że przesyłka szła do serwisu 13 dni bo takiego sobie przewoźnika wybrali... ale to był dopiero początek!
+BAD# U mnie zaczelo sie o tego ze przesylka szla do serwisu 13 dni bo takiego sobie przewoznika wybrali... ale to byl dopiero poczatek!
+BAD# Mało cierpliwy i nie ma moim zdaniem dobrego podejścia do pacjentek.
+BAD# Malo cierpliwy i nie m MOIM zdaniem dobrego podejscia do pacjentek.
+BAD# Niestety, nie wyleczył mnie do końca - brakło mu pomysłów.
+BAD# Niestety, nie wyleczyl MNIE d konca - braklo mu pomyslow.
+BAD# Gburowaty, bardzo obraża ludzi, zupełnie niepotrzebne i przykre słowa w stosunku do drugiego człowieka, który przychodzi po poradę.
+BAD# Gburowaty, bardzo obraza ludzi, zupelnie niepotrzebne i przykre slowa w stosunku DO drugieg czlowieka, ktory przychodzi po porade.
+BAD# Ocena " Słaby " za to, że powiedziała że prostatitis jest nieuleczalne co jest nieprawdą.
+BAD# Ocena " Slaby " za to ze powiedziala ze PROSTATITIS jest nieuleczalne co jest nieprawda.
+BAD# Dodatkowo tuż po naszym przybyciu do pokoju była zupełnie pusta i nie mogliśmy napić się nawet wody po długiej podróży.
+BAD# Dodatkowo tuz po naszym przybyciu do pokoju byla zupelnie pust i nie moglismy napic SIĘ nawet wody po dlugiej podrozy.
+BAD# Prócz skibusów brak komunikacji.
+BAD# Procz skibusow bra KOMUNIKACJI.
+BAD# Wino rozcieczone woda Jedzenie monotonne.
+BAD# Win ROZCIECZONE woda Jedzenie monotonne.
+BAD# Personel zupełnie niekompetentny!
+BAD# Persone ZUPEŁNIE niekompetentny!
+BAD# Obiadokolacji nie polecam.
+BAD# OBIADOKOLACJI nie polecam
+BAD# Pokoje niezbyt ładne.
+BAD# POKOJ niezbyt ladne.
+BAD# O wszystko trzeba się samemu pytać.
+BAD# O WSZYSTKO trzeba sie samem pytac.
+BAD# Wywiad zajął Jej dłużej niż sama rozmowa o problemie i jeszcze usłyszał em, ze byłem za długo.
+BAD# Wywiad zajal Jej DŁUŻEJ niz sama rozmowa o problemie i jeszcze uslyszal em, ze byle za dlugo.
+BAD# Hotel nie ma parkingu i autokar musiał stać bardzo daleko.
+BAD# Hotel nie ma parkingu i AUTOKAR musial stac bardzo daleko
+BAD# Winien jest profil miski.
+BAD# Winien jest PROFIL miski
+BAD# Z niekompletnym zrostem lekarka stwierdziła iż jestem zdrowy i nie widzi przeciwwskazań do wykonywania nawet ciężkich prac fizycznych.
+BAD# Z niekompletnym zrostem lekarka stwierdzila iz jeste zdrowy i nie widzi przeciwwskazan DO wykonywania nawet ciezkich prac fizycznych.
+BAD# Pani doktor niestety kompletnie nie potrafiła mnie znieczulić, przez co w sumie nietrudne leczenie przerodziło się w koszmar dla mnie i orkę na ugorze dla niej.
+BAD# Pani doktor niestety kompletni nie potrafila mnie znieczulic, przez co w sumie NIETRUDNE leczenie przerodzilo sie w koszmar dla mnie i orke na ugorze dla niej.
+BAD# Szelki to tylko same paski parciane z kawałkiem skaju na biodro.
+BAD# Szelki to tylko same pask parciane z kawalkiem SKAJU na biodro.
+BAD# W basenie zimna woda, w jacuzzi też.
+BAD# W BASENIE zimna woda w jacuzzi tez.
+BAD# Mi zupełnie nie przypadł do gustu.
+BAD# Mi zupelnie nie PRZYPADŁ d gustu.
+BAD# Szkoda jedynie że jest na ciepło, przez co nie działa po stuknięciu paznokciem, długopisem czy rysikiem.
+BAD# Szkoda jedyni ze jest na cieplo, przez CO nie dziala po stuknieciu paznokciem, dlugopisem czy rysikiem.
+BAD# do hoteu prowadzą schody, a więc ciężkie walizki trzeba nosić samodzielnie - brak podjazdu albo windy.
+BAD# DO hoteu prowadz schody, a wiec ciezkie walizki trzeba nosic samodzielnie - brak podjazdu albo windy.
+BAD# Obiadokolacja w cenie 50 zl od osoby straszna, dania podane zimne, ociekajace tluszczem.
+BAD# Obiadokolacja w cenie 50 zl od osoby straszna, DANIA podan zimne, ociekajace tluszczem.
+BAD# Otoczenie ośrodka smutne, niezadbane.
+BAD# OTOCZENIE osrodka smutne, niezadbane
+BAD# Mam taki bidon i jestem rozczarowana.
+BAD# Ma TAKI bidon i jestem rozczarowana.
+BAD# Np. Odmawia wykonania odpłatnie USG jajników, bo coś jej się ubzdurało.
+BAD# Np. Odmawia wykonania ODPŁATNIE USG jajnikow, bo cos jej sie ubzduralo
+BAD# Cena nie adekwatna do komfortu jaki oferuje hotel.
+BAD# Cen nie adekwatna DO komfortu jaki oferuje hotel.
+BAD# Niestety już pierwszego dnia w recepcji czekała na nas bardzo niemiła niespodzianka.
+BAD# Niestety juz PIERWSZEGO dnia w recepcji czekala na nas bardzo niemil niespodzianka.
+BAD# Prolaktyna nadal była ponad normą, natomiast pani ordynator przy wypisie przepisała mi sterydy ( mówiła zeby nie czytać ulotki bo moge sie wystraszyc ), jakiś środek na łaknienie ( w związku z moją rzekomą anoreksją ) i branie w dalszym ciągu norprolaku ( jak się później okazało nie powinno się go brać dłużej niż pół roku ).
+BAD# Prolaktyna nadal byla ponad norma, natomiast pani ordynator przy wypisie PRZEPISAŁA mi sterydy ( mowila zeby nie czytac ulotki bo moge sie wystraszyc ), jakis srodek na laknienie ( w zwiazku z moja rzekoma anoreksja ) i branie w dalszym ciag norprolaku ( jak sie pozniej okazalo nie powinno sie go brac dluzej niz pol roku ).
+BAD# Sale prelekcyjne porażka, były prowadzone równocześnie dwa szkolenia poproszono o wyłączenie mikrofonów bo wzajemnie się zagłuszaliśmy.
+BAD# Sale prelekcyjne porazka, byly prowadzone rownoczesnie dwa szkolenia poproszono o WYŁĄCZENIE mikrofonow b wzajemnie sie zagluszalismy.
+BAD# Nie odbiera telefonów, mimo, że wcześniej każe siebie informować o stanie zdrowia dziecka.
+BAD# Nie odbiera telefonow, mimo, z wczesniej kaze siebie INFORMOWAĆ o stanie zdrowia dziecka.
+BAD# Po otwarciu drzwi pokoju uderzał nieprzyjemny zapach pleśni i wilgoci.
+BAD# Po otwarciu drzw pokoju uderzal nieprzyjemny zapach plesni i WILGOCI.
+BAD# Nie było by tyle nie przespanych nocy, wątpliwości i mniej stresu.
+BAD# Ni bylo by TYLE nie przespanych nocy, watpliwosci i mniej stresu.
+BAD# Montaz tej kamerki na monitorze graniczy z cudem bo uchwyt który posiada jest tak zaprojektowany że nie nadaje sie do niczego, Aby ją stabilnie zamontowac zamówiłem rzepy do podklejenia bo inaczej jest nie stabilna i co chwila trzeba ja poprawiac bo się sama obraca razem z mocowaniem.
+BAD# Montaz tej kamerki na monitorze graniczy z cudem bo uchwyt ktory posiada jest tak zaprojektowany ze nie nadaje sie do niczego, Aby ja stabilnie zamontowac zamowilem rzepy do podklejenia bo inaczej JEST nie stabilna i co chwila trzeba ja poprawiac bo sie sama obraca raze z mocowaniem.
+BAD# Dodam, że przed wizytą zrobiłam już część badań, z których dobry, doświadczony lekarz potrafił by wysunąć jakiekolwiek, chociaż drobne wnioski.
+BAD# Dodam, ze przed wizyta zrobilam juz czesc badan, Z ktorych dobry, doswiadczon lekarz potrafil by wysunac jakiekolwiek, chociaz drobne wnioski.
+BAD# Generalnie od 9. 00 do 22. 00 - 23. 00 ( wtedy kończyły się ostatnie imprezy ) cały czas coś gra...
+BAD# Generalnie od 9. 00 d 22. 00 - 23. 00 ( wtedy konczyly sie ostatnie imprezy ) caly czas cos gra...
+BAD# Stanowczo odradzam
+BAD# Stanowczo ODRADZA
+BAD# z wizyty u tego lekarza wyszłam załamana.
+BAD# Z wizyty u tego lekarza wyszlam zalamana
+BAD# A wszystko to okraszone dość wysokimi wymaganiami sprzętowymi jeśli zamierzamy grać na pełnych detalach graficznych.
+BAD# A wszystko t okraszone dosc wysokimi wymaganiami sprzetowymi jesli zamierzamy grac NA pelnych detalach graficznych.
+BAD# Zdecydowanie jednak nie chciała bym znaleźć się na miejscu tych ludzi.
+BAD# Zdecydowanie jednak nie chciala bym znalezc sie NA miejsc tych ludzi.
+BAD# Niestety widok był z widokiem na parking i na miejsce gdzie ludzie podczas imprezy wychodzą palić papierosy.
+BAD# Niestety widok byl Z widokiem na parkin i na miejsce gdzie ludzie podczas imprezy wychodza palic papierosy.
+BAD# Pytania podczas laborki potrafią byc ciężkie, można wylecieć na sam koniec laboratorium, ale z reguły 3, może 4 grupy bedą zapytane podczas całych zajęć.
+BAD# Pytania podczas laborki potrafia byc ciezkie, mozna wyleciec na sam koniec laboratorium, ale z regul 3, moze 4 grupy beda zapytane podczas calych ZAJĘĆ.
+BAD# Szatnie na dole kolo basenu co może być kłopotliwe dla niektórych.
+BAD# Szatnie na dol kolo BASENU co moze byc klopotliwe dla niektorych.
+BAD# Male pokoje w ktorych widac ząb czasu.
+BAD# MALE pokoj w ktorych widac zab czasu.
+BAD# Nakłada i rozprowadza się idealnie ale najmniejszy zaciek kończy się ciemną plamą która przy próbie zamalowania robi się czarna i niemożliwa do usunięcia, gdyż w pomalowanym miejscu zarówno po wyschnięciu jak i przed wciągana jest w drewno kolejna warstwa impregnatu co doprowadza do sytuacji w której miejsce takie z kolejną warstwą robi się coraz ciemniejsze aż do całkowicie czarnego.
+BAD# Naklada i rozprowadza sie idealnie ale najmniejszy zaciek konczy sie ciemna plama ktora przy probie zamalowania robi sie czarna I niemozliwa do usuniecia, gdyz w pomalowanym miejscu zarowno po wyschnieciu jak i przed wciagana jest w drewno kolejna warstwa impregnatu co doprowadza do sytuacji w ktorej miejsce takie z kolejna warstw robi sie coraz ciemniejsze az do calkowicie czarnego.
+BAD# Pani doktor w trakcie usg stwierdziła że faktycznie jestem w ciąży a gdy obydwoje z mężem popłakaliśmy się ze szczęscia zapytała z oburzeniem " czego pani ryczy ? ".
+BAD# Pani doktor w trakcie usg stwierdzila z faktycznie jestem w ciazy a gdy obydwoje z mezem poplakalismy sie ze szczescia zapytala z oburzeniem " czego pani ryczy ? ".
+BAD# Sprzætanie bardzo kiepsko.
+BAD# SPRZÆTANIE bardz kiepsko.
+BAD# Ocena ogólna : UNIKAC : x : x
+BAD# Ocena ogolna : UNIKA : x : X
+BAD# Nie polecam!!!!!!!!!!!!!!!!!!!
 BAD# NI polecam!!!!!!!!!!!!!!!!!!!
-BAD# Jest to JAWN niesprawiedliwosc.
-BAD# Znajomi zaproponowali, zeby zostawil BAGAŻE i przeszedl sie do hotelu obok na co Jakis buc ( domniemam ze wlasciciel ) siedzacy w holu powiedzial, ze w zadnym wypadku nie moge zostawic bagazy - mam je zabierac i wyjsc... co z najwieksza przyjemnoscia uczynilismy.
-BAD# Łazienka ze zniszczonym brodzikiem, zatkany brodzik, brudne fugi na plytkach, kontakty nieprzykrecone do sciany po malowaniu, na korytarzu czuc palonymi papierosami w recepcji, W opisie hotelu jest opcja sniadan lec na miejscu okazuje sie, ze ich nie MA.
-BAD# z dnia na DZIEN bez slowa wyjasnien odwolali moja rezerwacje a gdy dzwonilam zeby wyjasnic dlaczego taka sytuacja zaistniala wlascicielka byla oprysklliwa i niemila mowiac " ze ja to nie obchodzi gdzie teraz znajde nocleg to moj klopot itp " Juz z wczesniejszych rozmow telefonicznych dal sie odczuc ze to niezbyt przyjazni ludzie... odnioslam wrazenie ze tak naprawde to laske mi robia ze daja mi nocleg.
-BAD# Przyciski panelu STEROWANIA glosno pikaj po nacisnieciu.
-BAD# W pokoju przy lozku nie ma zadnego gniazdka, zeby MÓC prze noc podladowac telefon.
-BAD# TEN zestaw jes kompletnie do niczego.
-BAD# Po wejsciu do gabinet Pani Janiszewska nie pozwolil zamknac drzwi wejsciowych z tego powodu CAŁA rozmowa byla slyszana przez pacjentow na korytarzu.
-BAD# TO sa t trafne zasciankowe diagnozy.
-BAD# Moje ostatnie dwie WIZYTY odbyly sie niezgodnie z podana wczesniej informacja i ostatecznie wyniosly mnie o 150 zl wiecej niz bylam informowana wczesniej, a specjalnie pytalam kilk razy o koszt. .
-BAD# Zarowno poziomem wiedzy medycznej, JAK i kultury osobistej
-BAD# Pani dr nie stwierdzila nic niepokojaceg a tym bardziej juz podejrzenia tarczycy, bo TO przeciez ( malo prawdopodobne jej zdaniem ).
-BAD# Ale D dzwieku bym sie przyczepil.
-BAD# Pajaki W pokoju i szerszenie
-BAD# A to w nieprzyjemny sposob " przesluchiwal " NA poranne wizycie smiertelnie zmeczona lekarke przekazujaca dyzur.
-BAD# Przypuszczam, ze wszystki jego pacjentki, ktore urodzily dzieci w trakcie leczenia u NIEGO po prostu mialy szczescie.
-BAD# C JEST najdziwniejsze ?
-BAD# ROZCZAROWAŁA mnie rownie okolica.
-BAD# Nieprofesjonalna obsluga w barze ( pozdrowienia dla Dawida ), slaby DJ ( puszcza tytuly, a nie rytm DO tanczenia, nie rozumie co sie do niego mowi ) nic dziwnego, ze klub swieci pustkami, a jedyna sensowna atrakcja jest bowling w przesadnej cenie 80 zl / h ( jak rozumiem za duzo chetnych z powodow wymienionych wczesniej ) Kolejna sprawa jest sposob platnosci na pokoj, zeby nie nosic karty kredytowej lub gotowki np do basenu.
-BAD# Niestety miala nieprzyjemnosc zetknac sie z nim znow w TEJ przychodni, gdy zglosilam sie w trybie pilnym, z powodu zapalenia twardowki i blony naczyniowej oka.
-BAD# Zero w nic ENERGII.
-BAD# Zimna woda ( jak sie odkreci prysznic na pol godziny, to leci ciepla ), lazienka na 2 pokoje ( w cenniku nazywaja to " studio " ), w pokoju zimno ( dostalem farelke, zeby si dogrzac ), sniadanie kiepskie ( a calosc dopelnia kawa rozpuszczalna z automatu jak na dworcu ), Internet woooolny ( o ile akurat jest, bo rwie sie co chwile ).
-BAD# Jedyne co MNIE zaskoczylo, to pewne nieprzemyslane elementy budowy.
-BAD# Pokoj z widokiem na PÓŁNOC 0 gor
-BAD# Nie polecam korzystania z opcji obiadokolacji, zaserwowano zupe pieczarkowa a na DANIE glowne golabek z ziemniakami
-BAD# Szkoda czasu i nerwow to rada dla WYBIERAJĄCYCH sie d profesora.
-BAD# Ogolnie butelki ni zostaly wysterelizowane, w toalecie W efekcie czego dziecko dostalo plesniawek.
-BAD# Niestety dzisiaj przyjechalam z mezem na wyczekiwanyw weekendw HOTELU Diament i niestety juz na samym poczatku okropn rozczarowanie - otrzymalismy pokoj z widokiem na betonowy mur...
-BAD# JEDNA pokoj pozostawial wiele do zyczenia.
-BAD# Rowniez zmieszane zapachy wiel potraw NIE zachecaly do dluzszego pobytu.
-BAD# Gondol i spacerowka TO jest po prostu koszmar.
-BAD# Jak tylko dostaje zasilanie wpada w taki rezonans, z zaglusza dwa inne dyski + 2 wentylatory w obudowie, wentylator i buczenie ZASILACZA, chlodzenie procesora oraz dwa wentylatory grafiki razem wziete.
-BAD# Jesli ktos liczy na basen do plywania z malymi dziecmi ( ponizej 4 lat ), musi wiedziec z w HOTELOWYM basenie nie moga sie kapac dzieci.
-BAD# Al jak juz sa komplikacje to chyba NIE jest najlepszy.
-BAD# Oszczedzaja ( a raczej dziaduja ) na wszystkim, CO si da.
-BAD# P drugie : JEDZENIE bylo PASKUDNE!
-BAD# Żeby moc korzystac z pokoju musielismy go najpierw porzadni POSPRZĄTAĆ.
-BAD# Kolejny raz i kolejne WIELKIE ROZCZAROWANIE, jesli chodzi zarowno o czystosc, obsluge, jedzenie i ogoln wrazenie.
-BAD# Jak na specjaliste W dziedzini medycyny estetycznej, troche slabe podejscie do problemu.
-BAD# Badanie trwalo doslownie moment - dr nie ZLECIŁ natychmiastowego badania moczu, czego wymaga moj stan ( bol pochwy i pecherza ).
-BAD# JEDEN raz byl makaron ( przypalony, z papryka chill ).
-BAD# N pewno nikomu nie POLECAM tego hotelu!
-BAD# Szklank brudne staly nie ZMIENIANE od niedzieli, sama je wynosilam i prosilam o czyste, kabina prysznicowa nie myta.
-BAD# ZaleceniaKupujac wczasy z biura Rainbow dobrze sie zastanow cz umowa gwarantuje komfort jakiego oczekujesz sugerujac sie standardem pokoju W hotelu.
-BAD# nie warto WYDAWAĆ pieniadze na niepotrzebne leki i traci czas.
-BAD# Udalem sie do toalety gdzi zauwazylem ze zabieg spowodowal KRWAWIENIE.
-BAD# Dodatkowo BYŁ niepomocny, niezainteresowany wyjasnieniem problemu
-BAD# OTRZYMAŁEM stanowcza odpowiedz, ze moge tylko otrzymac badania zgodne z dokumentacj pacjenta.
-BAD# Mala po tym dostala JESZCZ wiekszych kolek.
-BAD# Jedyny minus to bardzo wysokie ceny jak na Polske 700 plan za nocleg, 1700 PLN za 4 - osobowa salke, 180 pln za stek z antrykotu z kieliszkiem wina, czy piwo za 20pln.
-BAD# Oczywiscie NIE obwiniam Doktora Hodery o to co sie stalo, bo to bylo " dzielem " natury, ale bardzo nie spodobalo mi sie Jego podejscie do utraceni ciazy.
+BAD# Jest to jawna niesprawiedliwość.
+BAD# JEST t jawna niesprawiedliwosc.
+BAD# Znajomi zaproponowali, żebym zostawił bagaże i przeszedł sie do hotelu obok na co Jakiś buc ( domniemam że właściciel ) siedzący w holu powiedział, że w żadnym wypadku nie mogę zostawić bagaży - mam je zabierać i wyjść... co z największą przyjemnością uczyniliśmy.
+BAD# Znajomi zaproponowali ŻEBYM zostawil bagaze i przeszedl sie do hotelu obok na co Jakis buc ( domniemam ze wlasciciel ) siedzacy w holu powiedzial, ze w zadnym wypadku nie moge zostawic bagazy - mam je zabierac i wyjsc... co z najwieksza przyjemnoscia uczynilismy.
+BAD# Łazienka ze zniszczonym brodzikiem, zatkany brodzik, brudne fugi na płytkach, kontakty nieprzykręcone do ściany po malowaniu, na korytarzu czuć palonymi papierosami w recepcji, W opisie hotelu jest opcja śniadań lecz na miejscu okazuje się, że ich nie ma.
+BAD# Łazienka ze zniszczonym brodzikiem, zatkany brodzik, brudne fugi na plytkach kontakty nieprzykrecone do sciany po malowaniu, na korytarzu czuc palonymi papierosami w recepcji, W opisie hotelu jest opcja sniadan lecz na miejscu okazuje sie, ze ich nie ma.
+BAD# z dnia na dzien bez słowa wyjasnien odwołali moją rezerwacje a gdy dzwoniłam zeby wyjaśnić dlaczego taka sytuacja zaistniała włascicielka była oprysklliwa i niemiła mówiąc " ze ją to nie obchodzi gdzie teraz znajde nocleg to mój kłopot itp " Już z wczesniejszych rozmów telefonicznych dało sie odczuć że to niezbyt przyjazni ludzie... odniosłam wrażenie że tak naprawde to łaskę mi robią że dają mi nocleg.
+BAD# z dnia na dzien bez slowa wyjasnien odwolali moja rezerwacje a gdy dzwonilam zeby wyjasnic dlaczego taka sytuacja zaistniala wlascicielka byla OPRYSKLLIWA i niemila mowiac " ze ja to nie obchodzi gdzie teraz znajde nocle to moj klopot itp " Juz z wczesniejszych rozmow telefonicznych dalo sie odczuc ze to niezbyt przyjazni ludzie... odnioslam wrazenie ze tak naprawde to laske mi robia ze daja mi nocleg.
+BAD# Przyciski panelu sterowania głośno pikają po naciśnięciu.
+BAD# Przycisk panelu sterowania glosno pikaja po NACIŚNIĘCIU.
+BAD# W pokoju przy łóżku nie ma żadnego gniazdka, żeby móc przez noc podładować telefon.
+BAD# W pokoju przy ŁÓŻKU nie ma zadneg gniazdka, zeby moc przez noc podladowac telefon.
+BAD# Ten zestaw jest kompletnie do niczego.
+BAD# Te zestaw jest KOMPLETNIE do niczego.
+BAD# Po wejściu do gabinetu Pani Janiszewska nie pozwolił zamknąć drzwi wejściowych z tego powodu cała rozmowa była słyszana przez pacjentów na korytarzu.
+BAD# Po wejsciu do gabinetu Pani Janiszewska nie pozwolil zamkna drzwi wejsciowych z tego powodu cala ROZMOWA byla slyszana przez pacjentow na korytarzu.
+BAD# to sa te trafne zaściankowe diagnozy.
+BAD# to s te trafne zasciankowe DIAGNOZY.
+BAD# Moje ostatnie dwie wizyty odbyły się niezgodnie z podaną wcześniej informacją i ostatecznie wyniosły mnie o 150 zł więcej niż byłam informowana wcześniej, a specjalnie pytałam kilka razy o koszt. .
+BAD# Moje ostatnie DWIE wizyty odbyly sie niezgodnie z podana wczesniej informacja i ostatecznie wyniosly mnie o 150 zl wiecej niz bylam informowana wczesniej a specjalnie pytalam kilka razy o koszt. .
+BAD# Zarówno poziomem wiedzy medycznej, jak i kultury osobistej.
+BAD# ZARÓWNO poziomem wiedzy medycznej jak i kultury osobistej.
+BAD# Pani dr nie stwierdziła nic niepokojącego a tym bardziej już podejrzenia tarczycy, bo to przecież ( mało prawdopodobne jej zdaniem ).
+BAD# Pani dr nie stwierdzila nic niepokojacego a ty bardziej juz podejrzenia TARCZYCY, bo to przeciez ( malo prawdopodobne jej zdaniem ).
+BAD# Ale do dźwięku bym się przyczepił.
+BAD# Ale do dzwiek BYM sie przyczepil.
+BAD# Pająki w pokoju i szerszenie.
+BAD# Pajak W pokoju i szerszenie.
+BAD# A to w nieprzyjemny sposób " przesłuchiwał " na porannej wizycie śmiertelnie zmęczoną lekarkę przekazującą dyżur.
+BAD# A to w nieprzyjemny sposob " przesluchiwal " na porannej WIZYCI smiertelnie zmeczona lekarke przekazujaca dyzur.
+BAD# Przypuszczam, że wszystkie jego pacjentki, które urodziły dzieci w trakcie leczenia u niego po prostu miały szczęście.
+BAD# Przypuszczam, ze wszystkie JEGO pacjentki, ktore urodzily dzieci w trakcie leczenia u niego po prostu mialy szczescie
+BAD# Co jest najdziwniejsze ?
+BAD# Co JEST najdziwniejsz ?
+BAD# Rozczarowała mnie również okolica.
+BAD# Rozczarowala mni RÓWNIEŻ okolica.
+BAD# Nieprofesjonalna obsługa w barze ( pozdrowienia dla Dawida ), słaby DJ ( puszcza tytuły, a nie rytmy do tańczenia, nie rozumie co się do niego mówi ) nic dziwnego, że klub świeci pustkami, a jedyną sensowną atrakcją jest bowling w przesadnej cenie 80 zł / h ( jak rozumiem za dużo chętnych z powodów wymienionych wcześniej ) Kolejną sprawą jest sposób płatności na pokój, żeby nie nosić karty kredytowej lub gotówki np do basenu.
+BAD# Nieprofesjonalna obsluga w barze ( pozdrowienia dla Dawida ), slaby DJ ( puszcza tytuly, a nie rytmy do tanczenia, nie ROZUMIE co sie do niego mowi ) nic dziwnego, ze klub swieci pustkami, a jedyna sensowna atrakcja jest bowling w przesadnej cenie 80 z / h ( jak rozumiem za duzo chetnych z powodow wymienionych wczesniej ) Kolejna sprawa jest sposob platnosci na pokoj, zeby nie nosic karty kredytowej lub gotowki np do basenu.
+BAD# Niestety miałam nieprzyjemność zetknąć się z nim znów w tej przychodni, gdy zgłosiłam się w trybie pilnym, z powodu zapalenia twardówki i błony naczyniowej oka.
+BAD# Niestety mialam NIEPRZYJEMNOŚĆ zetknac sie z nim znow w tej przychodni, gdy zglosilam si w trybie pilnym, z powodu zapalenia twardowki i blony naczyniowej oka.
+BAD# Zero w nich energii.
+BAD# Zer W nich energii.
+BAD# Zimna woda ( jak sie odkreci prysznic na pol godziny, to leci ciepla ), lazienka na 2 pokoje ( w cenniku nazywaja to " studio " ), w pokoju zimno ( dostalem farelke, zeby sie dogrzac ), sniadanie kiepskie ( a calosc dopelnia kawa rozpuszczalna z automatu jak na dworcu ), Internet woooolny ( o ile akurat jest, bo rwie sie co chwile ).
+BAD# Zimna woda ( jak sie odkrec prysznic na pol godziny, to leci ciepla ), lazienka na 2 pokoje ( w cenniku nazywaja to " studio " ), w pokoju zimno ( dostalem farelke, zeby sie dogrzac ), sniadanie kiepskie ( a calosc dopelnia kawa rozpuszczalna z automatu jak na dworcu ), Internet woooolny ( o ile akurat jest, bo rwie sie co chwile ).
+BAD# Jedyne, co mnie zaskoczyło, to pewne nieprzemyślane elementy budowy.
+BAD# Jedyne, co mnie zaskoczylo TO pewne nieprzemyslane elementy budowy.
+BAD# Pokój z widokiem na północ 0 gór.
+BAD# Poko z widokiem NA polnoc 0 gor.
+BAD# Nie polecam korzystania z opcji obiadokolacji, zaserwowano zupę pieczarkową a na danie główne gołąbek z ziemniakami.
+BAD# Nie polecam korzystania z OPCJ obiadokolacji, zaserwowano zupe pieczarkowa a na danie glowne golabek z ziemniakami.
+BAD# Szkoda czasu i nerwów to rada dla wybierających się do profesora.
+BAD# Szkoda czasu i NERWÓW to rada dla wybierajacych si do profesora.
+BAD# Ogolnie butelki nie zostaly wysterelizowane, w toalecie w efekcie czego dziecko dostalo plesniawek.
+BAD# Ogolnie butelki ni zostaly wysterelizowane, w toalecie w efekcie CZEGO dziecko dostalo plesniawek.
+BAD# Niestety dzisiaj przyjechałam z mężem na wyczekiwanyw weekendw hotelu Diament i niestety już na samym początku okropne rozczarowanie - otrzymaliśmy pokój z widokiem na betonowy mur...
+BAD# Niestety dzisiaj przyjechalam z mezem na wyczekiwanyw weekendw hotelu Diament i niestety JUŻ na samym poczatku okropne rozczarowanie - otrzymalismy pokoj z widokie na betonowy mur...
+BAD# Jednak pokój pozostawial wiele do życzenia.
+BAD# Jednak pokoj pozostawial wiel DO zyczenia.
+BAD# Również zmieszane zapachy wielu potraw nie zachęcały do dłuższego pobytu.
+BAD# Rowniez ZMIESZANE zapachy wielu potraw nie zachecaly do dluzszego pobytu
+BAD# Gondola i spacerówka to jest po prostu koszmar.
+BAD# Gondola i SPACERÓWKA to jest po prost koszmar.
+BAD# Jak tylko dostaje zasilanie wpada w taki rezonans, że zagłusza dwa inne dyski + 2 wentylatory w obudowie, wentylator i buczenie zasilacza, chłodzenie procesora oraz dwa wentylatory grafiki razem wzięte.
+BAD# Jak tylko dostaje zasilanie wpada w taki rezonans, ze zaglusza dwa inne dysk + 2 wentylatory w obudowie, wentylator i buczenie zasilacza, chlodzenie procesora oraz dwa wentylatory grafiki razem WZIĘTE.
+BAD# Jeśli ktoś liczy na basen do pływania z małymi dziećmi ( poniżej 4 lat ), musi wiedzieć że w hotelowym basenie nie mogą się kąpać dzieci.
+BAD# Jesli ktos liczy na basen do plywania z malymi dziecmi ( ponizej 4 lat ), musi wiedziec ze w hotelowy basenie NIE moga sie kapac dzieci.
+BAD# Ale jak juz sa komplikacje to chyba nie jest najlepszy.
+BAD# Ale ja JUZ sa komplikacje to chyba nie jest najlepszy.
+BAD# Oszczędzają ( a raczej dziadują ) na wszystkim, co się da.
+BAD# Oszczedzaj ( a raczej dziaduja ) na wszystkim, co SIĘ da.
+BAD# Po drugie : jedzenie było PASKUDNE!
+BAD# PO drugie : jedzenie byl PASKUDNE!
+BAD# Żeby móc korzystać z pokoju musieliśmy go najpierw porządnie posprzątać.
+BAD# Żeby mo korzystac z pokoju musielismy go najpierw PORZĄDNIE posprzatac.
+BAD# Kolejny raz i kolejne WIELKIE rozczarowanie, jeśli chodzi zarówno o czystość, obsługę, jedzenie i ogólne wrażenie.
+BAD# Kolejny raz i kolejne WIELKI rozczarowanie, jesli chodzi ZARÓWNO o czystosc, obsluge, jedzenie i ogolne wrazenie.
+BAD# Jak na specjalistę w dziedzinie medycyny estetycznej, trochę slabe podejście do problemu.
+BAD# Ja na specjaliste w dziedzinie medycyny ESTETYCZNEJ, troche slabe podejscie do problemu.
+BAD# Badanie trwało dosłownie moment - dr nie zlecił natychmiastowego badania moczu, czego wymagał mój stan ( ból pochwy i pęcherza ).
+BAD# Badanie trwalo doslownie moment - dr nie zlecil natychmiastoweg badania moczu, czego WYMAGAŁ moj stan ( bol pochwy i pecherza ).
+BAD# Jeden raz był makaron ( przypalony, z papryką chilli ).
+BAD# Jeden raz byl MAKARON ( przypalony, z papryka chill ).
+BAD# Na pewno nikomu nie polecam tego hotelu!
+BAD# Na pewno nikomu nie POLECA tego hotelu!
+BAD# Szklanki brudne stały nie zmieniane od niedzieli, sama je wynosilam i prosiłam o czyste, kabina prysznicowa nie myta.
+BAD# Szklanki brudne stal nie zmieniane od niedzieli, sama je wynosilam i prosilam o czyste, KABINA prysznicowa nie myta.
+BAD# ZaleceniaKupując wczasy z biura Rainbow dobrze się zastanów czy umowa gwarantuje komfort jakiego oczekujesz sugerując się standardem pokoju w hotelu.
+BAD# ZaleceniaKupujac wczasy z biur Rainbow dobrze sie zastanow czy umowa gwarantuje komfort jakiego oczekujesz sugerujac sie STANDARDEM pokoju w hotelu.
+BAD# nie warto wydawać pieniądze na niepotrzebne leki i tracic czas.
+BAD# nie warto wydawac pieniadze na niepotrzebne lek I tracic czas.
+BAD# Udałem sie do toalety gdzie zauważyłem ze zabieg spowodował krwawienie.
+BAD# Udalem si do toalety gdzie ZAUWAŻYŁEM ze zabieg spowodowal krwawienie.
+BAD# Dodatkowo był niepomocny, niezainteresowany wyjaśnieniem problemu.
+BAD# Dodatkowo byl niepomocny, niezainteresowany wyjasnieniem PROBLEMU
+BAD# Otrzymałem stanowczą odpowiedź, że mogę tylko otrzymać badania zgodne z dokumentacją pacjenta.
+BAD# Otrzymalem stanowcz odpowiedz, ŻE moge tylko otrzymac badania zgodne z dokumentacja pacjenta.
+BAD# Mała po tym dostała jeszcze większych kolek.
+BAD# Mala po tym dostal jeszcze wiekszych KOLEK.
+BAD# Jedyny minus to bardzo wysokie ceny jak na Polskę 700 plan za nocleg, 1700 pln za 4 - osobowa salkę, 180 pln za steka z antrykotu z kieliszkiem wina, czy piwo za 20pln.
+BAD# Jedyny minus to bardzo wysokie ceny jak na Polsk 700 plan za nocleg, 1700 pln za 4 - osobowa salke, 180 pln za steka z antrykotu z kieliszkiem wina, czy piwo za 20PLN.
+BAD# Oczywiście nie obwiniam Doktora Hodery o to co się stało, bo to było " dziełem " natury, ale bardzo nie spodobało mi się Jego podejście do utracenia ciąży.
+BAD# Oczywiscie nie obwiniam Doktor Hodery o TO co sie stalo, bo to bylo " dzielem " natury, ale bardzo nie spodobalo mi sie Jego podejscie do utracenia ciazy.
+BAD# Mało przyjemne.
 BAD# Malo PRZYJEMNE
-BAD# Moze WYSTRÓJ nie do konc w moim guscie.
+BAD# Może wystrój nie do końca w moim guście.
+BAD# Moze wystro nie do konca W moim guscie.
