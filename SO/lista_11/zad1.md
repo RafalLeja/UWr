@@ -17,10 +17,10 @@ findmnt --pseudo
 
 - relatime:
   -  aktualizuje czas dostępu do pliku tylko wtedy, gdy poprzedni czas dostępu jest wczesniejszy niż czas modyfikacji.
-  -  
+  -  zmniejszanie I/O np. w przypadku serwerów.
 -  noexec:
   -  zabrania wykonywania plików z danego systemu plików.
   -  podejrzany pendrive, który może zawierać złośliwe oprogramowanie.
 - nodev:
   -  zabrania dostępu do urządzeń blokowych i znakowych.
-  -  
+  -  katalogi takie jak /tmp i /dev/shm, użytkownicy nie powinni mieć dostępu do urządzeń.
