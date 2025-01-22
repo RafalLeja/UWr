@@ -8,11 +8,12 @@ static void randsleep(void) {
   usleep(rand() % 5000 + 5000);
 }
 
-#define N 50
+#define N 5
 
 static pthread_t td[N];
 static sem_t forks[N];
 /* TODO: If you need extra shared state, define it here. */
+static sem_t waiter;
 
 void *philosopher(void *id) {
   int right = (intptr_t)id;
@@ -22,7 +23,11 @@ void *philosopher(void *id) {
     /* Think */
     randsleep();
 
+
     /* TODO: Take forks (without deadlock & starvation) */
+    outc('a');
+    Sem_wait(&waiter);
+
     Sem_wait(&forks[right]);
     Sem_wait(&forks[left]);
 
@@ -30,8 +35,10 @@ void *philosopher(void *id) {
     randsleep();
 
     /* TODO: Put forks (without deadlock & starvation) */
+
     Sem_post(&forks[left]);
     Sem_post(&forks[right]);
+    Sem_post(&waiter);
   }
 
   return NULL;
@@ -39,6 +46,7 @@ void *philosopher(void *id) {
 
 int main(void) {
   /* TODO: If you need extra shared state, initialize it here. */
+  Sem_init(&waiter, 0, N-1);
 
   for (int i = 0; i < N; i++)
     Sem_init(&forks[i], 0, 1);
