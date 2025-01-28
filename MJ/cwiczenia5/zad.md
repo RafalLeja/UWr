@@ -1,0 +1,3 @@
+## Zadanie 1
+
+### Znajd¹ informacje o wielko±ci modelu GPT-3. Przyjmijmy zaªo»enie, »e cyfra=token, mno»enie jest realizowane na sekwencyjnym, jednow¡tkowym procesorze, a do mno»enia macierzy u»ywamy szkolnego algorytmu O(N3). Jak wiele operacji mno»enia musi wykona¢ transformer GPT-3, »eby pomno»y¢ dwie liczby trzycyfrowe, wi¦ksze od 400. Wynik nie musi by¢ dokªadny, mo»esz pomyli¢ si¦ o rz¡d, czy dwa.
