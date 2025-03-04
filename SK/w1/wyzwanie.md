@@ -6,12 +6,12 @@ Virbian1 i Virbian2 do wirtualnej sieci local1 i następnie uruchom obie maszyny
 ```bash
 
 # 0
-ip link set up dev enp0s3
-ip addr add 192.168.100.1/24 dev enp0s3
+sudo ip link set up dev enp0s3
+sudo ip addr add 192.168.100.1/24 dev enp0s3
 
 # 1
-ip link set up dev enp0s3
-ip addr add 192.168.100.2/24 dev enp0s3
+sudo ip link set up dev enp0s3
+sudo ip addr add 192.168.100.2/24 dev enp0s3
 ```
 
 - Poleceniem ping sprawdź, czy jedna maszyna jest osiągalna z drugiej. Jaki jest RTT?
