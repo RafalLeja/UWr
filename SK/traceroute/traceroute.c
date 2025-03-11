@@ -56,7 +56,7 @@ void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
   struct icmp header;
   header.icmp_type = ICMP_ECHO;
   header.icmp_code = 0;
-  header.icmp_hun.ih_idseq.icd_id = getpid() && 0xFFFF;
+  header.icmp_hun.ih_idseq.icd_id = getpid() & 0xFFFF;
   header.icmp_hun.ih_idseq.icd_seq = seq;
   header.icmp_cksum = 0;
   header.icmp_cksum =
@@ -106,26 +106,48 @@ void recvPackets(struct packet_info *packets) {
     printf("Received IP packet with ICMP content from: %s\n", sender_ip_str);
 
     struct iphdr *ip_header = (struct iphdr *)buffer;
-    ssize_t ip_header_len = 4 * (ssize_t)(ip_header->ihl);
+    int ip_header_len = 4 * (ip_header->ihl);
 
-    // print_as_bytes(ip_header, ip_header_len);
-    // printf("\n");
+    printf("IP header: ");
+    print_as_bytes(ip_header, ip_header_len);
+    printf("\n");
 
-    struct icmp *header = (struct icmp *)(buffer + ip_header_len);
+    struct icmphdr *icmp_header = (struct icmphdr *)(buffer + ip_header_len);
     ssize_t header_len = packet_len - ip_header_len;
 
-    // print_as_bytes(header, header_len);
-    // printf("\n");
+    printf("ICMP header: ");
+    print_as_bytes(icmp_header, header_len);
+    printf("\n");
+
+    struct iphdr *ip_header2 = (struct iphdr *)(buffer + ip_header_len + sizeof(struct icmphdr));
+    int ip_header_len2 = 4 * (ip_header2->ihl);
+
+    printf("IP header2: ");
+    print_as_bytes(ip_header2, ip_header_len2);
+    printf("\n");
+
+    struct icmphdr *icmp_header2 = (struct icmphdr *)(buffer + ip_header_len + sizeof(struct icmphdr) + ip_header_len2);
+
+    printf("ICMP header2: ");
+    print_as_bytes(icmp_header2, sizeof(struct icmphdr));
+    printf("\n");
+
+
+    u_int16_t id = icmp_header2->un.echo.id;
+    u_int16_t seq = icmp_header2->un.echo.sequence;
+
+    printf("off %lu\n", offsetof(struct icmphdr, un.echo.id));
+    printf("off %lu\n", offsetof(struct icmphdr, un.echo.sequence));
 
     // Custom offsets, because the library does not work correctly
-    u_int16_t *id = (u_int16_t *)(buffer + ip_header_len + header_len - 4);
-    u_int16_t *seq = (u_int16_t *)(buffer + ip_header_len + header_len - 2);
+    // u_int16_t id = (u_int16_t *)(buffer + ip_header_len + header_len - 4);
+    // u_int16_t seq = (u_int16_t *)(buffer + ip_header_len + header_len - 2);
 
-    printf("id: %u, seq: %u\n", *id, *seq);
+    printf("id: %u, seq: %u\n", id, seq);
     printf("id: %u, seq: %u\n", getpid() & 0xFFFF, packets[0].seq);
     for (int i = 0; i < 3; i++) {
-      if (*seq == packets[i].seq &&
-          *id == getpid() && 0xFFFF) {
+      if (seq == packets[i].seq &&
+          id == getpid() && 0xFFFF) {
         packets[i].recv_time = end;
         count++;
         break;
