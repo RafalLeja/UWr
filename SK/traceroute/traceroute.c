@@ -12,6 +12,10 @@
 #include <time.h>
 #include <unistd.h>
 #include <stddef.h>
+#include <poll.h>
+
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 struct packet_info {
   struct timespec send_time;
@@ -83,11 +87,27 @@ void recvPackets(struct packet_info *packets) {
   if (sock_fd < 0)
     ERROR("socket error");
 
+  struct pollfd fds;
+  fds.fd = sock_fd;
+  fds.events = POLLIN;
+
   int count = 0;
   time_t start = time(NULL);
 
-  while (time(NULL) - start < 1) {
-  
+  for (int i = 0; i < 3; i++) {
+    int ret = poll(&fds, 1, 1000);
+    
+    struct timespec end;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+
+    if (ret < 0) {
+      ERROR("poll error");
+    } else if (ret == 0) {
+      break;
+    } else if (!(fds.revents & POLLIN)) {
+      continue;
+    }
+
     struct sockaddr_in sender;
     socklen_t sender_len = sizeof(sender);
     u_int8_t buffer[IP_MAXPACKET];
@@ -101,8 +121,6 @@ void recvPackets(struct packet_info *packets) {
       ERROR("recvfrom error");
     }
 
-    struct timespec end;
-    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
 
     char sender_ip_str[20];
     inet_ntop(AF_INET, &(sender.sin_addr), sender_ip_str,
@@ -152,7 +170,11 @@ int main(int argc, char *argv[]) {
   printf("Traceroute to %s\n", argv[1]);
 
   for (int i = 1; i <= 14; i++) {
-    struct packet_info packets[3];
+    struct packet_info packets[3] = {0, 0, 0};
+    long int min[3] = {0, 0, 0};
+    long int max[3] = {0, 0, 0};
+    long int avg[3] = {0, 0, 0};
+    int cnt[3] = {0, 0, 0};
 
     for (int k = 0; k < 3; k++) {
       sendPacket(argv[1], i, &packets[k]);
@@ -160,15 +182,56 @@ int main(int argc, char *argv[]) {
 
     recvPackets(packets);
 
+    // timing first packet
+    min[0] = (packets[0].recv_time.tv_nsec - packets[0].send_time.tv_nsec) / 1000000;
+    avg[0] = min[0];
+    max[0] = min[0];
+    cnt[0] = (packets[0].recv_time.tv_nsec != 0); // if it was recieved
+
+    // second packet
+    if (strcmp(packets[1].ip, packets[0].ip) == 0) {
+      // if from the same ip as 1st packet
+      min[0] = MIN(min[0], (packets[1].recv_time.tv_nsec - packets[1].send_time.tv_nsec) / 1000000);
+      avg[0] += (packets[1].recv_time.tv_nsec - packets[1].send_time.tv_nsec) / 1000000;
+      max[0] = MAX(max[0], (packets[1].recv_time.tv_nsec - packets[1].send_time.tv_nsec) / 1000000);
+      cnt[0]++;
+    } else {
+      min[1] = (packets[1].recv_time.tv_nsec - packets[1].send_time.tv_nsec) / 1000000;
+      avg[1] = min[1];
+      max[1] = min[1];
+      cnt[1] = (packets[1].recv_time.tv_nsec != 0);
+    }
+
+    // third packet
+    if (strcmp(packets[2].ip, packets[0].ip) == 0) {
+      // if from the same ip as 1st packet
+      min[0] = MIN(min[0], (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000);
+      avg[0] = (avg[0] + (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000) / 2;
+      max[0] = MAX(max[0], (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000);
+      cnt[0]++;
+    } else if (strcmp(packets[2].ip, packets[1].ip) == 0) {
+      // if from the same ip as 2nd packet
+      min[1] = MIN(min[1], (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000);
+      avg[1] += (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000;
+      max[1] = MAX(max[1], (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000);
+      cnt[1]++;
+    } else {
+      min[2] = (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000;
+      avg[2] = min[2];
+      max[2] = min[2];
+      cnt[2] = (packets[2].recv_time.tv_nsec != 0);
+    }
+
+    int n_srcs = 0;
     for (int k = 0; k <3; k++) {
-      if (packets[k].recv_time.tv_nsec != 0) {
-        printf("%d. %s %ldms\n", i, packets[k].ip,
-               (packets[k].recv_time.tv_nsec - packets[k].send_time.tv_nsec) / 1000000);
-      } else {
+      if (cnt[k] == 0 && n_srcs < 3) {
         printf("%d. *\n", i);
+        n_srcs += 1;
+      } else {
+        printf("%d. %s %ldms %fms %ldms\n", i, packets[k].ip, min[k],(float) (avg[k]/(long) cnt[k]), max[k]);
+        // n_srcs += cnt[k];
       }
     }
-    // sleep(1);
 
     if (strcmp(packets[0].ip, argv[1]) == 0 &&
         strcmp(packets[1].ip, argv[1]) == 0 &&
