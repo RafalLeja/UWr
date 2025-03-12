@@ -14,9 +14,10 @@
 #include <stddef.h>
 
 struct packet_info {
-  time_t send_time;
-  time_t recv_time;
+  struct timespec send_time;
+  struct timespec recv_time;
   int seq;
+  char ip[20];
 } packet_info;
 
 void ERROR(const char *str) {
@@ -62,7 +63,9 @@ void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
   header.icmp_cksum =
       compute_icmp_checksum((u_int16_t *)&header, sizeof(struct icmphdr));
 
-  time(&packet_info->send_time);
+  clock_gettime(CLOCK_MONOTONIC_RAW, &packet_info->send_time);
+  // time_t send_time = time(NULL);
+  // packet_info->send_time = send_time;
 
   ssize_t bytes_sent = sendto(sock_fd, &header, sizeof(struct icmphdr), 0,
                               (struct sockaddr *)&target, sizeof(target));
@@ -98,58 +101,34 @@ void recvPackets(struct packet_info *packets) {
       ERROR("recvfrom error");
     }
 
-    time_t end = time(NULL);
+    struct timespec end;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
 
     char sender_ip_str[20];
     inet_ntop(AF_INET, &(sender.sin_addr), sender_ip_str,
               sizeof(sender_ip_str));
-    printf("Received IP packet with ICMP content from: %s\n", sender_ip_str);
 
     struct iphdr *ip_header = (struct iphdr *)buffer;
     int ip_header_len = 4 * (ip_header->ihl);
 
-    printf("IP header: ");
-    print_as_bytes(ip_header, ip_header_len);
-    printf("\n");
-
     struct icmphdr *icmp_header = (struct icmphdr *)(buffer + ip_header_len);
     ssize_t header_len = packet_len - ip_header_len;
-
-    printf("ICMP header: ");
-    print_as_bytes(icmp_header, header_len);
-    printf("\n");
 
     struct iphdr *ip_header2 = (struct iphdr *)(buffer + ip_header_len + sizeof(struct icmphdr));
     int ip_header_len2 = 4 * (ip_header2->ihl);
 
-    printf("IP header2: ");
-    print_as_bytes(ip_header2, ip_header_len2);
-    printf("\n");
-
     struct icmphdr *icmp_header2 = (struct icmphdr *)(buffer + ip_header_len + sizeof(struct icmphdr) + ip_header_len2);
-
-    printf("ICMP header2: ");
-    print_as_bytes(icmp_header2, sizeof(struct icmphdr));
-    printf("\n");
-
 
     u_int16_t id = icmp_header2->un.echo.id;
     u_int16_t seq = icmp_header2->un.echo.sequence;
 
-    printf("off %lu\n", offsetof(struct icmphdr, un.echo.id));
-    printf("off %lu\n", offsetof(struct icmphdr, un.echo.sequence));
-
-    // Custom offsets, because the library does not work correctly
-    // u_int16_t id = (u_int16_t *)(buffer + ip_header_len + header_len - 4);
-    // u_int16_t seq = (u_int16_t *)(buffer + ip_header_len + header_len - 2);
-
-    printf("id: %u, seq: %u\n", id, seq);
-    printf("id: %u, seq: %u\n", getpid() & 0xFFFF, packets[0].seq);
     for (int i = 0; i < 3; i++) {
       if (seq == packets[i].seq &&
           id == getpid() && 0xFFFF) {
+        strcpy(packets[i].ip, sender_ip_str);
         packets[i].recv_time = end;
         count++;
+        // printf("found %d packet\n", i);
         break;
       }
     }
@@ -172,7 +151,7 @@ int main(int argc, char *argv[]) {
 
   printf("Traceroute to %s\n", argv[1]);
 
-  for (int i = 1; i <= 1; i++) {
+  for (int i = 1; i <= 14; i++) {
     struct packet_info packets[3];
 
     for (int k = 0; k < 3; k++) {
@@ -180,7 +159,22 @@ int main(int argc, char *argv[]) {
     }
 
     recvPackets(packets);
+
+    for (int k = 0; k <3; k++) {
+      if (packets[k].recv_time.tv_nsec != 0) {
+        printf("%d. %s %ldms\n", i, packets[k].ip,
+               (packets[k].recv_time.tv_nsec - packets[k].send_time.tv_nsec) / 1000000);
+      } else {
+        printf("%d. *\n", i);
+      }
+    }
     // sleep(1);
+
+    if (strcmp(packets[0].ip, argv[1]) == 0 &&
+        strcmp(packets[1].ip, argv[1]) == 0 &&
+        strcmp(packets[2].ip, argv[1]) == 0) {
+      break;
+    }
   }
 
   return 0;
