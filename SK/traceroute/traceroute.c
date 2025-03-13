@@ -17,12 +17,22 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
+#define N_PACKETS 3
+
 struct packet_info {
-  struct timespec send_time;
-  struct timespec recv_time;
+  long send_time;
+  long recv_time;
   int seq;
   char ip[20];
 } packet_info;
+
+struct source_info {
+  char ip[20];
+  long min;
+  long avg;
+  long max;
+  int cnt;
+} source_info;
 
 void ERROR(const char *str) {
   fprintf(stderr, "%s: %s\n", str, strerror(errno));
@@ -42,6 +52,28 @@ u_int16_t compute_icmp_checksum(const void *buff, int length) {
     sum += *ptr++;
   sum = (sum >> 16U) + (sum & 0xffffU);
   return (u_int16_t)(~(sum + (sum >> 16U)));
+}
+
+int addToSrc(struct source_info *srcs, int n, struct packet_info packet) {
+  for (int i = 0; i < n; i++) {
+    if (srcs[i].cnt == 0) {
+      strcpy(srcs[i].ip, packet.ip);
+      srcs[i].min = packet.recv_time - packet.send_time;
+      srcs[i].avg = srcs[i].min;
+      srcs[i].max = srcs[i].min;
+      srcs[i].cnt = 1;
+      return n;
+    }
+    if (strcmp(srcs[i].ip, packet.ip) == 0) {
+      srcs[i].min = MIN(srcs[i].min, packet.recv_time - packet.send_time);
+      srcs[i].avg += packet.recv_time - packet.send_time;
+      srcs[i].max = MAX(srcs[i].max, packet.recv_time - packet.send_time);
+      srcs[i].cnt++;
+      return n;
+    }
+  }
+
+  return -1;
 }
 
 void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
@@ -67,7 +99,9 @@ void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
   header.icmp_cksum =
       compute_icmp_checksum((u_int16_t *)&header, sizeof(struct icmphdr));
 
-  clock_gettime(CLOCK_MONOTONIC_RAW, &packet_info->send_time);
+  struct timespec send_time;
+  clock_gettime(CLOCK_MONOTONIC_RAW, &send_time);
+  packet_info->send_time = send_time.tv_nsec / 1000000;
   // time_t send_time = time(NULL);
   // packet_info->send_time = send_time;
 
@@ -144,7 +178,7 @@ void recvPackets(struct packet_info *packets) {
       if (seq == packets[i].seq &&
           id == getpid() && 0xFFFF) {
         strcpy(packets[i].ip, sender_ip_str);
-        packets[i].recv_time = end;
+        packets[i].recv_time = end.tv_nsec / 1000000;
         count++;
         // printf("found %d packet\n", i);
         break;
@@ -170,72 +204,39 @@ int main(int argc, char *argv[]) {
   printf("Traceroute to %s\n", argv[1]);
 
   for (int i = 1; i <= 14; i++) {
-    struct packet_info packets[3] = {0, 0, 0};
-    long int min[3] = {0, 0, 0};
-    long int max[3] = {0, 0, 0};
-    long int avg[3] = {0, 0, 0};
-    int cnt[3] = {0, 0, 0};
+    struct packet_info packets[N_PACKETS] = {0, 0, 0};
+    struct source_info srcs[N_PACKETS] = {0, 0, 0};
 
-    for (int k = 0; k < 3; k++) {
+    for (int k = 0; k < N_PACKETS; k++) {
       sendPacket(argv[1], i, &packets[k]);
     }
 
     recvPackets(packets);
 
-    // timing first packet
-    min[0] = (packets[0].recv_time.tv_nsec - packets[0].send_time.tv_nsec) / 1000000;
-    avg[0] = min[0];
-    max[0] = min[0];
-    cnt[0] = (packets[0].recv_time.tv_nsec != 0); // if it was recieved
-
-    // second packet
-    if (strcmp(packets[1].ip, packets[0].ip) == 0) {
-      // if from the same ip as 1st packet
-      min[0] = MIN(min[0], (packets[1].recv_time.tv_nsec - packets[1].send_time.tv_nsec) / 1000000);
-      avg[0] += (packets[1].recv_time.tv_nsec - packets[1].send_time.tv_nsec) / 1000000;
-      max[0] = MAX(max[0], (packets[1].recv_time.tv_nsec - packets[1].send_time.tv_nsec) / 1000000);
-      cnt[0]++;
-    } else {
-      min[1] = (packets[1].recv_time.tv_nsec - packets[1].send_time.tv_nsec) / 1000000;
-      avg[1] = min[1];
-      max[1] = min[1];
-      cnt[1] = (packets[1].recv_time.tv_nsec != 0);
+    for (int k = 0; k < N_PACKETS; k++) {
+      addToSrc(srcs, N_PACKETS, packets[k]);
     }
 
-    // third packet
-    if (strcmp(packets[2].ip, packets[0].ip) == 0) {
-      // if from the same ip as 1st packet
-      min[0] = MIN(min[0], (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000);
-      avg[0] = (avg[0] + (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000) / 2;
-      max[0] = MAX(max[0], (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000);
-      cnt[0]++;
-    } else if (strcmp(packets[2].ip, packets[1].ip) == 0) {
-      // if from the same ip as 2nd packet
-      min[1] = MIN(min[1], (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000);
-      avg[1] += (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000;
-      max[1] = MAX(max[1], (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000);
-      cnt[1]++;
-    } else {
-      min[2] = (packets[2].recv_time.tv_nsec - packets[2].send_time.tv_nsec) / 1000000;
-      avg[2] = min[2];
-      max[2] = min[2];
-      cnt[2] = (packets[2].recv_time.tv_nsec != 0);
-    }
-
-    int n_srcs = 0;
-    for (int k = 0; k <3; k++) {
-      if (cnt[k] == 0 && n_srcs < 3) {
-        printf("%d. *\n", i);
-        n_srcs += 1;
-      } else {
-        printf("%d. %s %ldms %fms %ldms\n", i, packets[k].ip, min[k],(float) (avg[k]/(long) cnt[k]), max[k]);
-        // n_srcs += cnt[k];
+    int blanks = 0;
+    for (int k = 0; k < N_PACKETS; k++) {
+      if (srcs[k].cnt == 0) {
+        break;
       }
+      if (srcs[k].ip[0] == '\0')
+      {
+        blanks += 1;
+        continue;
+      }
+      
+      printf("%d. %s %ldms %ldms %ldms\n", i, srcs[k].ip, srcs[k].min,
+             srcs[k].avg / srcs[k].cnt, srcs[k].max);
     }
 
-    if (strcmp(packets[0].ip, argv[1]) == 0 &&
-        strcmp(packets[1].ip, argv[1]) == 0 &&
-        strcmp(packets[2].ip, argv[1]) == 0) {
+    if (blanks > 0) {
+      printf("%d. *\n", i);
+    }
+
+    if (strcmp(srcs[0].ip, argv[1]) == 0) {
       break;
     }
   }
