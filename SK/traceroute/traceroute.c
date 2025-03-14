@@ -166,22 +166,40 @@ void recvPackets(struct packet_info *packets) {
     struct icmphdr *icmp_header = (struct icmphdr *)(buffer + ip_header_len);
     ssize_t header_len = packet_len - ip_header_len;
 
-    struct iphdr *ip_header2 = (struct iphdr *)(buffer + ip_header_len + sizeof(struct icmphdr));
-    int ip_header_len2 = 4 * (ip_header2->ihl);
+    if (icmp_header->type != ICMP_TIME_EXCEEDED) {
+      // found target!
 
-    struct icmphdr *icmp_header2 = (struct icmphdr *)(buffer + ip_header_len + sizeof(struct icmphdr) + ip_header_len2);
+      u_int16_t id = icmp_header->un.echo.id;
+      u_int16_t seq = icmp_header->un.echo.sequence;
 
-    u_int16_t id = icmp_header2->un.echo.id;
-    u_int16_t seq = icmp_header2->un.echo.sequence;
+      for (int i = 0; i < 3; i++) {
+        if (seq == packets[i].seq &&
+            id == getpid() && 0xFFFF) {
+          strcpy(packets[i].ip, sender_ip_str);
+          packets[i].recv_time = end.tv_nsec / 1000000;
+          count++;
+          break;
+        }
+      }
 
-    for (int i = 0; i < 3; i++) {
-      if (seq == packets[i].seq &&
-          id == getpid() && 0xFFFF) {
-        strcpy(packets[i].ip, sender_ip_str);
-        packets[i].recv_time = end.tv_nsec / 1000000;
-        count++;
-        // printf("found %d packet\n", i);
-        break;
+    } else {
+      // TTL exceeded
+      struct iphdr *ip_header2 = (struct iphdr *)(buffer + ip_header_len + sizeof(struct icmphdr));
+      int ip_header_len2 = 4 * (ip_header2->ihl);
+
+      struct icmphdr *icmp_header2 = (struct icmphdr *)(buffer + ip_header_len + sizeof(struct icmphdr) + ip_header_len2);
+
+      u_int16_t id = icmp_header2->un.echo.id;
+      u_int16_t seq = icmp_header2->un.echo.sequence;
+
+      for (int i = 0; i < 3; i++) {
+        if (seq == packets[i].seq &&
+            id == getpid() && 0xFFFF) {
+          strcpy(packets[i].ip, sender_ip_str);
+          packets[i].recv_time = end.tv_nsec / 1000000;
+          count++;
+          break;
+        }
       }
     }
 
@@ -201,9 +219,14 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
+  if (inet_addr(argv[1]) == -1) {
+    printf("Invalid hostname, use numbers\n");
+    exit(1);
+  }
+
   printf("Traceroute to %s\n", argv[1]);
 
-  for (int i = 1; i <= 14; i++) {
+  for (int i = 1; i <= 30; i++) {
     struct packet_info packets[N_PACKETS] = {0, 0, 0};
     struct source_info srcs[N_PACKETS] = {0, 0, 0};
 
@@ -217,6 +240,9 @@ int main(int argc, char *argv[]) {
       addToSrc(srcs, N_PACKETS, packets[k]);
     }
 
+    char ips[20 * N_PACKETS] = {0};
+    long sum = 0;
+    int cnt = 0;
     int blanks = 0;
     for (int k = 0; k < N_PACKETS; k++) {
       if (srcs[k].cnt == 0) {
@@ -228,12 +254,19 @@ int main(int argc, char *argv[]) {
         continue;
       }
       
-      printf("%d. %s %ldms %ldms %ldms\n", i, srcs[k].ip, srcs[k].min,
-             srcs[k].avg / srcs[k].cnt, srcs[k].max);
+      strcat(ips, srcs[k].ip);
+      strcat(ips, " ");
+      sum += srcs[k].avg;
+      cnt += 1;
     }
 
-    if (blanks > 0) {
+    if (blanks == N_PACKETS) {
       printf("%d. *\n", i);
+    } else if (blanks > 0) {
+      printf("%d. %s\t???\n", i, ips);
+    } else {
+      printf("%d. %s\t%ldms\n", i, ips, sum / cnt);
+
     }
 
     if (strcmp(srcs[0].ip, argv[1]) == 0) {
