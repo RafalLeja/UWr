@@ -28,18 +28,21 @@
   
 ### 2. Podziel sieć 10.10.0.0/16 na 5 rozłącznych podsieci, tak aby każdy z adresów IP z sieci 10.10.0.0/16 był w jednej z tych 5 podsieci. Jak zmieniła się liczba adresów IP możliwych do użycia przy adresowaniu komputerów? Jaki jest minimalny rozmiar podsieci, który możesz uzyskać w ten sposób?
 
-1. 10.10.0.0/18: 2^14 adresów IP
-2. 10.10.64.0/18: 2^14 adresów IP
-3. 10.10.128.0/19: 2^13 adresów IP
-4. 10.10.160.0/19: 2^13 adresów IP
-5. 10.10.192.0/19: 2^13 adresów IP
+1. 10.10.0.0/17: 32,768 adresów IP
+2. 10.10.128.0/18: 16,384 adresów IP
+3. 10.10.192.0/19: 8,192 adresów IP
+4. 10.10.224.0/20: 4,096 adresów IP
+5. 10.10.240.0/20: 4,096 adresów IP
 
-Liczba adresów IP możliwych do użycia przy adresowaniu komputerów zmniejszyła się z
-$$2^{16} - 2 = 65534$$
+$\pagebreak$
+
+Liczba adresów IP możliwych do użycia przy adresowaniu komputerów \
+ zmniejszyła się z
+$$65536 - 2 = 65534$$
 do
-$$2^{14} + 2^{14} + 2^{13} + 2^{13} + 2^{13} - 5 \cdot 2 = 57334$$
+$$32,768 + 16,384 + 8,192 + 4,096 + 4,096 - 5 \cdot 2 = 65526$$
 
-Minimalny rozmiar podsieci, który można uzyskać w ten sposób to 2^13 = 8192 adresy IP.
+Minimalny rozmiar podsieci, który można uzyskać w ten sposób to 2^12 = 4,096 adresy IP.
 
 ### 3. Tablica routingu zawiera następujące wpisy (podsieć → dokąd wysłać):
 
@@ -53,7 +56,7 @@ Minimalny rozmiar podsieci, który można uzyskać w ten sposób to 2^13 = 8192 
 - 10.0.1.16/29 → do routera B
 - 10.0.1.24/29 → do routera B
 
-Napisz równoważną tablicę routingu zawierającą jak najmniej wpisów.
+### Napisz równoważną tablicę routingu zawierającą jak najmniej wpisów.
 
 Rozpiszmy zakresy adresów IP dla podsieci B i C:
 
@@ -76,11 +79,12 @@ $[10.0.1.0, 10.0.1.255]$ $\backslash$ $[10.0.1.8, 10.0.1.31]$
 Zoptymalizowana tablica:
 
 - 0.0.0.0/0 → do routera A
-- 10.0.3.0/22 → do routera B
+- 10.0.0.0/22 → do routera B
 - 10.0.1.0/24 → do routera C
 - 10.0.1.8/29 → do routera B
 - 10.0.1.16/28 → do routera B
 
+$\pagebreak$
 
 ### 4. Wykonaj powyższe zadanie dla tablicy:
 
@@ -105,7 +109,7 @@ Zoptymalizowana tablica:
 - 0.0.0.0/0 → do routera A
 - 10.0.0.0/8 → do routera B
 - 10.3.0.0/27 → do routera C
-- 0.3.0.128/25 → do routera C
+- 10.3.0.128/25 → do routera C
 
 ### 5. Jak uporządkować wpisy w tablicy routingu, żeby zasada najlepszego dopasowania odpowiadała wyborowi „pierwszy pasujący” (tj. przeglądaniu tablicy od początku do końca aż do momentu napotkania dowolnej pasującej reguły)? Odpowiedź uzasadnij formalnie.
 
@@ -113,6 +117,8 @@ Należy posortować wpisy w tablicy routingu w kolejności malejącej długości
 
 Rozważmy adres IP oznaczony jako $a$.
 Niech $x$ oraz $y$ będą kolejnymi wpisami w tablicy routingu. Załóżmy że $a$ pasuje do $x$ na $n$ bitach. Skoro wpisy są posortowane malejąco, to $a$ nie pasuje do $y$ na więcej niż $n$ bitach. W przeciwnym przypadku $y$ miałby dłuższy prefiks niż $x$.
+
+$\pagebreak$
 
 ### 6. W podanej niżej sieci tablice routingu budowane są za pomocą algorytmu wektora odległości. Pokaż (krok po kroku), jak będzie się to odbywać. W ilu krokach zostanie osiągnięty stan stabilny?
 
