@@ -1,5 +1,7 @@
 # Ćwiczenia 1
-## Rafał Leja 19.03.2025 r.
+## 19.03.2025 r.
+
+## Rafał Leja 340879
 
 ### 1. Dla każdego z podanych poniżej adresów IP w notacji CIDR określ, czy jest to adres sieci, adres rozgłoszeniowy czy też adres komputera. W każdym przypadku wyznacz odpowiadający mu adres sieci, rozgłoszeniowy i jakiś adres IP innego komputera w tej samej sieci.
 
@@ -180,3 +182,70 @@ SX | 2(B) | 1 | 1 | 2(C) | 3(D)
 SY | 3(B) | 2(D) | 2(D) | 1 | 1
 SZ | 3(B) | 2(C) | 1 | 1 | 2(D)
 SQ | 1 | 2(A) | 3(B) | 2(D) | 1
+
+### 8. W przedstawionej poniżej sieci uszkodzeniu ulega połączenie między routerami D i E. Załóżmy, że w sieci działa algorytm wektora odległości wykorzystujący technikę zatruwania ścieżki zwrotnej (poison reverse). Pokaż — opisując krok po kroku jakie komunikaty są przesyłane między routerami — że może powstać cykl w routingu.
+
+![](image-1.png)
+
+Zakładam że połączenie między D i Sx jest uszkodzone.
+
+- **Poison reverse** - Jeśli router X jest wpisany jako następny router na ścieżce do S, to wysyłamy do X informację „mam do S ścieżkę nieskończoną“.
+
+Komunikaty:
+
+1. D -> B: „mam do SX ścieżkę nieskończoną“
+2. B -> A: „mam do SX ścieżkę nieskończoną“
+3. C -> A: "mam do SX 2 kroki, przez D"
+4. A -> B: "mam do SX 3 kroki, przez C"
+5. B -> D: "mam do SX 4 kroki, przez A"
+6. D -> C: "mam do SX 5 kroków, przez B"
+7. C -> A: "mam do SX 6 kroków, przez D"
+8. …
+
+Krok | _ | A | B | C | D | E
+-----|---|---|---|---|---|---
+ 0 | SX | 3(B) | 2(D) | 2(D) | $\infty$ | $\infty$
+ 1 | SX | 3(B) | $\infty$ | 2(D) | $\infty$ | $\infty$
+ 2 | SX | $\infty$ | $\infty$ | 2(D) | $\infty$ | $\infty$
+ 3 | SX | 3(C) | $\infty$ | 2(D) | $\infty$ | $\infty$
+ 4 | SX | 3(C) | 4(A) | 2(D) | $\infty$ | $\infty$
+ 5 | SX | 3(C) | 4(A) | 2(D) | 5(B) | $\infty$
+ 6 | SX | 3(C) | 4(A) | 6(D) | 5(B) | $\infty$
+ 7 | SX | 7(C) | 4(A) | 6(D) | 5(B) | $\infty$
+...|
+ N | SX | N(C) | N-3(A) | N-1(D) | N-2(B) | $\infty$
+
+### 9. Pokaż, że przy wykorzystaniu algorytmu stanu łączy też może powstać cykl w routingu. W tym celu skonstruuj sieć z dwoma wyróżnionymi, sąsiadującymi ze sobą routerami A i B. Załóż, że wszystkie routery znają graf całej sieci. W pewnym momencie łącze między A i B ulega awarii, o czym A i B od razu się dowiadują. Zalewają one sieć odpowiednią aktualizacją. Pokaż, że w okresie propagowania tej aktualizacji (kiedy dotarła ona już do części routerów a do części nie) może powstać cykl w routingu.
+
+![](image-2.png)
+
+Krok 0:
+
+ _ | A | B | C | D 
+---|---|---|---|---
+ A | 0 | 1 | 2(B) | 2 (B)
+ B | 1 | 0 | 1 | 1 
+ C | 2(B) | 1 | 0 | 1
+ D | 2(B) | 1 | 1 | 0
+
+Krok 1: uszkodzenie
+
+ _ | A | B | C | D 
+---|---|---|---|---
+ A | 0 | $\infty$ | 2(B) | 2 (B)
+ B | $\infty$ | 0 | 1 | 1 
+ C | 2(B) | 1 | 0 | 1
+ D | 2(B) | 1 | 1 | 0
+
+Krok 2:
+
+- A: "nie mam połączenia z B, aktualizuje swoją tablicę"
+- C -> D "mam do A 2 kroki, przez B"
+- B -> C "mam do A ścieżkę nieskończoną"
+
+ _ | A | B | C | D 
+---|---|---|---|---
+ A | 0 | $\infty$ | $\infty$ | 2 (B)
+ B | $\infty$ | 0 | 1 | 1 
+ C | $\infty$ | 1 | 0 | 1
+ D | $\infty$ | 1 | 1 | 0
