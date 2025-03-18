@@ -34,7 +34,6 @@
 4. 10.10.224.0/20: 4,096 adresów IP
 5. 10.10.240.0/20: 4,096 adresów IP
 
-$\pagebreak$
 
 Liczba adresów IP możliwych do użycia przy adresowaniu komputerów \
  zmniejszyła się z
@@ -43,6 +42,8 @@ do
 $$32,768 + 16,384 + 8,192 + 4,096 + 4,096 - 5 \cdot 2 = 65526$$
 
 Minimalny rozmiar podsieci, który można uzyskać w ten sposób to 2^12 = 4,096 adresy IP.
+
+$\pagebreak$
 
 ### 3. Tablica routingu zawiera następujące wpisy (podsieć → dokąd wysłać):
 
@@ -84,7 +85,6 @@ Zoptymalizowana tablica:
 - 10.0.1.8/29 → do routera B
 - 10.0.1.16/28 → do routera B
 
-$\pagebreak$
 
 ### 4. Wykonaj powyższe zadanie dla tablicy:
 
@@ -118,7 +118,6 @@ Należy posortować wpisy w tablicy routingu w kolejności malejącej długości
 Rozważmy adres IP oznaczony jako $a$.
 Niech $x$ oraz $y$ będą kolejnymi wpisami w tablicy routingu. Załóżmy że $a$ pasuje do $x$ na $n$ bitach. Skoro wpisy są posortowane malejąco, to $a$ nie pasuje do $y$ na więcej niż $n$ bitach. W przeciwnym przypadku $y$ miałby dłuższy prefiks niż $x$.
 
-$\pagebreak$
 
 ### 6. W podanej niżej sieci tablice routingu budowane są za pomocą algorytmu wektora odległości. Pokaż (krok po kroku), jak będzie się to odbywać. W ilu krokach zostanie osiągnięty stan stabilny?
 
@@ -153,6 +152,8 @@ SW | 2(B) | 1 | 2(B) | 1 | 2(D)
 SX | 2(B) | 1 | 1 | 2(C) | 3(D)
 SY | 3(B) | 2(D) | 2(D) | 1 | 1
 SZ | 3(B) | 2(C) | 1 | 1 | 2(D)
+
+$\pagebreak$
 
 ### 7. Załóżmy, że w powyższej sieci tablice routingu zostały już zbudowane. Co będzie się działo (krok po kroku), jeśli zostanie dodana sieć SQ łącząca routery A i E?
 
@@ -197,6 +198,8 @@ Zakładam że połączenie między D i Sx jest uszkodzone.
 
 - **Poison reverse** - Jeśli router X jest wpisany jako następny router na ścieżce do S, to wysyłamy do X informację „mam do S ścieżkę nieskończoną“.
 
+$\pagebreak$
+
 Komunikaty:
 
 1. D -> B: „mam do SX ścieżkę nieskończoną“
@@ -220,6 +223,8 @@ Krok | _ | A | B | C | D | E
  7 | SX | 7(C) | 4(A) | 6(D) | 5(B) | $\infty$
 ...|
  N | SX | N(C) | N-3(A) | N-1(D) | N-2(B) | $\infty$
+
+$\pagebreak$
 
 ### 9. Pokaż, że przy wykorzystaniu algorytmu stanu łączy też może powstać cykl w routingu. W tym celu skonstruuj sieć z dwoma wyróżnionymi, sąsiadującymi ze sobą routerami A i B. Załóż, że wszystkie routery znają graf całej sieci. W pewnym momencie łącze między A i B ulega awarii, o czym A i B od razu się dowiadują. Zalewają one sieć odpowiednią aktualizacją. Pokaż, że w okresie propagowania tej aktualizacji (kiedy dotarła ona już do części routerów a do części nie) może powstać cykl w routingu.
 
