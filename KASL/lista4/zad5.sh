@@ -1,20 +1,23 @@
 cflag=
 colorflag=
-colorval=
+colorval="auto"
+wflag=
 gflag=
-gval=
 name=
+greeting="Hello"
+wrld="world"
+clrb=""
+clre=""
 
 VARS=`getopt -o cg::hvw --long capitalize,color::,greeting::,help,version,world -n 'zad5.sh' -- "$@"`
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 
-echo $VARS
+# echo $VARS
 
 eval set -- "$VARS"
 
 while true; do
-    echo "var: $1"
     case $1 in
         -c|--capitalize)
             cflag=1
@@ -27,8 +30,7 @@ while true; do
             ;;
         -g|--greeting)
             gflag=1
-            gval=$2
-            echo $gval
+            greeting=$2
             shift
             shift
             ;;
@@ -48,11 +50,10 @@ while true; do
             exit 0
             ;;
         -w|--world)
-            echo "Hello, world!"
+            wflag=1
             shift
             ;;
         --)
-            shift
             name=$2
             break
             ;;
@@ -63,9 +64,49 @@ while true; do
     esac
 done
 
-echo "cflag: $cflag"
-echo "colorflag: $colorflag"
-echo "colorval: $colorval"
-echo "gflag: $gflag"
-echo "gval: $gval"
-echo "name: $name"
+# echo "cflag: $cflag"
+# echo "colorflag: $colorflag"
+# echo "colorval: $colorval"
+# echo "gflag: $gflag"
+# echo "name: $name"
+
+if [ -z $name ] && [ -z $wflag ]; then
+    echo "No name provided!"
+    exit 1
+fi
+
+case $colorval in
+    never)
+        ;;
+    auto)
+        if [ -t 1 ]; then
+            clrb="\033[31m"
+            clre="\033[0m"
+        else
+            clrb=""
+            clre=""
+        fi
+        ;;
+    always)
+        clrb="\033[31m"
+        clre="\033[0m"
+        ;;
+    *)
+        echo "Invalid color value!"
+        echo "Valid values: never, auto, always"
+        exit 1
+        ;;
+esac
+
+if [ $cflag ]; then
+    wrld=`echo $wrld | tr '[:lower:]' '[:upper:]'`
+    name=`echo $name | tr '[:lower:]' '[:upper:]'`
+fi
+
+if [ $wflag ]; then
+    echo -e "$greeting, $clrb$wrld$clre!"
+fi
+
+if [ $name ]; then
+    echo -e "$greeting, $clrb$name$clre!"
+fi
