@@ -3,7 +3,7 @@ colorflag=
 colorval="auto"
 wflag=
 gflag=
-name=
+names=()
 greeting="Hello"
 wrld="world"
 clrb=""
@@ -54,7 +54,11 @@ while true; do
             shift
             ;;
         --)
-            name=$2
+            shift
+            while [ -n "$1" ]; do
+                names+=("$1")
+                shift
+            done
             break
             ;;
         *)
@@ -68,9 +72,9 @@ done
 # echo "colorflag: $colorflag"
 # echo "colorval: $colorval"
 # echo "gflag: $gflag"
-# echo "name: $name"
+# echo "names: $names"
 
-if [ -z $name ] && [ -z $wflag ]; then
+if [ ${#names[@]} -eq 0 ] && [ -z $wflag ]; then
     echo "No name provided!"
     exit 1
 fi
@@ -100,13 +104,17 @@ esac
 
 if [ $cflag ]; then
     wrld=`echo $wrld | tr '[:lower:]' '[:upper:]'`
-    name=`echo $name | tr '[:lower:]' '[:upper:]'`
+    for i in "${!names[@]}"; do
+        names[$i]="`echo ${names[$i]} | tr '[:lower:]' '[:upper:]'`"
+    done
 fi
+
 
 if [ $wflag ]; then
     echo -e "$greeting, $clrb$wrld$clre!"
 fi
 
-if [ $name ]; then
+
+for name in "${names[@]}"; do
     echo -e "$greeting, $clrb$name$clre!"
-fi
+done
