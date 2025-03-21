@@ -166,4 +166,61 @@ TPM's big brother
 
 # What is TEE?
 
-- **Trusted Execution Environment (TEE)** is a secure **execution environment** is **isolated** from the **OS**
+- **Trusted Execution Environment (TEE)** is an **isolated** area in the **CPU** that runs in **parallel** with the main **OS**. 
+
+
+---
+
+# Use case 1: Mobile Payments
+
+**Problem:** Someone has **stolen** the **phone**, that has **mobile payment** information
+
+**Solution:** We store the **mobile payment** information in the **TEE**, that is **isolated** from the **OS**, thus the attacker cannot access the **mobile payment** information via the **OS**
+
+---
+
+# Use case 2: Biometric authentication
+
+**Problem:** Our laptop with fingerprint authentication has been **stolen**
+
+**Solution:** We store the **fingerprint** information in the **TEE**, that is **isolated** from the **OS**, thus the attacker cannot access the **fingerprint** information via the **OS**
+
+---
+
+# How to use TEE?
+
+| Step | Action |
+|------|--------|
+| **1** | Normal app requests a secure operation (e.g., encryption, authentication). |
+| **2** | The OS sends a request to the TEE via a driver (TEE Client API). |
+| **3** | A Secure Monitor Call (SMC) switches execution to the TEE. |
+| **4** | The TEE runs the secure code and accesses secure memory or hardware. |
+| **5** | The result is securely returned to the normal OS. |
+
+---
+
+# Why TEEs are secure?
+
+**TEEs** are guarantee their **security** by:
+- **Isolation** from the **OS**
+- **Immutable** **code** and **data**
+- **Confidentiality** of the **code** and **data**
+
+--- 
+
+# Modern use:
+
+- **Android** and **iOS** have **TEE** support for **mobile payments**
+- **DRM** (Digital Rights Management) uses **TEE** to protect **media content**
+- **ARM TrustZone** is a **TEE** implementation for **ARM** processors
+
+---
+
+# SGX (Software Guard Extensions)
+Intel's TEE
+
+---
+
+# What is SGX?
+
+- A set of **CPU** instructions that implement a **TEE** in the **CPU**
