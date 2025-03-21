@@ -1,24 +1,26 @@
-// Rafał Leja 06.03.2025
+// Rafał Leja 340879
 
 #include <arpa/inet.h>
 #include <assert.h>
 #include <errno.h>
 #include <netinet/ip.h>
 #include <netinet/ip_icmp.h>
+#include <poll.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <time.h>
 #include <unistd.h>
-#include <stddef.h>
-#include <poll.h>
-
-#define MIN(a, b) ((a) < (b) ? (a) : (b))
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 #define N_PACKETS 3
 
+// globalny licznik sekwencji
+static int seq = 0;
+
+// struktura do przechowywania informacji o pakietach które wysłaliśmy
+// i otrzymaliśmy
 struct packet_info {
   long send_time;
   long recv_time;
@@ -26,14 +28,15 @@ struct packet_info {
   char ip[20];
 } packet_info;
 
+// struktura do przechowywania informacji o źródłach pakietów
 struct source_info {
   char ip[20];
-  long min;
-  long avg;
-  long max;
+  long sum;
   int cnt;
 } source_info;
 
+// funkcje z wykładu
+// ------------------
 void ERROR(const char *str) {
   fprintf(stderr, "%s: %s\n", str, strerror(errno));
   exit(EXIT_FAILURE);
@@ -53,84 +56,93 @@ u_int16_t compute_icmp_checksum(const void *buff, int length) {
   sum = (sum >> 16U) + (sum & 0xffffU);
   return (u_int16_t)(~(sum + (sum >> 16U)));
 }
+// ------------------
 
+// funkcja dodająca źródło na podstawie odebranego pakietu
 int addToSrc(struct source_info *srcs, int n, struct packet_info packet) {
   for (int i = 0; i < n; i++) {
+    // zapisz wolne miejsce w tablicy
     if (srcs[i].cnt == 0) {
       strcpy(srcs[i].ip, packet.ip);
-      srcs[i].min = packet.recv_time - packet.send_time;
-      srcs[i].avg = srcs[i].min;
-      srcs[i].max = srcs[i].min;
-      srcs[i].cnt = 1;
-      return n;
     }
+    // odnaleziono źródło, zaktualizuj dane
     if (strcmp(srcs[i].ip, packet.ip) == 0) {
-      srcs[i].min = MIN(srcs[i].min, packet.recv_time - packet.send_time);
-      srcs[i].avg += packet.recv_time - packet.send_time;
-      srcs[i].max = MAX(srcs[i].max, packet.recv_time - packet.send_time);
+      srcs[i].sum += packet.recv_time - packet.send_time;
       srcs[i].cnt++;
       return n;
     }
   }
 
+  // nie znaleziono źródła, i nie ma miejsca w tablicy
+  // hopefully unreachable
   return -1;
 }
 
+// funkcja wysyłająca pakiet
 void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
+  // otwieranie gniazda i ustawianie TTL
   int sock_fd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
   if (sock_fd < 0 ||
-      setsockopt(sock_fd, IPPROTO_IP, IP_TTL, &ttl, sizeof(int)) < 0)
-    fprintf(stderr, "socket error\n"), exit(1);
+      setsockopt(sock_fd, IPPROTO_IP, IP_TTL, &ttl, sizeof(int)) < 0) {
+    ERROR("socket error");
+  }
 
-  struct sockaddr_in target;
-  memset(&target, 0, sizeof(struct sockaddr_in));
-  target.sin_family = AF_INET;
-  target.sin_addr.s_addr = inet_addr(destination);
+  // struktura adresowa
+  struct sockaddr_in recipient;
+  memset (&recipient, 0, sizeof(recipient));
+  recipient.sin_family = AF_INET;
+  inet_pton (AF_INET, destination, &recipient.sin_addr);
 
-  int seq = rand() % 0xFFFF;
-  packet_info->seq = seq;
-
+  // struktura nagłówka ICMP
   struct icmp header;
   header.icmp_type = ICMP_ECHO;
   header.icmp_code = 0;
   header.icmp_hun.ih_idseq.icd_id = getpid() & 0xFFFF;
-  header.icmp_hun.ih_idseq.icd_seq = seq;
+  // zapisujemy seq w strukturach i zwiekszamy globalny licznik
+  packet_info->seq = seq;
+  header.icmp_hun.ih_idseq.icd_seq = seq++;
   header.icmp_cksum = 0;
   header.icmp_cksum =
       compute_icmp_checksum((u_int16_t *)&header, sizeof(struct icmphdr));
 
+  // mierzymy czas wysłania pakietu
   struct timespec send_time;
   clock_gettime(CLOCK_MONOTONIC_RAW, &send_time);
-  packet_info->send_time = send_time.tv_nsec / 1000000;
-  // time_t send_time = time(NULL);
-  // packet_info->send_time = send_time;
 
+  // wysyłanie pakietu
   ssize_t bytes_sent = sendto(sock_fd, &header, sizeof(struct icmphdr), 0,
-                              (struct sockaddr *)&target, sizeof(target));
+                              (struct sockaddr *)&recipient, sizeof(recipient));
 
+  // zapisujemy czas wysłania pakietu
+  packet_info->send_time = send_time.tv_nsec / 1000000;
+
+  // obsługa błędów
   if (bytes_sent < 0) {
-    fprintf(stderr, "sendto error\n");
-    exit(1);
+    ERROR("sendto error");
   }
 
+  // zamknięcie gniazda
   close(sock_fd);
 }
 
-void recvPackets(struct packet_info *packets) {
-  int sock_fd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
-  if (sock_fd < 0)
-    ERROR("socket error");
 
+// funkcja odbierająca pakiety
+void recvPackets(struct packet_info *packets) {
+  // otwieranie gniazda
+  int sock_fd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
+  if (sock_fd < 0) {
+    ERROR("socket error");
+  }
+  
   struct pollfd fds;
   fds.fd = sock_fd;
   fds.events = POLLIN;
 
   int count = 0;
-  time_t start = time(NULL);
 
   for (int i = 0; i < 3; i++) {
     int ret = poll(&fds, 1, 1000);
-    
+
     struct timespec end;
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
 
@@ -155,7 +167,6 @@ void recvPackets(struct packet_info *packets) {
       ERROR("recvfrom error");
     }
 
-
     char sender_ip_str[20];
     inet_ntop(AF_INET, &(sender.sin_addr), sender_ip_str,
               sizeof(sender_ip_str));
@@ -164,17 +175,15 @@ void recvPackets(struct packet_info *packets) {
     int ip_header_len = 4 * (ip_header->ihl);
 
     struct icmphdr *icmp_header = (struct icmphdr *)(buffer + ip_header_len);
-    ssize_t header_len = packet_len - ip_header_len;
 
     if (icmp_header->type != ICMP_TIME_EXCEEDED) {
-      // found target!
+      // found recipient!
 
       u_int16_t id = icmp_header->un.echo.id;
       u_int16_t seq = icmp_header->un.echo.sequence;
 
       for (int i = 0; i < 3; i++) {
-        if (seq == packets[i].seq &&
-            id == getpid() && 0xFFFF) {
+        if (seq == packets[i].seq && id == getpid() && 0xFFFF) {
           strcpy(packets[i].ip, sender_ip_str);
           packets[i].recv_time = end.tv_nsec / 1000000;
           count++;
@@ -184,17 +193,19 @@ void recvPackets(struct packet_info *packets) {
 
     } else {
       // TTL exceeded
-      struct iphdr *ip_header2 = (struct iphdr *)(buffer + ip_header_len + sizeof(struct icmphdr));
+      struct iphdr *ip_header2 =
+          (struct iphdr *)(buffer + ip_header_len + sizeof(struct icmphdr));
       int ip_header_len2 = 4 * (ip_header2->ihl);
 
-      struct icmphdr *icmp_header2 = (struct icmphdr *)(buffer + ip_header_len + sizeof(struct icmphdr) + ip_header_len2);
+      struct icmphdr *icmp_header2 =
+          (struct icmphdr *)(buffer + ip_header_len + sizeof(struct icmphdr) +
+                             ip_header_len2);
 
       u_int16_t id = icmp_header2->un.echo.id;
       u_int16_t seq = icmp_header2->un.echo.sequence;
 
       for (int i = 0; i < 3; i++) {
-        if (seq == packets[i].seq &&
-            id == getpid() && 0xFFFF) {
+        if (seq == packets[i].seq && id == getpid() && 0xFFFF) {
           strcpy(packets[i].ip, sender_ip_str);
           packets[i].recv_time = end.tv_nsec / 1000000;
           count++;
@@ -212,23 +223,21 @@ void recvPackets(struct packet_info *packets) {
 }
 
 int main(int argc, char *argv[]) {
-  srand(time(NULL) ^ getpid());
-
   if (argc != 2) {
     printf("Usage: %s <hostname>\n", argv[0]);
     exit(1);
   }
 
-  if (inet_addr(argv[1]) == -1) {
+  if (inet_aton(argv[1], NULL) == 0) {
     printf("Invalid hostname, use numbers\n");
     exit(1);
   }
 
-  printf("Traceroute to %s\n", argv[1]);
-
   for (int i = 1; i <= 30; i++) {
-    struct packet_info packets[N_PACKETS] = {0, 0, 0};
-    struct source_info srcs[N_PACKETS] = {0, 0, 0};
+    struct packet_info packets[N_PACKETS];
+    memset(packets, 0, sizeof(packets));
+    struct source_info srcs[N_PACKETS];
+    memset(srcs, 0, sizeof(srcs));
 
     for (int k = 0; k < N_PACKETS; k++) {
       sendPacket(argv[1], i, &packets[k]);
@@ -248,15 +257,14 @@ int main(int argc, char *argv[]) {
       if (srcs[k].cnt == 0) {
         break;
       }
-      if (srcs[k].ip[0] == '\0')
-      {
+      if (srcs[k].ip[0] == '\0') {
         blanks += 1;
         continue;
       }
-      
+
       strcat(ips, srcs[k].ip);
       strcat(ips, " ");
-      sum += srcs[k].avg;
+      sum += srcs[k].sum;
       cnt += 1;
     }
 
@@ -266,7 +274,6 @@ int main(int argc, char *argv[]) {
       printf("%d. %s\t???\n", i, ips);
     } else {
       printf("%d. %s\t%ldms\n", i, ips, sum / cnt);
-
     }
 
     if (strcmp(srcs[0].ip, argv[1]) == 0) {
