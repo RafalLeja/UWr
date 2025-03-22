@@ -13,6 +13,9 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS)
+
+distclean: clean
+	rm -f $(TARGET)
 
 .PHONY: all clean
