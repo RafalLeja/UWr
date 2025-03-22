@@ -16,6 +16,8 @@
 
 #define N_PACKETS 3
 
+#define DEBUG 0
+
 // globalny licznik sekwencji
 static int seq = 0;
 
@@ -60,6 +62,11 @@ u_int16_t compute_icmp_checksum(const void *buff, int length) {
 
 // funkcja dodająca źródło na podstawie odebranego pakietu
 int addToSrc(struct source_info *srcs, int n, struct packet_info packet) {
+  if (strlen(packet.ip) == 0) {
+    // nie ma adresu IP
+    return -1;
+  }
+
   for (int i = 0; i < n; i++) {
     // zapisz wolne miejsce w tablicy
     if (srcs[i].cnt == 0) {
@@ -89,9 +96,9 @@ void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
 
   // struktura adresowa
   struct sockaddr_in recipient;
-  memset (&recipient, 0, sizeof(recipient));
+  memset(&recipient, 0, sizeof(recipient));
   recipient.sin_family = AF_INET;
-  inet_pton (AF_INET, destination, &recipient.sin_addr);
+  inet_pton(AF_INET, destination, &recipient.sin_addr);
 
   // struktura nagłówka ICMP
   struct icmp header;
@@ -107,14 +114,14 @@ void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
 
   // mierzymy czas wysłania pakietu
   struct timespec send_time;
-  clock_gettime(CLOCK_MONOTONIC_RAW, &send_time);
+  clock_gettime(CLOCK_MONOTONIC, &send_time);
 
   // wysyłanie pakietu
   ssize_t bytes_sent = sendto(sock_fd, &header, sizeof(struct icmphdr), 0,
                               (struct sockaddr *)&recipient, sizeof(recipient));
 
   // zapisujemy czas wysłania pakietu
-  packet_info->send_time = send_time.tv_nsec / 1000000;
+  packet_info->send_time = send_time.tv_nsec / 1000;
 
   // obsługa błędów
   if (bytes_sent < 0) {
@@ -125,7 +132,6 @@ void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
   close(sock_fd);
 }
 
-
 // funkcja odbierająca pakiety
 void recvPackets(struct packet_info *packets) {
   // otwieranie gniazda
@@ -133,147 +139,151 @@ void recvPackets(struct packet_info *packets) {
   if (sock_fd < 0) {
     ERROR("socket error");
   }
-  
+
+  // struktura do poll()
   struct pollfd fds;
   fds.fd = sock_fd;
   fds.events = POLLIN;
 
+  // powtarzamy aż nie otrzymamy wszystkich pakietów
+  struct timespec end;
   int count = 0;
-
-  for (int i = 0; i < 3; i++) {
+  while (count < N_PACKETS) {
+    // czekamy na pakiet przez max 1s
     int ret = poll(&fds, 1, 1000);
 
-    struct timespec end;
-    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+    // zapisujemy czas otrzymania pakietu
+    clock_gettime(CLOCK_MONOTONIC, &end);
 
     if (ret < 0) {
       ERROR("poll error");
     } else if (ret == 0) {
+      // timeout
       break;
     } else if (!(fds.revents & POLLIN)) {
+      // gniazdo niegotowe
       continue;
     }
 
+    // odbieranie pakietu
     struct sockaddr_in sender;
     socklen_t sender_len = sizeof(sender);
     u_int8_t buffer[IP_MAXPACKET];
 
-    ssize_t packet_len = recvfrom(sock_fd, buffer, IP_MAXPACKET, MSG_DONTWAIT,
+    ssize_t packet_len = recvfrom(sock_fd, buffer, IP_MAXPACKET, 0,
                                   (struct sockaddr *)&sender, &sender_len);
     if (packet_len < 0) {
-      if (errno == EWOULDBLOCK) {
-        continue;
-      }
       ERROR("recvfrom error");
     }
 
+    // zapisujemy adres IP nadawcy
     char sender_ip_str[20];
     inet_ntop(AF_INET, &(sender.sin_addr), sender_ip_str,
               sizeof(sender_ip_str));
 
+    // parsujemy nagłówek IP i ICMP
     struct iphdr *ip_header = (struct iphdr *)buffer;
     int ip_header_len = 4 * (ip_header->ihl);
-
     struct icmphdr *icmp_header = (struct icmphdr *)(buffer + ip_header_len);
 
-    if (icmp_header->type != ICMP_TIME_EXCEEDED) {
-      // found recipient!
+    u_int16_t id;
+    u_int16_t seq;
 
-      u_int16_t id = icmp_header->un.echo.id;
-      u_int16_t seq = icmp_header->un.echo.sequence;
+    // sprawdzamy typ pakietu
+    if (icmp_header->type == ICMP_ECHOREPLY) {
+      // echo reply
+      id = icmp_header->un.echo.id;
+      seq = icmp_header->un.echo.sequence;
 
-      for (int i = 0; i < 3; i++) {
-        if (seq == packets[i].seq && id == getpid() && 0xFFFF) {
-          strcpy(packets[i].ip, sender_ip_str);
-          packets[i].recv_time = end.tv_nsec / 1000000;
-          count++;
-          break;
-        }
-      }
-
-    } else {
+    } else if (icmp_header->type == ICMP_TIME_EXCEEDED) {
       // TTL exceeded
-      struct iphdr *ip_header2 =
-          (struct iphdr *)(buffer + ip_header_len + sizeof(struct icmphdr));
-      int ip_header_len2 = 4 * (ip_header2->ihl);
 
-      struct icmphdr *icmp_header2 =
-          (struct icmphdr *)(buffer + ip_header_len + sizeof(struct icmphdr) +
-                             ip_header_len2);
+      // musimy odczytać nagłówek IP i ICMP z pakietu wewnętrznego
+      struct iphdr *inner_ip_header = (struct iphdr *)(icmp_header + 1);
+      int inner_ip_header_len = 4 * (inner_ip_header->ihl);
 
-      u_int16_t id = icmp_header2->un.echo.id;
-      u_int16_t seq = icmp_header2->un.echo.sequence;
+      struct icmphdr *inner_icmp_header =
+          (struct icmphdr *)((u_int8_t *)inner_ip_header + inner_ip_header_len);
 
-      for (int i = 0; i < 3; i++) {
-        if (seq == packets[i].seq && id == getpid() && 0xFFFF) {
-          strcpy(packets[i].ip, sender_ip_str);
-          packets[i].recv_time = end.tv_nsec / 1000000;
-          count++;
-          break;
-        }
-      }
+      id = inner_icmp_header->un.echo.id;
+      seq = inner_icmp_header->un.echo.sequence;
     }
 
-    if (count == 3) {
-      break;
+    // szukamy pakietu w tablicy i zapisujemy dane
+    for (int i = 0; i < N_PACKETS; i++) {
+      if (seq == packets[i].seq && id == getpid() && 0xFFFF) {
+        strcpy(packets[i].ip, sender_ip_str);
+        packets[i].recv_time = end.tv_nsec / 1000;
+        count++;
+        break;
+      }
     }
   }
 
+  // zamykamy gniazdo
   close(sock_fd);
 }
 
 int main(int argc, char *argv[]) {
   if (argc != 2) {
-    printf("Usage: %s <hostname>\n", argv[0]);
-    exit(1);
+    // zła ilość argumentów
+    ERROR("Usage: ./traceroute <hostname>");
   }
 
   if (inet_aton(argv[1], NULL) == 0) {
-    printf("Invalid hostname, use numbers\n");
-    exit(1);
+    // niepoprawny adres IP
+    ERROR("Invalid IP address");
   }
 
-  for (int i = 1; i <= 30; i++) {
-    struct packet_info packets[N_PACKETS];
-    memset(packets, 0, sizeof(packets));
-    struct source_info srcs[N_PACKETS];
-    memset(srcs, 0, sizeof(srcs));
+  printf("traceroute to %s\n", argv[1]);
 
+  // wysyłamy pakiety z TTL od 1 do 30
+  for (int i = 1; i <= 30; i++) {
+    // tablice do przechowywania informacji o pakietach i źródłach
+    struct packet_info packets[N_PACKETS] = {0};
+    struct source_info srcs[N_PACKETS] = {0};
+
+    // wysyłamy pakiety
     for (int k = 0; k < N_PACKETS; k++) {
       sendPacket(argv[1], i, &packets[k]);
     }
 
+    // odbieramy pakiety
     recvPackets(packets);
 
+    // zliczamy źródła pakietów
     for (int k = 0; k < N_PACKETS; k++) {
       addToSrc(srcs, N_PACKETS, packets[k]);
     }
 
+    // przygotowujemy dane do wypisania
     char ips[20 * N_PACKETS] = {0};
     long sum = 0;
     int cnt = 0;
-    int blanks = 0;
     for (int k = 0; k < N_PACKETS; k++) {
       if (srcs[k].cnt == 0) {
         break;
-      }
-      if (srcs[k].ip[0] == '\0') {
-        blanks += 1;
-        continue;
       }
 
       strcat(ips, srcs[k].ip);
       strcat(ips, " ");
       sum += srcs[k].sum;
-      cnt += 1;
+      cnt += srcs[k].cnt;
     }
 
-    if (blanks == N_PACKETS) {
-      printf("%d. *\n", i);
-    } else if (blanks > 0) {
-      printf("%d. %s\t???\n", i, ips);
+    if (DEBUG) {
+      printf("TTL: %d\n", i);
+      printf("IPs: %s\n", ips);
+      printf("Sum: %ld\n", sum);
+      printf("Cnt: %d\n", cnt);
+    }
+
+    if (cnt == 0) {
+      printf("%d *\n", i);
+    } else if (cnt < N_PACKETS) {
+      printf("%d %s\t???\n", i, ips);
     } else {
-      printf("%d. %s\t%ldms\n", i, ips, sum / cnt);
+      printf("%d %s\t%.3gms\n", i, ips, (double)sum / (cnt * 1000));
     }
 
     if (strcmp(srcs[0].ip, argv[1]) == 0) {
