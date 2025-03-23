@@ -24,8 +24,8 @@ static int seq = 0;
 // struktura do przechowywania informacji o pakietach które wysłaliśmy
 // i otrzymaliśmy
 struct packet_info {
-  long send_time;
-  long recv_time;
+  long long send_time;
+  long long recv_time;
   int seq;
   char ip[20];
 } packet_info;
@@ -91,6 +91,7 @@ void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
   int sock_fd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
   if (sock_fd < 0 ||
       setsockopt(sock_fd, IPPROTO_IP, IP_TTL, &ttl, sizeof(int)) < 0) {
+    errno = EPERM;
     ERROR("socket error");
   }
 
@@ -114,14 +115,14 @@ void sendPacket(char *destination, int ttl, struct packet_info *packet_info) {
 
   // mierzymy czas wysłania pakietu
   struct timespec send_time;
-  clock_gettime(CLOCK_MONOTONIC, &send_time);
+  clock_gettime(CLOCK_MONOTONIC_RAW, &send_time);
 
   // wysyłanie pakietu
   ssize_t bytes_sent = sendto(sock_fd, &header, sizeof(struct icmphdr), 0,
                               (struct sockaddr *)&recipient, sizeof(recipient));
 
-  // zapisujemy czas wysłania pakietu
-  packet_info->send_time = send_time.tv_nsec / 1000;
+  // zapisujemy czas wysłania pakietu w mikrosekundach
+  packet_info->send_time = send_time.tv_sec * 1000000 + send_time.tv_nsec / 1000;
 
   // obsługa błędów
   if (bytes_sent < 0) {
@@ -137,6 +138,7 @@ void recvPackets(struct packet_info *packets) {
   // otwieranie gniazda
   int sock_fd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
   if (sock_fd < 0) {
+    errno = EPERM;
     ERROR("socket error");
   }
 
@@ -153,7 +155,7 @@ void recvPackets(struct packet_info *packets) {
     int ret = poll(&fds, 1, 1000);
 
     // zapisujemy czas otrzymania pakietu
-    clock_gettime(CLOCK_MONOTONIC, &end);
+    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
 
     if (ret < 0) {
       ERROR("poll error");
@@ -213,7 +215,7 @@ void recvPackets(struct packet_info *packets) {
     for (int i = 0; i < N_PACKETS; i++) {
       if (seq == packets[i].seq && id == getpid() && 0xFFFF) {
         strcpy(packets[i].ip, sender_ip_str);
-        packets[i].recv_time = end.tv_nsec / 1000;
+        packets[i].recv_time = end.tv_sec * 1000000 + end.tv_nsec / 1000;
         count++;
         break;
       }
@@ -227,11 +229,13 @@ void recvPackets(struct packet_info *packets) {
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     // zła ilość argumentów
+    errno = EINVAL;
     ERROR("Usage: ./traceroute <hostname>");
   }
 
   if (inet_aton(argv[1], NULL) == 0) {
     // niepoprawny adres IP
+    errno = EINVAL;
     ERROR("Invalid IP address");
   }
 
@@ -256,6 +260,7 @@ int main(int argc, char *argv[]) {
       addToSrc(srcs, N_PACKETS, packets[k]);
     }
 
+    
     // przygotowujemy dane do wypisania
     char ips[20 * N_PACKETS] = {0};
     long sum = 0;
