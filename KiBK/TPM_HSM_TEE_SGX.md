@@ -13,6 +13,7 @@ Agenda:
 - **HSM (Hardware Security Module)**
 - **TEE (Trusted Execution Environment)**
 - **SGX (Software Guard Extensions)**
+- **Comparison**
 
 Let's dive in!
 
@@ -24,7 +25,10 @@ Let's dive in!
 - **Use cases of TPM**
 - **Why TPMs are secure?**
 - **TPM alternatives**
-- **Do we need TPM?**
+- **Modern use**
+
+![bg right h:460](https://m.media-amazon.com/images/I/61tHItzyR9L._AC_SX466_.jpg)
+
 
 ---
 
@@ -75,12 +79,6 @@ by checking the **signature** of the **boot loader** with the **public key** sto
 
 ---
 
-# Do we need TPM?
-
-**Yes**, storing and generating **keys** on a software level is vunerable to **attacks**. **TPMs** provide a **secure** way to store and generate **keys**.
-
----
-
 # Modern use:
 - **Windows 11** requires a **TPM 2.0** chip.
 - Most modern **CPUs** have a integrated **TPM** chip.
@@ -98,7 +96,9 @@ TPM's big brother
 - **Use cases of HSM**
 - **Why HSMs are secure?**
 - **HSM alternatives**
-- **Do we need HSM?**
+- **Modern use**
+
+![bg right h:460](https://upload.wikimedia.org/wikipedia/commons/9/9b/NCipher_nShield_F3_Hardware_Security_Module.jpg)
 
 
 ---
@@ -223,4 +223,46 @@ Intel's TEE
 
 # What is SGX?
 
-- A set of **CPU** instructions that implement a **TEE** in the **CPU**
+- A **TEE** implementation by **Intel** for **x86** processors
+- Set of **CPU** instructions that allow **secure** **enclaves** to be created
+
+--- 
+
+# Why do we need TPMs, HSMs, TEEs, or SGX?
+
+- Security by **isolation**
+- Guaranteed **tamper resistance**
+
+---
+
+# Comparison
+
+| Feature | TPM | HSM | TEE |
+|---------|-----|-----|-----|
+| **Primary Function** | Secure boot & system integrity | Key management & encryption | Secure execution of apllications |
+| **Hardware integration** | Separate chip | Separate device | CPU |
+| **Security level** | High | Very high | Medium |
+
+---
+
+# Comparison
+
+| Feature | TPM | HSM | TEE |
+|---------|-----|-----|-----|
+| **Performance** | Low | High | Medium |
+| **Cost** | Low | High | Medium |
+| **Use case** | Secure boot, BitLocker | Payment processing, Digital signatures, Enterprise-level cryptography | Mobile payments, Biometric authentication | 
+
+--- 
+
+# Sources
+
+- [Wikipedia - Trusted Platform Module](https://en.wikipedia.org/wiki/Trusted_Platform_Module)
+- [Intel - What is a Trusted Platform Module?](https://www.intel.com/content/www/us/en/business/enterprise-computers/resources/trusted-platform-module.html)
+- [Wikipedia - Hardware Security Module](https://en.wikipedia.org/wiki/Hardware_security_module)
+- [Wikipedia - Trusted Execution Environment](https://en.wikipedia.org/wiki/Trusted_execution_environment)
+- [Wikipedia - Software Guard Extensions](https://en.wikipedia.org/wiki/Software_Guard_Extensions)
+
+## Images
+- [https://m.media-amazon.com/images/I/61tHItzyR9L._AC_SX466_.jpg](https://m.media-amazon.com/images/I/61tHItzyR9L._AC_SX466_.jpg)
+- [https://upload.wikimedia.org/wikipedia/commons/9/9b/NCipher_nShield_F3_Hardware_Security_Module.jpg](https://upload.wikimedia.org/wikipedia/commons/9/9b/NCipher_nShield_F3_Hardware_Security_Module.jpg)
