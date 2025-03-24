@@ -73,14 +73,15 @@ by checking the **signature** of the **boot loader** with the **public key** sto
 
 # Alternatives to TPM
 
-- **fTPM:** **TPM** implemented in **firmware** (e.g. **AMD PSP**)
-- **Software TPM:** **TPM** implemented in **software** (e.g. **Intel PTT**)
-- **Virtual TPM:** **TPM** implemented in **software** (e.g. **QEMU**)
+- **fTPM:** **TPM** implemented in **firmware** (e.g. **AMD PSP**, **Intel PTT**)
+<!-- - **Software TPM:** **TPM** implemented in **software** (e.g. **Intel PTT**) -->
+- **Virtual TPM:** **TPM** implemented in **software** (e.g. **QEMU**), used for **virtual machines**
 
 ---
 
 # Modern use:
 - **Windows 11** requires a **TPM 2.0** chip.
+- Banned in some countries (e.g. **China**)
 - Most modern **CPUs** have a integrated **TPM** chip.
 - 20$ **TPM** for a motherboard-->
 
@@ -111,7 +112,7 @@ TPM's big brother
   - **Encrypt** and **decrypt** data (up to 1000s of 1024-bit RSA operations per second)
   - **Sign** data
   - **Generate** random numbers
-  - **Secure** **remote** **access**
+  - **PKI** (Public Key Infrastructure) operations
 
 ---
 
@@ -136,6 +137,8 @@ TPM's big brother
 **HSMs** are guarantee their **security** by:
 - **Isolation:** HSM is a **separate device** from the **CPU**
 - **Tamper resistance:** HSM is **hard to tamper** with
+- **Physical security:** HSMs are **stored** in **secure** **data centers**
+- **Closed-source:** HSMs are **closed-source**, thus **hard** to **reverse-engineer**
 
 ---
 
@@ -254,6 +257,20 @@ Intel's TEE
 | **Use case** | Secure boot, BitLocker | Payment processing, Digital signatures, Enterprise-level cryptography | Mobile payments, Biometric authentication | 
 
 --- 
+
+# Vulnerabilities
+
+- **Buffer overflows**
+- **Privilege escalation**
+
+# Mitigations
+
+- **Regular updates**
+- **Firmware code-signing**
+- **Auditing**
+- **Secure coding practices**
+
+---
 
 # Sources
 
