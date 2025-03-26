@@ -25,4 +25,6 @@
   - deployment
   - location
 
+## uuid
+- generuje unikalny identyfikator
  
