@@ -27,4 +27,20 @@
 
 ## uuid
 - generuje unikalny identyfikator
- 
+- wyświetla indormacje o UUID
+- standard ISO/IEC 11578:1996
+
+## uuidgen
+- generuje unikalny identyfikator
+
+## dbus-uuidgen
+- generuje unikalny identyfikator systemu
+- zapisuje do pliku /etc/machine-id
+- sprawdza czy identyfikator jest zgodny
+
+## uname
+- wyświetla informacje o systemie
+
+## lsb_release
+- wyświetla informacje o systemie
+- czyta z pliku /etc/os-release
