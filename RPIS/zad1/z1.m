@@ -1,5 +1,7 @@
 1;
 
+disp("Rafał Leja 340879 Zadanie 3")
+
 # funkcja gamma eulera
 function y = gamma(k)
     if (k == 1/2)
