@@ -1,8 +1,8 @@
 ### Jaką rolę pełnią bity uprawnień «rwx» dla katalogów w systemach uniksowych?
 
 - r - pozwala na odczyt zawartości katalogu
-- w - pozwala na zapis do katalogu
-- x - przeszukiwanie katalogu
+- w - pozwala na zapisywanie i usuwanie plików z katalogu (nawet jeśli nie ma uprawnień do pliku???)
+- x - przejście do katalogu; wymagane do zapisywania plików w katalogu; otrzymywanie informacji o inodach plików w katalogu
 - X - przeszukiwanie katalogu jeśli jest ono wymagane
 
 ```shell
@@ -44,3 +44,13 @@ bit set-gid oznacza że wszystkie pliki utworzone w katalogu dziedziczą grupę 
 
 bit sticky ogranicza możliwość usuwania plików z katalogu do właściciela pliku, właściciela katalogu i roota
 
+### /tmp
+Access: (1777/drwxrwxrwt)  Uid: (    0/    root)   Gid: (    0/    root)
+- każdy użytkownik ma prawo zapisu do tego katalogu
+- każdy użytkownik ma prawo odczytu i zapisu do plików w tym katalogu
+- tylko właściciel pliku może usunąć plik z tego katalogu
+
+### /usr/bin/
+Access: (0755/drwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
+- każdy użytkownik ma prawo odczytu zawartości katalogu
+- tylko root ma prawo zapisu do tego katalogu
