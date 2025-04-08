@@ -24,3 +24,17 @@ adduser rafal projekt
 
 ## 5.
 ```bash
+groups
+```
+
+## 6.
+```bash
+jantest ALL= (rafal) /usr/bin/whoami
+```
+
+## 7.
+```bash
+nvim /etc/login.defs
+
+CHFN_RESTRICT frwh
+```
