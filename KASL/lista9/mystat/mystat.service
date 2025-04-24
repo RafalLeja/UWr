@@ -1,0 +1,15 @@
+[Unit]
+Description=CPU monitoring service (mystat)
+After=network.target
+Before=multi-user.target
+DefaultDependencies=no
+RequiresMountsFor=/var/log
+Wants=sysinit.target
+Before=sysinit.target
+
+[Service]
+ExecStart=/usr/local/bin/mystat
+Restart=always
+
+[Install]
+WantedBy=sysinit.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=Generate daily CPU usage graph
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/mystat-graph.sh
