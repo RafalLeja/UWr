@@ -108,6 +108,11 @@ Trójkąt jest ograniczony prostymi: \\
         a = \frac{5}{4}
     }
 \end{align*}
+Zakresy zmiennych to: \\
+\begin{align*}
+    0 &\leq X \leq 8 \\
+    0 &\leq Y \leq \frac{5}{4}x
+\end{align*}
 \end{multicols}
 
 \vspace{1.5cm}
@@ -130,37 +135,92 @@ Zamieniamy zmienne: \\
 \begin{equation*}
     \begin{cases}
         T = X + 2Y \\
-        U = Y
+        U = X
     \end{cases}
     \Rightarrow 
     \begin{cases}
-        X = T - 2U \\
-        Y = U
+        X = U \\
+        Y = \frac{T - U}{2}
     \end{cases}
 \end{equation*}
 
 Obliczamy wyznacznik Jacobiego: \\
 \begin{align*}
-    J &= \begin{vmatrix}
+    |J| &= \begin{vmatrix}
         \frac{\partial X}{\partial T} & \frac{\partial X}{\partial U} \\
         \frac{\partial Y}{\partial T} & \frac{\partial Y}{\partial U}
     \end{vmatrix} = 
     \begin{vmatrix}
-        1 & -2 \\
-        0 & 1
-    \end{vmatrix} = 1
+        0 & 1 \\
+        \frac{1}{2} & -\frac{1}{2}
+    \end{vmatrix} = \frac{1}{2}
 \end{align*}
+
+\section*{Nowy obszar zmiennych:}
+
+Zakresy oryginalnych zmiennych: \\
 \begin{align*}
-    f_{T,U}(t,u) &= f_{X,Y}(x,y) \cdot |J| \\
-    &= \frac{1}{40} \cdot 1 = \frac{1}{40}
+    0 &\leq X \leq 8 \\
+    0 &\leq Y \leq \frac{5}{4}x
 \end{align*}
 
-\section*{Funkcja gęstości (T,U):}
-
+Zakresy nowych zmiennych: \\
 \begin{align*}
-    f_{T,U}(t,u) &= \frac{1}{40} \\
-    t &= x + 2y \\
-    u &= y
+    0 &\leq U \leq 8 \\
+    0 &\leq \frac{T - U}{2} \leq \frac{5}{4}U
+\end{align*}
+Inaczej:
+\begin{align*}
+    0 &\leq \frac{T - U}{2} \leq \frac{5}{4}U \\
+    0 &\leq T - U \leq \frac{5}{2}U \\
+    U &\leq T \leq U + \frac{5}{2}U \\
+    U &\leq T \leq \frac{7}{2}U \\
+    0 &\leq T \leq 28
 \end{align*}
 
-\end{document}
+Zatem: 
+\begin{align*}
+    &U \in [0, 8]  \cap  [\frac{2}{7}T, T]\\
+\end{align*}
+
+\section*{Przedziały całkowania:}
+Z powyższych ograniczeń dzielimy obszar na 2 podobszary: \\
+\begin{list}{}{}
+
+  \item 1. Dla $T \in [0, 8]$: \\
+  \begin{align*}
+    &U \in [\frac{2}{7}t, T]\\
+  \end{align*}
+  więc:
+  \begin{align*}
+    f_T(t) &= \int f_{X,Y}(x, y) \cdot |J| \, dy \, dx \\
+    f_T(t) &= \int_{\frac{2}{7}t}^t \frac{1}{40} \cdot \frac{1}{2} \, du \\
+    &= \int_{\frac{2}{7}t}^t \frac{1}{80} \, du \\
+    &= \frac{1}{80} \cdot (t - \frac{2}{7}t) \\
+    &= \frac{1}{80} \cdot \frac{5}{7}t \\
+    &= \frac{1}{112}t
+  \end{align*}
+\pagebreak
+  \item 2. Dla $T \in [8, 28]$: \\
+  \begin{align*}
+    &U \in [\frac{2}{7}T, 8]\\
+  \end{align*}
+  więc:
+  \begin{align*}
+    f_T(t) &= \int f_{X,Y}(x, y) \cdot |J| \, dy \, dx \\
+    f_T(t) &= \int_{\frac{2}{7}t}^8 \frac{1}{40} \cdot \frac{1}{2} \, du \\
+    &= \int_{\frac{2}{7}t}^8 \frac{1}{80} \, du \\
+    &= \frac{1}{80} \cdot (8 - \frac{2}{7}t) \\
+    &= \frac{1}{10} - \frac{1}{280}t
+  \end{align*}
+\end{list}
+
+\section*{Ostateczna funkcja gęstości:}
+\begin{align*}
+    f_T(t) &= \begin{cases}
+        \frac{1}{112}t & \text{dla } 0 \leq t < 8 \\
+        \frac{1}{10} - \frac{1}{280}t & \text{dla } 8 \leq t < 28 \\
+        0 & \text{dla } t < 0 \text{ lub } t > 28
+    \end{cases}
+\end{align*}
+  \end{document}
