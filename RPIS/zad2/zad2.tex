@@ -8,6 +8,8 @@
 \usepackage{lmodern}
 \usepackage{parskip}
 \usepackage{pgfplots}
+\usepackage{systeme}
+\usepackage{multicol}
 
 % Page layout
 \geometry{margin=1in}
@@ -41,7 +43,9 @@ Rachunek prawdopodobieństwa i statystyka}
     m &= 10 \\
 \end{align*}
 
-\section*{Gęstość X, Y:}
+\section*{Trójkąt:}
+
+\begin{multicols}{2}
 
 Rozpatrujemy następujący trójkąt: \\
 
@@ -91,17 +95,72 @@ Rozpatrujemy następujący trójkąt: \\
       \end{axis}
 \end{tikzpicture}
 
-trójkąt jest ograniczony prostymi: \\
+Trójkąt jest ograniczony prostymi: \\
 \begin{align*}
-    x &= 0 \\
-    y &= 0 \\
-    y &= \frac{10}{8}x \\
+    &\text{1. } x = 0, \\
+    &\text{2, } y = 0, \\
+    &\text{3, } y = ax + b \\
+    &\systeme*{
+        0 = a*0 + b,
+        10 = a*8 + b
+    } \Rightarrow \systeme*{
+        b = 0,
+        a = \frac{5}{4}
+    }
+\end{align*}
+\end{multicols}
+
+\vspace{1.5cm}
+
+\section*{Funkcja gęstości (X,Y):}
+
+$f(x,y) = C$ na obszarze trójkąta, gdzie $C$ jest stałą. \\
+
+\begin{align*}
+    \int_\mathbb{R}  \int_\mathbb{R}  f(x, y) \, dy \, dx &= 1 \\
+    \int_0^8 \int_0^{\frac{5}{4}x} C \, dy \, dx &= 1 \\
+    \int_0^8 C \cdot \frac{5}{4}x \, dx &= 1 \\
+    C \cdot \frac{5}{8}x^2 \bigg|_0^8 &= 1 \\
+    C \cdot \frac{5}{8} \cdot 64 &= 1 \\
+    C &= \frac{1}{40} = f(x,y)
 \end{align*}
 
-\vspace{1cm}
+\section*{Zamiana zmiennych:}
+Zamieniamy zmienne: \\
+\begin{equation*}
+    \begin{cases}
+        T = X + 2Y \\
+        U = Y
+    \end{cases}
+    \Rightarrow 
+    \begin{cases}
+        X = T - 2U \\
+        Y = U
+    \end{cases}
+\end{equation*}
 
-% Add more problems as needed
-% \section*{Problem 3}
-% ...
+Obliczamy wyznacznik Jacobiego: \\
+\begin{align*}
+    J &= \begin{vmatrix}
+        \frac{\partial X}{\partial T} & \frac{\partial X}{\partial U} \\
+        \frac{\partial Y}{\partial T} & \frac{\partial Y}{\partial U}
+    \end{vmatrix} = 
+    \begin{vmatrix}
+        1 & -2 \\
+        0 & 1
+    \end{vmatrix} = 1
+\end{align*}
+\begin{align*}
+    f_{T,U}(t,u) &= f_{X,Y}(x,y) \cdot |J| \\
+    &= \frac{1}{40} \cdot 1 = \frac{1}{40}
+\end{align*}
+
+\section*{Funkcja gęstości (T,U):}
+
+\begin{align*}
+    f_{T,U}(t,u) &= \frac{1}{40} \\
+    t &= x + 2y \\
+    u &= y
+\end{align*}
 
 \end{document}
