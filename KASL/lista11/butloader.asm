@@ -28,4 +28,36 @@ show_licence:
 	mov si, 0x0500		; wypisz licencje
 
 .print_loop:
-	
+	lodsb			; al = si++	
+	cmp al, 0x00		; koniec lancucha
+	je .menu_loop
+	mov ah, 0x0E		; funkcja: wyswietl znak
+	call print_char		; 
+	jmp .print_loop		; powrot do petli
+
+reboot:
+	jmp 0xffff:0x0000
+
+print_string:
+.next_char:
+	lodsb
+	cmp al, 0x00
+	je .done
+	call print_char
+	jmp .next_char
+.done:
+	ret
+
+print_char:
+	mov ah, 0x0E		; write character
+	mov bh, 0x00		; numer strony
+	mov bl, 0x04		; kolor - czerwony
+	int 0x10		; interupt
+	ret
+
+read_char:
+	mov ah, 0x00		; read character
+	int 0x16		; keyboard interrupt
+	ret
+
+msg db "1) Licence", 13, 10, "2) Reboot", 13, 10, 0
