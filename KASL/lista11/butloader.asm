@@ -20,22 +20,23 @@ show_licence:
 	mov ch, 0x00		; cylider
 	mov cl, 0x02 		; sektor: 2 = LBA 1
 	mov dh, 0x00		; glowica
-	mov dl, 0x00		; numer dysku
+	mov dl, 0x80		; numer dysku
 	mov bx, 0x0500		; adres docelowy
 	mov es, bx
 	mov bx, 0x0000
 	int 0x13		; wywolanie przerwania
-	jc start.menu_loop	; jezeli blad to wracamy do menu
+	jc .err			; jezeli blad to wracamy do menu
 
-	mov si, 0x0500		; wypisz licencje
+	mov si, 0x05000		; wypisz licencje
 .print_loop:
 	lodsb			; al = si++	
-	cmp al, 0x00		; koniec lancucha
+	cmp al, 0		; koniec lancucha
 	je start.menu_loop
-	mov ah, 0x0E		; funkcja: wyswietl znak
 	call print_char		; 
 	jmp .print_loop		; powrot do petli
-
+.err:
+	mov si, err_msg
+	jmp start.menu_loop
 reboot:
 	jmp 0xffff:0x0000
 
@@ -61,5 +62,6 @@ read_char:
 	int 0x16		; keyboard interrupt
 	ret
 
+err_msg db "Error: ", 0
 menu db "1) Licence", 13, 10, "2) Reboot", 13, 10, 0
 times 446-($-$$) db 0  ; wypełnij do 446 bajtów
