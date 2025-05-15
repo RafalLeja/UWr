@@ -64,4 +64,4 @@ read_char:
 
 err_msg db "Error: ", 0
 menu db "1) Licence", 13, 10, "2) Reboot", 13, 10, 0
-times 446-($-$$) db 0  ; wypełnij do 446 bajtów
+times 446-($-$$) db 0  ; wypełnij do 446 bajtów + ( 4 wpisy * 16 bajtów ) + 2 bajty magic number
