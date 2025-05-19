@@ -1,0 +1,127 @@
+\documentclass[12pt,fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{lmodern}
+\usepackage{parskip}
+\usepackage{pgfplots}
+\usepackage{systeme}
+\usepackage{multicol}
+
+% Page layout
+\geometry{margin=1in}
+\pagestyle{fancy}
+\setlength{\mathindent}{2in}
+\fancyhf{}
+\lhead{Rafał Leja 340879}
+\rhead{RPiS zadanie nr 3}
+\cfoot{\thepage}
+
+\makeatletter
+\newenvironment{shiftedflalign}{%
+  \start@align\tw@%
+  \st@rredfalse%
+  \m@ne%
+  \hskip\parindent%
+}{%
+  \endalign%
+}
+\newenvironment{shiftedflalign*}{%
+  \start@align\tw@%
+  \st@rredtrue%
+  \m@ne%
+  \hskip\parindent%
+}{%
+  \endalign%
+}
+\makeatother
+
+% Title info
+\title{\textbf{Zadanie nr 3}}
+\author{Rafał Leja \\
+340879 \\
+Rachunek prawdopodobieństwa i statystyka}
+\date{\today}
+
+% plot options
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\begin{document}
+
+\maketitle
+
+% Example problems
+\section*{Dane:}
+
+\begin{align*}
+    X_{30}, X_{150}, X_{600} \sim  B(n,p), \text{gdzie } p = 1/3, n = 30, 150, 600 \\
+\end{align*}
+
+\section*{Prawdopodobieństwo wprost:}
+
+Prawdopodobieństwo rozkładu Bernoulliego dla $X \sim B(n,p)$ jest dane wzorem:
+\begin{align*}
+    P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \text{ dla } k = 0, 1, \ldots, n
+\end{align*}
+
+Więc, dla $X_{n}$ mamy:
+\begin{align*}
+    P(a \leq  X_n \leq  b) &= \sum_{k=a}^{b} P(X_n = k) \\
+    &= \sum_{k=a}^{b} \binom{n}{k} p^k (1-p)^{n-k}
+\end{align*}
+
+Co nam daje:
+\begin{align*}
+    P(8 \leq  X_{30} \leq  12) &= \sum_{k=8}^{12} \binom{30}{k} \left(\frac{1}{3}\right)^k \left(\frac{2}{3}\right)^{30-k} \approx 0,66720608 \\
+    P(40 \leq X_{150} \leq  60) &= \sum_{k=40}^{60} \binom{150}{k} \left(\frac{1}{3}\right)^k \left(\frac{2}{3}\right)^{150-k} \approx 0,93151283 \\
+    P(160 \leq  X_{600} \leq  240) &= \sum_{k=160}^{240} \binom{600}{k} \left(\frac{1}{3}\right)^k \left(\frac{2}{3}\right)^{600-k} \approx 0,99955211
+\end{align*}
+
+
+\section*{Przybliżenia Czebyszewa:}
+
+Wariancja rozkładu Bernoulliego jest dana wzorem:
+\begin{align*}
+    \sigma^2 = np(1-p)
+\end{align*}
+a wartość oczekiwana:
+\begin{align*}
+    \mu = np
+\end{align*}
+
+zatem, nierówność Czebyszewa dla rozkładu Bernoulliego jest następująca:
+
+\begin{align*}
+    P(|X_n - \mu| \geq k\sigma) &\leq \frac{1}{k^2} \implies P(|X_n - \mu| < k\sigma) \geq 1 - \frac{1}{k^2}
+\end{align*}
+
+Dla $X_{30}$ mamy:
+\begin{flalign*}
+    &\qquad \mu_{30} = 30 \cdot \frac{1}{3} = 10 &\\
+    &\qquad \sigma_{30} = \sqrt{30 \cdot \frac{1}{3} \cdot \frac{2}{3}} \approx 2,58 \\
+    &\qquad 8 \leq  X_{30} \leq  12 \implies |X_{30} - 10| < 2 \implies k = \frac{2}{2,58} \approx 0,775 \\
+    &\qquad P(|X_{30} - 10| < 2) \geq 1 - \frac{1}{(0,775)^2} \approx 1 - 1,65 = -0,65 \text{ (co jest niemożliwe)}
+\end{flalign*}
+
+Dla $X_{150}$ mamy analogicznie:
+\begin{flalign*}
+    &\qquad \space \mu_{150} = 150 \cdot \frac{1}{3} = 50 &\\
+    &\qquad \sigma_{150} = \sqrt{150 \cdot \frac{1}{3} \cdot \frac{2}{3}} \approx 6,12 \\
+    &\qquad 40 \leq X_{150} \leq 60 \implies |X_{150} - 50| < 10 \implies k = \frac{10}{6,12} \approx 1,63 \\
+    &\qquad P(|X_{150} - 50| < 10) \geq 1 - \frac{1}{(1,63)^2} \approx 1 - 0,375 = 0,625
+\end{flalign*}
+
+Dla $X_{600}$ mamy:
+\begin{flalign*}
+    &\qquad \mu_{600} = 600 \cdot \frac{1}{3} = 200 &\\
+    &\qquad \sigma_{600} = \sqrt{600 \cdot \frac{1}{3} \cdot \frac{2}{3}} \approx 12,65 \\
+    &\qquad 160 \leq  X_{600} \leq  240 \implies |X_{600} - 200| < 40 \implies k = \frac{40}{12,65} \approx 3,16 \\
+    &\qquad P(|X_{600} - 200| < 40) \geq 1 - \frac{1}{(3,16)^2} \approx 1 - 0,099 = 0,901
+\end{flalign*}
+
+  \end{document}
