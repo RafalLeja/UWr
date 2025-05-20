@@ -7,7 +7,6 @@
 \usepackage{fancyhdr}
 \usepackage{lmodern}
 \usepackage{parskip}
-\usepackage{pgfplots}
 \usepackage{systeme}
 \usepackage{multicol}
 
@@ -20,36 +19,12 @@
 \rhead{RPiS zadanie nr 3}
 \cfoot{\thepage}
 
-\makeatletter
-\newenvironment{shiftedflalign}{%
-  \start@align\tw@%
-  \st@rredfalse%
-  \m@ne%
-  \hskip\parindent%
-}{%
-  \endalign%
-}
-\newenvironment{shiftedflalign*}{%
-  \start@align\tw@%
-  \st@rredtrue%
-  \m@ne%
-  \hskip\parindent%
-}{%
-  \endalign%
-}
-\makeatother
-
 % Title info
 \title{\textbf{Zadanie nr 3}}
 \author{Rafał Leja \\
 340879 \\
 Rachunek prawdopodobieństwa i statystyka}
 \date{\today}
-
-% plot options
-\pgfplotsset{compat=1.18}
-\usepgfplotslibrary{external}
-\tikzexternalize
 
 \begin{document}
 
@@ -146,12 +121,51 @@ Zatem, dla $X_{30}$ mamy:
     &\qquad \sigma_{30} = \sqrt{30 \cdot \frac{1}{3} \cdot \frac{2}{3}} \approx 2,58 \\
     &\qquad Z = \frac{X_{30} - 10}{2,58} \sim N(0,1) \\
 \end{flalign*}
+\vspace{-0.5in}
+\begin{flalign*}
+    \qquad P(8 \leq X_{30} \leq 12) &= P(X_{30} \leq 12) - P(X_{30} \leq 8) &\\
+    & = P(Z \leq \frac{12 + 0,5 - 10}{2,58}) - P(Z \leq \frac{8 - 0,5 - 10}{2,58}) \\
+    & = \Phi(\frac{2,5}{2,58}) - \Phi(\frac{-2,5}{2,58}) \\
+    & = \Phi(0,97) - \Phi(-0,97) \\
+    & = 0,834 - 0,165 \\
+    & = 0,669
+\end{flalign*}
+
+Dla $X_{150}$ mamy:
+\begin{flalign*}
+    &\qquad \space \mu_{150} = 150 \cdot \frac{1}{3} = 50 &\\
+    &\qquad \sigma_{150} = \sqrt{150 \cdot \frac{1}{3} \cdot \frac{2}{3}} \approx 6,12 \\
+    &\qquad Z = \frac{X_{150} - 50}{6,12} \sim N(0,1) \\
+\end{flalign*}
+\vspace{-0.5in}
+\begin{flalign*}
+    \qquad P(40 \leq X_{150} \leq 60) &= P(X_{150} \leq 60) - P(X_{150} \leq 40) &\\
+    & = P(Z \leq \frac{60 + 0,5 - 50}{6,12}) - P(Z \leq \frac{40 - 0,5 - 50}{6,12}) \\
+    & = \Phi(\frac{10,5}{6,12}) - \Phi(\frac{-10,5}{6,12}) \\
+    & = \Phi(1,71) - \Phi(-1,71) \\
+    & = 0,912
+\end{flalign*}
+
+Dla $X_{600}$ mamy:
+\begin{flalign*}
+    &\qquad \mu_{600} = 600 \cdot \frac{1}{3} = 200 &\\
+    &\qquad \sigma_{600} = \sqrt{600 \cdot \frac{1}{3} \cdot \frac{2}{3}} \approx 12,65 \\
+    &\qquad Z = \frac{X_{600} - 200}{12,65} \sim N(0,1) \\
+\end{flalign*}
+\vspace{-0.5in}
+\begin{flalign*}
+    \qquad P(160 \leq X_{600} \leq 240) &= P(X_{600} \leq 240) - P(X_{600} \leq 160) &\\
+    & = P(Z \leq \frac{240 + 0,5 - 200}{12,65}) - P(Z \leq \frac{160 - 0,5 - 200}{12,65}) \\
+    & = \Phi(\frac{40,5}{12,65}) - \Phi(\frac{-40,5}{12,65}) \\
+    & = \Phi(3,20) - \Phi(-3,20) \\
+    & = 0,999 \\
+\end{flalign*}
+
+\section*{Nierówności Chernoffa:}
+Nierówności Chernoffa dla rozkładu Bernoulliego są następujące:
 \begin{align*}
-    P(8 \leq X_{30} \leq 12) &= P(X_{30} \leq 12) - P(X_{30} \leq 8) \\
-    &= P(Z \leq \frac{12 + 0,5 - 10}{2,58}) - P(Z \leq \frac{8 + 0,5 - 10}{2,58}) \\
-    &= \Phi(\frac{2,5}{2,58}) - \Phi(\frac{-1,5}{2,58}) \\
-    &= \Phi(0,968) - \Phi(-0,581) \\
-    &= 0,833 - 0,281 \\
-    &= 0,552
+    P(X_n \geq a) &\leq e^{-ta}M(t) = e^{-ta} \left(\frac{1-p}{p}\right)^{np} \\
+    P(X_n \leq a) &\leq e^{- \frac{(np - a)^2}{2n}}
 \end{align*}
+
     \end{document}
