@@ -164,8 +164,69 @@ Dla $X_{600}$ mamy:
 \section*{Nierówności Chernoffa:}
 Nierówności Chernoffa dla rozkładu Bernoulliego są następujące:
 \begin{align*}
-    P(X_n \geq a) &\leq e^{-ta}M(t) = e^{-ta} \left(\frac{1-p}{p}\right)^{np} \\
-    P(X_n \leq a) &\leq e^{- \frac{(np - a)^2}{2n}}
+    P(X_n \geq a) &\leq e^{-ta}M(t) = e^{-ta} (1-p + pe^t)n \\
 \end{align*}
+
+chcemy znaleźć $t$ takie, że $e^{-ta}M(t)$ jest minimalne. Zatem:
+\begin{align*}
+    \frac{d}{dt} e^{-ta}M(t) &= e^{-ta} (M'(t) - aM(t)) \\
+    &= e^{-ta} (1 - p + pe^t)^{n-1} (npe^t - a(1-p+pe^t)) \\
+\end{align*}
+przyrównując do zera, mamy:
+\begin{align*}
+    npe^t = a(1-p+pe^t) \\
+    npe^t - ape^t = a - ap \\
+    e^t = \frac{a - ap}{p(n - a)} \\
+\end{align*}
+wiemy że $p \neq 0$ oraz $n \neq a$ więc:
+\begin{align*}
+    t &= \ln\left(\frac{a(1-p)}{p(n - a)}\right) \\
+\end{align*}
+żeby to rozwiązanie miało sens, musimy mieć $a(1-p) > 0$ oraz $p(n - a) > 0$, co daje nam:
+\begin{align*}
+    a > 0 \text{ oraz } n - a > 0 \implies 0 < a < n
+\end{align*}
+
+Zatem, dla $X_{30}$ mamy:
+\begin{flalign*}
+    &\qquad \space a = 8, b = 12, n = 30, p = \frac{1}{3} &\\
+    &\qquad t_a = \ln\left(\frac{8(1-\frac{1}{3})}{\frac{1}{3}(30 - 8)}\right) \approx -0,3184 \\
+    &\qquad t_b = \ln\left(\frac{12(1-\frac{1}{3})}{\frac{1}{3}(30 - 12)}\right) \approx 0,2876\\
+\end{flalign*}
+\vspace{-0.5in}
+\begin{flalign*}
+    \qquad P(8 \leq X_{30} \leq 12) &\leq e^{-t_a a}M(t_a) - e^{-t_b b}M(t_b) &\\
+    & = e^{-(-0,3184) \cdot 8} \left(1 - \frac{1}{3} + \frac{1}{3} e^{-0,3184}\right)^{30} - e^{-(0,2876) \cdot 12} \left(1 - \frac{1}{3} + \frac{1}{3} e^{0,2876}\right)^{30} \\
+    & \approx -0.01502055 \\
+    & < 0 \text{ (co jest niemożliwe)}
+\end{flalign*}
+
+Dla $X_{150}$ mamy:
+\begin{flalign*}
+    &\qquad \space a = 40, b = 60, n = 150, p = \frac{1}{3} &\\
+    &\qquad t_a = \ln\left(\frac{40(1-\frac{1}{3})}{\frac{1}{3}(150 - 40)}\right) \approx -0,3184 \\
+    &\qquad t_b = \ln\left(\frac{60(1-\frac{1}{3})}{\frac{1}{3}(150 - 60)}\right) \approx 0,2876\\
+\end{flalign*}
+\vspace{-0.5in}
+\begin{flalign*}
+    \qquad P(40 \leq X_{150} \leq 60) &\leq e^{-t_a a}M(t_a) - e^{-t_b b}M(t_b) &\\
+    & = e^{-(-0,3184) \cdot 40} \left(1 - \frac{1}{3} + \frac{1}{3} e^{-0,3184}\right)^{150} - e^{-(0,2876) \cdot 60} \left(1 - \frac{1}{3} + \frac{1}{3} e^{0,2876}\right)^{150} \\
+    & \approx -0.02249244 \\
+    & < 0 \text{ (co jest niemożliwe)}
+\end{flalign*}
+
+Dla $X_{600}$ mamy:
+\begin{flalign*}
+    &\qquad \space a = 160, b = 240, n = 600, p = \frac{1}{3} &\\
+    &\qquad t_a = \ln\left(\frac{160(1-\frac{1}{3})}{\frac{1}{3}(600 - 160)}\right) \approx -0,3184 \\
+    &\qquad t_b = \ln\left(\frac{240(1-\frac{1}{3})}{\frac{1}{3}(600 - 240)}\right) \approx 0,2876\\
+\end{flalign*}
+\vspace{-0.5in}
+\begin{flalign*}
+    \qquad P(160 \leq X_{600} \leq 240) &\leq e^{-t_a a}M(t_a) - e^{-t_b b}M(t_b) &\\
+    & = e^{-(-0,3184) \cdot 160} \left(1 - \frac{1}{3} + \frac{1}{3} e^{-0,3184}\right)^{600} - e^{-(0,2876) \cdot 240} \left(1 - \frac{1}{3} + \frac{1}{3} e^{0,2876}\right)^{600} \\
+    & \approx -0.00098321 \\
+    & < 0 \text{ (co jest niemożliwe)}
+\end{flalign*}
 
     \end{document}
