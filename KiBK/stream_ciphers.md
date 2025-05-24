@@ -121,3 +121,96 @@ Ciphertext:             → [00101001 00000010 00011101 00010110 00000010]
 ## **Self-synchronous**: 
 - the keystream is generated from the previous ciphertext digits
 - resistant to bit loss
+
+---
+
+# Modern stream ciphers - building blocks
+- **Linear Feedback Shift Register (LFSR)**: a shift register with feedback
+- **Fibbonacci LFSR**: a type of LFSR where the feedback is taken from multiple bits
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/28/LFSR-F16.svg" alt="LFSR" width="100%" style="float: right;"/>
+
+---
+
+# Modern stream ciphers - Fibonacci LFSR
+- expressed as a polynomial mod 2
+- $x^{16} + x^{14} + x^{13} + x^{11} + x^{0} = x^{0}$
+- The longest period is $2^{16} - 1 = 65535$
+- This period can archieved by using a **primitive polynomial** over the Galois field GF(2)
+  - The number of taps must be **even**
+  - The taps must be **co-prime**
+  
+---
+
+# Modern stream ciphers - Galois LFSR
+- Fibonacci LFSR cannot be **parallelized**
+- The output is **the same** as with Fibonacci LFSR 
+- One round takes **1 clock cycle**
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/LFSR-G16.svg/590px-LFSR-G16.svg.png" alt="Galois LFSR" width="100%" style="float: right;"/>
+
+---
+
+# Non-linear feedback shift register (NLFSR)
+- Safer than LFSR
+- Uses a non-linear function to change the state
+- We don't know how to build them...
+
+---
+
+# Non-linear combining functions (NLCF)
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Nonlinear-combo-generator.png/500px-Nonlinear-combo-generator.png" alt="NLCF" width="40%" style="float: right;"/>
+
+- Fake a NLFSR
+- Use a non-linear function to combine the bits of the LFSR
+
+---
+
+# Clock-controlled generators
+- Now we shift, now we don't
+
+---
+
+# RC4
+- Invented by **Ron Rivest** (**R** in **RSA**) in 1987
+- Leaked in 1994
+- Starts with a **key-scheduling algorithm (KSA)** to generate the initial state
+- Then a **pseudo-random generation algorithm (PRGA)** is used to generate the keystream
+
+--- 
+# RC4 - Key-scheduling algorithm (KSA)
+```python
+for i from 0 to 255
+    S[i] := i
+
+j := 0
+for i from 0 to 255
+    j := (j + S[i] + key[i mod keylength]) mod 256
+    swap values of S[i] and S[j]
+```
+
+---
+# RC4 - Pseudo-random generation algorithm (PRGA)
+```python
+i := 0
+j := 0
+while GeneratingOutput:
+    i := (i + 1) mod 256
+    j := (j + S[i]) mod 256
+    swap values of S[i] and S[j]
+    t := (S[i] + S[j]) mod 256
+    K := S[t]
+    output K
+```
+---
+
+# Use of RC4
+- **WEP/WPA** (1997 - 2004)
+- **SSL/TLS** (1999 - 2015)
+- OpenBSD /dev/random (? - 2015)
+
+---
+
+# Problems with RC4
+- **Biases** in the first bytes of the keystream
+- No **initialization vector (IV)**, thus the same key produces the same keystream
+- **Bit-flipping** attacks
+- **7** diffrent attacks
