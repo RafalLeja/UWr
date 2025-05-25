@@ -214,3 +214,145 @@ while GeneratingOutput:
 - No **initialization vector (IV)**, thus the same key produces the same keystream
 - **Bit-flipping** attacks
 - **7** diffrent attacks
+
+---
+
+# A5/1
+- Used in **GSM** (2G) mobile phones
+- developed in **1987**
+- **64-bit** key
+- **224-bit** frame number
+
+---
+# A5/1 - Building blocks
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/A5-1_GSM_cipher.svg/525px-A5-1_GSM_cipher.svg.png" alt="A5/1" width="70%" style="float: right;"/>
+
+- **Key** is xored in (64 cycles)
+- **Frame number** is xored in (22 cycles)
+- 100 cycles discarded
+- ready to generate **2*114** bits of keystream
+
+---
+
+# A5/X flaws
+- **Weak keys**: 64-bit keys that can be broken by brute force
+- **Short period**: about 8Mb of randomess
+- First broken in **1994** by **Ross Anderson** and **Ruediger Weis**
+- Can be broken in **seconds** with a **FPGAs** and **Rainbow tables** 
+- Regularly broken by **NSA**
+
+---
+
+# NESSIE (New European Schemes for Signatures, Integrity and Encryption) 2000 - 2003
+- **F-FCSR**
+- **SFINKS**
+- **DECIM**
+- **LEX**
+- **Helix**
+- **Phelix**
+- And many more...
+
+---
+
+# :(
+- **F-FCSR** and **SFINKS** suffered from known plaintext attacks.
+
+- **DECIM** was broken shortly after submission (differential attacks).
+
+- **LEX** showed statistical biases in its output.
+
+- **Helix** and **Phelix** had potential forgeries in authenticated encryption mode.
+- **None were accepted** as a standard.
+
+---
+
+# eSTREAM 2004 - 2008
+- **eSTREAM** was a project to identify new stream ciphers after the **NESSIE** failure.
+- It was divided into two profiles:
+  - **Profile 1**: Software-oriented ciphers
+  - **Profile 2**: Hardware-oriented ciphers
+
+---
+# eSTREAM - Profile 1
+- **HC-256**: High-speed software-oriented cipher
+- **Rabbit**: Fast and efficient cipher
+- **Salsa20**: A family of ciphers designed by **Daniel J. Bernstein**
+- **Sosemanuk**: A cipher based on the Salsa20 core
+
+# eSTREAM - Profile 2
+- **Trivium**: Simplest secure stream cipher
+- **Grain**: designed for low-resource environments
+- **MICKEY**: designed for low-resource environments
+
+---
+# Trivium
+<img src="https://imgs.search.brave.com/aNfGK5ws_v2cUgByc8aGcWXhpEhbs2xouLhj-_b41jo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vejllVGRF/QzZMR244MExlT1lI/cmg5dXVmZHNWb3RB/cXJDMWVXWmtvVWVK/WS9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTkx/YzJWeS9MV2x0WVdk/bGN5NW5hWFJvL2RX/SjFjMlZ5WTI5dWRH/VnUvZEM1amIyMHZP/RGcyTVRZei9Nemd2/TVRrNE16TXdNakF4/L0xXSm1OMlJrTVRZ/eExURXkvWkRBdE5E/WmpOeTFpTURVMS9M/V1E0WmpWa05UbGxN/VEkzL01pNXdibWM" alt="Trivium" width="90%" style="float: right;"/>
+
+---
+
+# Trivium
+- **Key**: 80 bits
+- **IV**: 80 bits
+- **State**: 288 bits
+- **Period**: $2^{64}$
+
+---
+
+# ChaCha20
+- 128-bit **constant**: "expand 32-byte k"
+- **Key**: 256 bits
+- **Counter**: 32 bits
+- **Nonce**: 96 bits
+  
+|           | Column 0 | Column 1  | Column 2  | Column 3  |
+| --------- | -------- | --------- | --------- | --------- |
+| **Row 0** | "expa" | "nd 3"  | "2-by"  | "te k"  |
+| **Row 1** | key\[0]  | key\[1]   | key\[2]   | key\[3]   |
+| **Row 2** | key\[4]  | key\[5]   | key\[6]   | key\[7]   |
+| **Row 3** | counter  | nonce\[0] | nonce\[1] | nonce\[2] |
+
+---
+
+# ChaCha20 - Operations
+```C
+def QR(a, b, c, d){
+a += b; d ^= a; d <<<= 16;
+c += d; b ^= c; b <<<= 12;
+a += b; d ^= a; d <<<=  8;
+c += d; b ^= c; b <<<=  7;
+}
+```
+---
+# ChaCha20 - Operations
+```C
+// Odd round
+QR(0, 4,  8, 12) // column 1
+QR(1, 5,  9, 13) // column 2
+QR(2, 6, 10, 14) // column 3
+QR(3, 7, 11, 15) // column 4
+// Even round
+QR(0, 5, 10, 15) // diagonal 1 (main diagonal)
+QR(1, 6, 11, 12) // diagonal 2
+QR(2, 7,  8, 13) // diagonal 3
+QR(3, 4,  9, 14) // diagonal 4
+```
+
+---
+# ChaCha20 - Use
+- **TLS**
+- **OpenSSH**
+- **QUIC**
+- **Signal Protocol**
+- **WhatsApp**
+  
+---
+# Sources
+- [Wikipedia - Stream cipher](https://en.wikipedia.org/wiki/Stream_cipher)
+- [Wikipedia - Vigenère cipher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher)
+- [Wikipedia - One-time pad](https://en.wikipedia.org/wiki/One-time_pad)
+- [Wikipedia - Lorenz cipher](https://en.wikipedia.org/wiki/Lorenz_cipher)
+- [Wikipedia - A5/1](https://en.wikipedia.org/wiki/A5/1)
+- [Wikipedia - RC4](https://en.wikipedia.org/wiki/RC4)
+- [Wikipedia - eSTREAM](https://en.wikipedia.org/wiki/ESTREAM)
+- [Wikipedia - Trivium](https://en.wikipedia.org/wiki/Trivium_(cipher))
+- [Wikipedia - ChaCha20](https://en.wikipedia.org/wiki/ChaCha20)
