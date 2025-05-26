@@ -20,7 +20,7 @@ A stream cipher is a symmetric key cipher where:
 
 ---
 
-# 1553 - Vigenère cipher
+<!-- # 1553 - Vigenère cipher
 - invented by **Blaise de Vigenère**
 - shifts the plaintext by a **key** (a word)
 - the key is **repeated** to match the length of the plaintext
@@ -31,15 +31,15 @@ A stream cipher is a symmetric key cipher where:
 = 30      16      13      21      25     message + key
 =  4 (E)  16 (Q)  13 (N)  21 (V)  25 (Z) (message + key) mod 26
       E       Q       N       V       Z  → ciphertext
-```
----
+``` -->
+<!-- ---
 
 # 1553 - Vigenère cipher
 - **Key**: a word, agreed upon by both parties
 - **Vulnerable** to frequency analysis
 - Not a modern stream cipher, but a **block cipher**
 
----
+--- -->
 
 # 1882 - One-time-pad
 - invented by **Frank Miller** to encrypt **telegraph messages**
@@ -94,7 +94,7 @@ Ciphertext:             → [00101001 00000010 00011101 00010110 00000010]
 # WWII - Breaking the Lorenz SZ40
 - **4000** characters of ciphertext were transmitted from **Athens** to **Vienna**
 - the recipient asked (without encryption) for a **retransmission**,
-- the sender ***retransmitted** the slightly shorter message, **without changing the key**
+- the sender **retransmitted** the slightly shorter message, **without changing the key**
 - the **British** intercepted both messages
 
 ---
@@ -135,7 +135,7 @@ Ciphertext:             → [00101001 00000010 00011101 00010110 00000010]
 - expressed as a polynomial mod 2
 - $x^{16} + x^{14} + x^{13} + x^{11} + x^{0} = x^{0}$
 - The longest period is $2^{16} - 1 = 65535$
-- This period can archieved by using a **primitive polynomial** over the Galois field GF(2)
+- This period can archieved by using a **primitive polynomial** over the Galois field GF($2^N$)
   - The number of taps must be **even**
   - The taps must be **co-prime**
   
