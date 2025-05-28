@@ -26,7 +26,7 @@ print("Zadanie 4 - test Z:")
 Z4 = (EX - EY) / np.sqrt(VX / nX + VX / nY)
 print("Z = ", Z4)
 H4 = 1 - stats.norm.cdf(Z4)
-print("Hipoteza 1 - F(Z) = ", H4)
+print("Hipoteza 4: 1 - F(Z) = ", H4)
 
 print("\n-----------------------\n")
 
@@ -36,7 +36,7 @@ t5 = ((EX - EY) * np.sqrt(nX * nY- 2)) \
 / np.sqrt((nX * VX + nY * VX) * ((1.0/nX) + (1.0/nY))) 
 print("t = ", t5)
 H5 = 1 - stats.t.cdf(t5, df=nX + nY - 2)
-print("Hipoteza 2 - F(t) = ", H5)
+print("Hipoteza 5.1: 1 - F(t) = ", H5)
 print()
 print("test welcha:")
 t_welch = ((EX - EY) * np.sqrt(nX * nY)) \
@@ -47,5 +47,19 @@ r = np.power((VX / nX + VY / nY), 2)/ \
     ((VY / nY) ** 2) * ((nY - 1)/(nY**2)) 
 print("r = ", r)
 H5_welch = 1 - stats.t.cdf(t_welch, df= r)
-print("Hipoteza 2 - F(t_welch) = ", H5_welch)
+print("Hipoteza 5.2: 1 - F(t_welch) = ", H5_welch)
 print("\n-----------------------\n")
+
+
+print("Zadanie 6:")
+print("test F-Snedecora")
+
+F6 = VX / VY
+print("F = ", F6)
+H6 = 1 - stats.f.cdf(F6, dfn=nX-1, dfd=nY-1)
+print("Hipoteza 6: 1 - F(F) = ", H6)
+
+print("\n-----------------------\n")
+
+print("Zadanie 7:")
+print("to samo???")
