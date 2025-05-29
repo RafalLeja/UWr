@@ -69,3 +69,5 @@ sns.kdeplot(F, fill=True, color='orange', label='F')
 print("F[1]:", F[1], "F[14]:", F[14], "F[38]:", F[38])
 
 plt.show()
+
+

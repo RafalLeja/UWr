@@ -32,7 +32,7 @@ print("\n-----------------------\n")
 
 print("Zadanie 5:")
 print("test t-Studenta:")
-t5 = ((EX - EY) * np.sqrt(nX * nY- 2)) \
+t5 = ((EX - EY) * np.sqrt(nX + nY- 2)) \
 / np.sqrt((nX * VX + nY * VX) * ((1.0/nX) + (1.0/nY))) 
 print("t = ", t5)
 H5 = 1 - stats.t.cdf(t5, df=nX + nY - 2)
@@ -56,10 +56,10 @@ print("test F-Snedecora")
 
 F6 = VX / VY
 print("F = ", F6)
-H6 = 1 - stats.f.cdf(F6, dfn=nX-1, dfd=nY-1)
+H6 = 1 - stats.f.cdf(F6, dfn=nX, dfd=nY)
 print("Hipoteza 6: 1 - F(F) = ", H6)
 
 print("\n-----------------------\n")
 
 print("Zadanie 7:")
-print(f"to samo ale F({nX},{nY}) = {1 - stats.f.cdf(F6, dfn=nX, dfd=nY)}")
+print(f"to samo ale F({nX},{nY}) = {1 - stats.f.cdf(F6, dfn=nX-1, dfd=nY-1)}")
