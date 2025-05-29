@@ -62,4 +62,4 @@ print("Hipoteza 6: 1 - F(F) = ", H6)
 print("\n-----------------------\n")
 
 print("Zadanie 7:")
-print("to samo???")
+print(f"to samo ale F({nX},{nY}) = {1 - stats.f.cdf(F6, dfn=nX, dfd=nY)}")
