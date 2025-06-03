@@ -1,0 +1,67 @@
+X:
+Średnia =  0.9835869701959824
+Wariancja =  4.135752986004951
+Odchylenie standardowe =  2.0336550803921867
+Y:
+Średnia =  0.9616170767539625
+Wariancja =  4.135752986004951
+Odchylenie standardowe =  2.257888316844081
+
+-----------------------
+
+Zadanie 4 - test Z:
+Z =  0.048313183163105046
+Hipoteza 4: 1 - F(Z) =  0.4807333240893502
+
+-----------------------
+
+Zadanie 5:
+test t-Studenta:
+t =  0.21592804184577544
+Hipoteza 5.1: 1 - F(t) =  0.4148037574066743
+
+test welcha:
+t_welch =  0.2160631235242024
+r =  0.12190189777666556
+Hipoteza 5.2: 1 - F(t_welch) =  0.46727369602974445
+
+-----------------------
+
+Zadanie 6:
+test F-Snedecora
+F =  0.8112406030629867
+Hipoteza 6: 1 - F(F) =  0.7443463591879098
+
+-----------------------
+
+Zadanie 7:
+to samo ale F(40,40) = 0.741649048507104
+X:
+Średnia =  0.49237828481450147
+Wariancja =  0.07493312217424479
+Odchylenie standardowe =  0.2737391498749216
+Liczba próbek =  40
+
+-----------------------
+
+Rozkład normalny:
+Metoda Box-Muller
+Zdefiniowane zmienne losowe Z_0 i Z_1:
+Z_0 = sqrt(-2 * ln(X_0)) * cos(2 * pi * X_1)
+Z_1 = sqrt(-2 * ln(X_0)) * sin(2 * pi * X_1)
+Z[1]: -0.5661037472929481 Z[14]: -0.5942988850498604 Z[38]: -1.0412034976867577
+
+------------------------
+
+Rozkład Exp(5):
+dystrybuanta: F(x) = 1 - exp(-5 * x)
+odwrotność: F^(-1)(u) = -ln(1 - u) / 5 = -ln(u) / 5
+E[1]: 0.37864668707082844 E[14]: 0.05458508240000601 E[38]: 0.0167351784071279
+
+------------------------
+
+Rozkład f(x) = x na przedziale [0, 2]
+gęstość: f(x) = x / 2
+dystrybuanta: F(x) = x^2 / 4
+odwrotność: F^(-1)(u) = sqrt(4 * u)
+F[1]: 0.7761033869116073 F[14]: 1.7448777127752282 F[38]: 1.9180503636603496
