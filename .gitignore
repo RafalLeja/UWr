@@ -1,4 +1,11 @@
 *.out
+*.bin
+*.elf
+*.lst
+*.map
+*.hex
+*.srec
+*.bootloader_pad
 *.gif
 *.exe
 *.pgm
