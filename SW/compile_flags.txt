@@ -1,0 +1,4 @@
+-I/nix/store/61nfr4k6n1inz3zy4yps8s8ayh98wg1i-avr-gcc-14.3.0/lib/gcc/avr/14.3.0/include
+-I/nix/store/61nfr4k6n1inz3zy4yps8s8ayh98wg1i-avr-gcc-14.3.0/lib/gcc/avr/14.3.0/include-fixed
+-I/nix/store/61nfr4k6n1inz3zy4yps8s8ayh98wg1i-avr-gcc-14.3.0/lib/gcc/avr/14.3.0/../../../../avr/sys-include
+-I/nix/store/xgkz49l0cc8hjlbzcvynhbxvbk5aviv9-avr-libc-avr-2.2.1/avr/include
