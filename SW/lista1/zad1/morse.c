@@ -5,7 +5,7 @@
 #define LED PB5
 #define LED_DDR DDRB
 #define LED_PORT PORTB
-#define DIT 500
+#define DIT 60
 #define BAUD 9600                              // baudrate
 #define UBRR_VALUE ((F_CPU) / 16 / (BAUD) - 1) // zgodnie ze wzorem
 
@@ -48,7 +48,10 @@ int uart_receive(FILE *stream) {
 FILE uart_file;
 
 void sendMorseLetter(char letter) {
-  if (letter < 97 || letter > 122) {
+  if (letter == 32) {
+    _delay_ms(7 * DIT);
+    return;
+  } else if (letter < 97 || letter > 122) {
     printf("Niewspierany znak\n");
     return;
   }
@@ -73,6 +76,7 @@ void sendMorseLetter(char letter) {
     _delay_ms(DIT);
     bits = bits >> 1;
   }
+  _delay_ms(2 * DIT);
 }
 
 int main() {
