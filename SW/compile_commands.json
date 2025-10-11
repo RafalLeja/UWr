@@ -1,0 +1,24 @@
+[
+  {
+    "arguments": [
+      "/run/current-system/sw/bin/avr-gcc",
+      "-g",
+      "-std=c99",
+      "-I/nix/store/61nfr4k6n1inz3zy4yps8s8ayh98wg1i-avr-gcc-14.3.0/lib/gcc/avr/14.3.0/include",
+      "-I/nix/store/61nfr4k6n1inz3zy4yps8s8ayh98wg1i-avr-gcc-14.3.0/lib/gcc/avr/14.3.0/include-fixed",
+      "-I/nix/store/61nfr4k6n1inz3zy4yps8s8ayh98wg1i-avr-gcc-14.3.0/lib/gcc/avr/14.3.0/../../../../avr/sys-include",
+      "-I/nix/store/xgkz49l0cc8hjlbzcvynhbxvbk5aviv9-avr-libc-avr-2.2.1/avr/include",
+      "-DF_CPU=16000000",
+      "-Wall",
+      "-O3",
+      "-mmcu=atmega328p",
+      "-c",
+      "-o",
+      "program.o",
+      "program.c"
+    ],
+    "directory": "/home/rafal/Desktop/UWr/SW/lista1/zad1",
+    "file": "/home/rafal/Desktop/UWr/SW/lista1/zad1/program.c",
+    "output": "/home/rafal/Desktop/UWr/SW/lista1/zad1/program.o"
+  }
+]
