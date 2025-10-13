@@ -23,16 +23,27 @@ def bruteforce(ciphertext):
     for letter in list(alphabet):
         print(f"{letter}: {decode(ciphertext, letter)}")
 
+
 def guess(ciphertext, seed):
-    key_hint = ''.join([num2char[(char2num[c]-char2num[s]) % alphalen] for c, s in zip(ciphertext, seed)])
+    key_hint = "".join(
+        [
+            num2char[(char2num[c] - char2num[s]) % alphalen]
+            for c, s in zip(ciphertext, seed)
+        ]
+    )
     print(f"key fragment : {key_hint}")
     print("Input key: ")
     key = input().upper()
     print(f"plaintext: {decode(ciphertext, key)}")
+
 
 print("Zadanie 4")
 print("podpunkt 1:\n")
 bruteforce("FDGEFYQUMYMODKBFASDMBTQD")
 
 print("podpunkt 2:\n")
-guess("XHQPMFTFSJBHAMEHGIGHISHLPHLJAECWRVSRJWXNQECBSIQSCQSRHERWTWSVLVMRVLJAECWRVSRJWXNQECBSIFIHCPKS", "ITMAY")
+guess(
+    "XHQPMFTFSJBHAMEHGIGHISHLPHLJAECWRVSRJWXNQECBSIQSCQSRHERWTWSVLVMRVLJAECWRVSRJWXNQECBSIFIHCPKS",
+    "ITMAY",
+)
+print("-- 'The Gold Bug' - Edgar Allan Poe")
