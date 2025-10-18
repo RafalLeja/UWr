@@ -37,7 +37,7 @@ print(f"IV = 0, p1 = 0, p2 = 0 => {hexlify(c1)}, {hexlify(c2)}")
 c1p, c2p = Adam(c1, bytearray([0] * 16), bytearray([0] * 16))
 print(f"IV = c1, p1 = 0, p2 = 0 => {hexlify(c1p)}, {hexlify(c2p)}")
 
-print(f"Bob zgaduje {'AES' if c1p == c2 else 'losową permutację'}")
+print(f"Bob zgaduje: {'AES' if c1p == c2 else 'losowa permutacja'}")
 
 print("Wersja 2")
 
@@ -71,5 +71,5 @@ print(f"IV = 0, p1 = 0, p2 = c1 => {hexlify(c1p)}, {hexlify(c2p)}")
 c1b, c2b = AdamE(c2p, bytearray([0] * 16), c2)
 print(f"IV = c1p, p1 = 0, p2 = c2 => {hexlify(c1b)}, {hexlify(c2b)}")
 
-print(f"Bob zgaduje {'AES' if c1b == c2 and c2b ==
-      c2p else 'losową permutację'}")
+print(f"Bob zgaduje: {'AES' if c1b ==
+      c2 and c2b == c2p else 'losowa permutacja'}")
