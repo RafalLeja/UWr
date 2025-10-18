@@ -82,12 +82,13 @@ int uart_receive(FILE *stream) {
 
 FILE uart_file;
 
-inline void pletter(int8_t *trieIdx, int8_t *length) {
+inline void pletter(int8_t *trieIdx, int8_t *length, char *prev) {
   for (int i = 0; i < *length; i++) {
     printf("\b");
   }
   if (*trieIdx < 32 && morse_tree[*trieIdx] != ' ') {
     printf("%c", morse_tree[*trieIdx]);
+    *prev = morse_tree[*trieIdx];
   } else {
     // printf("#");
   }
@@ -116,8 +117,9 @@ int main(int argc, char *argv[]) {
   // char prevState = 0;
   int8_t length = 0;
   int8_t trieIdx = 1;
-
+  char prev = 0;
   int8_t cbuf = 0;
+
   while (1) {
     LED_PORT ^= _BV(LED);
     _delay_ms(DIT);
@@ -126,63 +128,27 @@ int main(int argc, char *argv[]) {
     cbuf <<= 1;
     cbuf |= (currState == 0);
 
-    if ((cbuf & _BV(3) - 1) == 0b010) {
+    if ((cbuf & (_BV(3) - 1)) == 0b010) {
       trieIdx *= 2;
       length++;
       pmorse('.');
-    } else if ((cbuf & _BV(5) - 1) == 0b01110) {
+    } else if ((cbuf & (_BV(4) - 1)) == 0b0111) {
       trieIdx *= 2;
       trieIdx++;
       length++;
       pmorse('-');
-    } else if ((cbuf & _BV(7) - 1) == 0) {
+    } else if ((cbuf & (_BV(7) - 1)) == 0 && prev != ' ') {
       // koniec słowa
-    } else if ((cbuf & _BV(3) - 1) == 0) {
+      finish_word();
+      prev = ' ';
+    } else if ((cbuf & (_BV(3) - 1)) == 0) {
       // koniec litery
-      pletter(&trieIdx, &length);
+      pletter(&trieIdx, &length, &prev);
     }
 
     pbit(currState == 0);
     pblink();
-    printf("\b\b");
-
-    // if (currState == prevState) {
-    //   length++;
-    //   if (currState) {
-    //     // printf("1 %d\r\n", length);
-    //     if (length == 3) {
-    //       finish_letter(&trieIdx);
-    //     }
-    //     if (length == 7) {
-    //       finish_word();
-    //     }
-    //   }
-    // } else {
-    //   if (prevState == 0) {
-    //     // on -> off
-    //     // printf("0 %d\r\n", length);
-    //     if (length == 1) {
-    //       printf(".");
-    //       trieIdx *= 2;
-    //     } else if (length == 3) {
-    //       printf("-");
-    //       trieIdx *= 2;
-    //       trieIdx++;
-    //     }
-    //   } else {
-    //     // off -> on
-    //     // printf("1 %d\r\n", length);
-    //     if (length >= 3) {
-    //       finish_letter(&trieIdx);
-    //     }
-    //     if (length >= 7) {
-    //       finish_word();
-    //     }
-    //   }
-    //   length = 1;
-    // }
-    //
-    // prevState = currState;
+    printf("\x1B[K\b\b");
   }
 
   return 0;
