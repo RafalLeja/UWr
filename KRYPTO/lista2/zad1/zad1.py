@@ -5,5 +5,4 @@ with open("./key", "rb") as keyF, open("./iv", "rb") as ivF:
 
     with open("./ciphertext", "rb") as cipherF:
         plaintext = aes.decrypt(cipherF.read())
-        print(plaintext)
-
+        print(plaintext.decode("utf-8"))
