@@ -8,9 +8,9 @@
 
 #define PNP0 PC0
 #define PNP1 PC1
-#define PNP_DDR DDRB
-#define PNP_PORT PORTB
-#define PNP_PIN PINB
+#define PNP_DDR DDRC
+#define PNP_PORT PORTC
+#define PNP_PIN PINC
 
 int8_t digits[] = {0b1000000, 0b1111001, 0b0100100, 0b0110000, 0b0011001,
                    0b0010010, 0b0000010, 0b1111000, 0b0000000, 0b0010000};
@@ -33,7 +33,7 @@ int main(void) {
     if (cyfra) {
       // jedności
       LED_PORT = digits[czas % 10];
-      PNP_PORT &= ~_BV(PNP0);
+      PNP_PORT &= ~_BV(PNP1);
     } else {
       // dziesiątek
       LED_PORT = digits[czas / 10];
