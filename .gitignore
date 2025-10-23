@@ -5,7 +5,7 @@
 *.map
 *.hex
 *.srec
-*.bootloader_pad
+*.bootloader-pad
 *.gif
 *.exe
 *.pgm
