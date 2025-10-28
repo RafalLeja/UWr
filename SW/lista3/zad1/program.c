@@ -1,4 +1,5 @@
 #include "./melody.h"
+#include "./notes.h"
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include <stdint.h>
@@ -14,18 +15,10 @@
  * bity 4-3 - oktawa
  * bity 2-0 - dźwięk w tonacji
  */
-static const uint16_t notes[] PROGMEM = {
-    65,  69,  73,  77,  82,  87,  92,  97,  103, 110, 116, 123,
-    130, 138, 146, 155, 164, 174, 184, 195, 207, 220, 233, 246,
-    261, 277, 293, 311, 329, 349, 369, 391, 415, 440, 466, 493,
-    523, 554, 587, 622, 659, 698, 739, 783, 830, 880, 932, 987,
-};
 // C = 0
-#define KEY 0
-#define BPM 120
-#define SCALE minor
+#define BPM 90
 #define EIGHT_NOTE (60000 / BPM) >> 3
-static const uint16_t n = 838;
+static const uint16_t n = 150;
 // static const size_t n = sizeof(melody) / sizeof(melody[0]);
 static const uint8_t major[] = {0, 2, 4, 5, 7, 9, 11};
 static const uint8_t minor[] = {0, 2, 3, 5, 7, 8, 10};
@@ -49,13 +42,14 @@ void tone(int frequency) {
   /*
    * Prescaler = 8
    */
-  TCCR1B = _BV(WGM02) | _BV(CS11);
+  TCCR1B = _BV(WGM12) | _BV(CS11);
 
   OCR1A = top;
 }
 
 void playNote(uint16_t idx) {
   uint8_t note = pgm_read_byte(&melody[idx]);
+  // uint8_t dur = 4;
   uint8_t dur = 1 << ((note & 0x60) >> 5);
   uint16_t freq;
   if (note >= 0x80) {
@@ -80,7 +74,8 @@ int main(void) {
   while (1) {
     // tone(pgm_read_u16(&notes[(3 * 12) + 5]));
     playNote(curr);
-    // tone(440);
+    tone(0);
+    _delay_ms(10);
     curr++;
     if (curr >= n) {
       curr = 0;
