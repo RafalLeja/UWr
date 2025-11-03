@@ -9,6 +9,9 @@
 #define LED_DDR DDRB
 #define LED_PORT PORTB
 
+#define MAXI_U 900
+#define MINI_U 200
+
 void pwm(uint16_t fill) {
   if (fill == 0) {
     TCCR1A = 0;
@@ -53,11 +56,22 @@ int main(void) {
 
   adc_init();
 
-  uint16_t val = 0;
+  uint16_t light_val = 0;
+  uint16_t led_val = 0;
+  uint16_t desired_val = 0;
   while (1) {
     pwm(0);
-    val = adc_measure(); // 0 - 16
-    pwm(pgm_read_u16(&exp_table[val]));
+    light_val = adc_measure();
+    if (light_val > MAXI_U)
+      light_val = MAXI_U;
+    if (light_val < MINI_U)
+      light_val = MINI_U;
+    light_val -= MINI_U;
+    desired_val = pgm_read_u16(&exp_table[light_val]);
+    led_val = (led_val * 7 + desired_val) / 8;
+
+    pwm(led_val);
+    // pwm(pgm_read_u16(&lin_table[(MAXI_U - MINI_U - 1) - val]));
     _delay_ms(50);
   }
 }
