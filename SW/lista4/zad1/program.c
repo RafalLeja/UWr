@@ -64,10 +64,23 @@ int main() {
     uint8_t b1 = b;
     uint8_t c1;
 
-    uint16_t t0 = TCNT1; // 2 cykle
-    c1 = a1 + b1;        // add8
-    uint16_t t1 = TCNT1; // 2 cykle
-    printf("uint8_t = %hu: %" PRIu16 " cykli\r\n", c1, t1 - t0);
+    volatile uint16_t t0 = TCNT1; // 2 cykle
+    volatile uint16_t t1 = TCNT1; // 2 cykle
+    uint16_t timer_const = t1 - t0;
+    t0 = TCNT1;   // 2 cykle
+    c1 = a1 + b1; // add8
+    t1 = TCNT1;   // 2 cykle
+    printf("uint8_t + = %hu: %" PRIu16 " cykli\r\n", c1, t1 - t0 - timer_const);
+
+    t0 = TCNT1;   // 2 cykle
+    c1 = a1 * c1; // add8
+    t1 = TCNT1;   // 2 cykle
+    printf("uint8_t * = %hu: %" PRIu16 " cykli\r\n", c1, t1 - t0 - timer_const);
+
+    t0 = TCNT1;   // 2 cykle
+    c1 = a1 / c1; // add8
+    t1 = TCNT1;   // 2 cykle
+    printf("uint8_t / = %hu: %" PRIu16 " cykli\r\n", c1, t1 - t0 - timer_const);
 
     // ---------------
 
@@ -78,7 +91,20 @@ int main() {
     t0 = TCNT1;   // wartość licznika przed czekaniem
     c2 = a2 + b2; // add16
     t1 = TCNT1;   // wartość licznika po czekaniu
-    printf("uint16 = %" PRIu16 ": %" PRIu16 " cykli\r\n", c2, t1 - t0);
+    printf("uint16 + = %" PRIu16 ": %" PRIu16 " cykli\r\n", c2,
+           t1 - t0 - timer_const);
+
+    t0 = TCNT1;   // wartość licznika przed czekaniem
+    c2 = a2 * c2; // add16
+    t1 = TCNT1;   // wartość licznika po czekaniu
+    printf("uint16 * = %" PRIu16 ": %" PRIu16 " cykli\r\n", c2,
+           t1 - t0 - timer_const);
+
+    t0 = TCNT1;   // wartość licznika przed czekaniem
+    c2 = a2 / c2; // add16
+    t1 = TCNT1;   // wartość licznika po czekaniu
+    printf("uint16 / = %" PRIu16 ": %" PRIu16 " cykli\r\n", c2,
+           t1 - t0 - timer_const);
 
     // ---------------
 
@@ -89,7 +115,17 @@ int main() {
     t0 = TCNT1; // wartość licznika przed czekaniem
     c3 = a3 + b3;
     t1 = TCNT1; // wartość licznika po czekaniu
-    printf("uint32 = %lu: %" PRIu16 " cykli\r\n", c3, t1 - t0);
+    printf("uint32 + = %lu: %" PRIu16 " cykli\r\n", c3, t1 - t0 - timer_const);
+
+    t0 = TCNT1; // wartość licznika przed czekaniem
+    c3 = a3 * c3;
+    t1 = TCNT1; // wartość licznika po czekaniu
+    printf("uint32 * = %lu: %" PRIu16 " cykli\r\n", c3, t1 - t0 - timer_const);
+
+    t0 = TCNT1; // wartość licznika przed czekaniem
+    c3 = a3 / c3;
+    t1 = TCNT1; // wartość licznika po czekaniu
+    printf("uint32 / = %lu: %" PRIu16 " cykli\r\n", c3, t1 - t0 - timer_const);
 
     // ---------------
 
@@ -102,7 +138,24 @@ int main() {
     t1 = TCNT1; // wartość licznika po czekaniu
     uint32_t high = (uint32_t)(c4 >> 32);
     uint32_t low = (uint32_t)c4;
-    printf("uint64 = 0x%08lX%08lX: %" PRIu16 " cykli\r\n", high, low, t1 - t0);
+    printf("uint64 + = 0x%08lX%08lX: %" PRIu16 " cykli\r\n", high, low,
+           t1 - t0 - timer_const);
+
+    t0 = TCNT1; // wartość licznika przed czekaniem
+    c4 = a4 * c4;
+    t1 = TCNT1; // wartość licznika po czekaniu
+    high = (uint32_t)(c4 >> 32);
+    low = (uint32_t)c4;
+    printf("uint64 * = 0x%08lX%08lX: %" PRIu16 " cykli\r\n", high, low,
+           t1 - t0 - timer_const);
+
+    t0 = TCNT1; // wartość licznika przed czekaniem
+    c4 = a4 / c4;
+    t1 = TCNT1; // wartość licznika po czekaniu
+    high = (uint32_t)(c4 >> 32);
+    low = (uint32_t)c4;
+    printf("uint64 / = 0x%08lX%08lX: %" PRIu16 " cykli\r\n", high, low,
+           t1 - t0 - timer_const);
 
     // ---------------
 
@@ -113,7 +166,17 @@ int main() {
     t0 = TCNT1; // wartość licznika przed czekaniem
     c6 = a6 + b6;
     t1 = TCNT1; // wartość licznika po czekaniu
-    printf("float = %f: %" PRIu16 " cykli\r\n", c6, t1 - t0);
+    printf("float + = %f: %" PRIu16 " cykli\r\n", c6, t1 - t0 - timer_const);
+
+    t0 = TCNT1; // wartość licznika przed czekaniem
+    c6 = a6 * c6;
+    t1 = TCNT1; // wartość licznika po czekaniu
+    printf("float * = %f: %" PRIu16 " cykli\r\n", c6, t1 - t0 - timer_const);
+
+    t0 = TCNT1; // wartość licznika przed czekaniem
+    c6 = a6 / c6;
+    t1 = TCNT1; // wartość licznika po czekaniu
+    printf("float / = %f: %" PRIu16 " cykli\r\n", c6, t1 - t0 - timer_const);
 
     // ---------------
 
@@ -124,9 +187,9 @@ int main() {
     t0 = TCNT1; // wartość licznika przed czekaniem
     c7 = a7 + b7;
     t1 = TCNT1; // wartość licznika po czekaniu
-    printf("%f %" PRIu16 "\r\n", c7, t1 - t0);
+    printf("%f %" PRIu16 "\r\n", c7, t1 - t0 - timer_const);
 
     printf("----\r\n\r\n");
-    _delay_ms(1000);
+    _delay_ms(10000);
   }
 }
