@@ -1,0 +1,58 @@
+/* Usage:
+   1) generate the table:
+      bc -l chain.bc | sed ':a;s/\\$//;T;N;s/\n//;ta' > chain.tex
+   2) use it in a TeX document:
+      \input chain.tex
+*/
+
+# Number of iterations:
+iter = 55
+
+scale = 100
+
+define floor(x) {
+   auto s
+   s = scale
+   scale = 0
+   x /= 1
+   scale = s
+   return x
+}
+
+define void mantexp(x, *me[]) {
+   auto s
+   me[0] = x
+   me[1] = 0
+   while (me[0] < 1 && me[0] > -1) {
+      me[0] *= 10
+      me[1] -= 1
+   }
+   s = scale
+   scale = 2
+   me[0] /= 1
+   scale = s
+}
+
+print "\\begin{tabular}{|r|r|r@{$/$}l|r@{${}\\cdot10$}l|}\\hline\n"
+print "\\multicolumn{1}{|c|}{$i$}&$a_i$&$p_i$&$q_i$&\n"
+print "\\multicolumn{2}{c|}{$\\pi-p_i/q_i$}\\\\\\hline\n"
+
+pi = 4 * a(1)
+x = pi
+a = floor(x)
+p = 1; q = 0; p1 = 0; q1 = 1
+for (n = 0; n < iter; n++) {
+   if (x == a)
+      break
+   p2 = p; q2 = q
+   p = a * p + p1; q = a * q + q1;
+   p1 = p2; q1 = q2
+   mantexp(pi-p/q, me[])
+   print n, "&", a, "&", p, "&", q, "&$", me[0], "$&$^{", me[1], "}$\\\\ \n"
+   x = 1 / (x-a)
+   a = floor(x)
+}
+
+print "\\hline\n\\end{tabular}\n"
+
+quit
