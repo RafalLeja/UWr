@@ -7,7 +7,7 @@ MCU_TARGET     = atmega328p
 AVRDUDE_TARGET = atmega328p
 OPTIMIZE       = -O3
 DEFS           =
-LIBS           = -Wl,-u,vfprintf -lprintf_flt -Wl,-u,vfscanf -lscanf_flt -lm
+LIBS           = 
 BAUDRATE       = 115200
 
 HZ          = 16000000
