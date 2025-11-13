@@ -29,6 +29,7 @@ def unravel_en(e, n):
         frac = 1 / (frac - a)
         p = a * p1 + p2
         q = a * q1 + q2
+        print(f"Current convergent: {p}/{q}")
 
         if p > 0 and frac - en > 0 and q % 2 == 1:
             c = Fraction((e * q) - 1, p)
