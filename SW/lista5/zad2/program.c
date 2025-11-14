@@ -14,10 +14,10 @@
 #define BTN_PORT PORTD
 #define BTN_PIN PIND
 
-#define V_IN 5
-#define R1 10000
+#define V_IN 5.0
+#define R1 2200
 
-volatile float last_value = 0;
+volatile uint32_t last_value = 0;
 
 void uart_init() {
   UBRR0 = UBRR_VALUE;
@@ -44,9 +44,26 @@ void uart_wait() {
 }
 
 ISR(ADC_vect) {
-  uint16_t v = ((float)ADC); // v_out/v_in * 1023
-  // v /= 3.0;
-  last_value = 1 * ((float)v / (1024 - v));
+  uint64_t v = ADC; // v_out/v_in * 1023
+  // if (v >= 1023) {
+  //   last_value = UINT32_MAX;
+  //   ADCSRA |= _BV(ADIF);
+  //   return;
+  // }
+  if (v <= 0) {
+    last_value = 1;
+    ADCSRA |= _BV(ADIF);
+    return;
+  }
+  uint64_t licznik = R1 * v;
+  uint32_t mianownik = 1023 - v;
+  uint64_t r2 = licznik / mianownik;
+  if (r2 >= UINT32_MAX) {
+    last_value = UINT32_MAX;
+    ADCSRA |= _BV(ADIF);
+    return;
+  }
+  last_value = r2;
   // last_value = v;
   ADCSRA |= _BV(ADIF);
 }
@@ -83,8 +100,8 @@ int main() {
   sei();
 
   while (1) {
-    printf("last_value: %f \r\n", last_value);
+    printf("opor = %" PRIu32 " Ohm \r\n", last_value);
     uart_wait();
-    _delay_ms(1000);
+    _delay_ms(500);
   }
 }
