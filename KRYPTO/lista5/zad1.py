@@ -1,17 +1,29 @@
 from fractions import Fraction
 from math import isqrt
 
-n = int(input("Podaj n:\n").strip())
-e = int(input("Podaj e:\n").strip())
-c = int(input("Podaj c:\n").strip())
+# n = int(input("Podaj n:\n").strip())
+# e = int(input("Podaj e:\n").strip())
+# c = int(input("Podaj c:\n").strip())
+
+# zad 1
+# n = 1966981193543797
+# e = 323815174542919
+# c = 123
+
+# zad 2
+n = 130687494429316880592587603591521383920412628811049308935752972814617747010315095971923145877064688137992902685596097216720996854853919218727159390021227148733855762386858555333362302124683761104846232605563413435009531762821185586791939352214160535318857072814374111130766141753918111259889897345003064525351
+e = 28693214582397890025989589693388201307112484632946573521392115165335417643770107378187402457550786952163563146261313111502966020280758229808732825588892750625283697984499468762855956587026046369855833720847192378100305673971120013410423795029025305091127141827911114988375014692107707438719088975457125194099
+c = 55454605216274283003615025402579985926872868938531978788960945200071288606272984986984693007941093017948228426576659044356115993101475334306953285769932350902758319431922420892596139683929338562320497889321445435632761748150943331239997895979747860404050845449692343927454617961984814625948913598527195055849
 
 
-def check_c(e, n, p, q, c):
+def check_c(n, phi):
     a = 1
-    b = -(n - c + 1)
+    b = -(n - phi + 1)
     delta = (b**2) - (4 * a * n)
-    x1 = (-b + isqrt(delta)) / (2 * a)
-    x2 = (-b - isqrt(delta)) / (2 * a)
+    if delta < 0:
+        return -1, -1
+    x1 = (-b + isqrt(delta)) // (2 * a)
+    x2 = (-b - isqrt(delta)) // (2 * a)
     return x1, x2
 
 
@@ -21,7 +33,6 @@ def unravel_en(e, n):
 
     p2, p1 = 0, 1
     q2, q1 = 1, 0
-    c = 0
     while frac.numerator != 0:
         a = frac.__floor__()
         if frac - a == 0:
@@ -29,19 +40,23 @@ def unravel_en(e, n):
         frac = 1 / (frac - a)
         p = a * p1 + p2
         q = a * q1 + q2
-        print(f"Current convergent: {p}/{q}")
+        # print(f"Current convergent: {p}/{q}")
 
-        if p > 0 and frac - en > 0 and q % 2 == 1:
-            c = Fraction((e * q) - 1, p)
-            if c.denominator == 1:
-                x1, x2 = check_c(e, n, p, q, c.numerator)
-                if x1.is_integer() and x2.is_integer() and x1 * x2 == n:
-                    return int(x1), int(x2)
+        if p != 0:
+            # if p > 0 and frac - en > 0 and q % 2 == 1:
+            # c = Fraction((e * q) - 1, p)
+            # if c.denominator == 1:
+            phi = (e * q - 1) // p
+            x1, x2 = check_c(n, phi)
+            if x1.is_integer() and x2.is_integer() and x1 * x2 == n:
+                return int(x1), int(x2)
 
         p2, p1 = p1, p
         q2, q1 = q1, q
     return 0, 0
 
+
+# print(f"[1/3 * _4/n] = {pow(n, 1 / 4) / 3}")
 
 p, q = unravel_en(e, n)
 if p > 0:
@@ -55,5 +70,9 @@ if p > 0:
 
     m = pow(c, d, n)
     print(f"m = {m}")
+    print(f"m (bytes) = {m.to_bytes((n.bit_length() + 7) // 8, byteorder='big')}")
+    print(
+        f"m (str) = {m.to_bytes((n.bit_length() + 7) // 8, byteorder='big').decode()}"
+    )
 else:
     print("No solution found")
