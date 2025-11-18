@@ -72,7 +72,7 @@ uint16_t variance(uint16_t avg) {
     // printf("diff: %" PRId16 "\r\n", diff);
     var += diff * diff;
   }
-  return var / AVG_LEN;
+  return var / 2; // / AVG_LEN;
 }
 
 FILE uart_file;
