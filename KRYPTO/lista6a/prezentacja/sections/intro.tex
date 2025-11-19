@@ -1,0 +1,45 @@
+\section{Dawno dawno temu w internecie...}
+
+\begin{frame}{Scenariusz: odwiedzanie strony www w 1994 r.}
+	Chcemy wejść na strone www.example.com.
+	\begin{itemize}
+		\item<1-> Wpisujemy w przeglądarce adres URL i naciskamy Enter.
+		\item<2-> Przeglądarka musi znaleźć adres IP serwera, na którym znajduje się strona. Wysyła zapytanie do DNS.
+		\item<3-> Otrzymuje odpowiedź z adresem IP i łączy się z serwerem na porcie 80.
+		\item<4-> Wysyła żądanie HTTP o stronę www.example.com.
+		\item<5-> Serwer odpowiada stroną HTML, którą przeglądarka renderuje i wyświetla użytkownikowi.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Scenariusz: Ewa przekieruje ruch do swojego serwera}
+	Przed atakem Ewa musi się przygotować.
+	\begin{itemize}
+		\item<1-> Ewa rejestruje domenę www.eve.com i ustawia jej rekord A na swój serwer.
+		\item<2-> Ewa modyfikuje rekordy DNS dla www.example.com, aby wskazywały na jej serwer (np. poprzez atak DNS spoofing).
+	\end{itemize}
+
+\end{frame}
+\begin{frame}{Scenariusz: odwiedzanie strony www po ataku Ewy}
+	Chcemy wejść na strone www.example.com.
+	\begin{itemize}
+		\item Wpisujemy w przeglądarce adres URL i naciskamy Enter.
+		\item Przeglądarka musi znaleźć adres IP serwera, na którym znajduje się strona. Wysyła zapytanie do DNS.
+		\item<3-> Ewa odpowiada, podając adres IP swojego serwera.
+		\item<4-> Wysyła żądanie HTTP o stronę www.example.com.
+		\item<5-> Serwer Ewy odpowiada stroną HTML, która może wyglądać jak oryginalna strona, ale jest fałszywa.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Słabe punkty scenariusza}
+	\begin{itemize}
+		\item<1-> Brak uwierzytelniania serwera DNS: przeglądarka ufa odpowiedzi DNS bez weryfikacji.
+		      \begin{itemize}
+			      \item<2-> Współczesne rozwiązanie: DNSSEC.
+			      \item<3-> Problem: DNSSEC nie jest powszechnie wdrożony.
+		      \end{itemize}
+		\item<4-> Brak uwierzytelniania serwera WWW: przeglądarka nie sprawdza, czy serwer WWW jest tym, za kogo się podaje.
+		      \begin{itemize}
+			      \item<5-> Współczesne rozwiązanie: SSL/TLS z certyfikatami X.509.
+		      \end{itemize}
+	\end{itemize}
+\end{frame}
