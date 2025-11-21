@@ -23,9 +23,6 @@ void uart_init(void) {
 
 ISR(USART_RX_vect) {
   uint8_t data = UDR0;
-
-  while (!(UCSR0A & (1 << UDRE0)))
-    ;
   UDR0 = data;
 }
 
