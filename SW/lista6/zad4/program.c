@@ -25,6 +25,7 @@ void spi_init() {
   // enable, master, clock = 4
   SPCR |= _BV(SPE) | _BV(MSTR) | _BV(SPR1) | _BV(SPR0);
   SPI_PORT &= ~_BV(OE);
+  SPI_PORT &= ~_BV(LE);
 }
 
 void timer1_init() {
@@ -35,13 +36,13 @@ void timer1_init() {
 }
 
 void send_data(uint8_t ctr) {
-  SPDR = digits[ctr];
+  SPDR = ~digits[ctr];
   // SPDR = 0x00;
   // SPDR = 0xff;
   while (!(SPSR & (1 << SPIF))) {
   }
   SPI_PORT |= _BV(LE);
-  _delay_us(10);
+  _delay_us(1);
   SPI_PORT &= ~_BV(LE);
   // _delay_us(10);
 }
@@ -55,13 +56,15 @@ int main() {
   spi_init();
   timer1_init();
 
-  // set_sleep_mode(SLEEP_MODE_IDLE);
+  set_sleep_mode(SLEEP_MODE_IDLE);
 
-  // sei();
+  sei();
 
   while (1) {
-    send_data(ctr);
-    // sleep_mode();
+    // send_data(ctr);
+    // _delay_ms(1000);
+    // ctr = (ctr + 1) % 10;
+    sleep_mode();
   }
   return 0;
 }
