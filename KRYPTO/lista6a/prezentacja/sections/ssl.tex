@@ -1,30 +1,60 @@
-\section{SSL/TLS}
+\section{Certyfikaty SSL/TLS}
 
-\begin{frame}{SSL/TLS - Podstawy}
-	\begin{itemize}
-		\item<1-> SSL (Secure Sockets Layer) i jego następca TLS (Transport Layer Security) to protokoły kryptograficzne zapewniające bezpieczną komunikację w sieci.
-		\item<2-> Główne cele SSL/TLS:
-		      \begin{itemize}
-			      \item<3-> Poufność: szyfrowanie danych przesyłanych między klientem a serwerem.
-			      \item<4-> Integralność: zapewnienie, że dane nie zostały zmienione podczas transmisji.
-			      \item<5-> Uwierzytelnianie: weryfikacja tożsamości serwera (i opcjonalnie klienta) za pomocą certyfikatów cyfrowych.
-		      \end{itemize}
-		\item<6-> SSL/TLS jest szeroko stosowany w protokołach takich jak HTTPS, SMTP, FTP itp.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{SSL/TLS - Struktura}
-	\begin{figure}
-		\centering
-		\input{figures/ssl1.tex}
-		\caption{SSL/TLS gwarantuje poufność, integralność i uwierzytelnienie.}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{SSL/TLS - Struktura}
+\begin{frame}{SSL/TLS}
 	\begin{figure}
 		\centering
 		\input{figures/ssl1a.tex}
 		\caption{SSL/TLS gwarantuje poufność, integralność i uwierzytelnienie.}
 	\end{figure}
+\end{frame}
+
+\begin{frame}{SSL/TLS - uwierzytelnienie}
+	\begin{itemize}
+		\item SSL/TLS używa certyfikatów X.509
+		\item Certyfikaty są wydawane przez zaufane podmioty zwane Urzędami Certyfikacji (CA).
+		\item Przeglądarka posiada listę zaufanych CA
+		\item Certyfikat jest zweryfikowany jeśli:
+		      \begin{itemize}
+			      \item jest ważny
+			      \item został wydany przez zaufanego CA
+		      \end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{SSL/TLS - certyfikaty X.509}
+	\begin{itemize}
+		\item Certyfikat X.509 zawiera (między innymi):
+		      \begin{itemize}
+			      \item Nazwę podmiotu (np. nazwę domeny).
+			      \item Klucz publiczny podmiotu.
+			      \item Dane o wydającym CA.
+			      \item Data wystawienia certyfikatu.
+			      \item Okres ważności certyfikatu.
+			      \item Podpis cyfrowy wydającego CA.
+		      \end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{SSL/TLS - weryfikacja certyfikatu}
+	\begin{itemize}
+		\item Przeglądarka musi zweryfikować certyfikat domeny, sprawdzając:
+		      \begin{itemize}
+			      \item Czy certyfikat jest podpisany przez zaufanego CA.
+			      \item Czy nazwa domeny w certyfikacie pasuje do odwiedzanej strony.
+			      \item Czy certyfikat nie wygasł.
+			      \item Czy certyfikat nie został unieważniony (CRL, OCSP).
+		      \end{itemize}
+		\item Trzeba również sprawdzić certyfikaty pośrednie w łańcuchu zaufania.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{SSL/TLS - Podatności}
+	\begin{itemize}
+		\item Podatności weryfikacji w SSL/TLS mogą wynikać z:
+		      \begin{itemize}
+			      \item Błędów implementacji weryfikacji SSL/TLS.
+			      \item Słabych algorytmów kryptograficznych (np. RC4, MD5).
+		      \end{itemize}
+		\item Przy błędniej weryfikacji, atak MitM staje się możliwy, nawet przy użyciu SSL/TLS.
+	\end{itemize}
 \end{frame}

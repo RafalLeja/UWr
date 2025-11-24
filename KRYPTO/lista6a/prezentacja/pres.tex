@@ -6,12 +6,12 @@
 \usepackage[T1]{fontenc}
 \usetheme{Warsaw}
 \usecolortheme{beaver}
-\usetikzlibrary{trees,positioning}
+\usetikzlibrary{trees,positioning,arrows.meta,decorations.pathreplacing}
 % \usepackage{twi_theme}
 
 \title{Kryptoanaliza stosowana}
 \subtitle{Frankencerts - Jak testować certyfikaty SSL/TLS}
-\author{Rafał Leja}
+\author{Rafał Leja (UWr)}
 \date{26 listopada 2025}
 
 % -----------------------------------------
@@ -26,7 +26,19 @@
 	\titlepage
 \end{frame}
 
-\input{sections/intro.tex}
+% \input{sections/intro.tex}
 \input{sections/ssl.tex}
+\input{sections/testing.tex}
+\input{sections/frankencerts.tex}
+
+\begin{frame}{Źródła}
+	\begin{itemize}
+		\item \href{https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6956560}{C. Brubaker, S. Jana, B. Ray, S. Khurshid, and V. Shmatikov. Using Frankencerts for automated adversarial testing of certificate validation in SSL/TLS implementations. In 35th IEEE Symposium on Security and Privacy, pages 114–129. IEEE Computer Society, 2014.}
+		\item \href{https://en.wikipedia.org/wiki/Transport_Layer_Security}{Wikipedia: Transport Layer Security}
+		\item \href{https://en.wikipedia.org/wiki/X.509}{Wikipedia: X.509}
+		\item \href{https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/}{Cloudflare: What is a TLS handshake?}
+		\item \href{https://www.cloudflare.com/learning/ssl/what-is-an-ssl-certificate/}{Cloudflare: What is an SSL certificate?}
+	\end{itemize}
+\end{frame}
 
 \end{document}

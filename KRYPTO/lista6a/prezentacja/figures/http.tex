@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+		node distance=36mm and 40mm,
+		box/.style={draw, rounded corners=3pt, minimum width=38mm, minimum height=12mm, align=center, fill=white},
+		arrow/.style={-Latex, thick},
+		dashedarrow/.style={->, dashed}
+	]
+
+	% Nodes
+	\node[box] (client) {Web Browser\\(Client)};
+	\node[box, right=of client] (internet) {Internet / Router};
+	\node[box, right=of internet] (server) {Web Server\\(port 80)};
+
+	% DNS resolver below internet
+	\node[box, below=18mm of internet] (dns) {DNS Resolver};
+
+	% Labels
+	\node[below=4mm of client.south, align=center] (cnote) {};
+	\node[below=4mm of server.south, align=center] (snote) {};
+
+	% Arrows: DNS lookup
+	\draw[arrow] (client.south east) .. controls +(down:8mm) and +(left:8mm) .. (dns.north west) node[midway, below left]{DNS query (UDP 53)};
+	\draw[arrow] (dns.north east) .. controls +(right:8mm) and +(down:8mm) .. (client.south west) node[midway, below right]{DNS response (A record)};
+
+	% TCP handshake (three-way)
+	\draw[arrow] (client.east) -- ++(8mm,0) node[midway,above]{TCP SYN (to :80)} -- ++(20mm,0) |- (server.west);
+	\draw[arrow] (server.west) -- ++(-8mm,0) node[midway,below]{SYN/ACK} -- ++(-20mm,0) |- (client.east);
+	\draw[arrow] (client.east) -- ++(24mm,0) node[midway,above]{ACK} -- ++(24mm,0) |- (server.west);
+
+	% Simplified straight arrows for clarity (HTTP request/response)
+	\draw[arrow] (client) -- (server) node[midway, above] {HTTP GET / (port 80)(unencrypted)};
+	\draw[arrow] (server) -- (client) node[midway, below] {HTTP/1.1 200 OKHTML, images, etc. (unencrypted)};
+
+	% Security warning brace
+	\draw[decorate,decoration={brace,mirror, amplitude=6pt}] ($(client.south)+(0,-14mm)$) -- ($(server.south)+(0,-14mm)$) node[midway,below=10pt, align=center] {\textbf{Plain HTTP — traffic is not encrypted}\\(vulnerable to eavesdropping / MITM)};
+
+	% Notes
+	\node[align=left, right=6mm of server, xshift=4mm] (notes) {
+		\small\textbf{Legend:}\\
+		\small DNS = name $\to$ IP,\; TCP 3-way handshake establishes connection,\\
+		\small HTTP over port 80 is transmitted in cleartext.
+	};
+
+\end{tikzpicture}

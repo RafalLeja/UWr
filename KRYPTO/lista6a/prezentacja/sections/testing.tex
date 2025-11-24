@@ -1,0 +1,26 @@
+\section{Testowanie implementacji SSL/TLS}
+
+\begin{frame}{Jak testować poprawność implementacji}
+	\begin{itemize}
+		\item Skąd brać różne certyfikaty do testów?
+		      \pause{}
+		      \begin{itemize}
+			      \item Prawdziwe certyfikaty z Internetu $\Rightarrow$ Tylko poprwane certyfikaty.
+			      \item Fuzzing $\Rightarrow$ Większość certyfikatów będzie odrzucona na poziomie parsowania.
+			      \item Manualne tworzenie certyfikatów $\Rightarrow$ Czasochłonne.
+		      \end{itemize}
+		\item Potrzebne jest automatyczne generowanie certyfikatów z kontrolowanymi błędami.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Jak testować poprawność implementacji}
+	\begin{itemize}
+		\item Jak interpretować wyniki testów?
+		      \pause{}
+		      \begin{itemize}
+			      \item Manualna analiza wyników $\Rightarrow$ Czasochłonna i podatna na błędy.
+			      \item Automatyczna analiza wyników $\Rightarrow$ Wymaga bezbłędnego zaimplementowania SSL/TLS.
+		      \end{itemize}
+		\item Potrzebujemy  ``Wyroczni'' weryfikującej certyfikaty.
+	\end{itemize}
+\end{frame}
