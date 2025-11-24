@@ -1,0 +1,18 @@
+
+\begin{tikzpicture}[
+		level distance=20mm,
+		sibling distance=30mm,
+		every node/.style={
+				draw,
+				rounded corners,
+				align=center,
+				minimum width=22mm,
+				font=\small
+			}
+	]
+	\node {SSL/TLS}
+	child { node {Poufność} }
+	child { node {Integralność} }
+	child { node {Uwierzytelnienie} };
+\end{tikzpicture}
+
