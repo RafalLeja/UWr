@@ -19,10 +19,10 @@ volatile uint16_t ctr = 0;
 void spi_init() {
   // output
   SPI_DDR = _BV(SS) | _BV(MOSI) | _BV(SCK);
-  SPI_PORT = _BV(SS);
+  SPI_PORT |= _BV(SS);
 
   // enable, master, clock = 4
-  SPCR = _BV(SPE) | _BV(MSTR) | _BV(SPR1) | _BV(SPR0);
+  SPCR = _BV(SPE) | _BV(MSTR) | _BV(SPR1);
 }
 
 void timer1_init() {
@@ -38,7 +38,7 @@ void timer1_init() {
 // }
 
 void send_data(uint16_t ctr) {
-  uint8_t header = 0x70;
+  uint8_t header = 0x30;
   // uint8_t data = 128;
   uint8_t data = pgm_read_byte(&dzwiek_raw[ctr]);
   uint8_t msg1 = header | ((data & 0xf0) >> 4);
