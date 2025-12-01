@@ -7,7 +7,7 @@ MCU_TARGET     = atmega328p
 AVRDUDE_TARGET = atmega328p
 OPTIMIZE       = -O3
 DEFS           = 
-LIBS           = ../../lib/uart.c
+LIBS           = ../../lib/*.c
 BAUDRATE       = 115200
 
 HZ          = 16000000
