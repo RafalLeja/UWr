@@ -1,6 +1,8 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <stdio.h>
+#ifndef UART_H
+#define UART_H
 
 #define BAUD 9600                              // baudrate
 #define UBRR_VALUE ((F_CPU) / 16 / (BAUD) - 1) // zgodnie ze wzorem
@@ -22,3 +24,4 @@ char uart_readline(FILE *stream, char *buf, uint8_t maxlen);
 
 ISR(USART_UDRE_vect);
 ISR(USART_RX_vect);
+#endif
