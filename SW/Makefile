@@ -6,8 +6,8 @@ PORT           = /dev/ttyUSB0
 MCU_TARGET     = atmega328p 
 AVRDUDE_TARGET = atmega328p
 OPTIMIZE       = -O3
-DEFS           =
-LIBS           =
+DEFS           = 
+LIBS           = ../../lib/uart.c
 BAUDRATE       = 115200
 
 HZ          = 16000000
