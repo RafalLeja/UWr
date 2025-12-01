@@ -1,0 +1,69 @@
+#!/usr/bin/python3
+
+# Defaults defined here.
+boundDefault = 1000000
+filenameDefault = 'smallPrimes.py'
+progressSteps = 10    # update progress text progressSteps times
+maxProgress = 100000  # or when passing each multiple of maxProgress
+
+__doc__ = (
+"""Creates a Python source file with a definition of a list of small primes.
+
+Optional arguments to the program (in given order):
+    – upper bound to which primes are calculated (default: """ + str(boundDefault) + """),
+    – name of the file to write the list to (default: """ + filenameDefault + """).
+
+The output file contains assignment statements defining the following
+variables:
+    bound – the upper bound,
+    primes – the sorted list of all primes less than the upper bound.
+""" )
+
+from itertools import takewhile
+from sys import argv
+
+if len(argv) > 3:
+    raise SystemExit('{}: at most 2 arguments should be given'.format(argv[0]))
+if len(argv) > 1:
+    if argv[1] == '-h':
+        print(__doc__)
+        exit()
+    else:
+        bound = int(argv[1])
+else:
+    bound = boundDefault
+filename = argv[2] if len(argv) > 2 else filenameDefault
+progress = min(bound // progressSteps, maxProgress)
+
+primes = [2]
+k = 1
+for n in range(3, bound, 2):
+    for p in takewhile(lambda p: p*p<=n, primes):
+        if n % p == 0:
+            break
+    else:
+        primes.append(n)
+        k += 1
+    if n % progress < 2:
+        print('Passed {}. Found {} primes.'.format(n,k), end='\r')
+print('Finished at {}. Found {} primes. Written to {}.'.format(bound, k, filename))
+
+# docstring for the generated source code
+smallPrimesDoc = """A list of small primes.
+
+This module contains the following variables:
+    bound – the upper bound,
+    primes – the sorted list of all primes less than the upper bound.
+
+This file was generated automatically by the program genSmallPrimes.
+"""
+
+with open(filename, 'w') as output:
+    print('"""', end='', file=output)
+    for docLine in smallPrimesDoc.split('\n'):
+        print(docLine, file=output)
+    print('"""', file=output)
+    print(file=output)
+
+    print('bound =', bound, file=output)
+    print('primes =', primes, file=output)

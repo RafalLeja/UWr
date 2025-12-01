@@ -1,0 +1,5 @@
+#!/bin/sh
+
+FILENAME=${1:-RSAkey}
+
+head -4 $FILENAME > $FILENAME.pub

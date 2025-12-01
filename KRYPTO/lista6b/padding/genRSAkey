@@ -1,0 +1,126 @@
+#!/usr/bin/python3
+
+# Defaults defined here.
+smallPrimesExp = 5
+repetitions = 10
+filenameDefault = 'RSAkey'
+keyBitsDefault = 1024
+eDefault = 65537
+
+__doc__ = (
+"""Generates an RSA key.
+
+Optional arguments (in given order):
+    – name of a file to write the generated key to (default: """ + filenameDefault + """),
+    – number of bits of the modulus n (default: """ + str(keyBitsDefault) + """),
+    – public exponent e (default: """ + str(eDefault) + """).
+
+The output file contains the following decimal numbers, each one in a separate
+line:
+    keyBits – number of bits of the modulus n,
+    keyBytes – number of bytes of the modulus n,
+    n — modulus, equal to p*q,
+    e – public exponent (default: """ + str(eDefault) + """),
+    p — generated prime,
+    q — generated prime,
+    d – private exponent, equal to e⁻¹ mod (p-1)*(q-1).
+First three lines of the output constitute the public key.
+
+Primes are generated as follows: first a random number r is drawn. Then
+consecutive odd numbers greater or equal to r are tested for primality. If a
+tested number is divisible by a small prime, then '.' is printed. Otherwise if
+it is rejected by a single invocation of the Miller-Rabin algorithm (with
+randomly chosen a), then '!' is printed.  If more than one invocation of the
+Miller-Rabin algorithm is performed on that number, then '*' is printed.
+For p the number r is 2**(keyBits//2). Por q it is calculated to ensure
+that p*q has exactly keyBits bits.
+""" )
+
+import importlib
+smallPrimes = importlib.import_module('rsa.smallPrimes.smallPrimes10e'
+    + str(smallPrimesExp))
+from rsa.primes import isPrime
+from rsa.getRandom import Random
+from rsa.inverse import inv
+from rsa.findPrimeNextTo import findPrimeNextTo
+from rsa.rsa import PrivRSAkey, write
+from sys import argv
+
+random = Random()
+
+if len(argv) > 4:
+    raise SystemExit('{}: at most 3 arguments should be given'.format(argv[0]))
+if len(argv) > 1:
+    if argv[1] == '-h':
+        print(__doc__)
+        exit()
+    else:
+        filename = argv[1]
+else:
+    filename = filenameDefault
+keyBits = int(argv[2]) if len(argv) > 2 else keyBitsDefault
+e = int(argv[3]) if len(argv) > 3 else eDefault
+
+def plural(x):
+    return x, 's' if x != 1 else ''
+def pluralWas(x):
+    return x, 's were' if x != 1 else ' was'
+
+def findPrime(x):
+    p, total, deep, deeper, tests = findPrimeNextTo(x, lambda y:
+        isPrime(y, smallPrimes.primes, random.random, repetitions))
+    print('    Total of {} number{} tested:'.format(*plural(total)))
+    print('    {:4d} number{} divisible by a small '
+          'prime '.format(*pluralWas(total-deep-1)), end='')
+    print('(< {}).'.format(smallPrimes.bound))
+    print('    {:4d} number{} rejected by single invocation to '
+          'the Miller-Rabin algorithm.'.format(*plural(deep)))
+    print('    {:4d} number{} rejected after more than one invocation to '
+          'the Miller-Rabin algorithm.'.format(*plural(deeper)))
+    print('    Total of {}+{} calls to the Miller-Rabin '
+          'algorithm.'.format(tests, repetitions))
+    return p
+
+def genKey(keyBits):
+    pm = 2 ** (keyBits // 2)
+    tooBig = 0
+    notInvertible = 0
+    while True:
+        print('Searching for p: ', end='', flush=True)
+        # we need p,q >= 3
+        p = findPrime(random.random(pm-3)+3)
+        # we want 2**(keyBits-1) <= p*q < 2**keyBits, so
+        # 2**(keyBits-1) / p <= q < 2**keyBits / p
+        lbq, r = divmod(2**(keyBits-1), p)
+        if r != 0: lbq +=1
+        ubq, r = divmod(2**keyBits, p)
+        if r != 0: ubq +=1
+        print('Searching for q: ', end='', flush=True)
+        q = findPrime(random.random(ubq-lbq)+lbq)
+        n = p * q
+        # it is extremely rare, but anyway...
+        if n.bit_length() > keyBits:
+            print('Oops, n too big. Trying again.\n')
+            tooBig += 1
+            continue
+        try:
+            d = inv(e, (p-1)*(q-1))
+        except ValueError as err:
+            if err.args[0] == 'not invertible':
+                print('Oops, e is not invertible. Trying again.\n')
+                notInvertible += 1
+                continue
+            else:
+                raise
+        print()
+        print('{} attempt{} failed with n too '
+              'big, '.format(*plural(tooBig)), end='')
+        print('{} with d not invertible.'.format(notInvertible))
+        print('Total of {} random byte{} read from '
+              'os.urandom.'.format(*plural(random.getCount())))
+        break
+    keyBytes = (keyBits + 7) // 8
+    return PrivRSAkey(keyBits,keyBytes,n,e,p,q,d)
+
+write(genKey(keyBits), filename)
+print('Output written to {}.'.format(filename))

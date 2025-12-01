@@ -1,0 +1,74 @@
+#!/usr/bin/python3
+
+#defaults
+filenameDefault = 'RSAkey'
+smallPrimesExp = 5
+repetitions = 10
+
+__doc__ = (
+"""Performs some sanity checks on a private RSA key.
+
+Optional argument:
+    – name of a file containing the key (default: """ + filenameDefault + """).
+""" )
+
+import importlib
+smallPrimes = importlib.import_module('rsa.smallPrimes.smallPrimes10e'
+    + str(smallPrimesExp))
+from rsa.primes import isPrime
+from rsa.getRandom import Random
+from rsa.inverse import inv
+from rsa.findPrimeNextTo import findPrimeNextTo
+import rsa.rsa
+from sys import argv
+
+random = Random()
+
+if len(argv) > 2:
+    raise SystemExit('{}: at most 1 argument should be given'.format(argv[0]))
+if len(argv) > 1:
+    if argv[1] == '-h':
+        print(__doc__)
+        exit()
+    else:
+        filename = argv[1]
+else:
+    filename = filenameDefault
+
+key = rsa.rsa.read(filename)
+
+def testSize(x, text):
+    bitLen = x.bit_length()
+    byteLen = (bitLen + 7) // 8
+    print('    {:5} has {} bits ({} bytes)'.format(text, bitLen, byteLen))
+
+print('SIZES:')
+testSize(key.n, 'n')
+testSize(key.p, 'p')
+testSize(key.q, 'q')
+testSize(abs(key.p-key.q), '|p-q|')
+
+def isOK(result, text):
+    print('OK:' if result else 'FAIL:', text)
+
+def testPrime(name):
+    result = isPrime(getattr(key, name), smallPrimes.primes, random.random,
+        repetitions) < 0
+    isOK(result, name + (' passed' if result else ' failed') +
+        ' the primality test')
+
+testPrime('p')
+testPrime('q')
+
+def testN():
+    result = key.p * key.q == key.n
+    isOK(result, ('n ' + ('=' if result else '!') + '= p * q'))
+
+testN()
+
+def testD():
+    result = (key.d * key.e) % ((key.p-1)*(key.q-1)) == 1
+    isOK(result, 'd ' + ('=' if result else '!') + '= e⁻¹ mod (p-1)*(q-1)')
+
+testD()
+

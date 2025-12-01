@@ -1,0 +1,119 @@
+#!./.venv/bin/python3
+
+import rsa.rsa as rsa
+import rsa.pkcs15pad as pad
+from rsa.oracle import Oracle
+from sys import argv
+
+# keyFile = "bleichenbacher/RSAkey1"
+# ciphertextFile = "bleichenbacher/cipher1.txt"
+keyFile = "bleichenbacher/RSAkey2"
+ciphertextFile = "bleichenbacher/cipher2.txt"
+
+print("""All you need is the encryption key, the eavesdropped ciphertext,
+and the oracle. The oracle needs the private key, so in fact the key
+we read here is private. Pretend you do not have access to the private
+part!""")
+
+key = rsa.read(keyFile)
+print(key)
+with open(ciphertextFile) as cf:
+    ciphertext = int(cf.readline().strip())
+TheOracle = Oracle(key)
+oracle = TheOracle.oracle
+# oracle = TheOracle.simpleOracle
+
+print("This is your key of size {} bits ({} bytes):".format(
+    key.keyBits, key.keyBytes))
+print("n =", key.n)
+print("e =", key.e)
+print("ciphertext =", ciphertext)
+print("oracle =", oracle)
+print("Now is YOUR turn!")
+
+
+def floor(a, b):
+    return a // b
+
+
+def ceil(a, b):
+    return a // b + (a % b > 0)
+
+
+B = pow(2, (8 * (key.keyBytes - 2)))
+a_0 = 2 * B
+b_0 = 3 * B - 1
+s_0 = ceil(key.n, (3 * B))
+
+M = set([(a_0, b_0)])
+
+
+def first_phase(s: int):
+    while True:
+        cp = ciphertext * pow(s, key.e, key.n) % key.n
+        if oracle(cp) == pad.ErrorCode.SUCCESS:
+            return s
+        s += 1
+
+
+def first_opt(old_s: int, a: int, b: int):
+    r = ceil((2 * (b * old_s - a_0)), key.n)
+    while True:
+        s_min = ceil((a_0 + r * key.n), b)
+        s_max = floor((b_0 + r * key.n), a)
+        for s in range(s_min, s_max + 1):
+            cp = ciphertext * pow(s, key.e, key.n) % key.n
+            if oracle(cp) == pad.ErrorCode.SUCCESS:
+                return s
+        r += 1
+
+
+def second_phase(s: int, M: set):
+    j_r = set()
+    for a, b in M:
+        r_0 = ceil((a * s - b_0), key.n)
+        r_n = floor((b * s - a_0), key.n)
+        for r in range(r_0, r_n + 1):
+            left = ceil((a_0 + r * key.n), s)
+            right = floor((b_0 + r * key.n), s)
+            if left <= right:
+                # print("adding interval:", (left, right))
+                j_r.add((left, right))
+    # if not j_r:
+    #     return set()
+    # j_r.sort()
+    # merged = []
+    # cur_a, cur_b = j_r[0]
+    # for a, b in j_r[1:]:
+    #     if a <= cur_b + 1:
+    #         cur_b = max(cur_b, b)
+    #     else:
+    #         merged.append((cur_a, cur_b))
+    #         cur_a, cur_b = a, b
+    # merged.append((cur_a, cur_b))
+    return j_r
+
+
+def bleichenbacher(s_0, M):
+    s_i = first_phase(s_0 - 1)
+    M = second_phase(s_i, M)
+    while True:
+        if len(M) > 1:
+            s_i = first_phase(s_i + 1)
+        else:
+            a, b = M.pop()
+            M.add((a, b))
+            if a == b:
+                print("Znaleziono wiadomość:", a)
+                print("Liczba zapytań:", TheOracle.count())
+                return a
+
+            s_i = first_opt(s_i + 1, a, b)
+        M = second_phase(s_i, M)
+
+
+m = bleichenbacher(s_0, M)
+msg = rsa.from_int(m, ((m.bit_length() + 7) // 8) + 1)
+msg = pad.dec(msg)
+msg = msg.decode("utf-8")
+print("Odszyfrowana wiadomość:", msg)
