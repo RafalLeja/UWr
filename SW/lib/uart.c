@@ -2,8 +2,8 @@
 
 char t_buf[BUFFER_SIZE] = {0};
 char r_buf[BUFFER_SIZE] = {0};
-uint8_t t_head = 0;
-uint8_t t_tail = 0;
+volatile uint8_t t_head = 0;
+volatile uint8_t t_tail = 0;
 volatile uint8_t r_head = 0;
 volatile uint8_t r_tail = 0;
 FILE uart_file;

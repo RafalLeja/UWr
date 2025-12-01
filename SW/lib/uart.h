@@ -11,8 +11,8 @@
 
 extern char t_buf[BUFFER_SIZE];
 extern char r_buf[BUFFER_SIZE];
-extern uint8_t t_head;
-extern uint8_t t_tail;
+extern volatile uint8_t t_head;
+extern volatile uint8_t t_tail;
 extern volatile uint8_t r_head;
 extern volatile uint8_t r_tail;
 extern FILE uart_file;
