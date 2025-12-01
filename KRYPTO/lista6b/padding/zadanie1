@@ -5,10 +5,10 @@ import rsa.pkcs15pad as pad
 from rsa.oracle import Oracle
 from sys import argv
 
-# keyFile = "bleichenbacher/RSAkey1"
-# ciphertextFile = "bleichenbacher/cipher1.txt"
-keyFile = "bleichenbacher/RSAkey2"
-ciphertextFile = "bleichenbacher/cipher2.txt"
+keyFile = "bleichenbacher/RSAkey1"
+ciphertextFile = "bleichenbacher/cipher1.txt"
+# keyFile = "bleichenbacher/RSAkey2"
+# ciphertextFile = "bleichenbacher/cipher2.txt"
 
 print("""All you need is the encryption key, the eavesdropped ciphertext,
 and the oracle. The oracle needs the private key, so in fact the key
@@ -20,11 +20,10 @@ print(key)
 with open(ciphertextFile) as cf:
     ciphertext = int(cf.readline().strip())
 TheOracle = Oracle(key)
-oracle = TheOracle.oracle
-# oracle = TheOracle.simpleOracle
+# oracle = TheOracle.oracle
+oracle = TheOracle.simpleOracle
 
-print("This is your key of size {} bits ({} bytes):".format(
-    key.keyBits, key.keyBytes))
+print("This is your key of size {} bits ({} bytes):".format(key.keyBits, key.keyBytes))
 print("n =", key.n)
 print("e =", key.e)
 print("ciphertext =", ciphertext)
@@ -56,9 +55,11 @@ def first_phase(s: int):
         s += 1
 
 
-def first_opt(old_s: int, a: int, b: int):
+def second_phase_a(old_s: int, a: int, b: int):
+    # slajd 36
     r = ceil((2 * (b * old_s - a_0)), key.n)
     while True:
+        # slajd 35
         s_min = ceil((a_0 + r * key.n), b)
         s_max = floor((b_0 + r * key.n), a)
         for s in range(s_min, s_max + 1):
@@ -68,35 +69,25 @@ def first_opt(old_s: int, a: int, b: int):
         r += 1
 
 
-def second_phase(s: int, M: set):
+def second_phase_b(s: int, M: set):
     j_r = set()
     for a, b in M:
+        # slajd 26
         r_0 = ceil((a * s - b_0), key.n)
         r_n = floor((b * s - a_0), key.n)
         for r in range(r_0, r_n + 1):
+            # slajd 39
             left = ceil((a_0 + r * key.n), s)
             right = floor((b_0 + r * key.n), s)
             if left <= right:
                 # print("adding interval:", (left, right))
                 j_r.add((left, right))
-    # if not j_r:
-    #     return set()
-    # j_r.sort()
-    # merged = []
-    # cur_a, cur_b = j_r[0]
-    # for a, b in j_r[1:]:
-    #     if a <= cur_b + 1:
-    #         cur_b = max(cur_b, b)
-    #     else:
-    #         merged.append((cur_a, cur_b))
-    #         cur_a, cur_b = a, b
-    # merged.append((cur_a, cur_b))
     return j_r
 
 
 def bleichenbacher(s_0, M):
     s_i = first_phase(s_0 - 1)
-    M = second_phase(s_i, M)
+    M = second_phase_b(s_i, M)
     while True:
         if len(M) > 1:
             s_i = first_phase(s_i + 1)
@@ -108,8 +99,8 @@ def bleichenbacher(s_0, M):
                 print("Liczba zapytań:", TheOracle.count())
                 return a
 
-            s_i = first_opt(s_i + 1, a, b)
-        M = second_phase(s_i, M)
+            s_i = second_phase_a(s_i + 1, a, b)
+        M = second_phase_b(s_i, M)
 
 
 m = bleichenbacher(s_0, M)
