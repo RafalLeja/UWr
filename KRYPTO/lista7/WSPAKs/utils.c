@@ -23,47 +23,33 @@ void makeSocket(int *sockfd, struct sockaddr_in *servaddr) {
   }
 }
 
-void commHandler(int connfd) {
-  struct pollfd pfd;
-  pfd.fd = connfd;
-
-  pfd.events = POLLIN | POLLHUP;
+void commHandler(gnutls_session_t session) {
   while (1) {
-    int ready = poll(&pfd, 1, -1);
-    if (ready == -1) {
-      ERROR_MSG("Poll error");
-      exit(EXIT_FAILURE);
-    } else if (pfd.revents & POLLHUP) {
+    char buffer[MAX_BUF] = {0};
+    char response[MAX_BUF] = {0};
+    int ret;
+    LOOP_CHECK(ret, gnutls_record_recv(session, buffer, MAX_BUF));
+    if (ret == 0) {
       printf("Client closed the connection\n");
-      return;
-    } else if ((pfd.revents & POLLIN) == 0) {
-
-      continue;
+      break;
+    } else if (ret < 0 && gnutls_error_is_fatal(ret)) {
+      fprintf(stderr, "*** Error in record recv: %s\n", gnutls_strerror(ret));
+      break;
+    } else if (ret < 0) {
+      printf("Recieved corrupted data: %d, closing connection\n", ret);
+      break;
     }
 
-    char buffer[65535] = {0};
-    char response[65535] = {0};
-    int len;
-
-    len = read(connfd, buffer, sizeof(buffer));
-    if (len < 0) {
-      ERROR_MSG("Read error");
-      exit(EXIT_FAILURE);
-    } else if (len == 0) {
-      printf("Client closed the connection\n");
-      return;
-    }
-    printf("Received message: %s\n", buffer);
-
-    len -= 2; // \r\n
-    if (len <= 0) {
+    ret -= 2; // \r\n
+    if (ret <= 0) {
       printf("Empty message, closing connection\n");
-      return;
+      break;
     }
 
-    reverseString(buffer, response, len);
+    reverseString(buffer, response, ret);
 
-    write(connfd, response, len + 3);
+    CHECK(gnutls_record_send(session, response, ret + 3),
+          "Error in record send");
   }
 }
 
