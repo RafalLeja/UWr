@@ -33,6 +33,8 @@ int main() {
 
   int sockfd, connfd;
   struct sockaddr_in servaddr = {0};
+  struct sockaddr_in cliaddr = {0};
+  socklen_t cliaddr_len = sizeof(cliaddr);
 
   makeSocket(&sockfd, &servaddr);
   server_sockfd = sockfd;
@@ -44,7 +46,7 @@ int main() {
   while (1) {
     printf("Server listening on port %d\n", PORT);
 
-    connfd = accept(sockfd, (struct sockaddr *)NULL, NULL);
+    connfd = accept(sockfd, (struct sockaddr *)&cliaddr, &cliaddr_len);
     if (connfd < 0) {
       ERROR_MSG("Server accept failed");
       exit(EXIT_FAILURE);
