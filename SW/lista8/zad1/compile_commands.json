@@ -1,0 +1,42 @@
+[
+  {
+    "directory": "/home/rafal/UWr/SW/lista8/zad1",
+    "file": "main.c",
+    "command": "avr-gcc -c -mmcu=atmega328p -I. -D F_CPU=16000000 -I../../freertos_atmega328P -I../../freertos_atmega328P/FreeRTOS/Source/include -I../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328 -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/variants/eightanaloginputs -g -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wextra -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused -Wa,-adhlns=  -std=gnu99  -o compile_commands.json -c main.c"
+  },
+  {
+    "directory": "/home/rafal/UWr/SW/lista8/zad1",
+    "file": "../../freertos_atmega328P/FreeRTOS/Source/tasks.c",
+    "command": "avr-gcc -c -mmcu=atmega328p -I. -D F_CPU=16000000 -I../../freertos_atmega328P -I../../freertos_atmega328P/FreeRTOS/Source/include -I../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328 -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/variants/eightanaloginputs -g -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wextra -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused -Wa,-adhlns=  -std=gnu99  -o compile_commands.json -c ../../freertos_atmega328P/FreeRTOS/Source/tasks.c"
+  },
+  {
+    "directory": "/home/rafal/UWr/SW/lista8/zad1",
+    "file": "../../freertos_atmega328P/FreeRTOS/Source/queue.c",
+    "command": "avr-gcc -c -mmcu=atmega328p -I. -D F_CPU=16000000 -I../../freertos_atmega328P -I../../freertos_atmega328P/FreeRTOS/Source/include -I../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328 -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/variants/eightanaloginputs -g -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wextra -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused -Wa,-adhlns=  -std=gnu99  -o compile_commands.json -c ../../freertos_atmega328P/FreeRTOS/Source/queue.c"
+  },
+  {
+    "directory": "/home/rafal/UWr/SW/lista8/zad1",
+    "file": "../../freertos_atmega328P/FreeRTOS/Source/list.c",
+    "command": "avr-gcc -c -mmcu=atmega328p -I. -D F_CPU=16000000 -I../../freertos_atmega328P -I../../freertos_atmega328P/FreeRTOS/Source/include -I../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328 -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/variants/eightanaloginputs -g -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wextra -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused -Wa,-adhlns=  -std=gnu99  -o compile_commands.json -c ../../freertos_atmega328P/FreeRTOS/Source/list.c"
+  },
+  {
+    "directory": "/home/rafal/UWr/SW/lista8/zad1",
+    "file": "../../freertos_atmega328P/FreeRTOS/Source/croutine.c",
+    "command": "avr-gcc -c -mmcu=atmega328p -I. -D F_CPU=16000000 -I../../freertos_atmega328P -I../../freertos_atmega328P/FreeRTOS/Source/include -I../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328 -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/variants/eightanaloginputs -g -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wextra -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused -Wa,-adhlns=  -std=gnu99  -o compile_commands.json -c ../../freertos_atmega328P/FreeRTOS/Source/croutine.c"
+  },
+  {
+    "directory": "/home/rafal/UWr/SW/lista8/zad1",
+    "file": "../../freertos_atmega328P/FreeRTOS/Source/portable/MemMang/heap_1.c",
+    "command": "avr-gcc -c -mmcu=atmega328p -I. -D F_CPU=16000000 -I../../freertos_atmega328P -I../../freertos_atmega328P/FreeRTOS/Source/include -I../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328 -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/variants/eightanaloginputs -g -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wextra -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused -Wa,-adhlns=  -std=gnu99  -o compile_commands.json -c ../../freertos_atmega328P/FreeRTOS/Source/portable/MemMang/heap_1.c"
+  },
+  {
+    "directory": "/home/rafal/UWr/SW/lista8/zad1",
+    "file": "../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328/port.c",
+    "command": "avr-gcc -c -mmcu=atmega328p -I. -D F_CPU=16000000 -I../../freertos_atmega328P -I../../freertos_atmega328P/FreeRTOS/Source/include -I../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328 -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/variants/eightanaloginputs -g -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wextra -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused -Wa,-adhlns=  -std=gnu99  -o compile_commands.json -c ../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328/port.c"
+  },
+  {
+    "directory": "/home/rafal/UWr/SW/lista8/zad1",
+    "file": "../../freertos_atmega328P/uart.c",
+    "command": "avr-gcc -c -mmcu=atmega328p -I. -D F_CPU=16000000 -I../../freertos_atmega328P -I../../freertos_atmega328P/FreeRTOS/Source/include -I../../freertos_atmega328P/FreeRTOS/Source/portable/GCC/ATMega328 -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/variants/eightanaloginputs -g -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wextra -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wunused -Wa,-adhlns=  -std=gnu99  -o compile_commands.json -c ../../freertos_atmega328P/uart.c"
+  }
+]
