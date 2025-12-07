@@ -40,9 +40,11 @@ void gnutlsInit(gnutls_certificate_credentials_t *x509_cred) {
   CHECK(gnutls_global_init(), "gnutls_global_init failed");
   CHECK(gnutls_certificate_allocate_credentials(x509_cred),
         "gnutls_certificate_allocate_credentials failed");
+  // dodajemy certyfikat CA, żeby wysłać go klientowi
   CHECK(gnutls_certificate_set_x509_trust_file(*x509_cred, CAFILE,
                                                GNUTLS_X509_FMT_PEM),
         "gnutls_certificate_set_x509_trust_file failed");
+  // dodajemy certyfikat serwera i klucz prywatny
   CHECK(gnutls_certificate_set_x509_key_file(*x509_cred, CERTFILE, KEYFILE,
                                              GNUTLS_X509_FMT_PEM),
         "gnutls_certificate_set_x509_key_file failed");
@@ -59,8 +61,9 @@ int main() {
 
   printf("Initializing GnuTLS...\n");
   gnutlsInit(&x509_cred);
+  // Ustawiamy piorytety szyfrów, NORMAL to rekomendowany bezpieczny zestaw
   gnutls_priority_init(&priority_cache, "NORMAL", NULL);
-  gnutls_certificate_set_known_dh_params(x509_cred, GNUTLS_SEC_PARAM_NORMAL);
+  // gnutls_certificate_set_known_dh_params(x509_cred, GNUTLS_SEC_PARAM_NORMAL);
   printf("GnuTLS initialized\n");
 
   // normal
@@ -72,7 +75,7 @@ int main() {
   makeSocket(&sockfd, &servaddr);
   server_sockfd = sockfd;
 
-  if (listen(sockfd, 5) != 0) {
+  if (listen(sockfd, LISTEN_QUEUE) != 0) {
     ERROR_MSG("Listen failed");
     exit(EXIT_FAILURE);
   }

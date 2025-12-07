@@ -48,15 +48,15 @@ void commHandler(gnutls_session_t session) {
 
     reverseString(buffer, response, ret);
 
-    CHECK(gnutls_record_send(session, response, ret + 3),
+    CHECK(gnutls_record_send(session, response, ret + 2),
           "Error in record send");
   }
 }
 
 void reverseString(char *input, char *output, int len) {
-  for (int i = 0; i <= len; i++) {
-    output[i] = input[len - i];
+  for (int i = 0; i < len; i++) {
+    output[i] = input[len - i - 1];
   }
-  output[len + 1] = '\r';
-  output[len + 2] = '\n';
+  output[len] = '\r';
+  output[len + 1] = '\n';
 }
