@@ -1,15 +1,11 @@
 #include "server.h"
 #include <poll.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 void makeSocket(int *sockfd, struct sockaddr_in *servaddr) {
   *sockfd = socket(AF_INET, SOCK_STREAM, 0);
-  if (*sockfd == -1) {
-    ERROR_MSG("Socket creation failed");
-    exit(EXIT_FAILURE);
-  }
+  CHECK(*sockfd, "Socket creation failed");
 
   setsockopt(*sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int));
 
@@ -17,10 +13,8 @@ void makeSocket(int *sockfd, struct sockaddr_in *servaddr) {
   servaddr->sin_addr.s_addr = htonl(ADDR);
   servaddr->sin_port = htons(PORT);
 
-  if (bind(*sockfd, (struct sockaddr *)servaddr, sizeof(*servaddr)) != 0) {
-    ERROR_MSG("Socket bind failed");
-    exit(EXIT_FAILURE);
-  }
+  CHECK(bind(*sockfd, (struct sockaddr *)servaddr, sizeof(*servaddr)),
+        "Socket bind failed");
 }
 
 void commHandler(int connfd) {
@@ -30,10 +24,8 @@ void commHandler(int connfd) {
   pfd.events = POLLIN | POLLHUP;
   while (1) {
     int ready = poll(&pfd, 1, -1);
-    if (ready == -1) {
-      ERROR_MSG("Poll error");
-      exit(EXIT_FAILURE);
-    } else if (pfd.revents & POLLHUP) {
+    CHECK(ready, "Poll error");
+    if (pfd.revents & POLLHUP) {
       printf("Client closed the connection\n");
       return;
     } else if ((pfd.revents & POLLIN) == 0) {
@@ -41,15 +33,13 @@ void commHandler(int connfd) {
       continue;
     }
 
-    char buffer[65535] = {0};
-    char response[65535] = {0};
+    char buffer[BUFFER_SIZE] = {0};
+    char response[BUFFER_SIZE] = {0};
     int len;
 
-    len = read(connfd, buffer, sizeof(buffer));
-    if (len < 0) {
-      ERROR_MSG("Read error");
-      exit(EXIT_FAILURE);
-    } else if (len == 0) {
+    len = read(connfd, buffer, sizeof(buffer) - 1);
+    CHECK(len, "Read error");
+    if (len == 0) {
       printf("Client closed the connection\n");
       return;
     }
@@ -63,14 +53,14 @@ void commHandler(int connfd) {
 
     reverseString(buffer, response, len);
 
-    write(connfd, response, len + 3);
+    write(connfd, response, len + 2);
   }
 }
 
 void reverseString(char *input, char *output, int len) {
-  for (int i = 0; i <= len; i++) {
-    output[i] = input[len - i];
+  for (int i = 0; i < len; i++) {
+    output[i] = input[len - i - 1];
   }
-  output[len + 1] = '\r';
-  output[len + 2] = '\n';
+  output[len] = '\r';
+  output[len + 1] = '\n';
 }

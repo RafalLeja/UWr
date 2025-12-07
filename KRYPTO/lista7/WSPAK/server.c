@@ -9,12 +9,12 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-static int server_sockfd = -1;
+static int server_socket = -1;
 
 void sigintHandler(int signum) {
   printf("\nCaught signal %d, exiting...\n", signum);
-  if (server_sockfd != -1) {
-    close(server_sockfd);
+  if (server_socket != -1) {
+    close(server_socket);
   }
   exit(EXIT_SUCCESS);
 }
@@ -31,46 +31,39 @@ int main() {
   signal(SIGINT, sigintHandler);
   signal(SIGCHLD, sigchldHandler);
 
-  int sockfd, connfd;
-  struct sockaddr_in servaddr = {0};
-  struct sockaddr_in cliaddr = {0};
-  socklen_t cliaddr_len = sizeof(cliaddr);
+  int connection_socket;
+  struct sockaddr_in server_addr = {0};
+  struct sockaddr_in client_addr = {0};
+  socklen_t client_addr_len = sizeof(client_addr);
 
-  makeSocket(&sockfd, &servaddr);
-  server_sockfd = sockfd;
+  makeSocket(&server_socket, &server_addr);
 
-  if (listen(sockfd, 5) != 0) {
-    ERROR_MSG("Listen failed");
-    exit(EXIT_FAILURE);
-  }
+  CHECK(listen(server_socket, LISTEN_QUEUE), "Listen failed");
   while (1) {
     printf("Server listening on port %d\n", PORT);
 
-    connfd = accept(sockfd, (struct sockaddr *)&cliaddr, &cliaddr_len);
-    if (connfd < 0) {
-      ERROR_MSG("Server accept failed");
-      exit(EXIT_FAILURE);
-    }
+    connection_socket = accept(server_socket, (struct sockaddr *)&client_addr,
+                               &client_addr_len);
+    CHECK(connection_socket, "Server accept failed");
 
     printf("Client connected\n");
     int pid = fork();
+    CHECK(pid, "Fork failed");
+
     if (pid == 0) {
       // Child
-      close(sockfd);
-      commHandler(connfd);
+      close(server_socket);
+      commHandler(connection_socket);
       printf("Client disconnected\n");
-      close(connfd);
+      close(connection_socket);
       exit(0);
-    } else if (pid > 0) {
-      // Parent
-      close(connfd);
     } else {
-      ERROR_MSG("Fork failed");
-      close(connfd);
+      // Parent
+      close(connection_socket);
     }
   }
 
   printf("Shutting down server\n");
-  close(sockfd);
+  close(server_socket);
   return 0;
 }
