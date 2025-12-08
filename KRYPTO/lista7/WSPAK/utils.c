@@ -23,7 +23,7 @@ void commHandler(int connfd) {
 
   pfd.events = POLLIN | POLLHUP;
   while (1) {
-    int ready = poll(&pfd, 1, -1);
+    int ready = EINTR_WRAPPER(poll(&pfd, 1, -1));
     CHECK(ready, "Poll error");
     if (pfd.revents & POLLHUP) {
       printf("Client closed the connection\n");
@@ -37,7 +37,7 @@ void commHandler(int connfd) {
     char response[BUFFER_SIZE] = {0};
     int len;
 
-    len = read(connfd, buffer, sizeof(buffer) - 1);
+    len = EINTR_WRAPPER_SSIZE(read(connfd, buffer, sizeof(buffer) - 1));
     CHECK(len, "Read error");
     if (len == 0) {
       printf("Client closed the connection\n");
@@ -53,7 +53,8 @@ void commHandler(int connfd) {
 
     reverseString(buffer, response, len);
 
-    write(connfd, response, len + 2);
+    ssize_t written = EINTR_WRAPPER_SSIZE(write(connfd, response, len + 2));
+    CHECK(written, "Write error");
   }
 }
 

@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +15,24 @@
     ERROR_MSG(msg);                                                            \
     exit(EXIT_FAILURE);                                                        \
   }
+
+#define EINTR_WRAPPER(call)                                                    \
+  ({                                                                           \
+    int _result;                                                               \
+    do {                                                                       \
+      _result = (call);                                                        \
+    } while (_result == -1 && errno == EINTR);                                 \
+    _result;                                                                   \
+  })
+
+#define EINTR_WRAPPER_SSIZE(call)                                              \
+  ({                                                                           \
+    ssize_t _result;                                                           \
+    do {                                                                       \
+      _result = (call);                                                        \
+    } while (_result == -1 && errno == EINTR);                                 \
+    _result;                                                                   \
+  })
 
 void makeSocket(int *sockfd, struct sockaddr_in *servaddr);
 

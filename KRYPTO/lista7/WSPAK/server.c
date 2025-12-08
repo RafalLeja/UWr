@@ -42,8 +42,8 @@ int main() {
   while (1) {
     printf("Server listening on port %d\n", PORT);
 
-    connection_socket = accept(server_socket, (struct sockaddr *)&client_addr,
-                               &client_addr_len);
+    connection_socket = EINTR_WRAPPER(accept(
+        server_socket, (struct sockaddr *)&client_addr, &client_addr_len));
     CHECK(connection_socket, "Server accept failed");
 
     printf("Client connected\n");
