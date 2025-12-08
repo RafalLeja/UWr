@@ -1,6 +1,8 @@
+#include <errno.h>
 #include <gnutls/gnutls.h>
 #include <netinet/in.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/socket.h>
 
 #define PORT 7777
@@ -18,6 +20,24 @@
   do {                                                                         \
     rval = cmd;                                                                \
   } while (rval == GNUTLS_E_AGAIN || rval == GNUTLS_E_INTERRUPTED)
+
+#define EINTR_WRAPPER(call)                                                    \
+  ({                                                                           \
+    int _result;                                                               \
+    do {                                                                       \
+      _result = (call);                                                        \
+    } while (_result == -1 && errno == EINTR);                                 \
+    _result;                                                                   \
+  })
+
+#define EINTR_WRAPPER_SSIZE(call)                                              \
+  ({                                                                           \
+    ssize_t _result;                                                           \
+    do {                                                                       \
+      _result = (call);                                                        \
+    } while (_result == -1 && errno == EINTR);                                 \
+    _result;                                                                   \
+  })
 
 void makeSocket(int *sockfd, struct sockaddr_in *servaddr);
 

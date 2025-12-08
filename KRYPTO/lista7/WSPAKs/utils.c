@@ -1,15 +1,11 @@
 #include "server.h"
 #include <poll.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 void makeSocket(int *sockfd, struct sockaddr_in *servaddr) {
   *sockfd = socket(AF_INET, SOCK_STREAM, 0);
-  if (*sockfd == -1) {
-    ERROR_MSG("Socket creation failed");
-    exit(EXIT_FAILURE);
-  }
+  CHECK(*sockfd, "Socket creation failed");
 
   setsockopt(*sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int));
 
@@ -17,10 +13,8 @@ void makeSocket(int *sockfd, struct sockaddr_in *servaddr) {
   servaddr->sin_addr.s_addr = htonl(ADDR);
   servaddr->sin_port = htons(PORT);
 
-  if (bind(*sockfd, (struct sockaddr *)servaddr, sizeof(*servaddr)) != 0) {
-    ERROR_MSG("Socket bind failed");
-    exit(EXIT_FAILURE);
-  }
+  CHECK(bind(*sockfd, (struct sockaddr *)servaddr, sizeof(*servaddr)),
+        "Socket bind failed");
 }
 
 void commHandler(gnutls_session_t session) {

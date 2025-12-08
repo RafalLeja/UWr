@@ -75,10 +75,7 @@ int main() {
   makeSocket(&sockfd, &servaddr);
   server_sockfd = sockfd;
 
-  if (listen(sockfd, LISTEN_QUEUE) != 0) {
-    ERROR_MSG("Listen failed");
-    exit(EXIT_FAILURE);
-  }
+  CHECK(listen(sockfd, LISTEN_QUEUE), "Listen failed");
   while (1) {
     printf("Server listening on port %d\n", PORT);
     CHECK(gnutls_init(&session, GNUTLS_SERVER), "gnutls_init failed");
@@ -90,11 +87,9 @@ int main() {
     gnutls_certificate_server_set_request(session, GNUTLS_CERT_IGNORE);
     gnutls_handshake_set_timeout(session, GNUTLS_DEFAULT_HANDSHAKE_TIMEOUT);
 
-    connfd = accept(sockfd, (struct sockaddr *)&cliaddr, &cliaddr_len);
-    if (connfd < 0) {
-      ERROR_MSG("Server accept failed");
-      exit(EXIT_FAILURE);
-    }
+    connfd = EINTR_WRAPPER(
+        accept(sockfd, (struct sockaddr *)&cliaddr, &cliaddr_len));
+    CHECK(connfd, "Server accept failed");
 
     char ipbuf[255] = {0};
     printf("- connection from %s, port %d\n",
@@ -103,6 +98,8 @@ int main() {
 
     printf("Client connected\n");
     int pid = fork();
+    CHECK(pid, "Fork failed");
+
     if (pid == 0) {
       // Child
       close(sockfd);
@@ -125,11 +122,8 @@ int main() {
       close(connfd);
       gnutls_deinit(session);
       exit(0);
-    } else if (pid > 0) {
-      // Parent
-      close(connfd);
     } else {
-      ERROR_MSG("Fork failed");
+      // Parent
       close(connfd);
     }
   }
