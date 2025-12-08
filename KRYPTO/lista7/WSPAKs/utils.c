@@ -41,11 +41,24 @@ void commHandler(gnutls_session_t session) {
       break;
     }
 
+    if (ascii_check(buffer, ret) == 0) {
+      printf("Non-ascii message, closing connection\n");
+      break;
+    }
     reverseString(buffer, response, ret);
 
     CHECK(gnutls_record_send(session, response, ret + 2),
           "Error in record send");
   }
+}
+
+int ascii_check(char *input, int len) {
+  for (int i = 0; i < len; i++) {
+    if (input[i] & 0x80) {
+      return 0;
+    }
+  }
+  return 1;
 }
 
 void reverseString(char *input, char *output, int len) {

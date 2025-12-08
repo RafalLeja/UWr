@@ -43,4 +43,5 @@ void makeSocket(int *sockfd, struct sockaddr_in *servaddr);
 
 void commHandler(gnutls_session_t session);
 
+int ascii_check(char *input, int len);
 void reverseString(char *input, char *output, int len);
