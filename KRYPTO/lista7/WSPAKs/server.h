@@ -7,7 +7,7 @@
 
 #define PORT 7777
 #define ADDR 0x7F000001
-#define MAX_BUF 65535
+#define MAX_BUF 65536
 #define LISTEN_QUEUE 5
 
 #define ERROR_MSG(str) perror(str)

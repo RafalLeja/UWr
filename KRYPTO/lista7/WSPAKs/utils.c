@@ -22,7 +22,7 @@ void commHandler(gnutls_session_t session) {
     char buffer[MAX_BUF] = {0};
     char response[MAX_BUF] = {0};
     int ret;
-    LOOP_CHECK(ret, gnutls_record_recv(session, buffer, MAX_BUF));
+    LOOP_CHECK(ret, gnutls_record_recv(session, buffer, sizeof(buffer) - 1));
     if (ret == 0) {
       printf("Client closed the connection\n");
       break;
@@ -33,8 +33,9 @@ void commHandler(gnutls_session_t session) {
       printf("Recieved corrupted data: %d, closing connection\n", ret);
       break;
     }
+    printf("Received message: %s, of length %d\n", buffer, ret);
 
-    ret -= 2; // \r\n
+    ret -= 1; // \r\n
     if (ret <= 0) {
       printf("Empty message, closing connection\n");
       break;

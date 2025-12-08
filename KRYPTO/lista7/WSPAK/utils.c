@@ -43,7 +43,7 @@ void commHandler(int connfd) {
       printf("Client closed the connection\n");
       return;
     }
-    printf("Received message: %s\n", buffer);
+    printf("Received message: %s, of length %d\n", buffer, len);
 
     len -= 2; // \r\n
     if (len <= 0) {
