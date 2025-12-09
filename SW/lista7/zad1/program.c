@@ -10,6 +10,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <util/delay.h>
 
 #define EEPROM_ADDRESS 0xA0
 
@@ -72,6 +73,7 @@ void write_addr(char *params, int len) {
 void write_addr_seq() {
 
   uint8_t count = 0;
+  uint8_t offset = 0;
   while (1) {
     uint8_t byte_count = 0;
     uint16_t record_addr = 0;
@@ -81,7 +83,8 @@ void write_addr_seq() {
     uint8_t record_checksum = 0;
     scanf(":%02hhx%04hx%02hhx", &byte_count, &record_addr, &record_type);
     if (record_type != 0) {
-      scanf("%02hhx", &record_checksum);
+      printf("Koniec danych\r\n");
+      // scanf("%02hhx", &record_checksum);
       break; // koniec zapisu
     }
     checksum +=
@@ -99,13 +102,26 @@ void write_addr_seq() {
       return;
     }
     if (count == 0) {
+      offset = record_addr & 0xF;
       i2cStart();
       i2cSend(EEPROM_ADDRESS); // adres + zapis
       i2cSend(record_addr & 0xFF);
     }
     count += byte_count;
     for (uint8_t j = 0; j < byte_count; j++) {
+      if (offset > 0xF) {
+        offset = record_addr & 0xF;
+        // printf("rec %x", record_addr);
+        i2cStop();
+        _delay_ms(10);
+        i2cStart();
+        i2cSend(EEPROM_ADDRESS); // adres + zapis
+        i2cSend(record_addr & 0xFF);
+        // return write_addr_seq();
+      }
       i2cSend(buf[j]);
+      record_addr++;
+      offset += 1;
     }
   }
 }
