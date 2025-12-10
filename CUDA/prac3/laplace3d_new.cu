@@ -1,9 +1,9 @@
 /*
  * Zad 4:
- *  32 x 32
+ *  64 x 2
  *
  * Zad 5:
- *  9 x 9 x 9
+ *  64 x 2 x 1
  *
  * Zad 6:
  * GPU_laplace3d(int, int, int, const float *, float *) (32, 32, 1)x(32, 32, 1),
@@ -147,9 +147,9 @@ int main(int argc, const char **argv) {
 
   // Set up the execution configuration
 
-  BLOCK_X = 9; // number of threads
-  BLOCK_Y = 9; // in each direction
-  BLOCK_Z = 9; // of 3D thread block
+  BLOCK_X = 64; // number of threads
+  BLOCK_Y = 2;  // in each direction
+  BLOCK_Z = 1;  // of 3D thread block
 
   bx = 1 + (NX - 1) / BLOCK_X; // number of blocks
   by = 1 + (NY - 1) / BLOCK_Y; // in each direction
@@ -177,7 +177,7 @@ int main(int argc, const char **argv) {
   printf("Block dimensions: %d x %d x %d\n", BLOCK_X, BLOCK_Y, BLOCK_Z);
   printf("%dx GPU_laplace3d_new: %.1f (ms) \n\n", REPEAT, milli);
   printf("Effective Bandwidth (GB/s): %.1f \n\n",
-         2.0e-6 * bytes * REPEAT / milli);
+         7.0e-6 * bytes * REPEAT / milli);
 
   // Read back GPU results
 

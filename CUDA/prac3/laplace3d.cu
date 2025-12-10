@@ -131,9 +131,8 @@ int main(int argc, const char **argv) {
 
   // Set up the execution configuration
 
-#define BLOCK_SIZE 32
-  BLOCK_X = BLOCK_SIZE; // number of threads
-  BLOCK_Y = BLOCK_SIZE; // in each direction
+  BLOCK_X = 32; // number of threads
+  BLOCK_Y = 32; // in each direction
 
   bx = 1 + (NX - 1) / BLOCK_X; // number of blocks
   by = 1 + (NY - 1) / BLOCK_Y; // in each direction
