@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "/home/rafal/UWr/SW/lista9/zad1",
+    "file": "program",
+    "command": "avr-gcc -g -std=c99 -DF_CPU=1000000 -Wall -O3 -mmcu=attiny84  -Wl,-Map,program.map -o compile_commands.json   -c program"
+  }
+]
