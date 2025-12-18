@@ -11,6 +11,9 @@ tensorCUBLAS:	tensorCUBLAS.cu Makefile
 
 simpleTensorCoreGEMM:	simpleTensorCoreGEMM.cu Makefile
 		nvcc simpleTensorCoreGEMM.cu -o simpleTensorCoreGEMM $(INC) $(NVCCFLAGS) $(LIB)
+	
+fft:	fft.cu Makefile
+		nvcc fft.cu -o fft $(INC) $(NVCCFLAGS) $(LIB)
 
 clean:
 		rm -f tensorCUBLAS simpleTensorCoreGEMM simpleCUFFT
