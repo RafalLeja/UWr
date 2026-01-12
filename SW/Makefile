@@ -8,6 +8,7 @@ AVRDUDE_TARGET = atmega328p
 OPTIMIZE       = -O3
 DEFS           = 
 LIBS           = ../../lib/*.c
+INCLUDES       = ../../lib/
 BAUDRATE       = 115200
 
 HZ          = 16000000
@@ -18,7 +19,7 @@ CC             = avr-gcc
 
 # Override is only needed by avr-lib build system.
 
-override CFLAGS        = -g -std=c99 -DF_CPU=$(HZ) -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
+override CFLAGS        = -g -std=c99 -I$(INCLUDES) -DF_CPU=$(HZ) -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
 override LDFLAGS       = -Wl,-Map,$(PRG).map
 
 OBJCOPY        = avr-objcopy
@@ -33,7 +34,7 @@ BOOT_PAD       = .bootloader-pad
 all: $(PRG).elf lst text
 
 $(PRG).elf: $(OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS)  $(LDFLAGS) -o $@ $^ $(LIBS)
 
 clean:
 	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak *.hex *.bin *.srec
