@@ -6,20 +6,28 @@
 struct args_t parse_args(int argc, char *argv[]) {
   int opt;
 
-  struct args_t args = {stdin, stdout, 'h', 10, 2048};
+  struct args_t args = {NULL, stdout, 'h', 10, 2048};
 
   static struct option long_options[] = {
       {"help", no_argument, 0, 'h'},
+
       {"benchmark", no_argument, 0, 'b'},
-      {"interations", required_argument, 0, 'r'},
+      {"iterations", required_argument, 0, 'r'},
       {"length", required_argument, 0, 'l'},
+
+      {"sum", no_argument, 0, 's'},
+      {"input", required_argument, 0, 'i'},
+      {"output", required_argument, 0, 'o'},
+
       {0, 0, 0, 0}};
 
-  while ((opt = getopt_long(argc, argv, "hbr:l:", long_options, NULL)) != -1) {
+  while ((opt = getopt_long(argc, argv, "hbr:l:si:o:", long_options, NULL)) !=
+         -1) {
     switch (opt) {
     case 'h':
       print_help(argv[0]);
       break;
+
     case 'b':
       args.mode = 'b';
       printf("[Benchmark]\n\n");
@@ -29,6 +37,25 @@ struct args_t parse_args(int argc, char *argv[]) {
       break;
     case 'l':
       args.length = atoi(optarg);
+      break;
+
+    case 's':
+      args.mode = 's';
+      printf("[Sum]\n\n");
+      break;
+    case 'i':
+      args.input_file = fopen(optarg, "rb");
+      if (args.input_file == NULL) {
+        perror("Error opening input file");
+        exit(EXIT_FAILURE);
+      }
+      break;
+    case 'o':
+      args.output_file = fopen(optarg, "wb");
+      if (args.output_file == NULL) {
+        perror("Error opening output file");
+        exit(EXIT_FAILURE);
+      }
       break;
     default:
       print_help(argv[0]);
