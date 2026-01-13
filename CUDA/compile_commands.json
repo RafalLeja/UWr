@@ -1,0 +1,16 @@
+[
+  {
+    "directory": "/home/rafal/UWr/CUDA/",
+    "file": "prac1/prac1a.cu",
+    "output": "prac1/prac1a.o",
+    "command": "nvcc \
+      -I./headers \
+      -lcudart \
+      -lcublas \
+      -lcurand \
+      -lcufft \
+      -std=c++17 \
+      -Xcompiler \"-fPIC\" \
+      -c prac1/prac1a.cu -o prac1/prac1a.o"
+  }
+]

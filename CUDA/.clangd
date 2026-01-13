@@ -3,4 +3,5 @@ CompileFlags:
     - --cuda-path=/usr/local/cuda
     - -L/usr/local/cuda/lib64
     - -I/usr/local/cuda/include
+    - -I./headers
   Compiler: nvcc
