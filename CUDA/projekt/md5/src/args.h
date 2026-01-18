@@ -9,6 +9,8 @@ struct args_t {
   bool benchmark;
   char mode;
   int iterations;
+  int pass_length;
+  int pass_type;
 };
 
 #endif // ARGS_H

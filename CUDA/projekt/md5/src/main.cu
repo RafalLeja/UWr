@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
   case 'h':
     print_help(argv[0]);
     break;
-  case 's':
+  case 'c':
     if (args.input_file == NULL) {
       fprintf(stderr, "Input file is required for sum mode.\n");
       return 1;
