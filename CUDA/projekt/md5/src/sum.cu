@@ -1,4 +1,5 @@
-#include "md5.h"
+#include "md5c.h"
+#include "md5g.h"
 #include "sum.h"
 #include "utils.h"
 #include <stdbool.h>

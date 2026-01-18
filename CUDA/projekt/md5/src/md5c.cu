@@ -1,4 +1,4 @@
-#include "md5.h"
+#include "md5c.h"
 #include "utils.h"
 #include <stdint.h>
 

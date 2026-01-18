@@ -1,5 +1,5 @@
-#include "md5.h"
-#include <__clang_cuda_runtime_wrapper.h>
+#include "md5c.h"
+#include "md5g.h"
 #include <cstdint>
 
 __constant__ __device__ uint32_t K_g[] = {
