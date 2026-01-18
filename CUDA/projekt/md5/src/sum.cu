@@ -3,6 +3,7 @@
 #include "utils.h"
 #include <stdbool.h>
 #include <stdint.h>
+#include <time.h>
 
 void write_hash(struct md5_state state, FILE *output_file) {
   fprintf(
@@ -16,9 +17,48 @@ void write_hash(struct md5_state state, FILE *output_file) {
       (state.d >> 16) & 0xff, (state.d >> 24) & 0xff);
 }
 
-void calculate_md5_sum(FILE *input_file, FILE *output_file) {
+void benchmark_md5_sum(FILE *input_file, FILE *output_file,
+                       int iterations) {
+  printf("Benchmarking enabled: %d iterations.\n", iterations);
+
+  float cpu_elapsed_time = 0.0f;
+  for (int i = 0; i < iterations; i++) {
+    fseek(input_file, 0, SEEK_SET);
+
+    float elapsed_time = 0.0f;
+    calculate_md5_sum(input_file, output_file, &elapsed_time);
+    cpu_elapsed_time += elapsed_time;
+
+    printf("Iteration %d: Time taken: %.3f seconds\n", i + 1,
+           elapsed_time);
+  }
+  cpu_elapsed_time /= iterations;
+
+  float gpu_elapsed_time = 0.0f;
+  for (int i = 0; i < iterations; i++) {
+    fseek(input_file, 0, SEEK_SET);
+
+    float elapsed_time = 0.0f;
+    calculate_md5_sum_gpu(input_file, output_file, &elapsed_time);
+    gpu_elapsed_time += elapsed_time;
+
+    printf("GPU Iteration %d: Time taken: %.3f seconds\n", i + 1,
+           elapsed_time);
+  }
+  gpu_elapsed_time /= iterations;
+
+  printf("\nAverage CPU Time: %.3f seconds\n", cpu_elapsed_time);
+  printf("Average GPU Time: %.3f seconds\n", gpu_elapsed_time);
+}
+
+void calculate_md5_sum(FILE *input_file, FILE *output_file, float *time) {
   uint64_t file_size = get_file_size(input_file);
   printf("File size: %lu bytes\n", file_size);
+
+  clock_t start, end;
+  if (time != NULL) {
+    start = clock();
+  }
 
   struct md5_state state = md5_init();
   char buffer[64];
@@ -71,14 +111,26 @@ void calculate_md5_sum(FILE *input_file, FILE *output_file) {
     state = md5_iter(state, M);
   }
 
+  if (time != NULL) {
+    end = clock();
+    *time = (float)(end - start) / CLOCKS_PER_SEC;
+  }
+
   write_hash(state, output_file);
 }
 
-void calculate_md5_sum_gpu(FILE *input_file, FILE *output_file) {
+void calculate_md5_sum_gpu(FILE *input_file, FILE *output_file,
+                           float *time) {
   uint64_t file_size = get_file_size(input_file);
   printf("File size: %lu bytes\n", file_size);
 
-  // TODO: alloc + cpy
+  cudaEvent_t start, stop;
+  if (time != NULL) {
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+    cudaEventRecord(start, 0);
+  }
+
   struct md5_state state = md5_init();
   struct md5_state *state_d;
   cudaMalloc((void **)&state_d, sizeof(struct md5_state));
@@ -143,6 +195,17 @@ void calculate_md5_sum_gpu(FILE *input_file, FILE *output_file) {
 
   cudaMemcpy(&state, state_d, sizeof(struct md5_state),
              cudaMemcpyDeviceToHost);
+
+  if (time != NULL) {
+    cudaEventRecord(stop, 0);
+    cudaEventSynchronize(stop);
+    float elapsed_time;
+    cudaEventElapsedTime(&elapsed_time, start, stop);
+    *time = elapsed_time / 1000.0f;
+
+    cudaEventDestroy(start);
+    cudaEventDestroy(stop);
+  }
 
   write_hash(state, output_file);
 
