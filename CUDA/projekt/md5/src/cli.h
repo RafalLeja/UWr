@@ -1,12 +1,4 @@
-#include <stdio.h>
-
-struct args_t {
-  FILE *input_file;
-  FILE *output_file;
-  char mode;
-  int iterations;
-  int length;
-};
+#include "args.h"
 
 struct args_t parse_args(int argc, char *argv[]);
 
