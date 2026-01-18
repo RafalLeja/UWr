@@ -1,7 +1,7 @@
 #include "md5.h"
 #include <cstdint>
 
-__constant__ __device__ uint32_t K_g[] = {
+__constant__ __device__ uint32_t K_d[] = {
     0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee, 0xf57c0faf, 0x4787c62a,
     0xa8304613, 0xfd469501, 0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
     0x6b901122, 0xfd987193, 0xa679438e, 0x49b40821, 0xf61e2562, 0xc040b340,
@@ -14,7 +14,7 @@ __constant__ __device__ uint32_t K_g[] = {
     0xffeff47d, 0x85845dd1, 0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
     0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391};
 
-__constant__ __device__ uint32_t S_g[] = {
+__constant__ __device__ uint32_t S_d[] = {
     7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
     5, 9,  14, 20, 5, 9,  14, 20, 5, 9,  14, 20, 5, 9,  14, 20,
     4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
@@ -45,11 +45,11 @@ __global__ void md5_iter_gpu(struct md5_state *state, const uint32_t *M) {
       g = (7 * i) % 16;
     }
 
-    F = F + a + K_g[i] + M[g];
+    F = F + a + K_d[i] + M[g];
     a = d;
     d = c;
     c = b;
-    b = b + ((F << S_g[i]) | (F >> (32 - S_g[i])));
+    b = b + ((F << S_d[i]) | (F >> (32 - S_d[i])));
   }
 
   state[idx].a += a;

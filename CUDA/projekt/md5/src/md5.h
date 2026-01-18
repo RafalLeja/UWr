@@ -18,8 +18,4 @@ void md5_padding(uint64_t file_size, char *pad, int *pad_len);
 
 extern const uint32_t K[];
 
-extern __constant__ __device__ uint32_t K_g[];
-
 extern const uint32_t S[];
-
-extern __constant__ __device__ uint32_t S_g[];
