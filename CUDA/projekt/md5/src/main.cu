@@ -1,4 +1,5 @@
 #include "cli.h"
+#include "pass.h"
 #include "sum.h"
 #include <getopt.h>
 #include <stdio.h>
@@ -25,6 +26,12 @@ int main(int argc, char *argv[]) {
       calculate_md5_sum(args.input_file, args.output_file, NULL);
     }
     break;
+
+  case 'p':
+    if (args.input_file == NULL) {
+      fprintf(stderr, "Input file is required for password mode.\n");
+      return 1;
+    }
   }
 
   return 0;

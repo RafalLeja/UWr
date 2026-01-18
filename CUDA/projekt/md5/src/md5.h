@@ -10,6 +10,8 @@ struct md5_state {
 
 struct md5_state md5_iter(struct md5_state state, uint32_t *M);
 
+struct md5_state md5_passwd(char *pass, int pass_len);
+
 __global__ void md5_iter_gpu(struct md5_state *state, const uint32_t *M);
 
 __global__ void md5_chunk_gpu(struct md5_state *state,

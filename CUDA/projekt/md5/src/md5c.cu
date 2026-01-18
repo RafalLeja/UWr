@@ -89,3 +89,23 @@ void md5_padding(uint64_t file_size, char *pad, int *pad_len) {
   pad[padding_needed + 6] = (bit_length >> 48) & 0xff;
   pad[padding_needed + 7] = (bit_length >> 56) & 0xff;
 }
+
+struct md5_state md5_passwd(char *pass, int pass_len) {
+  char buffer[64] = {0};
+  strncpy(buffer, pass, pass_len);
+  buffer[pass_len] = 0x80;
+  uint64_t bit_length = pass_len * 8;
+  buffer[56] = bit_length & 0xff;
+  buffer[57] = (bit_length >> 8) & 0xff;
+
+  uint32_t M[16];
+  for (int i = 0; i < 16; i++) {
+    M[i] = ((uint32_t)(uint8_t)buffer[i * 4]) |
+           (((uint32_t)(uint8_t)buffer[i * 4 + 1]) << 8) |
+           (((uint32_t)(uint8_t)buffer[i * 4 + 2]) << 16) |
+           (((uint32_t)(uint8_t)buffer[i * 4 + 3]) << 24);
+  }
+  struct md5_state state = md5_init();
+  state = md5_iter(state, M);
+  return state;
+}
