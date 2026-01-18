@@ -58,43 +58,39 @@ __global__ void md5_iter_gpu(struct md5_state *state, const uint32_t *M) {
   state[idx].d += d;
 }
 
-// CUDA kernel to process MD5 in
-// parallel
-// __global__ void md5_kernel(struct md5_state *state, const uint8_t *data,
-//                            size_t len) {
-//   int idx = blockIdx.x * blockDim.x + threadIdx.x;
-//   if (idx < len / 64) {
-//     // Process each 64-byte chunk
-//     md5_process_chunk(&state[idx], &data[idx * 64]);
-//   }
-// }
-//
-// size_t num_chunks = (len + 63) / 64;
-// struct md5_state *d_state;
-// uint8_t *d_data;
-//
-// // Allocate device memory
-// cudaMalloc((void **)&d_state, num_chunks * sizeof(struct md5_state));
-// cudaMalloc((void **)&d_data, len * sizeof(uint8_t));
-//
-// // Copy data to device
-// cudaMemcpy(d_data, data, len * sizeof(uint8_t), cudaMemcpyHostToDevice);
-// cudaMemcpy(d_state, &state, sizeof(struct md5_state),
-//            cudaMemcpyHostToDevice);
-//
-// // Launch kernel
-// int threadsPerBlock = 256;
-// int blocksPerGrid = (num_chunks + threadsPerBlock - 1) /
-// threadsPerBlock; md5_kernel<<<blocksPerGrid, threadsPerBlock>>>(d_state,
-// d_data, len);
-//
-// // Copy result back to host
-// cudaMemcpy(&state, d_state, sizeof(struct md5_state),
-//            cudaMemcpyDeviceToHost);
-//
-// // Free device memory
-// cudaFree(d_state);
-// cudaFree(d_data);
-//
-// return state;
-// }
+__global__ void md5_chunk_gpu(struct md5_state *state,
+                              const uint32_t *chunks, const int iters) {
+  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+  uint32_t a = state[idx].a;
+  uint32_t b = state[idx].b;
+  uint32_t c = state[idx].c;
+  uint32_t d = state[idx].d;
+  for (int chunk = 0; chunk < iters; chunk++) {
+    for (int i = 0; i < 64; i++) {
+      uint32_t F, g;
+      if (i < 16) {
+        F = (b & c) | (~b & d);
+        g = i;
+      } else if (i < 32) {
+        F = (d & b) | (~d & c);
+        g = (5 * i + 1) % 16;
+      } else if (i < 48) {
+        F = b ^ c ^ d;
+        g = (3 * i + 5) % 16;
+      } else {
+        F = c ^ (b | ~d);
+        g = (7 * i) % 16;
+      }
+
+      F = F + a + K_d[i] + chunks[g + chunk * 64];
+      a = d;
+      d = c;
+      c = b;
+      b = b + ((F << S_d[i]) | (F >> (32 - S_d[i])));
+    }
+  }
+  state[idx].a += a;
+  state[idx].b += b;
+  state[idx].c += c;
+  state[idx].d += d;
+}

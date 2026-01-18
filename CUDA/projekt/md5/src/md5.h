@@ -12,6 +12,9 @@ struct md5_state md5_iter(struct md5_state state, uint32_t *M);
 
 __global__ void md5_iter_gpu(struct md5_state *state, const uint32_t *M);
 
+__global__ void md5_chunk_gpu(struct md5_state *state,
+                              const uint32_t *chunks, const int iters);
+
 struct md5_state md5_init();
 
 void md5_padding(uint64_t file_size, char *pad, int *pad_len);

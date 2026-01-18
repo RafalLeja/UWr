@@ -140,8 +140,7 @@ void calculate_md5_sum_gpu(FILE *input_file, FILE *output_file,
   cudaMalloc((void **)&state_d, sizeof(struct md5_state));
   cudaMemcpy(state_d, &state, sizeof(struct md5_state),
              cudaMemcpyHostToDevice);
-  uint32_t *M;
-  M = (uint32_t *)malloc(sizeof(uint32_t) * 16 * GPU_BLOCK_SIZE);
+  uint32_t M[16];
   uint32_t *M_d;
   cudaMalloc((void **)&M_d, 16 * sizeof(uint32_t));
 
