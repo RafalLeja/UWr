@@ -1,6 +1,6 @@
 
-PRG            = program
-OBJ            = ${PRG}.o
+PRG            = $(wildcard *.c)
+OBJ            = $(PRG:.c=.o)
 PROGRAMMER     = arduino
 PORT           = /dev/ttyUSB0
 MCU_TARGET     = atmega328p 
