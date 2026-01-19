@@ -13,11 +13,17 @@
 #define LED_DDR DDRB
 #define LED_PORT PORTB
 
+#define DEADZONE 50
+uint16_t prev_adc = 0;
+
+#define SERVO_MIN 1050 // 1ms
+#define SERVO_MAX 5000 // 2ms
+
 void timer1_init() {
   TCCR1A = _BV(WGM11) | _BV(COM1A1);            // FastPWM ICR1
   TCCR1B = _BV(WGM13) | _BV(WGM12) | _BV(CS11); // prescaler = 8
   ICR1 = 40000; // 16MHz / 8 / 40000 = 50 Hz = 20ms
-  OCR1A = 2000; // 16MHz / 8 / 3000 = 1.5ms
+  OCR1A = 3000; // 16MHz / 8 / 3000 = 1.5ms
 }
 
 void adc_init() {
@@ -31,8 +37,14 @@ void adc_init() {
 
 ISR(ADC_vect) {
   uint16_t v = ADC;
-  uint16_t angle = 2000 + (v * 2); // map 0..1023 to 2000..4000
-  OCR1A = angle > 4000 ? 4000 : angle;
+  // if (v > prev_adc - DEADZONE && v < prev_adc + DEADZONE) {
+  //   return;
+  // }
+  prev_adc = v;
+  uint16_t angle =
+      SERVO_MIN +
+      (v * ((SERVO_MAX - SERVO_MIN) / 1024)); // map 0..1023 to 2000..4000
+  OCR1A = angle > SERVO_MAX ? SERVO_MAX : angle;
   if (v > 512) {
     LED_PORT |= _BV(LED_PIN);
   } else {
@@ -49,7 +61,7 @@ int main() {
   set_sleep_mode(SLEEP_MODE_IDLE);
   while (1) {
     ADCSRA |= _BV(ADSC);
-    sleep_mode();
+    // sleep_mode();
     // _delay_ms(20);
   }
 }
