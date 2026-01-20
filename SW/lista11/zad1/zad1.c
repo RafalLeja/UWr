@@ -43,7 +43,7 @@ int main() {
   adc_init();
   timer1_init();
   sei();
-  set_sleep_mode(SLEEP_MODE_ADC);
+  set_sleep_mode(SLEEP_MODE_IDLE);
   while (1) {
     ADCSRA |= _BV(ADSC);
     sleep_mode();

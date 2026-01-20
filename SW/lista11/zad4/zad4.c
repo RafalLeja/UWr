@@ -61,7 +61,7 @@ int main() {
   set_sleep_mode(SLEEP_MODE_IDLE);
   while (1) {
     ADCSRA |= _BV(ADSC);
-    // sleep_mode();
+    sleep_mode();
     // _delay_ms(20);
   }
 }
