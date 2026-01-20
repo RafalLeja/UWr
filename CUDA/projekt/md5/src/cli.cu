@@ -6,7 +6,7 @@
 struct args_t parse_args(int argc, char *argv[]) {
   int opt;
 
-  struct args_t args = {NULL, stdout, false, 'h', 10, 8, 0b1111};
+  struct args_t args = {NULL, stdout, false, 'h', 10, 8, 0};
 
   static struct option long_options[] = {
       {"help", no_argument, 0, 'h'},
@@ -71,23 +71,27 @@ struct args_t parse_args(int argc, char *argv[]) {
       break;
 
     case 'n':
-      args.pass_type &= 0x1;
+      args.pass_type |= 0x1;
       break;
 
     case 'l':
-      args.pass_type &= 0x2;
+      args.pass_type |= 0x2;
       break;
 
     case 'u':
-      args.pass_type &= 0x4;
+      args.pass_type |= 0x4;
       break;
 
     case 's':
-      args.pass_type &= 0x8;
+      args.pass_type |= 0x8;
       break;
     default:
       print_help(argv[0]);
     }
+  }
+
+  if (args.pass_type == 0 && args.mode == 'p') {
+    args.pass_type = 0b1111;
   }
 
   return args;
@@ -115,8 +119,8 @@ void print_help(const char *program_name) {
       "    -i / --input [file]\tInput file containing md5 hash\n"
       "    -m / --pass_length [number]\tLength of the password to crack\n"
       "    -n / --numbers\t\tInclude numbers in the password\n"
-      "    -l / --lowercase\tInclude lowercase letters in the password\n"
-      "    -u / --uppercase\tInclude uppercase letters in the password\n"
+      "    -l / --lowercase\t\tInclude lowercase letters in the password\n"
+      "    -u / --uppercase\t\tInclude uppercase letters in the password\n"
       "    -s / --special\t\tInclude special characters in the password\n"
       "\n",
       program_name);
