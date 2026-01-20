@@ -82,7 +82,7 @@ bool crack_len_gpu(struct md5_state target_hash, int pass_length,
   int base = all_chars_size;
   int indices[pass_length];
   char buffer[pass_length + 1];
-  const int blockSize = 1024;
+  const int blockSize = 1024 * 256;
   const int threadCount = 1024;
   int batch = 0;
   int passIdx = 0;
@@ -130,7 +130,7 @@ bool crack_len_gpu(struct md5_state target_hash, int pass_length,
         for (int j = 0; j < pass_length; j++) {
           buffer[j] = passwd_h[(result_h - 1) * pass_length + j];
         }
-        printf("Password: %s", buffer);
+        printf("Password: %s\n", buffer);
         cudaFree(passwd_d);
         cudaFree(target_hash_d);
         cudaFree(result_d);
@@ -169,17 +169,17 @@ void crack_gpu(FILE *input_file, FILE *output_file, int pass_length,
   struct md5_state target_hash = get_hash_from_file(input_file);
   int all_chars_size;
   char *all_chars = get_all_chars(pass_type, &all_chars_size);
-  for (int len = 1; len <= 5; len++) {
-    printf("Cracking passwords of length %d...\n", len);
-    if (crack_len(target_hash, len, all_chars_size, all_chars)) {
-      return;
-    }
-  }
-
-  for (int len = 6; len <= pass_length; len++) {
-    printf("Cracking passwords of length %d on GPU...\n", len);
-    if (crack_len_gpu(target_hash, len, all_chars_size, all_chars)) {
-      return;
+  for (int len = 1; len <= pass_length; len++) {
+    if (pow(all_chars_size, len) < 100000) {
+      printf("Cracking passwords of length %d...\n", len);
+      if (crack_len(target_hash, len, all_chars_size, all_chars)) {
+        return;
+      }
+    } else {
+      printf("Cracking passwords of length %d on GPU...\n", len);
+      if (crack_len_gpu(target_hash, len, all_chars_size, all_chars)) {
+        return;
+      }
     }
   }
 

@@ -95,29 +95,13 @@ __global__ void md5_chunk_gpu(struct md5_state *state,
   state[idx].d += d;
 }
 
-__global__ void md5_passwd_gpu(const char *passwd, int len,
-                               struct md5_state *target, int *result) {
-  int idx = blockIdx.x * blockDim.x + threadIdx.x;
-  uint32_t M[16] = {0};
-  for (int i = 0; i < len; i++) {
-    M[i / 4] |= (uint8_t)passwd[idx + i] << ((i % 4) * 8);
-  }
-  for (int i = len; i < 64; i++) {
-    if (i == len) {
-      M[i / 4] |= 0x80 << ((i % 4) * 8);
-    } else if (i >= 56) {
-      // Append original length in bits at the end
-      uint64_t bit_len = len * 8;
-      M[14] = (uint32_t)(bit_len & 0xFFFFFFFF);
-      M[15] = (uint32_t)((bit_len >> 32) & 0xFFFFFFFF);
-      break;
-    }
-  }
+__device__ void md5_round(uint32_t *o_a, uint32_t *o_b, uint32_t *o_c,
+                          uint32_t *o_d, uint32_t *M) {
+  uint32_t a = *o_a;
+  uint32_t b = *o_b;
+  uint32_t c = *o_c;
+  uint32_t d = *o_d;
 
-  uint32_t a = 0x67452301;
-  uint32_t b = 0xefcdab89;
-  uint32_t c = 0x98badcfe;
-  uint32_t d = 0x10325476;
   for (int i = 0; i < 64; i++) {
     uint32_t F, g;
     if (i < 16) {
@@ -141,8 +125,51 @@ __global__ void md5_passwd_gpu(const char *passwd, int len,
     b = b + ((F << S_d[i]) | (F >> (32 - S_d[i])));
   }
 
-  if (target->a == (0x67452301 + a) && target->b == (0xefcdab89 + b) &&
-      target->c == (0x98badcfe + c) && target->d == (0x10325476 + d)) {
+  *o_a += a;
+  *o_b += b;
+  *o_c += c;
+  *o_d += d;
+}
+
+__device__ void int_to_passwd(int idx, int len, int base, char *all_chars,
+                              uint32_t *M) {
+  char passwd[64] = {0};
+  for (int i = len - 1; i >= 0; i--) {
+    passwd[i] = all_chars[idx % base];
+    idx /= base;
+  }
+
+  for (int i = 0; i < len; i++) {
+    M[i / 4] |= (uint8_t)passwd[i] << ((i % 4) * 8);
+  }
+}
+__global__ void md5_passwd_gpu(const char *passwd, int len,
+                               struct md5_state *target, int *result) {
+  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+  uint32_t M[16] = {0};
+  for (int i = 0; i < len; i++) {
+    M[i / 4] |= (uint8_t)passwd[idx * len + i] << ((i % 4) * 8);
+  }
+  for (int i = len; i < 64; i++) {
+    if (i == len) {
+      M[i / 4] |= 0x80 << ((i % 4) * 8);
+    } else if (i >= 56) {
+      // Append original length in bits at the end
+      uint64_t bit_len = len * 8;
+      M[14] = (uint32_t)(bit_len & 0xFFFFFFFF);
+      M[15] = (uint32_t)((bit_len >> 32) & 0xFFFFFFFF);
+      break;
+    }
+  }
+
+  uint32_t a = 0x67452301;
+  uint32_t b = 0xefcdab89;
+  uint32_t c = 0x98badcfe;
+  uint32_t d = 0x10325476;
+  md5_round(&a, &b, &c, &d, M);
+
+  if (target->a == a && target->b == b && target->c == c &&
+      target->d == d) {
     atomicExch(&result[0], idx + 1);
   }
 }
