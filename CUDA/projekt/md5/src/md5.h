@@ -17,8 +17,10 @@ __global__ void md5_iter_gpu(struct md5_state *state, const uint32_t *M);
 __global__ void md5_chunk_gpu(struct md5_state *state,
                               const uint32_t *chunks, const int iters);
 
-__global__ void md5_passwd_gpu(const char *passwd, int len,
-                               struct md5_state *target, int *result);
+__global__ void md5_passwd_gpu(const char *all_chars, int base, int len,
+                               unsigned long long offset,
+                               struct md5_state *target,
+                               unsigned long long *result);
 
 struct md5_state md5_init();
 

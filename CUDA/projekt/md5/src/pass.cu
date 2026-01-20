@@ -77,90 +77,68 @@ bool crack_len(struct md5_state target_hash, int pass_length,
   return false;
 }
 
+void int_to_passwd(unsigned long long idx, int len, int base,
+                   const char *all_chars, char *passwd) {
+  for (int i = len - 1; i >= 0; i--) {
+    passwd[i] = all_chars[idx % base];
+    idx /= base;
+  }
+  passwd[len] = '\0';
+}
+
 bool crack_len_gpu(struct md5_state target_hash, int pass_length,
                    int all_chars_size, char *all_chars) {
   int base = all_chars_size;
-  int indices[pass_length];
   char buffer[pass_length + 1];
-  const int blockSize = 1024 * 256;
+  const int blockSize = 1024 * 1024;
   const int threadCount = 1024;
-  int batch = 0;
-  int passIdx = 0;
-  bool last_batch = false;
+
+  unsigned long long all_combinations = base;
+  for (int i = 1; i < pass_length; i++) {
+    all_combinations *= base;
+  }
 
   // GPU memory allocation
-  char *passwd_h = (char *)malloc(pass_length * threadCount * blockSize);
-  if (passwd_h == NULL) {
-    fprintf(stderr, "Failed to allocate host memory for passwords.\n");
-    return false;
-  }
-  char *passwd_d;
-  cudaMalloc((void **)&passwd_d, pass_length * threadCount * blockSize);
+  char *all_chars_d;
+  cudaMalloc((void **)&all_chars_d, all_chars_size);
+  cudaMemcpy(all_chars_d, all_chars, all_chars_size,
+             cudaMemcpyHostToDevice);
 
   struct md5_state *target_hash_d;
   cudaMalloc((void **)&target_hash_d, sizeof(struct md5_state));
   cudaMemcpy(target_hash_d, &target_hash, sizeof(struct md5_state),
              cudaMemcpyHostToDevice);
 
-  int *result_d;
-  cudaMalloc((void **)&result_d, sizeof(int));
-  cudaMemset(result_d, 0, sizeof(int));
+  unsigned long long *result_d;
+  cudaMalloc((void **)&result_d, sizeof(unsigned long long));
+  cudaMemset(result_d, 0, sizeof(unsigned long long));
 
-  memset(indices, 0, sizeof(indices));
   memset(buffer, 0, sizeof(buffer));
 
-  while (1) {
-    for (int i = 0; i < pass_length; i++) {
-      passwd_h[(passIdx * pass_length) + i] = all_chars[indices[i]];
+  for (unsigned long long offset = 0; offset < all_combinations;
+       offset += blockSize * threadCount) {
+    printf("%llu%% combinations tried...\r",
+           offset * 100 / all_combinations);
+    md5_passwd_gpu<<<blockSize, threadCount>>>(
+        all_chars_d, base, pass_length, offset, target_hash_d, result_d);
+    cudaDeviceSynchronize();
+    unsigned long long result_h;
+    cudaMemcpy(&result_h, result_d, sizeof(unsigned long long),
+               cudaMemcpyDeviceToHost);
+    if (result_h > 0) {
+      printf("Password found at index %llu.\n", result_h - 1);
+      int_to_passwd(result_h - 1, pass_length, base, all_chars, buffer);
+      printf("Password: %s\n", buffer);
+      cudaFree(all_chars_d);
+      cudaFree(target_hash_d);
+      cudaFree(result_d);
+      return true;
     }
-    // printf("passIdx: %d\n", passIdx);
-
-    if (passIdx + 1 == blockSize * threadCount || last_batch) {
-      batch++;
-      // printf("Launching GPU kernel for batch %d\n", batch);
-      cudaMemcpy(passwd_d, passwd_h, pass_length * threadCount * blockSize,
-                 cudaMemcpyHostToDevice);
-      md5_passwd_gpu<<<blockSize, threadCount>>>(passwd_d, pass_length,
-                                                 target_hash_d, result_d);
-      cudaDeviceSynchronize();
-      int result_h;
-      cudaMemcpy(&result_h, result_d, sizeof(int), cudaMemcpyDeviceToHost);
-      if (result_h > 0) {
-        printf("Password found in GPU batch %d.\n", batch);
-        for (int j = 0; j < pass_length; j++) {
-          buffer[j] = passwd_h[(result_h - 1) * pass_length + j];
-        }
-        printf("Password: %s\n", buffer);
-        cudaFree(passwd_d);
-        cudaFree(target_hash_d);
-        cudaFree(result_d);
-        free(passwd_h);
-        return true;
-      }
-      if (last_batch) {
-        break;
-      }
-      passIdx = 0;
-    }
-
-    int pos = pass_length - 1;
-    while (pos >= 0) {
-      indices[pos]++;
-      if (indices[pos] < base) {
-        break;
-      } else {
-        indices[pos] = 0;
-        pos--;
-      }
-    }
-    if (pos < 0) {
-      // printf("Completed all combinations for length %d.\n",
-      // pass_length);
-      last_batch = true;
-      // break;
-    }
-    passIdx += 1;
   }
+  cudaFree(all_chars_d);
+  cudaFree(target_hash_d);
+  cudaFree(result_d);
+
   return false;
 }
 
@@ -182,26 +160,6 @@ void crack_gpu(FILE *input_file, FILE *output_file, int pass_length,
       }
     }
   }
-
-  // char passwd_h[] = "abc";
-  // char *passwd_d;
-  // int result_h;
-  // int *result_d;
-  // struct md5_state *target_hash_d;
-  // cudaMalloc((void **)&target_hash_d, sizeof(struct md5_state));
-  // cudaMalloc((void **)&result_d, sizeof(int));
-  // cudaMalloc((void **)&passwd_d, pass_length + 1);
-  // cudaMemcpy(target_hash_d, &target_hash, sizeof(struct md5_state),
-  //            cudaMemcpyHostToDevice);
-  // cudaMemcpy(passwd_d, passwd_h, pass_length + 1,
-  // cudaMemcpyHostToDevice);
-  //
-  // md5_passwd_gpu<<<1, 1>>>(passwd_d, pass_length, target_hash_d,
-  // result_d);
-  //
-  // cudaDeviceSynchronize();
-  // cudaMemcpy(&result_h, result_d, sizeof(int), cudaMemcpyDeviceToHost);
-  // printf("Result: %d\n", result_h);
 }
 
 void crack(FILE *input_file, FILE *output_file, int pass_length,

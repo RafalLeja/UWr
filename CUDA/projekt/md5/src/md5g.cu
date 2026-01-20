@@ -131,8 +131,8 @@ __device__ void md5_round(uint32_t *o_a, uint32_t *o_b, uint32_t *o_c,
   *o_d += d;
 }
 
-__device__ void int_to_passwd(int idx, int len, int base, char *all_chars,
-                              uint32_t *M) {
+__device__ void int_to_passwd(unsigned long long idx, int len, int base,
+                              const char *all_chars, uint32_t *M) {
   char passwd[64] = {0};
   for (int i = len - 1; i >= 0; i--) {
     passwd[i] = all_chars[idx % base];
@@ -143,13 +143,14 @@ __device__ void int_to_passwd(int idx, int len, int base, char *all_chars,
     M[i / 4] |= (uint8_t)passwd[i] << ((i % 4) * 8);
   }
 }
-__global__ void md5_passwd_gpu(const char *passwd, int len,
-                               struct md5_state *target, int *result) {
-  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+
+__global__ void md5_passwd_gpu(const char *all_chars, int base, int len,
+                               unsigned long long offset,
+                               struct md5_state *target,
+                               unsigned long long *result) {
+  unsigned long long idx = blockIdx.x * blockDim.x + threadIdx.x + offset;
   uint32_t M[16] = {0};
-  for (int i = 0; i < len; i++) {
-    M[i / 4] |= (uint8_t)passwd[idx * len + i] << ((i % 4) * 8);
-  }
+  int_to_passwd(idx, len, base, all_chars, M);
   for (int i = len; i < 64; i++) {
     if (i == len) {
       M[i / 4] |= 0x80 << ((i % 4) * 8);
