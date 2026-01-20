@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
       fprintf(stderr, "Input file is required for password mode.\n");
       return 1;
     }
-    crack(args.input_file, args.output_file, args.pass_length,
-          args.pass_type, NULL);
+    crack_gpu(args.input_file, args.output_file, args.pass_length,
+              args.pass_type, NULL);
   }
 
   return 0;

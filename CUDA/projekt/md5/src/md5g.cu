@@ -94,3 +94,55 @@ __global__ void md5_chunk_gpu(struct md5_state *state,
   state[idx].c += c;
   state[idx].d += d;
 }
+
+__global__ void md5_passwd_gpu(const char *passwd, int len,
+                               struct md5_state *target, int *result) {
+  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+  uint32_t M[16] = {0};
+  for (int i = 0; i < len; i++) {
+    M[i / 4] |= (uint8_t)passwd[idx + i] << ((i % 4) * 8);
+  }
+  for (int i = len; i < 64; i++) {
+    if (i == len) {
+      M[i / 4] |= 0x80 << ((i % 4) * 8);
+    } else if (i >= 56) {
+      // Append original length in bits at the end
+      uint64_t bit_len = len * 8;
+      M[14] = (uint32_t)(bit_len & 0xFFFFFFFF);
+      M[15] = (uint32_t)((bit_len >> 32) & 0xFFFFFFFF);
+      break;
+    }
+  }
+
+  uint32_t a = 0x67452301;
+  uint32_t b = 0xefcdab89;
+  uint32_t c = 0x98badcfe;
+  uint32_t d = 0x10325476;
+  for (int i = 0; i < 64; i++) {
+    uint32_t F, g;
+    if (i < 16) {
+      F = (b & c) | (~b & d);
+      g = i;
+    } else if (i < 32) {
+      F = (d & b) | (~d & c);
+      g = (5 * i + 1) % 16;
+    } else if (i < 48) {
+      F = b ^ c ^ d;
+      g = (3 * i + 5) % 16;
+    } else {
+      F = c ^ (b | ~d);
+      g = (7 * i) % 16;
+    }
+
+    F = F + a + K_d[i] + M[g];
+    a = d;
+    d = c;
+    c = b;
+    b = b + ((F << S_d[i]) | (F >> (32 - S_d[i])));
+  }
+
+  if (target->a == (0x67452301 + a) && target->b == (0xefcdab89 + b) &&
+      target->c == (0x98badcfe + c) && target->d == (0x10325476 + d)) {
+    atomicExch(&result[0], idx + 1);
+  }
+}
