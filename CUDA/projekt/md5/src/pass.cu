@@ -153,13 +153,13 @@ bool crack_len_gpu(struct md5_state target_hash, int pass_length,
       cudaEventSynchronize(stop);
       cudaEventElapsedTime(&elapsedTime, start, stop);
 
+      printf("Time taken: %.2f seconds\n", elapsedTime / 1000.0);
+      printf("Speed: %.2f million hashes/second\n\n",
+             (result_h) / (elapsedTime / 1000.0) / 1e6);
+
       printf("Password found at index %llu.\n", result_h - 1);
       int_to_passwd(result_h - 1, pass_length, base, all_chars, buffer);
       printf("Password: %s\n", buffer);
-
-      printf("Time taken: %.2f seconds\n", elapsedTime / 1000.0);
-      printf("Speed: %.2f million hashes/second\n",
-             (result_h) / (elapsedTime / 1000.0) / 1e6);
 
       cudaFree(all_chars_d);
       cudaFree(target_hash_d);
