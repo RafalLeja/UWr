@@ -35,7 +35,7 @@ void benchmark_md5_sum(FILE *input_file, FILE *output_file,
     calculate_md5_sum(input_file, null_file, &elapsed_time);
     cpu_elapsed_time += elapsed_time * 1000.0f;
 
-    printf("Iteration %d: Time taken: %.5f miliseconds\n", i + 1,
+    printf("Iteration %d: Time taken: %.5f seconds\n", i + 1,
            elapsed_time);
   }
   cpu_elapsed_time /= iterations;
@@ -48,13 +48,13 @@ void benchmark_md5_sum(FILE *input_file, FILE *output_file,
     calculate_md5_sum_gpu(input_file, null_file, &elapsed_time);
     gpu_elapsed_time += elapsed_time * 1000.0f;
 
-    printf("GPU Iteration %d: Time taken: %.5f miliseconds\n", i + 1,
+    printf("GPU Iteration %d: Time taken: %.5f seconds\n", i + 1,
            elapsed_time);
   }
   gpu_elapsed_time /= iterations;
 
-  printf("\nAverage CPU Time: %.5f miliseconds\n", cpu_elapsed_time);
-  printf("Average GPU Time: %.5f miliseconds\n", gpu_elapsed_time);
+  printf("\nAverage CPU Time: %.5f seconds\n", cpu_elapsed_time);
+  printf("Average GPU Time: %.5f seconds\n", gpu_elapsed_time);
 }
 
 void calculate_md5_sum(FILE *input_file, FILE *output_file, float *time) {
