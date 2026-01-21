@@ -104,18 +104,23 @@ __device__ void md5_round(uint32_t *o_a, uint32_t *o_b, uint32_t *o_c,
 
   for (int i = 0; i < 64; i++) {
     uint32_t F, g;
-    if (i < 16) {
+    switch (i / 16) {
+    case 0:
       F = (b & c) | (~b & d);
       g = i;
-    } else if (i < 32) {
+      break;
+    case 1:
       F = (d & b) | (~d & c);
       g = (5 * i + 1) % 16;
-    } else if (i < 48) {
+      break;
+    case 2:
       F = b ^ c ^ d;
       g = (3 * i + 5) % 16;
-    } else {
+      break;
+    case 3:
       F = c ^ (b | ~d);
       g = (7 * i) % 16;
+      break;
     }
 
     F = F + a + K_d[i] + M[g];
