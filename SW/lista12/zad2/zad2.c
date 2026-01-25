@@ -8,11 +8,11 @@
 #include <util/delay.h>
 void pot();
 
-#define K_P 1.5
-#define K_I 0.005
+#define K_P 0.15
+#define K_I 0.004
 #define K_D 0.0
 
-struct PID_DATA pidData;
+struct PID_DATA pidData = {0};
 
 #define TIME_INTERVAL 8
 #define INTEGRAL_RESET 50
@@ -31,19 +31,19 @@ struct GLOBAL_FLAGS {
 #define LED_DDR DDRB
 #define LED_PORT PORTB
 
-#define MIN_PWM 50
+#define MIN_PWM 10
 
-uint16_t motor_u = 0;
-uint16_t motor_u_prev = 0;
-uint16_t set_speed = 0;
-uint16_t set_speed_prev = 0;
-uint16_t control_input = 0;
+int16_t motor_u = 0;
+int16_t motor_u_prev = 0;
+int16_t set_speed = 0;
+int16_t set_speed_prev = 0;
+int16_t control_input = 0;
 
 void timer1_init() {
   TCCR1A = _BV(COM1A1);                        // Phase and Freq mode
   TCCR1B = _BV(WGM13) | _BV(CS11) | _BV(CS10); // prescaler = 256
   TIMSK1 = _BV(TOIE1);                         // overflow interrupt enable
-  ICR1 = 1024;                                 // TOP value
+  ICR1 = 5120;                                 // TOP value
   OCR1A = 200;
 }
 
@@ -73,14 +73,16 @@ ISR(TIMER1_OVF_vect) {
   while (ADCSRA & _BV(ADSC))
     ;
 
-  motor_u = ADC; // szybko:512-1024:wolno
-  motor_u -= 200;
-  motor_u = (motor_u + motor_u_prev) / 2;
+  motor_u = ADC / 2; // szybko:512-1024:wolno
+  motor_u = 512 - motor_u;
+  motor_u -= 70;
+  motor_u *= 2;
+  motor_u = motor_u < 512 ? motor_u : 512;
+  motor_u = motor_u > 0 ? motor_u : 0;
+  // motor_u = (motor_u + motor_u_prev) / 2;
   motor_u_prev = motor_u;
-  // motor_u = motor_u > 0 ? motor_u : 0;
-  // motor_u *= 2;
-  // motor_u = motor_u < 1023 ? motor_u : 1023;
   // motor_u = motor_u > 150 ? motor_u : 150;
+  // motor_u *= 2;
   pot();
 }
 
@@ -95,8 +97,8 @@ void pot() {
   while (ADCSRA & _BV(ADSC))
     ;
 
-  set_speed = ADC;
-  set_speed = set_speed > 200 ? set_speed : 200;
+  set_speed = ADC / 2;
+  // set_speed = set_speed > 200 ? set_speed : 200;
   set_speed = (set_speed + set_speed_prev) / 2;
   set_speed_prev = set_speed;
   // uint32_t a = ADC * 700;
@@ -114,12 +116,9 @@ ISR(TIMER2_OVF_vect) {
     i = 0;
     //     gFlags.pidTimer = 1;
     control_input = pid_Controller(set_speed, motor_u, &pidData);
-    if (control_input > 1023)
-      control_input = 1023;
-    else if (control_input < MIN_PWM)
-      control_input = MIN_PWM;
-    OCR1A = control_input;
-    // OCR1A = 1024;
+    // pid_Controller(set_speed, motor_u, &pidData) / SCALING_FACTOR;
+    OCR1A = (set_speed + control_input) * 10;
+    // OCR1A = 512;
     //
     //     if (integral > INTEGRAL_RESET) {
     //       integral = 0;
@@ -147,6 +146,6 @@ int main() {
 
   while (1) {
     _delay_ms(20);
-    printf("S: %4u, M: %4u C: %4u\r\n", set_speed, motor_u, control_input);
+    printf("S: %4d, M: %4d C: %4d\r\n", set_speed, motor_u, control_input);
   }
 }
