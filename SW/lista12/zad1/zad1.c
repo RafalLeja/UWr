@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <util/delay.h>
 
-#define K_P 0.05
+#define K_P 2.05
 #define K_I 0.0
 #define K_D 0.0
 
@@ -85,13 +85,12 @@ ISR(TIMER2_OVF_vect) {
 
 ISR(ADC_vect) {
   LED_PORT ^= _BV(LED_PIN);
-  uint16_t adc_value = ADC * 11;
-  adc_value -= 5000;
+  uint32_t adc_value = ((int32_t)ADC * 1100UL) / 1024UL; // mV
+  adc_value -= 500;
   // adc_value /= 10;
   // przeliczenie wartości ADC na temperaturę w °C
-  measured_temp = (adc_value / 4) + (3 * prev_measured_temp) / 4;
+  measured_temp = ((int16_t)adc_value / 4) + (3 * prev_measured_temp) / 4;
   prev_measured_temp = measured_temp;
-  // measured_temp = (adc_value * 110) / 1023;
 }
 
 int main() {
