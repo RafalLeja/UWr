@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <util/delay.h>
 
-#define K_P 2.0
+#define K_P 0.05
 #define K_I 0.0
 #define K_D 0.0
 
@@ -33,12 +33,13 @@ struct GLOBAL_FLAGS {
 
 int16_t set_temp = 200;
 int16_t measured_temp = 0;
+int16_t prev_measured_temp = 0;
 int16_t control_input = 0;
 
 void timer1_init() {
   TCCR1A = _BV(COM1A1) | _BV(WGM11) | _BV(WGM10); // Fast 10-bit
   TCCR1B = _BV(WGM12) | _BV(CS11) | _BV(CS10);    // prescaler = 64
-  OCR1A = 100;
+  OCR1A = 1000;
 }
 
 void timer2_init() {
@@ -64,10 +65,14 @@ ISR(TIMER2_OVF_vect) {
     LED_PORT ^= _BV(LED_PIN);
     i = 0;
     //     gFlags.pidTimer = 1;
-    control_input = pid_Controller(set_temp, measured_temp, &pidData);
+    control_input = 4 * pid_Controller(set_temp, measured_temp, &pidData);
     // pid_Controller(set_speed, motor_u, &pidData) / SCALING_FACTOR;
-    // OCR1A = (set_temp + control_input) * 10;
-    OCR1A = 1000;
+    if (control_input < 0)
+      control_input = 0;
+    if (control_input > 1023)
+      control_input = 1023;
+    OCR1A = control_input;
+    // OCR1A = (set_temp + control_input) * 2;
     //
     //     if (integral > INTEGRAL_RESET) {
     //       integral = 0;
@@ -82,9 +87,10 @@ ISR(ADC_vect) {
   LED_PORT ^= _BV(LED_PIN);
   uint16_t adc_value = ADC * 11;
   adc_value -= 5000;
-  adc_value /= 10;
+  // adc_value /= 10;
   // przeliczenie wartości ADC na temperaturę w °C
-  measured_temp = adc_value;
+  measured_temp = (adc_value / 4) + (3 * prev_measured_temp) / 4;
+  prev_measured_temp = measured_temp;
   // measured_temp = (adc_value * 110) / 1023;
 }
 
@@ -109,7 +115,7 @@ int main() {
 
   ADCSRA |= _BV(ADSC); // start konwersji ADC
   while (1) {
-    _delay_ms(100);
+    _delay_ms(300);
     printf("S: %4d, M: %4d C: %4d\r\n", set_temp, measured_temp, control_input);
   }
 }
