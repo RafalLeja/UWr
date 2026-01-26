@@ -8,13 +8,13 @@
 #include <stdio.h>
 #include <util/delay.h>
 
-#define K_P 2.05
-#define K_I 0.0
-#define K_D 0.0
+#define K_P 22.0
+#define K_I 0.05
+#define K_D 0.01
 
 struct PID_DATA pidData = {0};
 
-#define TIME_INTERVAL 8
+#define TIME_INTERVAL 16
 #define INTEGRAL_RESET 50
 #define SCALING_FACTOR 128
 
@@ -32,14 +32,14 @@ struct GLOBAL_FLAGS {
 #define LED_PORT PORTB
 
 int16_t set_temp = 200;
-int16_t measured_temp = 0;
+volatile int16_t measured_temp = 0;
 int16_t prev_measured_temp = 0;
 int16_t control_input = 0;
 
 void timer1_init() {
-  TCCR1A = _BV(COM1A1) | _BV(WGM11) | _BV(WGM10); // Fast 10-bit
-  TCCR1B = _BV(WGM12) | _BV(CS11) | _BV(CS10);    // prescaler = 64
-  OCR1A = 1000;
+  TCCR1A = _BV(COM1A1) | _BV(WGM10);           // Fast 8-bit
+  TCCR1B = _BV(WGM12) | _BV(CS11) | _BV(CS10); // prescaler = 64
+  OCR1A = 0;
 }
 
 void timer2_init() {
@@ -53,45 +53,49 @@ void adc_init() {
   ADMUX |= _BV(MUX1) | _BV(MUX2);  // ADC6
   // częstotliwość zegara ADC 125 kHz (16 MHz / 128)
   ADCSRA = _BV(ADPS0) | _BV(ADPS1) | _BV(ADPS2); // preskaler 64
-  ADCSRA |= _BV(ADEN) | _BV(ADATE) | _BV(ADIE);  // włącz ADC i interrupt
+  ADCSRA |= _BV(ADEN);                           // włącz ADC i interrupt
+}
+
+void measure_temp() {
+  int32_t temp = 0;
+  for (uint8_t i = 0; i < 16; i++) {
+    ADCSRA |= _BV(ADSC); // start konwersji ADC
+    while (ADCSRA & _BV(ADSC))
+      ;
+    temp += ADC;
+  }
+  temp = temp / 16;
+  temp = ((temp * 1100UL) / 1024UL) - 500;
+  measured_temp = (int16_t)(temp);
 }
 
 ISR(TIMER2_OVF_vect) {
   static uint16_t i = 0;
-  static uint16_t integral;
   if (i < TIME_INTERVAL) {
     i++;
   } else {
     LED_PORT ^= _BV(LED_PIN);
     i = 0;
-    //     gFlags.pidTimer = 1;
-    control_input = 4 * pid_Controller(set_temp, measured_temp, &pidData);
-    // pid_Controller(set_speed, motor_u, &pidData) / SCALING_FACTOR;
+
+    measure_temp();
+    control_input = pid_Controller(set_temp, measured_temp, &pidData);
+
     if (control_input < 0)
       control_input = 0;
-    if (control_input > 1023)
-      control_input = 1023;
+    if (control_input > 255)
+      control_input = 255;
     OCR1A = control_input;
-    // OCR1A = (set_temp + control_input) * 2;
-    //
-    //     if (integral > INTEGRAL_RESET) {
-    //       integral = 0;
-    //       // pid_Reset_Integrator(&pidData);
-    //     } else
-    //       integral++;
-    //     // OCR1A = 512;
   }
 }
 
-ISR(ADC_vect) {
-  LED_PORT ^= _BV(LED_PIN);
-  uint32_t adc_value = ((int32_t)ADC * 1100UL) / 1024UL; // mV
-  adc_value -= 500;
-  // adc_value /= 10;
-  // przeliczenie wartości ADC na temperaturę w °C
-  measured_temp = ((int16_t)adc_value / 4) + (3 * prev_measured_temp) / 4;
-  prev_measured_temp = measured_temp;
-}
+// ISR(ADC_vect) {
+//   uint32_t adc_value = ((int32_t)ADC * 1100UL) / 1024UL; // mV
+//   adc_value -= 500;
+//   // adc_value /= 10;
+//   // przeliczenie wartości ADC na temperaturę w °C
+//   measured_temp = ((int16_t)adc_value / 4) + (3 * prev_measured_temp) / 4;
+//   prev_measured_temp = measured_temp;
+// }
 
 int main() {
   DDRB |= _BV(RES_PIN);
