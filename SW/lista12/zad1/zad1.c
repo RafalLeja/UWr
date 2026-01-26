@@ -5,10 +5,11 @@
 #include <avr/sfr_defs.h>
 #include <avr/sleep.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <util/delay.h>
 
-#define K_P 0.15
-#define K_I 0.004
+#define K_P 2.0
+#define K_I 0.0
 #define K_D 0.0
 
 struct PID_DATA pidData = {0};
@@ -35,10 +36,9 @@ int16_t measured_temp = 0;
 int16_t control_input = 0;
 
 void timer1_init() {
-  TCCR1A = _BV(COM1A1);                        // Phase and Freq mode
-  TCCR1B = _BV(WGM13) | _BV(CS11) | _BV(CS10); // prescaler = 256
-  ICR1 = 5120;                                 // TOP value
-  OCR1A = 200;
+  TCCR1A = _BV(COM1A1) | _BV(WGM11) | _BV(WGM10); // Fast 10-bit
+  TCCR1B = _BV(WGM12) | _BV(CS11) | _BV(CS10);    // prescaler = 64
+  OCR1A = 100;
 }
 
 void timer2_init() {
@@ -52,7 +52,7 @@ void adc_init() {
   ADMUX |= _BV(MUX1) | _BV(MUX2);  // ADC6
   // częstotliwość zegara ADC 125 kHz (16 MHz / 128)
   ADCSRA = _BV(ADPS0) | _BV(ADPS1) | _BV(ADPS2); // preskaler 64
-  ADCSRA |= _BV(ADEN) | _BV(ADATE) | _BV(ADIF);  // włącz ADC i interrupt
+  ADCSRA |= _BV(ADEN) | _BV(ADATE) | _BV(ADIE);  // włącz ADC i interrupt
 }
 
 ISR(TIMER2_OVF_vect) {
@@ -67,7 +67,7 @@ ISR(TIMER2_OVF_vect) {
     control_input = pid_Controller(set_temp, measured_temp, &pidData);
     // pid_Controller(set_speed, motor_u, &pidData) / SCALING_FACTOR;
     // OCR1A = (set_temp + control_input) * 10;
-    // OCR1A = 2500;
+    OCR1A = 1000;
     //
     //     if (integral > INTEGRAL_RESET) {
     //       integral = 0;
@@ -80,7 +80,9 @@ ISR(TIMER2_OVF_vect) {
 
 ISR(ADC_vect) {
   LED_PORT ^= _BV(LED_PIN);
-  uint16_t adc_value = ADC;
+  uint16_t adc_value = ADC * 11;
+  adc_value -= 5000;
+  adc_value /= 10;
   // przeliczenie wartości ADC na temperaturę w °C
   measured_temp = adc_value;
   // measured_temp = (adc_value * 110) / 1023;
@@ -100,6 +102,10 @@ int main() {
 
   pid_Init(K_P * SCALING_FACTOR, K_I * SCALING_FACTOR, K_D * SCALING_FACTOR,
            &pidData);
+
+  printf("Sterownik PID - regulacja temperatury\r\n");
+  printf("Podaj temperaturę zadaną w °C: ");
+  scanf("%d", &set_temp);
 
   ADCSRA |= _BV(ADSC); // start konwersji ADC
   while (1) {
