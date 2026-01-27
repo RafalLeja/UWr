@@ -1,16 +1,18 @@
 #include "cli.h"
 #include <getopt.h>
+#include <stdexcept>
 #include <stdio.h>
 #include <stdlib.h>
 
 struct args_t parse_args(int argc, char *argv[]) {
   int opt;
 
-  struct args_t args = {NULL, stdout, false, 'h', 10, 8, 0};
+  struct args_t args = {NULL, stdout, false, DEF, 'h', 10, 8, 0};
 
   static struct option long_options[] = {
       {"help", no_argument, 0, 'h'},
 
+      {"device", required_argument, 0, 'd'},
       {"benchmark", no_argument, 0, 'b'},
       {"iterations", required_argument, 0, 'r'},
 
@@ -27,25 +29,39 @@ struct args_t parse_args(int argc, char *argv[]) {
 
       {0, 0, 0, 0}};
 
-  while ((opt = getopt_long(argc, argv, "hbr:ci:o:pm:nlus", long_options,
+  while ((opt = getopt_long(argc, argv, "hd:br:ci:o:pm:nlus", long_options,
                             NULL)) != -1) {
     switch (opt) {
     case 'h':
       print_help(argv[0]);
       break;
 
+    case 'd':
+      if (strcmp(optarg, "cpu") == 0) {
+        args.device = CPU;
+        printf("[Device] CPU\n\n");
+      } else if (strcmp(optarg, "cuda") == 0) {
+        args.device = GPU;
+        printf("[Device] CUDA\n\n");
+      } else {
+        fprintf(stderr, "Unknown device: %s\n", optarg);
+        print_help(argv[0]);
+        exit(EXIT_FAILURE);
+      }
+      break;
+
     case 'b':
       args.benchmark = true;
-      printf("[Benchmark]\n\n");
       break;
+
     case 'r':
       args.iterations = atoi(optarg);
       break;
 
     case 'c':
       args.mode = 'c';
-      printf("[Checksum]\n\n");
       break;
+
     case 'i':
       args.input_file = fopen(optarg, "rb");
       if (args.input_file == NULL) {
@@ -53,6 +69,7 @@ struct args_t parse_args(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
       }
       break;
+
     case 'o':
       args.output_file = fopen(optarg, "wb");
       if (args.output_file == NULL) {
@@ -63,7 +80,6 @@ struct args_t parse_args(int argc, char *argv[]) {
 
     case 'p':
       args.mode = 'p';
-      printf("[Password Cracker]\n\n");
       break;
 
     case 'm':
@@ -103,6 +119,7 @@ void print_help(const char *program_name) {
       "[modes]:\n"
       "  -h / --help\t\t\tDisplay this help message\n"
       "\n"
+      "  -d / --device [cpu|gpu]\tSelect device\n"
       "  -b / --benchmark\t\tRun in benchmark mode\n"
       "  [options]:\n"
       "    -r / --iterations [number]\tNumber of iterations (default: "
