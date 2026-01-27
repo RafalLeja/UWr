@@ -32,15 +32,11 @@ int main(int argc, char *argv[]) {
       fprintf(stderr, "Input file is required for password mode.\n");
       return 1;
     }
-    if (args.benchmark) {
-      printf("Benchmarking CPU password cracking...\n");
-      crack(args.input_file, args.output_file, args.pass_length,
-            args.pass_type, NULL);
-      fseek(args.input_file, 0, SEEK_SET);
-      printf("\nBenchmarking GPU password cracking...\n");
+    if (!args.benchmark) {
+      fprintf(args.output_file, "[Password Cracking]\n");
     }
-    crack_gpu(args.input_file, args.output_file, args.pass_length,
-              args.pass_type, NULL);
+    crack_device(args.input_file, args.output_file, args.pass_length,
+                 args.pass_type, args.device, args.benchmark);
   }
 
   return 0;
