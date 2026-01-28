@@ -194,7 +194,6 @@ unsigned long long crack_len_gpu(struct md5_state *target_hash_d,
     }
   }
 
-  // Final check
   cudaMemcpyAsync(&result_h, result_d, sizeof(unsigned long long),
                   cudaMemcpyDeviceToHost, stream);
   cudaStreamSynchronize(stream);
@@ -216,7 +215,7 @@ unsigned long long crack_len_gpu(struct md5_state *target_hash_d,
   cudaEventDestroy(stop);
   cudaStreamDestroy(stream);
 
-  return 0;
+  return result_h;
 }
 
 void crack_gpu(FILE *input_file, FILE *output_file, int pass_length,
