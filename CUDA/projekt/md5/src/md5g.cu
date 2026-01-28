@@ -58,52 +58,55 @@ __global__ void md5_iter_gpu(struct md5_state *state, const uint32_t *M) {
   state[idx].d += d;
 }
 
-__global__ void md5_chunk_gpu(struct md5_state *state,
-                              const uint32_t *chunks, const int iters) {
-  int idx = blockIdx.x * blockDim.x + threadIdx.x;
-  uint32_t a = state[idx].a;
-  uint32_t b = state[idx].b;
-  uint32_t c = state[idx].c;
-  uint32_t d = state[idx].d;
-  for (int chunk = 0; chunk < iters; chunk++) {
-    for (int i = 0; i < 64; i++) {
-      uint32_t F, g;
-      if (i < 16) {
-        F = (b & c) | (~b & d);
-        g = i;
-      } else if (i < 32) {
-        F = (d & b) | (~d & c);
-        g = (5 * i + 1) % 16;
-      } else if (i < 48) {
-        F = b ^ c ^ d;
-        g = (3 * i + 5) % 16;
-      } else {
-        F = c ^ (b | ~d);
-        g = (7 * i) % 16;
-      }
-
-      F = F + a + K_d[i] + chunks[g + chunk * 64];
-      a = d;
-      d = c;
-      c = b;
-      b = b + ((F << S_d[i]) | (F >> (32 - S_d[i])));
-    }
-  }
-  state[idx].a += a;
-  state[idx].b += b;
-  state[idx].c += c;
-  state[idx].d += d;
-}
+// __global__ void md5_chunk_gpu(struct md5_state *state,
+//                               const uint32_t *chunks, const int iters) {
+//   int idx = blockIdx.x * blockDim.x + threadIdx.x;
+//   uint32_t a = state[idx].a;
+//   uint32_t b = state[idx].b;
+//   uint32_t c = state[idx].c;
+//   uint32_t d = state[idx].d;
+//   for (int chunk = 0; chunk < iters; chunk++) {
+//     for (int i = 0; i < 64; i++) {
+//       uint32_t F, g;
+//       if (i < 16) {
+//         F = (b & c) | (~b & d);
+//         g = i;
+//       } else if (i < 32) {
+//         F = (d & b) | (~d & c);
+//         g = (5 * i + 1) % 16;
+//       } else if (i < 48) {
+//         F = b ^ c ^ d;
+//         g = (3 * i + 5) % 16;
+//       } else {
+//         F = c ^ (b | ~d);
+//         g = (7 * i) % 16;
+//       }
+//
+//       F = F + a + K_d[i] + chunks[g + chunk * 64];
+//       a = d;
+//       d = c;
+//       c = b;
+//       b = b + ((F << S_d[i]) | (F >> (32 - S_d[i])));
+//     }
+//   }
+//   state[idx].a += a;
+//   state[idx].b += b;
+//   state[idx].c += c;
+//   state[idx].d += d;
+// }
 
 __device__ void md5_round(uint32_t *o_a, uint32_t *o_b, uint32_t *o_c,
-                          uint32_t *o_d, uint32_t *M) {
+                          uint32_t *o_d, uint32_t *M,
+                          unsigned long long *result) {
   uint32_t a = *o_a;
   uint32_t b = *o_b;
   uint32_t c = *o_c;
   uint32_t d = *o_d;
 
+  uint32_t F, g;
   for (int i = 0; i < 64; i++) {
-    uint32_t F, g;
+    if (result[0] != 0)
+      return;
     switch (i / 16) {
     case 0:
       F = (b & c) | (~b & d);
@@ -160,7 +163,6 @@ __global__ void md5_passwd_gpu(const char *all_chars, int base, int len,
     if (i == len) {
       M[i / 4] |= 0x80 << ((i % 4) * 8);
     } else if (i >= 56) {
-      // Append original length in bits at the end
       uint64_t bit_len = len * 8;
       M[14] = (uint32_t)(bit_len & 0xFFFFFFFF);
       M[15] = (uint32_t)((bit_len >> 32) & 0xFFFFFFFF);
@@ -168,11 +170,14 @@ __global__ void md5_passwd_gpu(const char *all_chars, int base, int len,
     }
   }
 
+  if (result[0] != 0)
+    return;
+
   uint32_t a = 0x67452301;
   uint32_t b = 0xefcdab89;
   uint32_t c = 0x98badcfe;
   uint32_t d = 0x10325476;
-  md5_round(&a, &b, &c, &d, M);
+  md5_round(&a, &b, &c, &d, M, result);
 
   if (target->a == a && target->b == b && target->c == c &&
       target->d == d) {
