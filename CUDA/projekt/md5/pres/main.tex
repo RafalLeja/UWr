@@ -1,0 +1,37 @@
+%! TEX root = ./main.tex
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[polish]{babel}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{graphicx}
+
+
+\usetheme{Warsaw}
+\usecolortheme{beaver}
+\usetikzlibrary{trees,positioning,arrows.meta,decorations.pathreplacing}
+
+\title{Łamanie MD5}
+\subtitle{Obliczenia równoległe na kartach graficznych CUDA}
+\author{Rafał Leja (UWr)}
+\date{29 stycznia 2026}
+
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\input{sections/intro.tex}
+\input{sections/md5.tex}
+\input{sections/alg.tex}
+\input{sections/code.tex}
+
+\begin{frame}[allowframebreaks]{Źródła}
+\end{frame}
+
+\end{document}

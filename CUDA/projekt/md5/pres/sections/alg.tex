@@ -1,0 +1,67 @@
+\section{Algorytm}
+
+\begin{frame}{MD5 - padding}
+	\begin{itemize}
+		\item Dane wejściowe są dzielone na bloki 512-bitowe
+		\item Jeśli ostatni blok jest krótszy niż 512 bitów, stosowany jest padding
+		      \begin{itemize}
+			      \item Dodanie bitu '1' na końcu danych
+			      \item Dodanie bitów '0' aż do osiągnięcia długości 448 bitów
+			      \item Dodanie 64-bitowej reprezentacji długości oryginalnych danych
+		      \end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{MD5 - inicjalizacja}
+	\begin{itemize}
+		\item MD5 używa czterech 32-bitowych słów jako stanu wewnętrznego:
+		      \begin{itemize}
+			      \item A = 0x67452301
+			      \item B = 0xEFCDAB89
+			      \item C = 0x98BADCFE
+			      \item D = 0x10325476
+		      \end{itemize}
+		\item Te wartości są inicjalizowane na początku procesu haszowania.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{MD5 - funkcje pomocnicze}
+	MD5 używa czterech nieliniowych funkcji bitowych:
+	\begin{itemize}
+		\item F(X, Y, Z) = (X AND Y) OR (NOT X AND Z)
+		\item G(X, Y, Z) = (X AND Z) OR (Y AND NOT Z)
+		\item H(X, Y, Z) = X XOR Y XOR Z
+		\item I(X, Y, Z) = Y XOR (X OR NOT Z)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{MD5 - główna pętla}
+	\begin{itemize}
+		\item Dla każdego 512-bitowego bloku danych:
+		      \begin{itemize}
+			      \item Podziel blok na szesnaście 32-bitowych słów M[0..15]
+			      \item Wykonaj 64 rundy operacji, podzielone na cztery fazy po 16 rund każda
+			      \item W każdej rundzie użyj jednej z funkcji F, G, H, I oraz odpowiedniego słowa M[i] i stałej K[i]
+		      \end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{MD5 - aktualizacja stanu}
+	\begin{itemize}
+		\item Po przetworzeniu każdego bloku, zaktualizuj stan wewnętrzny:
+		      \begin{itemize}
+			      \item A = A + AA
+			      \item B = B + BB
+			      \item C = C + CC
+			      \item D = D + DD
+		      \end{itemize}
+		\item Gdzie AA, BB, CC, DD to wartości stanu przed przetworzeniem bieżącego bloku.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{MD5 - wynik końcowy}
+	\begin{itemize}
+		\item Po przetworzeniu wszystkich bloków, wynikowy hash to konkatenacja A, B, C, D
+		\item Wynik jest reprezentowany jako 32-znakowy ciąg szesnastkowy.
+	\end{itemize}
+\end{frame}
