@@ -1,0 +1,39 @@
+%!TEX program = lualatex
+\documentclass{beamer}
+% \usepackage[utf8]{inputenc}
+\usepackage[polish]{babel}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{lmodern}
+
+\usetheme{metropolis}
+\usecolortheme{beaver}
+\metroset{block=fill}
+\usetikzlibrary{trees,positioning,arrows.meta,decorations.pathreplacing}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\title{Kryptografia w sieci komórkowej}
+\author{Rafał Leja}
+\date{9 luty 2026}
+
+\begin{document}
+% \setlength{\itemsep}{6pt}
+% \setlength{\parskip}{4pt}
+
+
+\begin{frame}[plain]
+	\vspace{-1cm}
+	\titlepage
+\end{frame}
+
+\input{chapters/historia.tex}
+
+\end{document}
+
+
