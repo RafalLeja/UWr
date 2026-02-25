@@ -30,7 +30,7 @@ english_freq = {
 }
 
 # mapping = {"W": "F"}
-mapping = {"F": "W", "C": "e"}
+mapping = {"F": "w", "C": "e", "Z": "h", "N": "l"}
 reverse_mapping = {v: k for k, v in mapping.items()}
 
 
